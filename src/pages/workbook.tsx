@@ -1,6 +1,8 @@
 import React from 'react';
-import { PageContainer, NavContainer , Title_text, Content, UpPadding} from '../styles/MainStyles'; // MainContainer 스타일 가져오기
-import { CreateButton } from '../styles/SignupStyles';
+import {  Content} from '../styles/MainStyles'; // MainContainer 스타일 가져오기
+import { NavContainer } from '../styles/Public';
+import { PageBackGround } from '../styles/Public';
+import { CreateButton } from '../styles/WorkBook';
 import NavBar from '../components/public/navbar'
 import SidebarOptions from '../components/board/select_option';
 import WorkbookCard from '../components/board/workbook_card';
@@ -69,7 +71,7 @@ const WorkBook: React.FC = () => {
     <CreateButton>문제집 만들기</CreateButton>
     </NavContainer>
     
-    <PageContainer>
+    <PageBackGround>
       
       <SidebarOptions/> 
       <Content>
@@ -85,7 +87,7 @@ const WorkBook: React.FC = () => {
       {/* <ListComponent items={items} onItemSelect={handleItemSelect} /> */}
 
       </Content>
-    </PageContainer>
+    </PageBackGround>
     </>
   );
 };

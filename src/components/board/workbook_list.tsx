@@ -1,5 +1,6 @@
 import React from "react";
-import {ListContainer, ListItem} from '../../styles/MainStyles'
+import { ListItem } from "../../styles/WorkBook";
+import { ListContainer } from "../../styles/WorkBook";
 
 interface Item{
     id: number;

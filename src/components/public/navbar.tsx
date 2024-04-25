@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavBarContainer , NavLink } from '../../styles/MainStyles';
+import { NavBarContainer , NavLink } from '../../styles/Public';
 
 
 const NavBar: React.FC = () => {

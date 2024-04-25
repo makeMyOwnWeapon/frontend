@@ -1,12 +1,13 @@
 import React from 'react';
-import { MainContainer, MainImage, LoginButton } from '../styles/MainStyles';
+import { MainImage, LoginButton } from '../styles/MainStyles';
+import { MainBackGround } from '../styles/Public';
 import NavBar from '../components/public/navbar'
 import Account from '../components/main/account'
 import image from  '../images/loa2.png'
 
 const Main: React.FC = () => {
   return (
-    <MainContainer>
+    <MainBackGround>
       <NavBar /> 
         <LoginButton left="65%" top="60%">
           <Account />
@@ -14,7 +15,7 @@ const Main: React.FC = () => {
       
         <MainImage src={image} alt="Example" width="50%" left="20px" top="10px" />
         
-    </MainContainer>
+    </MainBackGround>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {SidebarContainer, Option} from '../../styles/MainStyles'
+import { Option } from "../../styles/WorkBook";
+import { SidebarContainer } from "../../styles/WorkBook";
 
 const SidebarOptions = () => {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
