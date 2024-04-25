@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageContainer , Title_text} from '../styles/MainStyles'; // MainContainer 스타일 가져오기
+import { PageContainer, NavContainer , Title_text} from '../styles/MainStyles'; // MainContainer 스타일 가져오기
 import NavBar from '../components/public/navbar'
 import SidebarOptions from '../components/board/select_option';
 import ListComponent from '../components/board/workbook_list';
@@ -47,9 +47,12 @@ const WorkBook: React.FC = () => {
     
     <>
     <NavBar /> 
-    <Title_text>
-        h1 문자
+    <NavContainer>
+      <Title_text>
+
     </Title_text>
+    </NavContainer>
+    
     <PageContainer>
       
       <SidebarOptions/> 

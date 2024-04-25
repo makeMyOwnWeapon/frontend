@@ -27,6 +27,36 @@ export const Button = styled.button`
   font-size: 16px;        
 `;
 
+export const SmallButton = styled.button<{selected: boolean }>`
+padding: 8px 16px;
+margin-right: 8px;
+background-color: ${({ selected }) => (selected ? '#4CAF50' : '#CCCCCC')};
+color: #fff;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+`;
+
+export const NameContainer = styled.div`
+display: flex;
+aliign-items: center;
+margin-top: 16px;
+`;
+
+export const NameGeneratorButton = styled.button`
+padding: 8px 16px;
+margin-right: 8px;
+color: #000;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+`;
+
+export const ButtonContainer = styled.div`
+  display: inline-block;
+`;
+
+
 export const Title = styled.h1`
   ${tw`text-2xl font-bold text-gray-900`}
 `;

@@ -23,6 +23,14 @@ export const PageContainer = styled.div`
   justify-content: start; /* 세로 축 중앙 정렬 */
   align-items: start;     /* 가로 축 중앙 정렬 */
 `;
+export const NavContainer = styled.div`
+  height: 200px;
+  background: #F2F2F2;
+  display: flex;
+  flex-direction: row;
+  justify-content: start; /* 세로 축 중앙 정렬 */
+  align-items: start;     /* 가로 축 중앙 정렬 */
+`;
 
 
 // NavBar 컨테이너 스타일 정의
@@ -32,7 +40,7 @@ export const NavBarContainer = styled.nav`
   position: fixed; // 상단 고정
   top: 0;
   width: 100%;
-  background: transparent; // 배경색 없음
+  background: #FFFFFF; // 배경색 없음
   color: darkgray; // 글자색
   padding: 10px 0;
   z-index: 1000; // 다른 요소들 위에 위치
