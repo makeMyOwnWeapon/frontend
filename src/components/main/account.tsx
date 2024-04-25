@@ -1,27 +1,30 @@
-import React from 'react';
-import { GoogleLogin } from 'react-google-login';
+import React, { useEffect } from 'react';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
 
 const Account: React.FC = () => {
-  const onSuccess = (response: any) => {
-    console.log('로그인 성공:', response.profileObj); // 로그인 성공시 호출
-  };
+  useEffect(() => {
+    window.google?.accounts.id.initialize({
+      client_id: clientId,
+      callback: handleCredentialResponse
+    });
 
-  const onFailure = (response: any) => {
-    console.error('로그인 실패:', response); // 로그인 실패시 호출
+    window.google?.accounts.id.renderButton(
+      document.getElementById('signInDiv'),
+      { theme: 'outline', size: 'large' }  // 버튼 옵션
+    );
+
+    window.google?.accounts.id.prompt(); // 세션 종료 시 자동 로그인 프롬프트
+  }, []);
+
+  const handleCredentialResponse = (response: any) => {
+    console.log('인증 데이터:', response);
+    // 여기서 response를 사용하여 사용자 로그인 처리
   };
 
   return (
     <div>
-      <GoogleLogin
-        clientId={clientId}
-        buttonText="Login with Google"
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-        cookiePolicy={'single_host_origin'}
-        isSignedIn={true}
-      />
+      <div id="signInDiv"></div> {/* 로그인 버튼이 렌더링될 위치 */}
     </div>
   );
 };

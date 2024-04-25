@@ -7,7 +7,7 @@ import image from  '../images/loa2.png'
 const Main: React.FC = () => {
   return (
     <MainContainer>
-      <NavBar /> 
+      {/* <NavBar />  */}
       <Account />
         <MainImage src={image} alt="Example" width="50%" left="20px" top="10px" />
       
