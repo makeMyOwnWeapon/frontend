@@ -7,8 +7,6 @@ export const Content = styled.div`
   flex-wrap: wrap;
 `;
 
-
-
 export const MainImage = styled.img<{ width?: string; left?: string; top?: string }>`
   width: ${props => props.width || '100%'};
   position: relative;
