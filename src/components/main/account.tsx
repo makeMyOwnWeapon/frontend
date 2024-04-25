@@ -1,8 +1,7 @@
-// Account.tsx
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 
-const clientId = "YOUR_CLIENT_ID.apps.googleusercontent.com"; // 구글 클라이언트 ID
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
 
 const Account: React.FC = () => {
   const onSuccess = (response: any) => {
