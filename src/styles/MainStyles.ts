@@ -14,6 +14,17 @@ display: flex;
 flex-direction: column;
 
 `;
+
+export const PageContainer = styled.div`
+  height: 100vh;
+  background: #F2F2F2;
+  display: flex;
+  flex-direction: row;
+  justify-content: start; /* 세로 축 중앙 정렬 */
+  align-items: start;     /* 가로 축 중앙 정렬 */
+`;
+
+
 // NavBar 컨테이너 스타일 정의
 export const NavBarContainer = styled.nav`
   display: flex;
@@ -50,4 +61,53 @@ export const Section = styled.section`
   flex: 1;
   padding: 20px;
   background: rgba(255, 255, 255, 0.6);
+`;
+
+
+export const Title_text = styled.div`
+  margin-top: 10px;
+  padding: 100px;
+  font-size: 24px;  /* 글꼴 크기 증가 */
+  color: #333;      /* 글꼴 색상 설정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+`;
+
+export const SidebarContainer = styled.div`
+  width: 250px;
+  height: auto;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 20px; // 상단에 붙임
+`;
+
+export const Option = styled.div`
+  padding: 10px 15px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #ddd;
+  }
+`;
+
+export const ListContainer = styled.div`
+  margin: 20px;
+  padding: 10px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  flex: 1;
+`;
+
+// 스타일링된 리스트 아이템
+export const ListItem = styled.div`
+  padding: 8px 12px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  &:hover {
+    background-color: #e2e2e2;
+  }
 `;
