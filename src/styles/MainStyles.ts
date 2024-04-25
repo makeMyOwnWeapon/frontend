@@ -118,3 +118,17 @@ export const MainImage = styled.img<{ width?: string; left?: string; top?: strin
   left: ${props => props.left || '0'};
   top: ${props => props.top || '0'};
 `;
+
+export const LoginButton = styled.button<{ left?: string; top?: string }>`
+  position: relative; 
+  left: ${props => props.left || '0px'}; // 왼쪽 여백
+  top: ${props => props.top || '0px'}; // 상단 여백
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  background: transparent;
+
+  }
+`;
+
