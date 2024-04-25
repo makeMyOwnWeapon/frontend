@@ -8,7 +8,7 @@ const Main: React.FC = () => {
   return (
     <MainContainer>
       <NavBar /> 
-        <LoginButton left="400px" top="450px">
+        <LoginButton left="65%" top="60%">
           <Account />
         </LoginButton>
       
