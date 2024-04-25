@@ -22,14 +22,28 @@ export const PageContainer = styled.div`
   flex-direction: row;
   justify-content: start; /* 세로 축 중앙 정렬 */
   align-items: start;     /* 가로 축 중앙 정렬 */
+  flex-wrap: wrap;
+`;
+
+export const Content = styled.div`
+  flex: 1; /* 콘텐츠 영역이 남은 공간을 차지 */
+  display: flex;
+  flex-wrap: wrap;
+`;
+export const UpPadding = styled.div`
+height:300px;
+  padding-left: 500000px; /* 좌측 패딩 */
+  padding-right: 50000px; /* 우측 패딩 */
 `;
 export const NavContainer = styled.div`
+  
   height: 200px;
   background: #F2F2F2;
   display: flex;
   flex-direction: row;
   justify-content: start; /* 세로 축 중앙 정렬 */
   align-items: start;     /* 가로 축 중앙 정렬 */
+  flex-wrap: wrap;
 `;
 
 

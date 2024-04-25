@@ -9,7 +9,8 @@ const CardContainer = styled.div`
   border-radius: 0.5rem;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
   transition: box-shadow 0.2s ease;
-
+  width: 300px;
+  height: 400px;
   &:hover {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
   }
@@ -17,13 +18,15 @@ const CardContainer = styled.div`
 
 const CardImage = styled.img`
   width: 100%;
-  height: auto;
+  height: 200px;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
 `;
 
 const CardContent = styled.div`
   padding: 1.25rem;
+  // display : flex;
+  align-tems: flex-start;
 `;
 
 const CardTitle = styled.h5`

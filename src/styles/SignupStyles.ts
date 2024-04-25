@@ -36,6 +36,21 @@ border: none;
 border-radius: 4px;
 cursor: pointer;
 `;
+export const CreateButton = styled.button`
+  flex-direction: column;
+  margin-top: auto; 
+  margin-bottom:10px;
+  padding: 8px 16px;
+  margin-right: 8px;
+  background-color: #CCCCCC;
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  left: 75%;
+  position: relative;
+`;
+
 
 export const NameContainer = styled.div`
 display: flex;
