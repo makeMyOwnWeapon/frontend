@@ -1,18 +1,10 @@
 import styled from 'styled-components';
 
-const sizes = {
-  mobile: '320px',
-  tablet: '768px',
-  desktop: '1024px'
-};
-
-
 export const MainContainer = styled.div`
-height: 100vh;
-background: linear-gradient(to bottom, white, lightblue);
-display: flex;
-flex-direction: column;
-
+  height: 100vh;
+  background: linear-gradient(to bottom, white, lightblue);
+  display: flex;
+  flex-direction: column;
 `;
 
 export const PageContainer = styled.div`
@@ -30,13 +22,14 @@ export const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
+
 export const UpPadding = styled.div`
-height:300px;
+  height:300px;
   padding-left: 500000px; /* 좌측 패딩 */
   padding-right: 50000px; /* 우측 패딩 */
 `;
+
 export const NavContainer = styled.div`
-  
   height: 200px;
   background: #F2F2F2;
   display: flex;
@@ -45,7 +38,6 @@ export const NavContainer = styled.div`
   align-items: start;     /* 가로 축 중앙 정렬 */
   flex-wrap: wrap;
 `;
-
 
 // NavBar 컨테이너 스타일 정의
 export const NavBarContainer = styled.nav`
@@ -70,21 +62,18 @@ export const NavLink = styled.a`
 `;
 
 export const NavBar = styled.nav`
-display: flex;
-align-items: center;
-justify-content: center;
-background: transparent; // 배경을 투명하게 설정
-padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent; // 배경을 투명하게 설정
+  padding: 10px;
 `;
-
-
 
 export const Section = styled.section`
   flex: 1;
   padding: 20px;
   background: rgba(255, 255, 255, 0.6);
 `;
-
 
 export const Title_text = styled.div`
   margin-top: 10px;
@@ -108,7 +97,6 @@ export const Option = styled.div`
   margin: 5px 0;
   cursor: pointer;
   border-radius: 5px;
-
   &:hover {
     background-color: #ddd;
   }
@@ -148,7 +136,6 @@ export const LoginButton = styled.button<{ left?: string; top?: string }>`
   top: ${props => props.top || '0px'}; // 상단 여백
   border: none;
   background: transparent;
-
   }
 `;
 

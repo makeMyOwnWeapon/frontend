@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
+interface CardProps {
+  imageUrl?: string;
+  title: string;
+  description: string;
+  readMoreUrl: string;
+}
+
 export const Container = styled.div`
   ${tw`flex flex-col items-center justify-center min-h-screen bg-gray-100`}
   height: 100vh;
@@ -36,6 +43,7 @@ border: none;
 border-radius: 4px;
 cursor: pointer;
 `;
+
 export const CreateButton = styled.button`
   flex-direction: column;
   margin-top: auto; 
@@ -50,7 +58,6 @@ export const CreateButton = styled.button`
   left: 75%;
   position: relative;
 `;
-
 
 export const NameContainer = styled.div`
 display: flex;
@@ -71,17 +78,9 @@ export const ButtonContainer = styled.div`
   display: inline-block;
 `;
 
-
 export const Title = styled.h1`
   ${tw`text-2xl font-bold text-gray-900`}
 `;
-
-interface CardProps {
-  imageUrl?: string;
-  title: string;
-  description: string;
-  readMoreUrl: string;
-}
 
 export const Card = styled.div<CardProps>`
   max-width: 20rem;

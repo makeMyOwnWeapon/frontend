@@ -1,6 +1,5 @@
 import React , {useState} from 'react';
-import { Container, Form, Input, Button, Title, SmallButton,NameGeneratorButton, NameContainer } from '../styles/SignupStyles';
-import { MainContainer } from '../styles/MainStyles';
+import { Container, Form, Button, Title, SmallButton,NameGeneratorButton, NameContainer } from '../styles/SignupStyles';
 
 function Signup() {
   const [nickname, setNickname] = useState('');
@@ -16,11 +15,10 @@ function Signup() {
     }
   };
 
-
   const generateNickname = () => {
     const prefixes = ['Cool', 'Super', 'Mighty'];
     const suffixes = ['Wizard', 'Ranger', 'Ninja'];
-    const name = ['User']; // Default to 'User' if name field is empty
+    const name = ['User'];
 
     const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
     const randomSuffix = suffixes[Math.floor(Math.random() * suffixes.length)];
@@ -37,12 +35,6 @@ function Signup() {
 
       <SmallButton selected={selectedButton === 0} onClick={(event) => {event.preventDefault();  handleButtonClick(0); }}> 선생님 </SmallButton>
       <SmallButton selected={selectedButton === 1} onClick={(event) => {event.preventDefault();  handleButtonClick(1); }}> 학생 </SmallButton>
-
-
-
-        {/* <Input type="text" placeholder="name" />
-        <Input type="email" placeholder="e-mail" />
-        <Input type="password" placeholder="password" /> */}
         <NameContainer>
           <NameGeneratorButton type="button" onClick={generateNickname}>Generate Nickname</NameGeneratorButton> 
           {nickname && <p>{nickname}</p>} 

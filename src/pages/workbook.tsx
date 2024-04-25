@@ -3,13 +3,7 @@ import { PageContainer, NavContainer , Title_text, Content, UpPadding} from '../
 import { CreateButton } from '../styles/SignupStyles';
 import NavBar from '../components/public/navbar'
 import SidebarOptions from '../components/board/select_option';
-import ListComponent from '../components/board/workbook_list';
-import workbook_card from '../components/board/workbook_card';
-import { Card } from '../styles/SignupStyles';
 import WorkbookCard from '../components/board/workbook_card';
-
-  
-
 
 
 const WorkBook: React.FC = () => {
@@ -66,8 +60,6 @@ const WorkBook: React.FC = () => {
           readMoreUrl: "#"
         },
     ]
-
-
 
   return (
     

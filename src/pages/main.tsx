@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainContainer, MainImage, LoginButton } from '../styles/MainStyles'; // MainContainer 스타일 가져오기
+import { MainContainer, MainImage, LoginButton } from '../styles/MainStyles';
 import NavBar from '../components/public/navbar'
 import Account from '../components/main/account'
 import image from  '../images/loa2.png'
