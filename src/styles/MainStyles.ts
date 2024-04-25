@@ -111,3 +111,10 @@ export const ListItem = styled.div`
     background-color: #e2e2e2;
   }
 `;
+
+export const MainImage = styled.img<{ width?: string; left?: string; top?: string }>`
+  width: ${props => props.width || '100%'};
+  position: relative;
+  left: ${props => props.left || '0'};
+  top: ${props => props.top || '0'};
+`;
