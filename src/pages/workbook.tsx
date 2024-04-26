@@ -3,7 +3,7 @@ import {  Content} from '../styles/MainStyles'; // MainContainer 스타일 가�
 import { NavContainer } from '../styles/Public';
 import { PageBackGround } from '../styles/Public';
 import { CreateButton } from '../styles/WorkBook';
-import NavBar from '../components/public/navbar'
+import NavBar from '../components/public/navbar_default'
 import SidebarOptions from '../components/board/select_option';
 import WorkbookCard from '../components/board/workbook_card';
 import {useNavigate } from 'react-router-dom';

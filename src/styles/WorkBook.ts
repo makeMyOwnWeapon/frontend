@@ -18,10 +18,11 @@ export const CreateButton = styled.button`
 export const SidebarContainer = styled.div`
   width: 250px;
   height: auto;
-  background-color: #f4f4f4;
+  background-color: #f2f2f2;
   padding: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(1,1,0,);
   margin-top: 20px; // 상단에 붙임
+  
 `;
 
 export const Option = styled.div`
@@ -39,7 +40,7 @@ export const ListContainer = styled.div`
   padding: 10px;
   background: #f8f8f8;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0);
   flex: 1;
 `;
 
@@ -52,4 +53,14 @@ export const ListItem = styled.div`
   &:hover {
     background-color: #e2e2e2;
   }
+`;
+
+export const SidebarBackGround = styled.div`
+  justify-content: space-around;
+  top: 0;
+  width: 100%;
+  background: #FFFFFF; // 배경색 없음
+  color: darkgray; // 글자색
+  padding: 10px 0;
+
 `;

@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { Form, Input, InputContainer, Image, QuestionContainer, InputBoxWrapper, Input_text } from '../../styles/CreateQuestion'
+import { Form, Input, InputContainer, QuestionContainer, InputBoxWrapper, Input_text, StyledText } from '../../styles/CreateQuestion'
 import { NameGeneratorButton } from '../../styles/SignupStyles';
-import inflearn from '../../images/inflearn.png'
-import krafton from '../../images/krafton.png'
-import defaultThumbnail from '../../images/default_thumbnail.jpeg'
 import VideoThumbnail from '../public/url_to_image';
 
 
@@ -92,7 +89,12 @@ const ProblemPage: React.FC = () => {
   };
   return (
     <Form>
+      <StyledText>
+        나만의 문제 만들기
+      </StyledText>
       <InputContainer>
+      
+        
         <Input type="text" placeholder="동영상 URL" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} />
         <VideoThumbnail imageUrl={videoUrl}/> 
 

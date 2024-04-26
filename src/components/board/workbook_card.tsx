@@ -1,8 +1,5 @@
 import React from "react";
 import { CardContainer, CardImage, CardContent, CardTitle, CardDescription, ReadMoreLink } from "../../styles/WorkBookCard"; 
-import defaultThumbnail from '../../images/default_thumbnail.jpeg'
-import inflearn from '../../images/inflearn.png'
-import krafton from '../../images/krafton.png'
 import VideoThumbnail from "../public/url_to_image";
 // 컴포넌트 정의
 interface WorkbookCardProps {
@@ -17,7 +14,7 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({ imageUrl, title, descriptio
   return (
     <CardContainer>
       <a href="#">
-          <VideoThumbnail imageUrl={imageUrl}/> 
+          <VideoThumbnail imageUrl={imageUrl} /> 
       </a>
       <CardContent>
         <a href="#">

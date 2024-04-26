@@ -1,9 +1,17 @@
 import React, {useState} from "react";
-import { Option } from "../../styles/WorkBook";
+import { Option, SidebarBackGround } from "../../styles/WorkBook";
 import { SidebarContainer } from "../../styles/WorkBook";
+import { Input } from "../../styles/CreateQuestion";
+
+interface OptionItem {
+  id: number;
+  label: string;
+}
 
 const SidebarOptions = () => {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
+    const [searchTerm, setSearchTerm] = useState('');
+
   
     const options = [
       { id: 1, label: 'Option 1' },
@@ -15,9 +23,14 @@ const SidebarOptions = () => {
     const handleOptionClick = (id: number) => {
       setSelectedOption(id);
     };
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchTerm(event.target.value);
+    };
+
   
     return (
       <SidebarContainer>
+        <SidebarBackGround>
         {options.map(option => (
           <Option
             key={option.id}
@@ -27,6 +40,18 @@ const SidebarOptions = () => {
             {option.label}
           </Option>
         ))}
+
+        <div style={{ display: 'flex', margin: '10px', padding: '5px' }}>
+          <Input
+            type="text"
+            placeholder="Search options..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            style={{ flexGrow: 1, marginRight: '10px' }}
+          />
+
+        </div>
+        </SidebarBackGround>
       </SidebarContainer>
     );
   };

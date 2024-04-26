@@ -1,11 +1,8 @@
 import React from 'react';
 import { Form, InputContainer } from '../styles/CreateQuestion';
 import { NavBarContainer, PageBackGround } from '../styles/Public';
-import NavBar from '../components/public/navbar';
+import NavBar from '../components/public/navbar_default';
 import { Question } from '../styles/QuestionInfo';
-import inflearn from '../images/inflearn.png'
-import krafton from '../images/krafton.png'
-import defaultThumbnail from '../images/default_thumbnail.jpeg'
 import VideoThumbnail from '../components/public/url_to_image';
 // 옵션 객체에 대한 타입 정의
 interface Option {
@@ -54,28 +51,32 @@ const QuestionComponent = ({ videoUrl, questions }: QuestionComponentProps) => {
 
   return (
       <Form>
+      <VideoThumbnail imageUrl={videoUrl}/>   
       {/*동영상의 url을 표시하는 코드 */}
       {/* <InputContainer>Video URL: {videoUrl}</InputContainer> */} 
-      <VideoThumbnail imageUrl={videoUrl}/> 
+
       {questions.map((question:Question, index:number) => (
         <div key={index}>
-          <Question>
-          <InputContainer>Time: {question.time}</InputContainer>
-          <InputContainer>Question: {question.question}</InputContainer>
-          {question.options && (
-            <ul>
-              {question.options.map(option => (
-                <li key={option.id}>{option.text}</li>
-              ))}
-            </ul>
+
+            <Question>
+            <InputContainer>Time: {question.time}</InputContainer>
+            <InputContainer>Question: {question.question}</InputContainer>
+
+            {question.options && (
+
+              <ul>
+                {question.options.map(option => (
+                  <li key={option.id}>{option.text}</li>
+                ))}
+              </ul>
+              
+            )}
             
-          )}
-          
-          {question.answer && <div>Answer: {question.answer}</div>}
-          </Question>
+            {question.answer && <div>Answer: {question.answer}</div>}
+            </Question>
+
         </div>
       ))}
-      
       
       </Form>
   );

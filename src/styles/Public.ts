@@ -36,7 +36,7 @@ export const PageBackGround = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center; /* 세로 축 중앙 정렬 */
-  align-items: center;     /* 가로 축 중앙 정렬 */
+  // align-items: center;     /* 가로 축 중앙 정렬 */
   flex-wrap: wrap;
 `;
 

@@ -7,10 +7,8 @@ interface Props {
     imageUrl: string;
   }
 
-
 const VideoThumbnail: React.FC<Props> = ({ imageUrl}) => {
-  const [url, setUrl] = useState('');
-
+    
   const thumbnailMappings :{ [key: string]: string } = {
     'inflearn.com': inflearn,
     'krafton.com': krafton,
@@ -25,7 +23,7 @@ const VideoThumbnail: React.FC<Props> = ({ imageUrl}) => {
 
   return (
       <div>
-        <img src={getVideoThumbnail(imageUrl)} alt="Video Thumbnail"style={{ width: '300px', height: '200px' }} />
+        <img src={getVideoThumbnail(imageUrl)} alt="Video Thumbnail" style={{ width: '300px', height: '200px' }} />
       </div>
   );
 };

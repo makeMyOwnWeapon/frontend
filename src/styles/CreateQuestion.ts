@@ -79,3 +79,10 @@ export const Input_text = styled.input`
     border-color: #0056b3;
   }
 `;
+
+export const StyledText = styled.p`
+font-size: 24px;
+color: black;
+margin-bottom: 30px;
+text-align:left;
+`;

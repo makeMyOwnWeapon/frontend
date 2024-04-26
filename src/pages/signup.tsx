@@ -1,5 +1,7 @@
 import React , {useState} from 'react';
 import { Container, Form, Button, Title, SmallButton,NameGeneratorButton, NameContainer } from '../styles/SignupStyles';
+import NavBar from '../components/public/navbar_main';
+
 
 function Signup() {
   const [nickname, setNickname] = useState('');
@@ -27,6 +29,7 @@ function Signup() {
 
   return (
     <Container>
+      <NavBar/>
       <Form>
       <Title>Sign Up</Title>
       <SmallButton selected={selectedButton === 0} onClick={(event) => {event.preventDefault();  handleButtonClick(0); }}> 선생님 </SmallButton>
