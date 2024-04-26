@@ -5,7 +5,8 @@ import NavBar from '../components/public/navbar';
 import { Question } from '../styles/QuestionInfo';
 import inflearn from '../images/inflearn.png'
 import krafton from '../images/krafton.png'
-
+import defaultThumbnail from '../images/default_thumbnail.jpeg'
+import VideoThumbnail from '../components/public/url_to_image';
 // 옵션 객체에 대한 타입 정의
 interface Option {
     id: number;
@@ -50,19 +51,12 @@ const data : {videoUrl: string; questions: Question[] } ={
 
 // React component for displaying questions
 const QuestionComponent = ({ videoUrl, questions }: QuestionComponentProps) => {
-  const isInflearnUrl = (url: string) => {
-    return url.startsWith('https://www.inflearn.com/');
-  };
-
-  const videoThumbnail = isInflearnUrl(videoUrl) ? inflearn : krafton;
-
-
 
   return (
       <Form>
       {/*동영상의 url을 표시하는 코드 */}
       {/* <InputContainer>Video URL: {videoUrl}</InputContainer> */} 
-      <img src={videoThumbnail} alt="Video Thumbnail" />
+      <VideoThumbnail imageUrl={videoUrl}/> 
       {questions.map((question:Question, index:number) => (
         <div key={index}>
           <Question>

@@ -4,6 +4,7 @@ import { NameGeneratorButton } from '../../styles/SignupStyles';
 import inflearn from '../../images/inflearn.png'
 import krafton from '../../images/krafton.png'
 import defaultThumbnail from '../../images/default_thumbnail.jpeg'
+import VideoThumbnail from '../public/url_to_image';
 
 
 const QuestionComponent: React.FC<{ id: number, onToggle: (id: number) => void, onDelete: (id: number) => void, expand: boolean }> = ({ id, expand, onToggle, onDelete }) => {
@@ -89,33 +90,11 @@ const ProblemPage: React.FC = () => {
     }));
     setQuestionComponents(reindexedComponents);
   };
-
-  const thumbnailMappings: { [key: string]: string } = {
-    'inflearn.com': inflearn,
-    'krafton.com': krafton,
-    // 도메인과 썸네일을 추가하여 확장시킬 수 있음.
-  };
-  
-  const getVideoThumbnail = (url: string) => {
-    // URL에서 도메인을 추출
-    const domain = url.startsWith('https') ? new URL(url).hostname.replace('www.', '') : '';
-    console.log(domain)
-    // 썸네일 매핑에서 해당 도메인에 대한 썸네일을 찾음
-    const thumbnail = thumbnailMappings[domain];
-  
-    // 매핑된 썸네일이 없는 경우 기본값 반환
-    return thumbnail || defaultThumbnail;
-  };
-  
-  
-  // 사용할 썸네일 선택
-  const videoThumbnail = getVideoThumbnail(videoUrl);
-
   return (
     <Form>
       <InputContainer>
         <Input type="text" placeholder="동영상 URL" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} />
-        <img src={videoThumbnail} alt="Video Thumbnail" style={{ width: '400px', height: '30ㅋ0px' }} />
+        <VideoThumbnail imageUrl={videoUrl}/> 
 
       </InputContainer>
       {questionComponents.map((component, index) => (

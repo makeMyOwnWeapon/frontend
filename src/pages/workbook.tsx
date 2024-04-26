@@ -35,15 +35,15 @@ const WorkBook: React.FC = () => {
 
     const cards = [
         {
-          imageUrl: "https://i.namu.wiki/i/7SO2FDuNnzmK_kE68K_wceSKJqoW8-E4vQnJE3uAItSdqFbjbwHMgITRfWLnssiT7MLWzTz3n6nBedGTFFC1EA.webp",
-          title: "나는 우는 고양이",
-          description: "집에가고싶어요.",
+          imageUrl: "https://www.inflearn.com",
+          title: "인프런이에요",
+          description: "인프런 썸네일 이에요",
           readMoreUrl: "#"
         },
         {
-          imageUrl: "https://i.namu.wiki/i/9aUQQ4YjU9vmKuHT_cZAL61VKpKsLolynnI46BhOZQuKxGJygZ6BJK2zTHoX3pcNQmmcfzcVEZQcythY1lRXBQ.webp",
-          title: "나는 슬픈 고양이",
-          description: "집으로 보내주세요.",
+          imageUrl: "https://krafton.com",
+          title: "krafton이에요",
+          description: "의장님 좋아요",
           readMoreUrl: "#"
         },
         {
