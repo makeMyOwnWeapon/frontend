@@ -4,6 +4,7 @@ import Main from './pages/main';
 import Signup from './pages/signup';
 import WorkBook from './pages/workbook';
 import Create from './pages/create_question';
+import Question_info from './pages/question_info';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/workbook" element={<WorkBook/>} />
         <Route path="/create" element={<Create/>}/>
+        <Route path="/question_info" element={<Question_info/>}/>
       </Routes>
     </BrowserRouter>
   );
