@@ -1,4 +1,7 @@
 import React from 'react';
+import { Form, InputContainer } from '../styles/CreateQuestion';
+import { NavBarContainer, PageBackGround } from '../styles/Public';
+import NavBar from '../components/public/navbar';
 
 // 옵션 객체에 대한 타입 정의
 interface Option {
@@ -45,12 +48,12 @@ const data : {videoUrl: string; questions: Question[] } ={
 // React component for displaying questions
 const QuestionComponent = ({ videoUrl, questions }:QuestionComponentProps) => {
   return (
-    <div>
-      <div>Video URL: {videoUrl}</div>
+      <Form>
+      <InputContainer>Video URL: {videoUrl}</InputContainer>
       {questions.map((question:Question, index:number) => (
         <div key={index}>
-          <div>Time: {question.time}</div>
-          <div>Question: {question.question}</div>
+          <InputContainer>Time: {question.time}</InputContainer>
+          <InputContainer>Question: {question.question}</InputContainer>
           {question.options && (
             <ul>
               {question.options.map(option => (
@@ -61,7 +64,8 @@ const QuestionComponent = ({ videoUrl, questions }:QuestionComponentProps) => {
           {question.answer && <div>Answer: {question.answer}</div>}
         </div>
       ))}
-    </div>
+      
+      </Form>
   );
 };
 
@@ -69,7 +73,15 @@ const QuestionComponent = ({ videoUrl, questions }:QuestionComponentProps) => {
 const QuestionInfo = () => {
   return (
     <div>
-      <QuestionComponent videoUrl={data.videoUrl} questions={data.questions} />
+      <NavBarContainer>
+        <NavBar/>
+      </NavBarContainer>
+      
+      <PageBackGround>
+
+        <QuestionComponent videoUrl={data.videoUrl} questions={data.questions} />
+      </PageBackGround>
+      
     </div>
   );
 };
