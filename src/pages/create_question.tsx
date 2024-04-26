@@ -11,8 +11,6 @@ const Create: React.FC = () => {
         </NavContainer>
         <PageBackGround>
         <ProblemPage/>
-        
-
         </PageBackGround>
         </>
     );

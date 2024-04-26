@@ -7,7 +7,6 @@ import NavBar from '../components/public/navbar'
 import SidebarOptions from '../components/board/select_option';
 import WorkbookCard from '../components/board/workbook_card';
 
-
 const WorkBook: React.FC = () => {
     interface Item{
         id: number;
@@ -70,9 +69,7 @@ const WorkBook: React.FC = () => {
     <NavContainer>
     <CreateButton>문제집 만들기</CreateButton>
     </NavContainer>
-    
     <PageBackGround>
-      
       <SidebarOptions/> 
       <Content>
       {cards.map((card, index) => (
@@ -85,7 +82,6 @@ const WorkBook: React.FC = () => {
           />
         ))}
       {/* <ListComponent items={items} onItemSelect={handleItemSelect} /> */}
-
       </Content>
     </PageBackGround>
     </>

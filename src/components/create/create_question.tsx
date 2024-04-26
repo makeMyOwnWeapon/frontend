@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { Input, InputContainer, Image } from '../../styles/CreateQuestion'
 
-
-
-
-
-
-
 // 문제를 만드는 컴포넌트의 props 타입 정의
 interface QuestionComponentProps {
   onDelete: () => void;

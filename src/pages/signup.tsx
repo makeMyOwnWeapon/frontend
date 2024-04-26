@@ -4,7 +4,6 @@ import { Container, Form, Button, Title, SmallButton,NameGeneratorButton, NameCo
 function Signup() {
   const [nickname, setNickname] = useState('');
   const [selectedButton, setSelectedButton] = useState<number | null>(null);
-
   const handleButtonClick = (buttonIndex: number) => {
     // 이미 선택된 버튼이면 선택을 해제합니다.
     if (selectedButton === buttonIndex) {
@@ -19,7 +18,6 @@ function Signup() {
     const prefixes = ['Cool', 'Super', 'Mighty'];
     const suffixes = ['Wizard', 'Ranger', 'Ninja'];
     const name = ['User'];
-
     const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
     const randomSuffix = suffixes[Math.floor(Math.random() * suffixes.length)];
     const newNickname = `${randomPrefix}${name}${randomSuffix}`;
@@ -27,12 +25,10 @@ function Signup() {
     setNickname(newNickname);
   };
 
-
   return (
     <Container>
       <Form>
       <Title>Sign Up</Title>
-
       <SmallButton selected={selectedButton === 0} onClick={(event) => {event.preventDefault();  handleButtonClick(0); }}> 선생님 </SmallButton>
       <SmallButton selected={selectedButton === 1} onClick={(event) => {event.preventDefault();  handleButtonClick(1); }}> 학생 </SmallButton>
         <NameContainer>

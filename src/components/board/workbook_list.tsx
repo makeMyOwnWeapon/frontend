@@ -11,7 +11,6 @@ interface ListComponentProps {
     onItemSelect: (item: Item) => void;
   }
 
-
   const ListComponent: React.FC<ListComponentProps> = ({ items, onItemSelect }) => {
     return (
       <ListContainer>

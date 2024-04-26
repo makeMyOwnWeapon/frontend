@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const Content = styled.div`
   flex: 1; /* 콘텐츠 영역이 남은 공간을 차지 */
   display: flex;
@@ -23,4 +22,3 @@ export const LoginButton = styled.button<{ left?: string; top?: string }>`
   background: transparent;
   }
 `;
-

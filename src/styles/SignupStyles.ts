@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
-interface CardProps {
-  imageUrl?: string;
-  title: string;
-  description: string;
-  readMoreUrl: string;
-}
-
 export const Container = styled.div`
   ${tw`flex flex-col items-center justify-center min-h-screen bg-gray-100`}
   height: 100vh;

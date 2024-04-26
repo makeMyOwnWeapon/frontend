@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 // NavBar 컨테이너 스타일 정의
 export const NavBarContainer = styled.nav`
   display: flex;
@@ -39,7 +38,6 @@ export const PageBackGround = styled.div`
   align-items: start;     /* 가로 축 중앙 정렬 */
   flex-wrap: wrap;
 `;
-
 
 export const NavContainer = styled.div`
   height: 200px;
