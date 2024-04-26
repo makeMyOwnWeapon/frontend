@@ -32,11 +32,12 @@ export const MainBackGround = styled.div`
 
 export const PageBackGround = styled.div`
   height: 100vh;
+  width: 100%;
   background: #F2F2F2;
   display: flex;
   flex-direction: row;
-  justify-content: start; /* 세로 축 중앙 정렬 */
-  align-items: start;     /* 가로 축 중앙 정렬 */
+  justify-content: center; /* 세로 축 중앙 정렬 */
+  align-items: center;     /* 가로 축 중앙 정렬 */
   flex-wrap: wrap;
 `;
 

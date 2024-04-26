@@ -55,3 +55,4 @@ cursor: pointer;
 export const Title = styled.h1`
   ${tw`text-2xl font-bold text-gray-900`}
 `;
+
