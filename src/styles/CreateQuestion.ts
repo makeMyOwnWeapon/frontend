@@ -1,45 +1,81 @@
 import styled from "styled-components";
 
-// 스타일드 컴포넌트를 사용하여 스타일링된 입력란과 이미지 컨테이너를 생성합니다.
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+`;
+
 export const InputContainer = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
 `;
 
 export const Input = styled.input`
+  flex: 1;
+  padding: 10px;
   margin-right: 10px;
+  border: 2px solid #dee2e6;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  &:focus {
+    border-color: #007bff;
+  }
 `;
 
 export const Image = styled.img`
-max-width: 200px;
-max-height: 150px;
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 `;
 
 export const QuestionContainer = styled.div`
-  margin-bottom: 10px; /* 각 문제 컴포넌트 간의 간격 조절 */
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
 `;
-
 
 export const InputBoxWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 15px;
+  align-items: center;
   margin-bottom: 15px;
 `;
 
 export const Label = styled.label`
-margin-bottom: 5px;
-font-weight: bold;
+  min-width: 80px;
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: bold;
 `;
 
 export const Input_text = styled.input`
-padding: 10px;
-border: 1px solid #ccc;
-border-radius: 5px;
-font-size: 16px;
-outline: none;
-
-&:focus {
-  border-color: #007bff;
-}
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+  &:focus {
+    border-color: #0056b3;
+  }
 `;

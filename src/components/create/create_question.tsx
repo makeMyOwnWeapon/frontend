@@ -1,90 +1,105 @@
 import React, { useState } from 'react';
-import { Input, InputContainer, Image, QuestionContainer, InputBoxWrapper, Label, Input_text } from '../../styles/CreateQuestion'
-import { Form, NameGeneratorButton, SmallButton } from '../../styles/SignupStyles';
+import { Form, Input, InputContainer, Image, QuestionContainer, InputBoxWrapper, Input_text } from '../../styles/CreateQuestion'
+import { NameGeneratorButton } from '../../styles/SignupStyles';
 
-// 문제를 만드는 컴포넌트의 props 타입 정의
-interface QuestionComponentProps {
-  onDelete: () => void;
-}
-
-// 문제를 만드는 컴포넌트를 생성합니다.
-const QuestionComponent: React.FC<QuestionComponentProps> = () => {
+const QuestionComponent: React.FC<{ id: number, onToggle: (id: number) => void, onDelete: (id: number) => void, expand: boolean }> = ({ id, expand, onToggle, onDelete }) => {
   const [time, setTime] = useState<string>('');
   const [questionType, setQuestionType] = useState<'objective' | 'subjective'>('objective');
-  const [answer, setAnswer] = useState<string>('');
+  const [answers, setAnswers] = useState<string[]>(['', '', '', '', '']); // 4개의 답변과 1개의 문제 설명을 위한 배열
+
+  const handleAnswerChange = (index: number, value: string) => {
+    const newAnswers = answers.slice();
+    newAnswers[index] = value;
+    setAnswers(newAnswers);
+  };
+
   return (
     <QuestionContainer>
-      <div>
-      <InputBoxWrapper>
-        <label>시간: </label>
-        <Input_text type="text" value={time} onChange={(e) => setTime(e.target.value)} />
-        </InputBoxWrapper>
-      </div>
-      <div>
-        <label>문제 유형:</label>
-        <select value={questionType} onChange={(e) => setQuestionType(e.target.value as 'objective' | 'subjective')}>
-          <option value="objective">객관식</option>
-          <option value="subjective">주관식</option>
-        </select>
-      </div>
-      {questionType === 'objective' ? (
-        //문제를 담는 코드. 하지만 지금으로써는 하나의 답안밖에 받지 못함으로 list 배열로 만들어서 받던지 해야됨.
-        <div>
-              <InputBoxWrapper>
-              <label>1번: </label>
-              <Input_text type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
+      <button onClick={() => onToggle(id)} type="button" style={{ marginBottom: '10px' }}>
+        {expand ? `${id + 1}번 문제 접기` : `${id + 1}번 문제 펼치기`}
+      </button>
+      <button onClick={() => onDelete(id)} type="button" style={{ marginBottom: '10px' }}>
+        {id + 1}번 문제 삭제하기
+      </button>
+      {expand && (
+        <>
+          <div>
+            <InputBoxWrapper>
+              <label>시간: </label>
+              <Input_text type="text" value={time} onChange={(e) => setTime(e.target.value)} />
+            </InputBoxWrapper>
+          </div>
+          <div>
+            <label>문제 유형:</label>
+            <select value={questionType} onChange={(e) => setQuestionType(e.target.value as 'objective' | 'subjective')}>
+              <option value="objective">객관식</option>
+              <option value="subjective">주관식</option>
+            </select>
+          </div>
+          <InputBoxWrapper>
+            <label>{questionType === 'objective' ? '문제: ' : '문제 설명: '}</label>
+            <Input_text type="text" value={answers[0]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
+          </InputBoxWrapper>
+          {questionType === 'objective' ? (
+            ['1번', '2번', '3번', '4번'].map((label, index) => (
+              <InputBoxWrapper key={index + 1}>
+                <label>{label}: </label>
+                <Input_text type="text" value={answers[index + 1]} onChange={(e) => handleAnswerChange(index + 1, e.target.value)} />
               </InputBoxWrapper>
-              <InputBoxWrapper>
-              <label>2번: </label>
-              <Input_text type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
-              </InputBoxWrapper>
-              <InputBoxWrapper>
-              <label>3번: </label>
-              <Input_text type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
-              </InputBoxWrapper>
-              <InputBoxWrapper>
-              <label>4번: </label>
-              <Input_text type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
-              </InputBoxWrapper>
-        </div>
-      ) : (
-        <InputBoxWrapper>
+            ))
+          ) : (
+            <InputBoxWrapper>
               <label>답: </label>
-              <Input_text type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
-              </InputBoxWrapper>
+              <Input_text type="text" value={answers[1]} onChange={(e) => handleAnswerChange(1, e.target.value)} />
+            </InputBoxWrapper>
+          )}
+        </>
       )}
     </QuestionContainer>
   );
 };
 
-// 문제 페이지 컴포넌트를 생성합니다.
 const ProblemPage: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState<string>('');
-  const [questionComponents, setQuestionComponents] = useState<JSX.Element[]>([]);
+  const [questionComponents, setQuestionComponents] = useState<{ id: number, expanded: boolean }[]>([]);
 
-  // 새로운 문제 컴포넌트 추가
   const addQuestionComponent = () => {
-    setQuestionComponents([...questionComponents, <QuestionComponent key={questionComponents.length} onDelete={() => handleDelete(questionComponents.length)} />]);
+    setQuestionComponents([...questionComponents, { id: questionComponents.length, expanded: false }]);
   };
 
-  // 문제 컴포넌트 삭제
-  const handleDelete = (index: number) => {
-    const updatedComponents = [...questionComponents];
-    updatedComponents.splice(index, 1);
-    setQuestionComponents(updatedComponents);
+  const toggleExpand = (id: number) => {
+    const newComponents = questionComponents.map(component => {
+      if (component.id === id) {
+        return { ...component, expanded: !component.expanded };
+      }
+      return component;
+    });
+    setQuestionComponents(newComponents);
+  };
+
+  const deleteQuestion = (id: number) => {
+    const filteredComponents = questionComponents.filter(component => component.id !== id);
+    const reindexedComponents = filteredComponents.map((component, index) => ({
+      ...component,
+      id: index
+    }));
+    setQuestionComponents(reindexedComponents);
   };
 
   return (
-    // Image url => 나중에 인프런으로 바꾸면 url 바꿔야됨.
     <Form>
       <InputContainer>
         <Input type="text" placeholder="동영상 URL" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} />
-        <Image src={`http://img.youtube.com/vi/${videoUrl.split('v=')[1]}/0.jpg`} alt="Video Thumbnail" /> 
+        <Image src={`http://img.youtube.com/vi/${videoUrl.split('v=')[1]}/0.jpg`} alt="Video Thumbnail" />
       </InputContainer>
       {questionComponents.map((component, index) => (
         <div key={index}>
-          {component}
-          {index === questionComponents.length - 1 && <NameGeneratorButton type="button" onClick={() => handleDelete(index)}>문제 삭제</NameGeneratorButton>}
+          <QuestionComponent
+            id={component.id}
+            expand={component.expanded}
+            onToggle={toggleExpand}
+            onDelete={deleteQuestion}
+          />
         </div>
       ))}
       <NameGeneratorButton type="button" onClick={addQuestionComponent}>문제 추가</NameGeneratorButton>
