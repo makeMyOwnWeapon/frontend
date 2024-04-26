@@ -7,8 +7,6 @@ const Create: React.FC = () => {
     return (
         <>
         <NavBar /> 
-        <NavContainer> 
-        </NavContainer>
         <PageBackGround>
         <ProblemPage/>
         </PageBackGround>

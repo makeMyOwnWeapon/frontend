@@ -6,8 +6,18 @@ import { CreateButton } from '../styles/WorkBook';
 import NavBar from '../components/public/navbar'
 import SidebarOptions from '../components/board/select_option';
 import WorkbookCard from '../components/board/workbook_card';
+import {useNavigate } from 'react-router-dom';
+
+
 
 const WorkBook: React.FC = () => {
+    const navigate = useNavigate();
+    const goToCreateQuestion = () => {
+      navigate("/create");
+    }
+    
+
+
     interface Item{
         id: number;
         name: string;
@@ -67,7 +77,7 @@ const WorkBook: React.FC = () => {
     <>
     <NavBar /> 
     <NavContainer>
-    <CreateButton>문제집 만들기</CreateButton>
+    <CreateButton onClick={goToCreateQuestion}>문제집 만들기</CreateButton>
     </NavContainer>
     <PageBackGround>
       <SidebarOptions/> 

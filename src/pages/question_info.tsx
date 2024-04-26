@@ -2,6 +2,9 @@ import React from 'react';
 import { Form, InputContainer } from '../styles/CreateQuestion';
 import { NavBarContainer, PageBackGround } from '../styles/Public';
 import NavBar from '../components/public/navbar';
+import { Question } from '../styles/QuestionInfo';
+import inflearn from '../images/inflearn.png'
+import krafton from '../images/krafton.png'
 
 // 옵션 객체에 대한 타입 정의
 interface Option {
@@ -25,7 +28,7 @@ interface Option {
 
 // Sample JSON data as given in the example
 const data : {videoUrl: string; questions: Question[] } ={
-  "videoUrl": "https://example.com/video",
+  "videoUrl": "https://www.inflearn.com/course/lecture?courseSlug=%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-jwt&unitId=65764",
   "questions": [
     {
       "time": "00:01:30",
@@ -46,12 +49,23 @@ const data : {videoUrl: string; questions: Question[] } ={
 };
 
 // React component for displaying questions
-const QuestionComponent = ({ videoUrl, questions }:QuestionComponentProps) => {
+const QuestionComponent = ({ videoUrl, questions }: QuestionComponentProps) => {
+  const isInflearnUrl = (url: string) => {
+    return url.startsWith('https://www.inflearn.com/');
+  };
+
+  const videoThumbnail = isInflearnUrl(videoUrl) ? inflearn : krafton;
+
+
+
   return (
       <Form>
-      <InputContainer>Video URL: {videoUrl}</InputContainer>
+      {/*동영상의 url을 표시하는 코드 */}
+      {/* <InputContainer>Video URL: {videoUrl}</InputContainer> */} 
+      <img src={videoThumbnail} alt="Video Thumbnail" />
       {questions.map((question:Question, index:number) => (
         <div key={index}>
+          <Question>
           <InputContainer>Time: {question.time}</InputContainer>
           <InputContainer>Question: {question.question}</InputContainer>
           {question.options && (
@@ -60,10 +74,14 @@ const QuestionComponent = ({ videoUrl, questions }:QuestionComponentProps) => {
                 <li key={option.id}>{option.text}</li>
               ))}
             </ul>
+            
           )}
+          
           {question.answer && <div>Answer: {question.answer}</div>}
+          </Question>
         </div>
       ))}
+      
       
       </Form>
   );
