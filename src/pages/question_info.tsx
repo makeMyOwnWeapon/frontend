@@ -1,9 +1,8 @@
 import React from 'react';
-import { Form, InputContainer } from '../styles/CreateQuestion';
 import { NavBarContainer, PageBackGround } from '../styles/Public';
 import NavBar from '../components/public/navbar_default';
-import { Question } from '../styles/QuestionInfo';
-import VideoThumbnail from '../components/public/url_to_image';
+import QuestionInfoComponent from '../components/question/question_info_component';
+
 // 옵션 객체에 대한 타입 정의
 interface Option {
     id: number;
@@ -11,21 +10,17 @@ interface Option {
   }
   
   // 질문 객체에 대한 타입 정의
-  interface Question {
+  interface Question__ {
     time: string;
     question: string;
     options?: Option[]; // 선택적 속성
     answer?: string;
   }
   
-  // QuestionComponent의 props에 대한 타입 정의
-  interface QuestionComponentProps {
-    videoUrl: string;
-    questions: Question[];
-  }
+
 
 // Sample JSON data as given in the example
-const data : {videoUrl: string; questions: Question[] } ={
+const data : {videoUrl: string; questions: Question__[] } ={
   "videoUrl": "https://www.inflearn.com/course/lecture?courseSlug=%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-jwt&unitId=65764",
   "questions": [
     {
@@ -46,42 +41,6 @@ const data : {videoUrl: string; questions: Question[] } ={
   ]
 };
 
-// React component for displaying questions
-const QuestionComponent = ({ videoUrl, questions }: QuestionComponentProps) => {
-
-  return (
-      <Form>
-      <VideoThumbnail imageUrl={videoUrl}/>   
-      {/*동영상의 url을 표시하는 코드 */}
-      {/* <InputContainer>Video URL: {videoUrl}</InputContainer> */} 
-
-      {questions.map((question:Question, index:number) => (
-        <div key={index}>
-
-            <Question>
-            <InputContainer>Time: {question.time}</InputContainer>
-            <InputContainer>Question: {question.question}</InputContainer>
-
-            {question.options && (
-
-              <ul>
-                {question.options.map(option => (
-                  <li key={option.id}>{option.text}</li>
-                ))}
-              </ul>
-              
-            )}
-            
-            {question.answer && <div>Answer: {question.answer}</div>}
-            </Question>
-
-        </div>
-      ))}
-      
-      </Form>
-  );
-};
-
 // Wrapper component that passes the data to the QuestionComponent
 const QuestionInfo = () => {
   return (
@@ -92,7 +51,7 @@ const QuestionInfo = () => {
       
       <PageBackGround>
 
-        <QuestionComponent videoUrl={data.videoUrl} questions={data.questions} />
+        <QuestionInfoComponent videoUrl={data.videoUrl} questions={data.questions} />
       </PageBackGround>
       
     </div>

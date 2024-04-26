@@ -9,7 +9,8 @@ export const CardContainer = styled.div`
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
   transition: box-shadow 0.2s ease;
   width: 300px;
-  height: 400px;
+  height:auto;
+  margin: 10px;
   &:hover {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
   }
@@ -24,12 +25,11 @@ export const CardImage = styled.img`
 
 export const CardContent = styled.div`
   padding: 1.25rem;
-  // display : flex;
-  align-tems: flex-start;
 `;
 
 export const CardTitle = styled.h5`
   margin-bottom: 0.5rem;
+  margin-top: 0rem;
   font-size: 1.25rem;
   font-weight: bold;
   line-height: 1.5;
@@ -49,13 +49,12 @@ export const ReadMoreLink = styled.a`
   justify-content: center;
   padding: 0.75rem 1.25rem;
   font-size: 0.875rem;
-  font-weight: 500;
   text-align: center;
   text-transform: uppercase;
-  color: #fff;
+  color: #ffffff;
   background-color: #3b82f6;
   border-radius: 0.375rem;
-  transition: background-color 0.2s ease;
+  
 
   &:hover {
     background-color: #2563eb;

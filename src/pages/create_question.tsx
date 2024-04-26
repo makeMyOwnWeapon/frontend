@@ -1,7 +1,7 @@
 import React from "react";
 import { PageBackGround } from "../styles/Public";
-import NavBar from "../components/public/navbar_default";
 import ProblemPage from "../components/create/create_question";
+import NavBar from "../components/public/navbar_default";
 
 const Create: React.FC = () => {
     return (

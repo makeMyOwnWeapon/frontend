@@ -49,3 +49,39 @@ export const NavContainer = styled.div`
   align-items: start;     /* 가로 축 중앙 정렬 */
   flex-wrap: wrap;
 `;
+
+export const Content = styled.div`
+  flex: 1; /* 콘텐츠 영역이 남은 공간을 차지 */
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const ImageWithShadow = styled.img`
+  /* 그림자 효과를 적용합니다. */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 수평, 수직, 퍼짐 정도, 색상을 설정합니다. */
+  border-radius: 8px; /* 이미지에 둥근 모서리를 만듭니다. */
+`;
+
+export const TextContainer = styled.div`
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  color: #212529;
+  font-size: 16px;
+  line-height: 1.5;
+`;
+
+export const ListContainer = styled.li`
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  color: #212529;
+  font-size: 16px;
+  line-height: 1.5;
+`;
+
+export const SliderContainer = styled.div`
+position: relative;
+`;

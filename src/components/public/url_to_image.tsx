@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import inflearn from '../../images/inflearn.png'
 import krafton from '../../images/krafton.png'
 import defaultThumbnail from '../../images/default_thumbnail.jpeg'
+import { ImageWithShadow } from '../../styles/Public';
 
 interface Props {
     imageUrl: string;
@@ -23,7 +24,7 @@ const VideoThumbnail: React.FC<Props> = ({ imageUrl}) => {
 
   return (
       <div>
-        <img src={getVideoThumbnail(imageUrl)} alt="Video Thumbnail" style={{ width: '300px', height: '200px' }} />
+        <ImageWithShadow src={getVideoThumbnail(imageUrl)} alt="Video Thumbnail" style={{ width: '300px', height: '200px' }} />
       </div>
   );
 };

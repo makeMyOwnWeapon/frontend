@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-export const Content = styled.div`
-  flex: 1; /* 콘텐츠 영역이 남은 공간을 차지 */
-  display: flex;
-  flex-wrap: wrap;
-`;
-
 export const MainImage = styled.img<{ width?: string; left?: string; top?: string }>`
   width: ${props => props.width || '100%'};
   position: relative;
