@@ -5,6 +5,9 @@ import VideoThumbnail from '../public/url_to_image';
 import QuestionComponent from './create_question_component';
 
 
+
+
+
 const ProblemPage: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState<string>('');
   const [questionComponents, setQuestionComponents] = useState<{ id: number, expanded: boolean }[]>([]);
@@ -35,8 +38,38 @@ const ProblemPage: React.FC = () => {
     setQuestionComponents(reindexedComponents);
   };
 
-  return (
+  const postData = async (e: React.FormEvent<HTMLFormElement>) => {
 
+    e.preventDefault();
+
+    try {
+      // const response = await fetch('192.168.0.143:3000/api/member/registration', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     videoUrl: videoUrl,
+      //     questionComponents: questionComponents,
+      //   }),
+      // });
+  
+      // if (!response.ok) {
+      //   throw new Error('Network response was not ok');
+      // }
+      console.log(questionComponents);
+      // 서버 응답 처리
+      // const responseData = await response.json();
+      // console.log('서버 응답:', responseData);
+    } catch (error) {
+      console.error('오류 발생:', error);
+    }
+  };
+  
+
+
+  return (
+<>
     <Form>
       <StyledText>
         나만의 문제 만들기
@@ -60,9 +93,14 @@ const ProblemPage: React.FC = () => {
       ))}
       
       <NameGeneratorButton type="button" onClick={addQuestionComponent}>문제 추가</NameGeneratorButton>
-
+      
+    </Form>
+    <Form onSubmit={postData}>
+        <NameGeneratorButton>제출하기 버튼</NameGeneratorButton>
     </Form>
 
+
+    </>
   );
 };
 
