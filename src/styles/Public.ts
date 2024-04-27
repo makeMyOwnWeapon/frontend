@@ -84,4 +84,5 @@ export const ListContainer = styled.li`
 
 export const SliderContainer = styled.div`
 position: relative;
+
 `;

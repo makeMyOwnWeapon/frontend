@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 export const Info_page = styled.div`
 
@@ -27,6 +28,7 @@ export const QuestionContainer = styled.div`
   width: 100%;
   max-width: 100%; /* 최대 너비 제한 */
   overflow-x: auto; /* 가로 스크롤 활성화 */
+  
 `;
 
 export const QuestionButton = styled.button`
@@ -48,22 +50,27 @@ export const VideoThumbnailContainer = styled.div`
   text-align: center; /* 이미지를 중앙으로 정렬 */
 `;
 
-export const ArrowButton = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
-  color: #000;
-  z-index: 999;
+export const SliderContainer = styled.div`
+    margin: 0px 200px;
+    border: solid 1px black;
+    .slick-prev:before,
+    .slick-next:before {
+        display: none;	
+    }
 `;
 
-export const LeftArrow = styled(ArrowButton)`
-  left: 10px;
-`;
 
-export const RightArrow = styled(ArrowButton)`
-  right: 10px;
-`;
+export const NextTo = styled.div`
+    background-image: {FaArrowAltCircleLeft};
+    background-size: contain;
+    height: 20px;
+    width: 20px;
+`
+
+export const Prev = styled.div`
+    transform: rotate(180deg);
+    background-image: {FaArrowAltCircleLeft};
+    background-size: contain;
+    height: 20px;
+    width: 20px;
+`

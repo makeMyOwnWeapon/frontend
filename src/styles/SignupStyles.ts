@@ -13,6 +13,10 @@ export const Form = styled.form`
   ${tw`p-10  bg-white rounded-lg shadow-md`}
 `;
 
+export const Div = styled.div`
+  ${tw`p-10  bg-white rounded-lg shadow-md`}
+`;
+
 export const Button = styled.button`
   ${tw`w-full py-3 px-4 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-700`}
   box-sizing: border-box; 

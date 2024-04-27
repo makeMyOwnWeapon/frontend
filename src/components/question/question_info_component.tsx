@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import { Form } from '../../styles/CreateQuestion';
 import VideoThumbnail from "../public/url_to_image";
-import { LeftArrow, Question, RightArrow, VideoThumbnailContainer } from '../../styles/QuestionInfo';
+import { NextTo, Prev, Question, VideoThumbnailContainer } from '../../styles/QuestionInfo';
 import { QuestionContainer } from "../../styles/QuestionInfo";
 import { ListContainer, SliderContainer, TextContainer } from "../../styles/Public";
 import { FaArrowAltCircleLeft,  FaArrowAltCircleRight,  FaChevronRight } from 'react-icons/fa';
@@ -43,43 +43,57 @@ const QuestionInfoComponent = ({ videoUrl, questions }: QuestionComponentProps) 
         const prevIndex = currentImageIndex === 0 ? questions.length - 1 : currentImageIndex - 1;
         setCurrentImageIndex(prevIndex);
     };
-    
+
+    // const SlickButtonFix = ({ currentSlide, slideCount, children, ...props }) =>(
+    //     <span {...props}>{children}</span>
+    //   );
     const settings = {
         dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-      };
+        nextArrow: 			//오른쪽 화살표
+        // <SlickButtonFix>
+          <NextTo />
+        // {/* </SlickButtonFix> */}
+        ,
+        prevArrow: 			//왼쪽 화살표
+            // <SlickButtonFix>
+            <Prev />
+            // </SlickButtonFix>
+        
+    };
 
     return (
         <Form>
             <SliderContainer>
-            <VideoThumbnailContainer>
-                <VideoThumbnail imageUrl={videoUrl} />
-            </VideoThumbnailContainer>
+                <VideoThumbnailContainer>
+                    <VideoThumbnail imageUrl={videoUrl} />
+                </VideoThumbnailContainer>
                 
-            <Slider {...settings}> 
-                {questions.map((question, index) => (
-                    <QuestionContainer key={index}>
-                        <Question>
-                            <TextContainer>시간: {question.time}</TextContainer>
-                            <TextContainer>문제: {question.question}</TextContainer>
-                            {question.options && (
-                                <ul>
-                                    {question.options.map(option => (
-                                        <ListContainer key={option.id}>{option.text}</ListContainer>
-                                    ))}
-                                </ul>
-                            )}
-                            {question.answer && <TextContainer>{question.answer}</TextContainer>}
-                        </Question>
-                    </QuestionContainer>
-                ))} 
-                
-            </Slider> 
-            {/* <LeftArrow onClick={goToPrev}><FaArrowAltCircleLeft /></LeftArrow>
-            <RightArrow onClick={goToNext}><FaArrowAltCircleRight /></RightArrow> */}
+                <Slider {...settings}> 
+                    {questions.map((question, index) => (
+                        <QuestionContainer key={index}>
+                            <Question>
+                                <TextContainer>시간: {question.time}</TextContainer>
+                                <TextContainer>문제: {question.question}</TextContainer>
+                                {question.options && (
+                                    <ul>
+                                        {question.options.map(option => (
+                                            <ListContainer key={option.id}>{option.text}</ListContainer>
+                                        ))}
+                                    </ul>
+                                )}
+                                {question.answer && <TextContainer>{question.answer}</TextContainer>}
+                            </Question>
+                        </QuestionContainer>
+                    ))} 
+                </Slider> 
+
+                {/* Custom arrows
+                <LeftArrow onClick={goToPrev}><FaArrowAltCircleLeft /></LeftArrow>
+                <RightArrow onClick={goToNext}><FaArrowAltCircleRight /></RightArrow> */}
             </SliderContainer>
         </Form>
     );
