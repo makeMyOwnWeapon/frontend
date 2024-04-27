@@ -5,7 +5,7 @@ import WorkBook from '../../pages/workbook';
 import Signup from '../../pages/signup';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
-
+const expirationDate = new Date();
 const Account: React.FC = () => {
 
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ const Account: React.FC = () => {
   const handleCredentialResponse = async (userToken: string) => {
 
     try {
+      localStorage.setItem('token',JSON.stringify(userToken));
       interface UserToken {
         credential: string;
       }
@@ -36,20 +37,22 @@ const Account: React.FC = () => {
         const userToken: UserToken = JSON.parse(userTokenString);
        credential = userToken.credential;
      }else{return;}
+
       console.log('userToken1 :',userToken);
+      
       const response = await axios.get('http://192.168.0.143:3000/api/member/signin', {
         headers: {
           'Authorization': `Bearer ${credential}`
         },
       });
+      console.log('response: ',response.data)
       
-      if (response.data !== 'ok') {
-        console.log('log: ', response.data);
-        localStorage.setItem('token',JSON.stringify(userToken));  
+      if (response.data === '') {
         navigate('/signup');
       } else {
         navigate('/workbook');
-        console.log('log: ', response.data);
+        expirationDate.setTime(expirationDate.getTime() + (1 * 60 * 60 * 1000));
+        document.cookie = `token=${response.data}; expires=${expirationDate.toUTCString()}`;
       }
     } catch (error) {
       console.error('Error fetching user data:', error);

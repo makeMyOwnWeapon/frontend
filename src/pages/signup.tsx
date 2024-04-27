@@ -67,7 +67,7 @@ function Signup() {
           console.log(response.data);
           expirationDate.setTime(expirationDate.getTime() + (1 * 60 * 60 * 1000));
           document.cookie = `token=${response.data}; expires=${expirationDate.toUTCString()}`;
-
+          console.log(document.cookie);
           navigate('/workbook');
       }
     } catch (error) {
