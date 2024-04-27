@@ -43,6 +43,9 @@ const ProblemPage: React.FC = () => {
     e.preventDefault();
 
     try {
+      questionComponents.forEach(component => {
+        console.log(component.id);
+      });
       // const response = await fetch('192.168.0.143:3000/api/member/registration', {
       //   method: 'POST',
       //   headers: {
@@ -57,7 +60,6 @@ const ProblemPage: React.FC = () => {
       // if (!response.ok) {
       //   throw new Error('Network response was not ok');
       // }
-      console.log(questionComponents);
       // 서버 응답 처리
       // const responseData = await response.json();
       // console.log('서버 응답:', responseData);
