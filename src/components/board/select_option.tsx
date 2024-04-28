@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Option, SidebarBackGround } from "../../styles/WorkBook";
 import { SidebarContainer } from "../../styles/WorkBook";
-import { Input } from "../../styles/CreateQuestion";
+import { Input } from "../../styles/Public";
 
 interface OptionItem {
   id: number;

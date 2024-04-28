@@ -30,7 +30,7 @@ export const MainBackGround = styled.div`
 `;
 
 export const PageBackGround = styled.div`
-  height: 100vh;
+  height: auto;
   width: 100%;
   background: #F2F2F2;
   display: flex;
@@ -85,4 +85,29 @@ export const ListContainer = styled.li`
 export const SliderContainer = styled.div`
 position: relative;
 
+`;
+
+
+export const NameGeneratorButton = styled.button`
+padding: 8px 16px;
+margin-right: 8px;
+margin-top:8px;
+margin-bottom:8px;
+color: #000;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+`;
+
+export const Input = styled.input`
+  flex: 1;
+  padding: 10px;
+  margin-right: 20px;
+  border: 2px solid #dee2e6;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  &:focus {
+    border-color: #007bff;
+  }
 `;

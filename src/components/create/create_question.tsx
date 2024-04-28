@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Formdiv, Input, InputContainer, StyledText } from '../../styles/CreateQuestion';
-import { NameGeneratorButton } from '../../styles/SignupStyles';
 import VideoThumbnail from '../public/url_to_image';
+import { Formdiv, InputContainer, StyledText } from '../../styles/CreateQuestion';
 import QuestionComponent from './create_question_component';
+import { Input, NameGeneratorButton } from '../../styles/Public';
 
 
 const ProblemPage: React.FC = () => {
@@ -48,18 +48,22 @@ const ProblemPage: React.FC = () => {
 
   const postData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const cookie = document.cookie.match('(^|;)\\s*' + 'token' + '\\s*=\\s*([^;]+)');
+    const token = cookie? cookie.pop():'';
+    
     try {
-      console.log(answers);
-      console.log(questionTimes)
-      const response = await fetch('http://192.168.0.143:3000/api/member/registration', {
+      const response = await fetch('http://192.168.0.143:3000/api/quizsets', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // `랑 ' 햇깔리지 않기
         },
         body: JSON.stringify({
           title: title,
           videoUrl: videoUrl,
           answers: answers,
+          time:questionTimes,
         }),
       });
 
@@ -79,8 +83,10 @@ const ProblemPage: React.FC = () => {
       <Formdiv>
         <StyledText>나만의 문제 만들기</StyledText>
         <InputContainer>
-          <Input type="text" placeholder="강의 제목" value={title} onChange={(e) => setTitle(e.target.value)} />
-          <Input type="text" placeholder="동영상 URL" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} />
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+            <Input type="text" placeholder="강의 제목" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <Input type="text" placeholder="동영상 URL" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} />
+          </div>
           <VideoThumbnail imageUrl={videoUrl}/> 
         </InputContainer>
         {questionComponents.map((component, index) => (

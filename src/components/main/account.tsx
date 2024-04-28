@@ -44,13 +44,14 @@ const Account: React.FC = () => {
         },
       });
       
+      
       if (response.data === '') {
         navigate('/signup');
       } else {
-        navigate('/workbook');
         localStorage.removeItem('token')
-        expirationDate.setTime(expirationDate.getTime() + (1 * 60 * 60 * 1000));
-        document.cookie = `token=${response.data}; expires=${expirationDate.toUTCString()}`;
+        document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
+        navigate('/workbook');
+
       }
     } catch (error) {
       console.error('Error fetching user data:', error);

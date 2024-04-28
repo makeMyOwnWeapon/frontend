@@ -17,11 +17,11 @@ export const Formdiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-    align-items: center;
+  align-items: center;
   background: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  width: 90%;
+  width: 100%;
   max-width: 800px;
   margin: auto;
 `;
@@ -30,21 +30,12 @@ export const InputContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  padding:20px;
+  justify-content: space-between;
   margin-bottom: 20px;
 `;
 
-export const Input = styled.input`
-  flex: 1;
-  padding: 10px;
-  margin-right: 10px;
-  border: 2px solid #dee2e6;
-  border-radius: 5px;
-  outline: none;
-  font-size: 16px;
-  &:focus {
-    border-color: #007bff;
-  }
-`;
+
 
 export const Image = styled.img`
   width: 100px;
@@ -55,6 +46,7 @@ export const Image = styled.img`
 
 export const QuestionContainer = styled.div`
   width: 100%;
+  margin:auto;
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -98,4 +90,15 @@ font-size: 24px;
 color: black;
 margin-bottom: 30px;
 text-align:left;
+`;
+
+export const SelectOption = styled.select`
+padding: 8px 16px;
+margin-right: 8px;
+margin-top:8px;
+margin-bottom:8px;
+color: #000;
+border: 1px solid #ccc;
+border-radius: 4px;
+cursor: pointer;
 `;

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { InputBoxWrapper, Input_text, QuestionContainer } from "../../styles/CreateQuestion";
+import { InputBoxWrapper, Input_text, QuestionContainer, SelectOption } from "../../styles/CreateQuestion";
+import { NameGeneratorButton } from "../../styles/Public";
+
 
 
 
@@ -31,8 +33,8 @@ const QuestionComponent: React.FC<{ id: number, onToggle: (id: number) => void, 
 
     return (
       <QuestionContainer>
-        <button onClick={() => onToggle(id)}>{expand ? `문제 접기` : `문제 펼치기`}</button>
-        <button onClick={() => onDelete(id)}>문제 삭제하기</button>
+        <NameGeneratorButton onClick={() => onToggle(id)}>{expand ? `문제 접기` : `문제 펼치기`}</NameGeneratorButton>
+        <NameGeneratorButton onClick={() => onDelete(id)}>문제 삭제하기</NameGeneratorButton>
         {expand && (
           <>
             <div>
@@ -44,10 +46,10 @@ const QuestionComponent: React.FC<{ id: number, onToggle: (id: number) => void, 
 
             <div>
               <label>문제 유형:</label>
-              <select value={questionType} onChange={(e) => setQuestionType(e.target.value as 'objective' | 'subjective')}>
+              <SelectOption value={questionType} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setQuestionType(e.target.value as 'objective' | 'subjective')}>
                 <option value="objective">객관식</option>
                 <option value="subjective">주관식</option>
-              </select>
+              </SelectOption>
             </div>
 
             <InputBoxWrapper>
@@ -61,9 +63,9 @@ const QuestionComponent: React.FC<{ id: number, onToggle: (id: number) => void, 
                   <label>{label}: </label>
                   <Input_text type="text" value={answers[index + 1].text} onChange={(e) => handleAnswerChange(index + 1, e.target.value)} />
                   {index < 4 && (
-                    <button onClick={() => handleSelectionChange(index + 1)}>
+                    <NameGeneratorButton onClick={() => handleSelectionChange(index + 1)}>
                       {answers[index + 1].selected ? '선택됨' : '선택 안됨'}
-                    </button>
+                    </NameGeneratorButton>
                   )}
                 </InputBoxWrapper>
               ))

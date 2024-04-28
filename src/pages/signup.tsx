@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Button, Title, SmallButton, NameGeneratorButton, NameContainer, Div } from '../styles/SignupStyles';
+import { Container, Button, Title, SmallButton, NameContainer, Div } from '../styles/SignupStyles';
 import NavBar from '../components/public/navbar_main';
 import { useNavigate } from 'react-router-dom';
+import { NameGeneratorButton } from '../styles/Public';
 
 function Signup() {
   const [nickname, setNickname] = useState('');
@@ -56,8 +57,7 @@ function Signup() {
   
       if (response.data !== 'Invalid token') {
           localStorage.removeItem('token');
-          expirationDate.setTime(expirationDate.getTime() + (1 * 60 * 60 * 1000));
-          document.cookie = `token=${response.data}; expires=${expirationDate.toUTCString()}`;
+          document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
           navigate('/workbook');
       }
     } catch (error) {
