@@ -4,6 +4,20 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   padding: 20px;
+    align-items: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+`;
+
+export const Formdiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+    align-items: center;
   background: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -53,7 +67,7 @@ export const QuestionContainer = styled.div`
 `;
 
 export const InputBoxWrapper = styled.div`
-  display: flex;
+  display: block;
   flex-direction: row;
   align-items: center;
   margin-bottom: 15px;

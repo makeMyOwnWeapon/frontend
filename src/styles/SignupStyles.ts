@@ -43,6 +43,8 @@ margin-top: 16px;
 export const NameGeneratorButton = styled.button`
 padding: 8px 16px;
 margin-right: 8px;
+margin-top:8px;
+margin-bottom:8px;
 color: #000;
 border: none;
 border-radius: 4px;

@@ -18,10 +18,10 @@ const Account: React.FC = () => {
 
     window.google?.accounts.id.renderButton(
       document.getElementById('signInDiv'),
-      { theme: 'outline', size: 'large' }  // 로그인 버튼 옵션
+      { theme: 'outline', size: 'large' }
     );
 
-    window.google?.accounts.id.prompt(); // 세션 종료 시 자동 로그인 프롬프트
+    window.google?.accounts.id.prompt();
   }, []);
 
   const handleCredentialResponse = async (userToken: string) => {
@@ -37,20 +37,18 @@ const Account: React.FC = () => {
         const userToken: UserToken = JSON.parse(userTokenString);
        credential = userToken.credential;
      }else{return;}
-
-      console.log('userToken1 :',userToken);
       
       const response = await axios.get('http://192.168.0.143:3000/api/member/signin', {
         headers: {
           'Authorization': `Bearer ${credential}`
         },
       });
-      console.log('response: ',response.data)
       
       if (response.data === '') {
         navigate('/signup');
       } else {
         navigate('/workbook');
+        localStorage.removeItem('token')
         expirationDate.setTime(expirationDate.getTime() + (1 * 60 * 60 * 1000));
         document.cookie = `token=${response.data}; expires=${expirationDate.toUTCString()}`;
       }
