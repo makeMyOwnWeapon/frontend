@@ -8,10 +8,10 @@ export const MainImage = styled.img<{ width?: string; left?: string; top?: strin
 `;
 
 export const LoginButton = styled.button<{ left?: string; top?: string }>`
-  display: flex; 
-  position: relative;
-  left: ${props => props.left || '0px'}; // 왼쪽 여백
-  top: ${props => props.top || '0px'}; // 상단 여백
+  position:fixed;
+  top: 30%;
+  left: 70%;
+  top: 50%;
   border: none;
   background: transparent;
   }
