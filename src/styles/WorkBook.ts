@@ -16,12 +16,14 @@ export const CreateButton = styled.button`
 `;
 
 export const SidebarContainer = styled.div`
+  position:fixed;
+  top: 35%;
+  left: 4%;
   width: 250px;
-  height: auto;
   background-color: #f2f2f2;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(1,1,0,);
-  margin-top: 20px; // 상단에 붙임
+  // margin-top: 20px; // 상단에 붙임
   
 `;
 
@@ -63,4 +65,25 @@ export const SidebarBackGround = styled.div`
   color: darkgray; // 글자색
   padding: 10px 0;
 
+`;
+
+export const PaginationContainer = styled.ul`
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+`;
+
+export const PageItem = styled.li<{ isActive: boolean }>`
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  margin: 5px;
+  background-color: ${props => props.isActive ? '#007bff' : '#fff'};
+  color: ${props => props.isActive ? '#fff' : '#007bff'};
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+    color: #fff;
+  }
 `;

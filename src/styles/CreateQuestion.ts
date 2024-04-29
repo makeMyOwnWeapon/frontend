@@ -22,8 +22,10 @@ export const Formdiv = styled.div`
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   width: 100%;
+  min-height:100vh;
   max-width: 800px;
   margin: auto;
+  
 `;
 
 export const InputContainer = styled.div`
@@ -46,7 +48,6 @@ export const Image = styled.img`
 
 export const QuestionContainer = styled.div`
   width: 100%;
-  margin:auto;
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -88,6 +89,7 @@ export const Input_text = styled.input`
 export const StyledText = styled.p`
 font-size: 24px;
 color: black;
+margin-top: 70px;
 margin-bottom: 30px;
 text-align:left;
 `;

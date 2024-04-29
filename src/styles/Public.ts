@@ -34,7 +34,7 @@ export const PageBackGround = styled.div`
   width: 100%;
   background: #F2F2F2;
   display: flex;
-  flex-direction: row;
+  // flex-direction: row;
   justify-content: center; /* 세로 축 중앙 정렬 */
   // align-items: center;     /* 가로 축 중앙 정렬 */
   flex-wrap: wrap;
@@ -48,12 +48,14 @@ export const NavContainer = styled.div`
   justify-content: start; /* 세로 축 중앙 정렬 */
   align-items: start;     /* 가로 축 중앙 정렬 */
   flex-wrap: wrap;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 섀딩 추가 */
 `;
 
 export const Content = styled.div`
   flex: 1; /* 콘텐츠 영역이 남은 공간을 차지 */
   display: flex;
   flex-wrap: wrap;
+   margin-left: 400px; /* 왼쪽에 고정된 컴포넌트의 너비에 맞춰 조정 */
 `;
 
 export const ImageWithShadow = styled.img`
@@ -110,4 +112,16 @@ export const Input = styled.input`
   &:focus {
     border-color: #007bff;
   }
+`;
+
+export const PageFooter = styled.footer`
+  width: 100%;
+  border: 1px solid #dee2e6;
+  background-color: #FFFFFF; // 배경색은 원하는 대로 조정 가능
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 `;
