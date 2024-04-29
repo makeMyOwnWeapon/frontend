@@ -101,6 +101,7 @@ class ProblemPage extends Component<Props, State> {
     e.preventDefault();
     const { title, subLectureUrl, mainLectureTitle, subLectureTitle, lecturerName, duration } = this.state;
     if (!title || !subLectureUrl || !mainLectureTitle || !subLectureTitle || !lecturerName || !duration) {
+      alert('모든 필드를 채워주세요.');
       console.error("모든 필드를 채워주세요.");
       return;
     }
@@ -111,11 +112,13 @@ const quizzes = this.state.answers.map((answerSet, index) => {
   // Check if popupTime is a valid time format
   const timeRegex = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/;
   if (!timeRegex.test(this.state.questionTimes[index])) {
+    alert('시간 형식이 잘못되었습니다. "hh:mm:ss" 형식으로 입력해 주세요.');
     throw new Error(`시간 형식이 잘못되었습니다. 'hh:mm:ss' 형식으로 입력해주세요. (문제 ${index + 1})`);
   }
 
   // Check for null values in answerSet
   if (answerSet.some(answer => answer.text === '')) {
+    alert('빈 값이 포함되어 있습니다.');
     throw new Error(`answerSet에 빈 값이 포함되어 있습니다. (문제 ${index + 1})`);
   }
 
@@ -150,8 +153,15 @@ const quizzes = this.state.answers.map((answerSet, index) => {
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        switch(response.status){
+          case 412:
+            alert('same title');
+            throw new Error('same title');
+          default:
+            throw new Error('Network response was not ok');
       }
+        }
+        
 
       const responseData = await response.json();
       console.log('Server Response:', responseData);
