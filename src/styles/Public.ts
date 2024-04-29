@@ -27,6 +27,7 @@ export const MainBackGround = styled.div`
   background: linear-gradient(to bottom, white, lightblue);
   display: flex;
   flex-direction: column;
+  bottom: 0px;
 `;
 
 export const PageBackGround = styled.div`

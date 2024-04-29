@@ -88,6 +88,7 @@ class ProblemPage extends Component<Props, State> {
     const timeRegex = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/;
   
     if (!timeRegex.test(timeStr)) {
+      alert('올바른 시간 형식이 아닙니다.');
       throw new Error('올바른 시간 형식이 아닙니다. "hh:mm:ss" 형식으로 입력해주세요.');
     }
     const parts = timeStr.split(':').reverse();
@@ -113,13 +114,11 @@ const quizzes = this.state.answers.map((answerSet, index) => {
   const timeRegex = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/;
   if (!timeRegex.test(this.state.questionTimes[index])) {
     alert('시간 형식이 잘못되었습니다. "hh:mm:ss" 형식으로 입력해 주세요.');
-    throw new Error(`시간 형식이 잘못되었습니다. 'hh:mm:ss' 형식으로 입력해주세요. (문제 ${index + 1})`);
   }
 
   // Check for null values in answerSet
   if (answerSet.some(answer => answer.text === '')) {
     alert('빈 값이 포함되어 있습니다.');
-    throw new Error(`answerSet에 빈 값이 포함되어 있습니다. (문제 ${index + 1})`);
   }
 
   return {
