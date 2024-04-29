@@ -1,0 +1,18 @@
+// {
+//   title: '',1
+//   subLectureUrl: '',1
+//   subLectureTitle: '',
+//   mainLectureTitle: '',
+//   lecturerName: '',
+//   duration: '',
+//   quizzes: [
+//     {
+//       instruction: '',
+//       commentary: '',
+//       popupTime: '',
+//       answers: [
+//         {content: '', isAnswer: false}
+//       ]
+//     },
+//   ]
+// }

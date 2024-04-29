@@ -8,7 +8,7 @@ interface Props {
     imageUrl: string;
   }
 
-const VideoThumbnail: React.FC<Props> = ({ imageUrl}) => {
+const VideoThumbnail: React.FC<Props> = ({ imageUrl }) => {
     
   const thumbnailMappings :{ [key: string]: string } = {
     'inflearn.com': inflearn,
@@ -18,6 +18,7 @@ const VideoThumbnail: React.FC<Props> = ({ imageUrl}) => {
 
   const getVideoThumbnail = (url:string) => {
     const domain = url.startsWith('https') ? new URL(url).hostname.replace('www.', '') : '';
+    console.log(imageUrl);
     const thumbnail = thumbnailMappings[domain];
     return thumbnail || defaultThumbnail;
   };

@@ -34,11 +34,25 @@ class QuestionComponent extends Component<Props, State> {
   }
 
   handleAnswerChange = (index: number, value: string) => {
-    const newAnswers = this.state.answers.map((answer, idx) =>
-      idx === index ? { ...answer, text: value } : answer
-    );
-    this.setState({ answers: newAnswers });
-    this.props.updateAnswer(index, newAnswers);
+    this.setState(prevState => {
+      const newAnswers = prevState.answers.map((answer, idx) =>
+        idx === index ? { ...answer, text: value } : answer
+      );
+      return { answers: newAnswers };
+    }, () => {
+      this.props.updateAnswer(this.props.id, this.state.answers);
+    });
+  };
+  
+  handleSelectionChange = (index: number) => {
+    this.setState(prevState => {
+      const newAnswers = prevState.answers.map((answer, idx) =>
+        idx === index ? { ...answer, selected: !answer.selected } : answer
+      );
+      return { answers: newAnswers };
+    }, () => {
+      this.props.updateAnswer(this.props.id, this.state.answers);
+    });
   };
 
   handleTimeChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,13 +61,22 @@ class QuestionComponent extends Component<Props, State> {
     this.props.updateTime(this.props.id, newTime);
   };
 
-  handleSelectionChange = (index: number) => {
-    const newAnswers = this.state.answers.map((answer, idx) =>
-      idx === index ? { ...answer, selected: !answer.selected } : answer
-    );
-    this.setState({ answers: newAnswers });
-    this.props.updateAnswer(index,newAnswers);
+  handleTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newType = e.target.value as 'objective' | 'subjective';
+    const initialAnswers = newType === 'objective' ? 
+    [{ text: '' }, { text: '', selected: false }, { text: '' , selected: false }, { text: '', selected: false }, { text: '', selected: false }, { text: '' }] :
+      [{ text: '' }, { text: '', selected: true }, { text: '' }];
+
+    this.setState({
+      questionType: newType,
+      answers: initialAnswers
+    }, () => {
+      this.props.updateAnswer(this.props.id, initialAnswers);
+    });
   };
+
+
+
 
   render() {
     const { id, expand, onToggle, onDelete } = this.props;
@@ -68,13 +91,13 @@ class QuestionComponent extends Component<Props, State> {
             <div>
               <InputBoxWrapper>
                 <label>시간: </label>
-                <Input_text type="text" value={newTime} onChange={this.handleTimeChange} />
+                <Input_text type="timeInput" placeholder="예: 01:23:45" value={newTime} onChange={this.handleTimeChange} />
               </InputBoxWrapper>
             </div>
 
             <div>
               <label>문제 유형:</label>
-              <SelectOption value={questionType} onChange={(e: ChangeEvent<HTMLSelectElement>) => this.setState({ questionType: e.target.value as 'objective' | 'subjective' })}>
+              <SelectOption value={questionType} onChange={this.handleTypeChange}>
                 <option value="objective">객관식</option>
                 <option value="subjective">주관식</option>
               </SelectOption>
@@ -82,19 +105,19 @@ class QuestionComponent extends Component<Props, State> {
 
             <InputBoxWrapper>
               <label>문제: </label>
-              <Input_text type="text" value={answers[0].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)} />
+              <Input_text type="text" value={answers[0].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)} />
             </InputBoxWrapper>
 
             {questionType === 'objective' ? (
               ['1번', '2번', '3번', '4번', '해설'].map((label, index) => (
                 <InputBoxWrapper key={index}>
                   <label>{label}: </label>
-                  <Input_text type="text" value={answers[index + 1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} />
-                  {/* {index < 4 && (
+                  <Input_text type="text" value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} />
+                  {index < 4 && (
                     <NameGeneratorButton onClick={() => this.handleSelectionChange(index + 1)}>
                       {answers[index + 1].selected ? '선택됨' : '선택 안됨'}
                     </NameGeneratorButton>
-                  )} */}
+                  )}
                 </InputBoxWrapper>
               ))
             ) : (

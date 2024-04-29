@@ -15,11 +15,15 @@ interface QuestionComponentData {
 }
 
 interface State {
-  videoUrl: string;
+  subLectureUrl: string;
   title: string;
   questionComponents: QuestionComponentData[];
   answers: Answer[][];
   questionTimes: string[];
+  subLectureTitle: string;
+  mainLectureTitle: string;
+  lecturerName: string;
+  duration: string;  // Store duration as string to handle user input
 }
 
 interface Props {}
@@ -28,11 +32,15 @@ class ProblemPage extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      videoUrl: '',
+      subLectureUrl: '',
       title: '',
       questionComponents: [],
       answers: [],
-      questionTimes: []
+      questionTimes: [],
+      subLectureTitle: '',
+      mainLectureTitle: '',
+      lecturerName: '',
+      duration: '',
     };
   }
 
@@ -57,11 +65,12 @@ class ProblemPage extends Component<Props, State> {
   };
 
   toggleExpand = (id: number): void => {
-    const newComponents = this.state.questionComponents.map(component => ({
-      ...component,
-      expanded: component.id === id ? !component.expanded : component.expanded
+    this.setState(prevState => ({
+      questionComponents: prevState.questionComponents.map(component => ({
+        ...component,
+        expanded: component.id === id ? !component.expanded : component.expanded
+      }))
     }));
-    this.setState({ questionComponents: newComponents });
   };
 
   deleteQuestion = (id: number): void => {
@@ -71,25 +80,54 @@ class ProblemPage extends Component<Props, State> {
     }));
   };
 
+  handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ duration: e.target.value });
+  };
+
+  convertTimeToSeconds = (timeStr: string): number => {
+    const parts = timeStr.split(':').reverse();
+    let seconds = parseInt(parts[0] || '0', 10);
+    let minutes = parseInt(parts[1] || '0', 10);
+    let hours = parseInt(parts[2] || '0', 10);
+    return hours * 3600 + minutes * 60 + seconds;
+  };
+
   postData = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    const cookie = document.cookie.match('(^|;)\\s*token\\s*=\\s*([^;]+)');
-    const token = cookie ? cookie.pop() : '';
+    const { title, subLectureUrl, mainLectureTitle, subLectureTitle, lecturerName, duration } = this.state;
+    if (!title || !subLectureUrl || !mainLectureTitle || !subLectureTitle || !lecturerName || !duration) {
+      console.error("모든 필드를 채워주세요.");
+      return;
+    }
 
-    
+    const durationInSeconds = this.convertTimeToSeconds(duration);
+
+    const quizzes = this.state.answers.map((answerSet, index) => ({
+      instruction: answerSet[0].text,
+      commentary: answerSet[answerSet.length - 1].text,
+      popupTime: this.state.questionTimes[index],
+      answers: answerSet.slice(1).map((answer, idx) => ({
+        content: answer.text,
+        isAnswer: answer.selected
+      }))
+    }));
 
     try {
+
       const response = await fetch('http://192.168.0.143:3000/api/quizsets', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`,
         },
         body: JSON.stringify({
-          title: this.state.title,
-          videoUrl: this.state.videoUrl,
-          answers: this.state.answers,
-          time: this.state.questionTimes,
+          title,
+          subLectureUrl,
+          subLectureTitle,
+          mainLectureTitle,
+          lecturerName,
+          duration: durationInSeconds,
+          quizzes,
         }),
       });
 
@@ -111,10 +149,14 @@ class ProblemPage extends Component<Props, State> {
           <StyledText>나만의 문제 만들기</StyledText>
           <InputContainer>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <Input type="text" placeholder="강의 제목" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
-              <Input type="text" placeholder="동영상 URL" value={this.state.videoUrl} onChange={(e) => this.setState({ videoUrl: e.target.value })} />
+              <Input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
+              <Input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={(e) => this.setState({ subLectureUrl: e.target.value })} />
+              <Input type="text" placeholder="대강의명" value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
+              <Input type="text" placeholder="소강의명" value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
+              <Input type="text" placeholder="강사명" value={this.state.lecturerName} onChange={(e) => this.setState({ lecturerName: e.target.value })} />
+              <Input type="text" placeholder="강의 시간 (예: 1:23:45 또는 45:30)" value={this.state.duration} onChange={this.handleDurationChange} />
             </div>
-            <VideoThumbnail imageUrl={this.state.videoUrl} />
+            <VideoThumbnail imageUrl={this.state.subLectureUrl} />
           </InputContainer>
           {this.state.questionComponents.map((component, index) => (
             <QuestionComponent
