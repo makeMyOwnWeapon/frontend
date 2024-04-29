@@ -90,11 +90,11 @@ class QuestionComponent extends Component<Props, State> {
                 <InputBoxWrapper key={index}>
                   <label>{label}: </label>
                   <Input_text type="text" value={answers[index + 1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} />
-                  {index < 4 && (
+                  {/* {index < 4 && (
                     <NameGeneratorButton onClick={() => this.handleSelectionChange(index + 1)}>
                       {answers[index + 1].selected ? '선택됨' : '선택 안됨'}
                     </NameGeneratorButton>
-                  )}
+                  )} */}
                 </InputBoxWrapper>
               ))
             ) : (
