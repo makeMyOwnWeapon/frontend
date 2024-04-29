@@ -5,7 +5,6 @@ import WorkBook from '../../pages/workbook';
 import Signup from '../../pages/signup';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
-const expirationDate = new Date();
 const Account: React.FC = () => {
 
   const navigate = useNavigate();
@@ -25,7 +24,7 @@ const Account: React.FC = () => {
   }, []);
 
   const handleCredentialResponse = async (userToken: string) => {
-
+    console.log('start');
     try {
       localStorage.setItem('token',JSON.stringify(userToken));
       interface UserToken {
