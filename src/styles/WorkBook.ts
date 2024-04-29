@@ -17,7 +17,7 @@ export const CreateButton = styled.button`
 
 export const SidebarContainer = styled.div`
   position:fixed;
-  top: 35%;
+  top: 25%;
   left: 4%;
   width: 250px;
   background-color: #f2f2f2;

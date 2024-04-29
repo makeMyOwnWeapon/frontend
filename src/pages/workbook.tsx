@@ -220,7 +220,6 @@ const WorkBook: React.FC = () => {
     <>
     <NavBar /> 
     <NavContainer>
-    {/* <CreateButton onClick={goToCreateQuestion}>문제집 만들기</CreateButton> */}
     </NavContainer>
     <PageBackGround>
       <SidebarOptions/> 

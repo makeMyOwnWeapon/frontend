@@ -123,7 +123,7 @@ const quizzes = this.state.answers.map((answerSet, index) => {
     instruction: answerSet[0].text,
     commentary: answerSet[answerSet.length - 1].text,
     popupTime: this.state.questionTimes[index],
-    answers: answerSet.slice(1).map((answer, idx) => ({
+    choices: answerSet.slice(1,answerSet.length-1).map((answer, idx) => ({
       content: answer.text,
       isAnswer: answer.selected
     }))
