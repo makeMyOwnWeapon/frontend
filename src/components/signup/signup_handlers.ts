@@ -18,6 +18,7 @@ export async function handleSubmit({
 }: HandleSubmitArgs) {
   event.preventDefault();
   try {
+    console.log('start');
     const response: AxiosResponse = await axios.post('http://192.168.0.143:3000/api/member/signup', {
       authorizationCode: selectedButton === 1 ? 0 : 1,
       nickname: nickname
@@ -26,7 +27,7 @@ export async function handleSubmit({
         'Authorization': `Bearer ${credential}`
       }
     });
-
+    console.log(response);
     if (response.data !== 'Invalid token') {
       localStorage.removeItem('token');
       document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;

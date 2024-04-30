@@ -84,12 +84,12 @@ class ProblemPage extends Component<Props, State> {
     this.setState({ duration: e.target.value });
   };
 
-  convertTimeToSeconds = (timeStr: string): number => {
+  convertTimeToSeconds = (timeStr: string): number|void => {
     const timeRegex = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/;
   
     if (!timeRegex.test(timeStr)) {
-      alert('올바른 시간 형식이 아닙니다.');
-      throw new Error('올바른 시간 형식이 아닙니다. "hh:mm:ss" 형식으로 입력해주세요.');
+      alert('올바른 시간 형식이 아닙니다. hh:mm:ss 로 바꿔주세요.');
+      return;
     }
     const parts = timeStr.split(':').reverse();
     let seconds = parseInt(parts[0] || '0', 10);
@@ -103,7 +103,6 @@ class ProblemPage extends Component<Props, State> {
     const { title, subLectureUrl, mainLectureTitle, subLectureTitle, lecturerName, duration } = this.state;
     if (!title || !subLectureUrl || !mainLectureTitle || !subLectureTitle || !lecturerName || !duration) {
       alert('모든 필드를 채워주세요.');
-      console.error("모든 필드를 채워주세요.");
       return;
     }
 
@@ -114,11 +113,13 @@ const quizzes = this.state.answers.map((answerSet, index) => {
   const timeRegex = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/;
   if (!timeRegex.test(this.state.questionTimes[index])) {
     alert('시간 형식이 잘못되었습니다. "hh:mm:ss" 형식으로 입력해 주세요.');
+    return ;
   }
 
   // Check for null values in answerSet
   if (answerSet.some(answer => answer.text === '')) {
     alert('빈 값이 포함되어 있습니다.');
+    return ;
   }
 
   return {
@@ -155,9 +156,10 @@ const quizzes = this.state.answers.map((answerSet, index) => {
         switch(response.status){
           case 412:
             alert('same title');
-            throw new Error('same title');
+            break;
           default:
-            throw new Error('Network response was not ok');
+            alert('Network response was not ok')
+            break;
       }
         }
         

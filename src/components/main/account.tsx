@@ -24,7 +24,6 @@ const Account: React.FC = () => {
   }, []);
 
   const handleCredentialResponse = async (userToken: string) => {
-    console.log('start');
     try {
       localStorage.setItem('token',JSON.stringify(userToken));
       interface UserToken {

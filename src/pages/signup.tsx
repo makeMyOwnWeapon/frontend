@@ -10,7 +10,17 @@ function Signup() {
   const [nickname, setNickname] = useState('');
   const [selectedButton, setSelectedButton] = useState<number | null>(null);
   const navigate = useNavigate();
-  const credential = localStorage.getItem('token');
+
+  interface UserToken {
+    credential: string;
+  }
+
+  const userTokenString: string | null = localStorage.getItem('token');
+  let credential: string;
+  if (userTokenString) {
+    const userToken: UserToken = JSON.parse(userTokenString);
+    credential = userToken.credential;
+  }else{return null;}
 
   return (
     <Container>
