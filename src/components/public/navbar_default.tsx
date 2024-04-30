@@ -15,11 +15,14 @@ const NavBar: React.FC = () => {
   const goToCreateQuestion = () => {
     navigate("/create");
   }
+  const goToVideo = () => {
+    navigate("/video");
+  }
 
   return (
     <NavBarContainer>
       <NavLink href="/workbook">Home</NavLink>
-      <NavLink href="/about">about</NavLink>
+      <NavLink href="/video" onClick={goToVideo}>영상촬영</NavLink>
       <NavLink href="/create" onClick={goToCreateQuestion}>문제집 만들기</NavLink>
       <NavLink href="/" onClick={handleLogout}>로그아웃</NavLink>
     </NavBarContainer>
