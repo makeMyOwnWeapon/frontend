@@ -3,6 +3,7 @@ import VideoThumbnail from '../public/url_to_image';
 import { Formdiv, InputContainer, StyledText } from '../../styles/CreateQuestion';
 import QuestionComponent from './create_question_component';
 import { Input, NameGeneratorButton } from '../../styles/Public';
+import { motion } from 'framer-motion';
 
 interface Answer {
   text: string;
@@ -175,6 +176,7 @@ const quizzes = this.state.answers.map((answerSet, index) => {
     return (
       <>
         <Formdiv>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
           <StyledText>나만의 문제 만들기</StyledText>
           <InputContainer>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -187,6 +189,7 @@ const quizzes = this.state.answers.map((answerSet, index) => {
             </div>
             <VideoThumbnail imageUrl={this.state.subLectureUrl} />
           </InputContainer>
+          </motion.div>
           {this.state.questionComponents.map((component, index) => (
             <QuestionComponent
               key={component.id}
@@ -199,10 +202,12 @@ const quizzes = this.state.answers.map((answerSet, index) => {
               updateTime={(index, timeExchange) => this.updateQuestionTime(index, timeExchange)}
             />
           ))}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
           <NameGeneratorButton type="button" onClick={this.addQuestionComponent}>문제 추가</NameGeneratorButton>
           <form onSubmit={this.postData}>
             <NameGeneratorButton type="submit">제출하기 버튼</NameGeneratorButton>
           </form>
+          </motion.div>
         </Formdiv>
       </>
     );

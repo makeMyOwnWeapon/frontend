@@ -5,6 +5,8 @@ import SidebarOptions from '../components/board/select_option';
 import WorkbookCard from '../components/board/workbook_card';
 import axios from 'axios';
 import Pagination from '../components/board/pagenation';
+import { motion } from 'framer-motion';
+
 
 
 
@@ -284,6 +286,8 @@ const WorkBook: React.FC = () => {
     <NavContainer>
     </NavContainer>
     <PageBackGround>
+      
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       <SidebarOptions/> 
       <Content>
         {currentItems.map((card, index) => (
@@ -295,8 +299,9 @@ const WorkBook: React.FC = () => {
             readMoreUrl={card.readMoreUrl}
           />
         ))}
-  
+      
       </Content>
+      </motion.div>
       <PageFooter>
         <Pagination
           itemsPerPage={itemsPerPage}

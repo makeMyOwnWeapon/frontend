@@ -47,13 +47,16 @@ export const Image = styled.img`
 `;
 
 export const QuestionContainer = styled.div`
-  width: 100%;
+  width: 50%;
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   padding: 15px;
   margin-bottom: 20px;
   transition: all 0.3s ease;
+  display:flex;
+  justify-content: center; /* 세로 축 중앙 정렬 */
+  align-items: center; 
   &:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   }
