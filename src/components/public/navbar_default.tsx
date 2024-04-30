@@ -10,18 +10,19 @@ const NavBar: React.FC = () => {
 
   const handleLogout = () => {
     deleteCookie('token'); // 'username'은 예시 쿠키 이름입니다.
+    navigate("/");
   };
   const navigate = useNavigate();
-  const goToCreateQuestion = () => {
-    navigate("/create");
+  const startNavigate = (location:string) => {
+    navigate(`/${location}`);
   }
 
   return (
     <NavBarContainer>
-      <NavLink href="/workbook">Home</NavLink>
-      <NavLink href="/about">about</NavLink>
-      <NavLink href="/create" onClick={goToCreateQuestion}>문제집 만들기</NavLink>
-      <NavLink href="/" onClick={handleLogout}>로그아웃</NavLink>
+      <NavLink href="" onClick={()=>startNavigate("workbook")}>Home</NavLink>
+      <NavLink href="" onClick={()=>startNavigate("workbook")}>about</NavLink>
+      <NavLink href="" onClick={()=>startNavigate("create")}>Create</NavLink>
+      <NavLink href="" onClick={handleLogout}>Logout</NavLink>
     </NavBarContainer>
   );
 };

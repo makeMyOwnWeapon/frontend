@@ -1,29 +1,31 @@
 import React from "react";
 import { CardContainer, CardContent, CardTitle, CardDescription, ReadMoreLink } from "../../styles/WorkBookCard"; 
 import VideoThumbnail from "../public/url_to_image";
+import { FaThumbsUp } from "react-icons/fa";
 // 컴포넌트 정의
 interface WorkbookCardProps {
-  videoUrl: string;
-  title: string;
-  description: string;
-  readMoreUrl: string;
+  createdAt: string;
+  memberNickname: string;
+  quizSetTitle: string;
+  recommendationCount: number;
+  subLectureTitle: string;
+  subLectureUrl:string
 }
 
-const WorkbookCard: React.FC<WorkbookCardProps> = ({ videoUrl, title, description, readMoreUrl }) => {
+const WorkbookCard: React.FC<WorkbookCardProps> = ({ createdAt, memberNickname, quizSetTitle, recommendationCount,subLectureTitle,subLectureUrl }) => {
 //문제집명, 강의명, 강사명, 추천인수, 작성자 id, 등록날짜, 페이징
   return (
     <CardContainer>
       <a href="#">
-          <VideoThumbnail imageUrl={videoUrl} /> 
+          <VideoThumbnail imageUrl={subLectureUrl} /> 
       </a>
       <CardContent>
         <a href="#">
-          <CardTitle>{title}</CardTitle>
+          <CardTitle>{quizSetTitle}</CardTitle>
         </a>
-        <CardDescription>{description}</CardDescription>
-        <CardDescription>사람이름이 들어가는 자리에요</CardDescription>
-        <ReadMoreLink href={readMoreUrl}>
-          추천!
+        <CardDescription>작성자: {memberNickname}</CardDescription>
+        <ReadMoreLink >
+        <FaThumbsUp />{recommendationCount}
         </ReadMoreLink>
       </CardContent>
     </CardContainer>

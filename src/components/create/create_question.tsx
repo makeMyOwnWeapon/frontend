@@ -4,7 +4,12 @@ import { Formdiv, InputContainer, StyledText } from '../../styles/CreateQuestion
 import QuestionComponent from './create_question_component';
 import { Input, NameGeneratorButton } from '../../styles/Public';
 import { motion } from 'framer-motion';
+import { NavigateFunction } from 'react-router-dom';
 
+
+interface Props {
+  navigate: NavigateFunction;
+}
 interface Answer {
   text: string;
   selected?: boolean;
@@ -24,7 +29,7 @@ interface State {
   subLectureTitle: string;
   mainLectureTitle: string;
   lecturerName: string;
-  duration: string;  // Store duration as string to handle user input
+  duration: string; 
 }
 
 interface Props {}
@@ -99,8 +104,10 @@ class ProblemPage extends Component<Props, State> {
     return hours * 3600 + minutes * 60 + seconds;
   };
 
+  
   postData = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+    
     const { title, subLectureUrl, mainLectureTitle, subLectureTitle, lecturerName, duration } = this.state;
     if (!title || !subLectureUrl || !mainLectureTitle || !subLectureTitle || !lecturerName || !duration) {
       alert('모든 필드를 채워주세요.');
@@ -136,6 +143,7 @@ const quizzes = this.state.answers.map((answerSet, index) => {
 
     try {
 
+
       const response = await fetch('http://192.168.0.143:3000/api/quizsets', {
         method: 'POST',
         headers: {
@@ -162,17 +170,21 @@ const quizzes = this.state.answers.map((answerSet, index) => {
             alert('Network response was not ok')
             break;
       }
-        }
+        }else{this.props.navigate('/workbook');}
         
 
       const responseData = await response.json();
-      console.log('Server Response:', responseData);
+        // 여기에 navigate되게
+      
     } catch (error) {
       console.error('Error:', error);
     }
+
   };
 
   render() {
+
+
     return (
       <>
         <Formdiv>
