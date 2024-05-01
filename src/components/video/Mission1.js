@@ -182,7 +182,8 @@ export function Mission1(){
                         sublectureId : "16"
                     }).then(
                         (response) => {
-                            alert(response);
+                            console.dir(response.data.message);
+                            alert(response.data.message);
                         }).catch(
                         (error) => {
                             alert(error);
