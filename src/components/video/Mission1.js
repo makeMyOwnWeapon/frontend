@@ -152,12 +152,21 @@ export function Mission1(){
                 // 눈을 감았을 경우
                 dev_eye_status.innerText = '눈감음';
 
+                if(isSleeping){
+                    sleepDuration = (currentTime - sleepStart) / 1000;
+                    if(sleepDuration >= 3){
+                        console.log('자는중');
+                        status.innerText = '자는중';
+
+                    }
+                }
+
                 if (!isSleeping) {
                     // 자는 상태가 아니라면 자는 상태로 변경하고 현재 시간 기록
                     isSleeping = true;
                     sleepStart = currentTime;
                     console.log('눈감음11');                    
-                } 
+                }
             } else {
                 // 눈을 뜬 경우
                 dev_eye_status.innerText = '눈뜸';
@@ -189,9 +198,6 @@ export function Mission1(){
                                     alert(error);
                                 }
                         )
-
-
-
                         sleepCount++;
                         console.log(`잔 횟수: ${sleepCount}`);
                         document.querySelector('#dev_submit_history').innerHTML += ` <li> 시작 시간 : ${sleepStart} 종료 시간 :  ${sleepEnd} </li>`;
