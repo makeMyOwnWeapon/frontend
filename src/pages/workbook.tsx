@@ -40,22 +40,16 @@ const WorkBook: React.FC = () => {
             
             try {
               //192.168.0.143
-              // 로그인 상태인 경우 GET 요청 보내기
               const response = await axios.get('http://localhost:3000/api/quizsets/', {
                 headers: {
                   'Authorization': `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`
                 },
               });
-    
-              // 여기서 서버로부터 받은 데이터에 따라 필요한 처리를 수행할 수 있습니다.
-              console.log('Server Response:', response.data);
-    
-              deleteCookie('token'); // 'username'은 예시 쿠키 이름입니다.
+  
+              deleteCookie('token'); 
               document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
     
               setCards(response.data)
-            console.log(response);
-              // 로그인 상태를 갱신합니다.
             } catch (error) {
               console.error('Error:', error);
             }
@@ -67,7 +61,6 @@ const WorkBook: React.FC = () => {
         const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
         const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
         const renderWorkbookCards = () => {
-          console.log(currentItems);
           return currentItems.map((card, index) => (
             <WorkbookCard
             key={index}

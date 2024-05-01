@@ -41,9 +41,7 @@ const Account: React.FC = () => {
           'Authorization': `Bearer ${credential}`
         },
       });
-      
-      console.log(response.data.token);
-      if (response.data === '') {
+            if (response.data === '') {
         navigate('/signup');
       } else {
         localStorage.removeItem('token')

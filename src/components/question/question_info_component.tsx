@@ -13,27 +13,28 @@ import axios from "axios";
 // QuestionComponent의 props에 대한 타입 정의
 interface QuestionComponentProps {
     videoUrl: string;
-    questions: Question_[];
     quizSetId:string | undefined;
 }
 
-// 질문 객체에 대한 타입 정의
-interface Question_ {
-    time: string;
-    question: string;
-    options?: Option[]; // 선택적 속성
-    answer?: string;
+interface Choice {
+    choiceId: number;
+    content: string;
 }
+
+interface Question_ {
+    choice: Choice[];
+    commentary:string;
+    instruction:string;
+    popupTime:string;
+}
+
 
 // 옵션 객체에 대한 타입 정의
-interface Option {
-    id: number;
-    text: string;
-}
 
 // React component for displaying questions
-const QuestionInfoComponent = ({ videoUrl, questions, quizSetId }: QuestionComponentProps) => {
+const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) => {
 
+    const [data, setData] = useState<Question_[] | undefined>(undefined);
     useEffect(() => {
         function deleteCookie(name:string){
           document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -43,18 +44,17 @@ const QuestionInfoComponent = ({ videoUrl, questions, quizSetId }: QuestionCompo
           
           try {
             //192.168.0.143
-            const response = await axios.get(`/api/quizsets/${quizSetId}/quizzes?commentary=${true}&answer=${false}`, {
+            const response = await axios.get(`http://localhost:3000/api/quizsets/${quizSetId}/quizzes?commentary=${true}&answer=${false}`, {
               headers: {
                 'Authorization': `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`
               },
             });
   
-            console.log('Server Response:', response.data);
-  
             deleteCookie('token');
             document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
-  
-          console.log(response);
+            console.log(response);
+            setData(response.data);
+
           } catch (error) {
             console.error('Error:', error);
           }
@@ -68,23 +68,24 @@ const QuestionInfoComponent = ({ videoUrl, questions, quizSetId }: QuestionCompo
 
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const goToNext = () => {
+        const nextIndex = currentImageIndex === 0?
+        (data ? data.length - 1 : 0 ) : currentImageIndex + 1;
+        setCurrentImageIndex(nextIndex);
+    };
 
-    // const goToNext = () => {
-    //     const nextIndex = currentImageIndex === questions.length - 1 ? 0 : currentImageIndex + 1;
-    //     setCurrentImageIndex(nextIndex);
-    // };
-
-    // const goToPrev = () => {
-    //     const prevIndex = currentImageIndex === 0 ? questions.length - 1 : currentImageIndex - 1;
-    //     setCurrentImageIndex(prevIndex);
-    // };
+    const goToPrev = () => {
+        const prevIndex = currentImageIndex === 0 ? 
+            (data ? data.length - 1 : 0) : currentImageIndex - 1;
+        setCurrentImageIndex(prevIndex);
+    };
 
     // const SlickButtonFix = ({ currentSlide, slideCount, children, ...props }) =>(
     //     <span {...props}>{children}</span>
     //   );
     const settings = {
         dots: true,
-        infinite: true,
+        infinite: data && data.length > 1,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -99,32 +100,27 @@ const QuestionInfoComponent = ({ videoUrl, questions, quizSetId }: QuestionCompo
             // </SlickButtonFix>
         
     };
-    // console.log(quizsetId);
     return (
         <Form>
             <SliderContainer>
                 <VideoThumbnailContainer>
                     <VideoThumbnail imageUrl={videoUrl} />
                 </VideoThumbnailContainer>
-{/*                 
+                
                 <Slider {...settings}> 
-                    {questions.map((question, index) => (
-                        <QuestionContainer key={index}>
-                            <Question>
-                                <TextContainer>시간: {question.time}</TextContainer>
-                                <TextContainer>문제: {question.question}</TextContainer>
-                                {question.options && (
-                                    <ul>
-                                        {question.options.map(option => (
-                                            <ListContainer key={option.id}>{option.text}</ListContainer>
-                                        ))}
-                                    </ul>
-                                )}
-                                {question.answer && <TextContainer>{question.answer}</TextContainer>}
-                            </Question>
-                        </QuestionContainer>
-                    ))} 
-                </Slider>  */}
+                
+                {data && data.map((question, index) => (
+                <QuestionContainer key={index}>
+                    <TextContainer>시간: {question.popupTime}</TextContainer>
+                    <TextContainer>문제: {question.commentary}</TextContainer>
+                    <Question key={index}>
+                        {question && question.choice && question.choice.map((choice, choiceIndex) => (
+                            <TextContainer key={choiceIndex}>{choice.content}</TextContainer>
+                        ))}
+                    </Question>
+                </QuestionContainer>
+            ))}
+                </Slider>
 
                 {/* Custom arrows
                 <LeftArrow onClick={goToPrev}><FaArrowAltCircleLeft /></LeftArrow>

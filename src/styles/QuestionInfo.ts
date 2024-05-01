@@ -19,6 +19,7 @@ export const Question = styled.div`
   border-radius: 5px; /* 테두리 모서리를 둥글게 만듦 */
   padding: 10px; /* 내부 여백 추가 */
   margin: 10px; /* 외부 패딩 추가 */
+  flex-direction:column;
 `;
 
 export const QuestionContainer = styled.div`

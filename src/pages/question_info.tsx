@@ -42,10 +42,8 @@ const data : {videoUrl: string; questions: Question__[] } ={
   ]
 };
 
-// Wrapper component that passes the data to the QuestionComponent
 const QuestionInfo = () => {
   const {quizSetId} = useParams();
-  console.log('quizsetid = ',quizSetId);
 
   return (
     <div>
@@ -55,7 +53,7 @@ const QuestionInfo = () => {
 
       <PageBackGround>
 
-       {quizSetId&& <QuestionInfoComponent videoUrl={data.videoUrl} questions={data.questions} quizSetId={quizSetId} />}
+       {quizSetId&& <QuestionInfoComponent videoUrl={data.videoUrl}  quizSetId={quizSetId} />}
 
       </PageBackGround>
       
