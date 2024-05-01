@@ -28,7 +28,9 @@ export async function handleSubmit({
     });
     if (response.data !== 'Invalid token') {
       // 쿠키에 토큰과 만료일자 저장
-      document.cookie = `token=${response.data.token}; expires=${response.data.expire}; path=/`;
+      localStorage.removeItem('token');
+      localStorage.setItem('jwt', response.data.token);
+      console.log('response.data:', response.data);
       navigate('/workbook');
     }
   } catch (error) {

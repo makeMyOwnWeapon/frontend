@@ -157,7 +157,7 @@ class QuestionComponent extends Component<Props, State> {
                         <Input_text type="text" value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} />
                         {index < 4 && (
                           <NameGeneratorButton onClick={() => this.handleSelectionChange(index + 1)}>
-                            {answers[index + 1].selected ? '선택됨' : '선택 안됨'}
+                            {answers[index + 1].selected ? '정답입니다' : '오답입니다'}
                           </NameGeneratorButton>
                         )}
                       </InputBoxWrapper>
