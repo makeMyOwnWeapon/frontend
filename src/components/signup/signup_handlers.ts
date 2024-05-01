@@ -18,7 +18,6 @@ export async function handleSubmit({
 }: HandleSubmitArgs) {
   event.preventDefault();
   try {
-    //192.168.0.143
     const response: AxiosResponse = await axios.post('http://localhost:3000/api/member/signup', {
       authorizationCode: selectedButton === 1 ? 0 : 1,
       nickname: nickname
@@ -28,14 +27,15 @@ export async function handleSubmit({
       }
     });
     if (response.data !== 'Invalid token') {
-      localStorage.removeItem('token');
-      document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
+      // 쿠키에 토큰과 만료일자 저장
+      document.cookie = `token=${response.data.token}; expires=${response.data.expire}; path=/`;
       navigate('/workbook');
     }
   } catch (error) {
     console.error('Error:', error);
   }
 }
+
 
 interface HandleButtonClickArgs {
   buttonIndex: number;

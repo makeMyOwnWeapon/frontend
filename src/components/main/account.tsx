@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes, useNavigate} from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import WorkBook from '../../pages/workbook';
 import Signup from '../../pages/signup';
@@ -25,29 +25,25 @@ const Account: React.FC = () => {
 
   const handleCredentialResponse = async (userToken: string) => {
     try {
-      localStorage.setItem('token',JSON.stringify(userToken));
+      localStorage.setItem('token', JSON.stringify(userToken));
       interface UserToken {
         credential: string;
       }
       const userTokenString: string | null = localStorage.getItem('token');
-      let credential: string;
-      if (userTokenString) {
-        const userToken: UserToken = JSON.parse(userTokenString);
-       credential = userToken.credential;
-     }else{return;}
-      //192.168.0.143
+      if (!userTokenString) return;
+      const { credential } = JSON.parse(userTokenString);
       const response = await axios.get('http://localhost:3000/api/member/signin', {
         headers: {
           'Authorization': `Bearer ${credential}`
         },
       });
-            if (response.data === '') {
+      if (response.data === '') {
         navigate('/signup');
       } else {
-        localStorage.removeItem('token')
-        document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
+        localStorage.removeItem('token');
+        localStorage.setItem('jwt', response.data.token);
+        console.log('response.data:', response.data);
         navigate('/workbook');
-
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -57,7 +53,7 @@ const Account: React.FC = () => {
   return (
     <div>
       <Routes>
-        <Route path="/workbook" element={<WorkBook/>} />
+        <Route path="/workbook" element={<WorkBook />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
 
