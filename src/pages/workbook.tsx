@@ -39,7 +39,6 @@ const WorkBook: React.FC = () => {
 
             
             try {
-              //192.168.0.143
               const response = await axios.get('http://localhost:3000/api/quizsets/', {
                 headers: {
                   'Authorization': `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`

@@ -35,7 +35,6 @@ const Account: React.FC = () => {
         const userToken: UserToken = JSON.parse(userTokenString);
        credential = userToken.credential;
      }else{return;}
-      //192.168.0.143
       const response = await axios.get('http://localhost:3000/api/member/signin', {
         headers: {
           'Authorization': `Bearer ${credential}`
@@ -44,8 +43,9 @@ const Account: React.FC = () => {
             if (response.data === '') {
         navigate('/signup');
       } else {
-        localStorage.removeItem('token')
-        document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
+        localStorage.removeItem('token');
+        console.log(response.data.token);
+        document.cookie = `token=${response.data.token}; expires=${response.data.expire};`;
         navigate('/workbook');
 
       }
