@@ -2,10 +2,11 @@
 import NavBar_main_jsx from '../components/public/navbar_main_jsx';
 import {Mission1} from '../components/video/Mission1';
 import "../styles/css/video.css"
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 
-const Video = () => {   
+const Video = () => {
+    
 
   useEffect(() => {
     // 컴포넌트가 마운트된 후 실행될 코드
@@ -37,10 +38,16 @@ const Video = () => {
           <div id="align">
             <div id='title'>제목</div>
             <div id='video_box'></div>
-            <div id="video_footer">비디오정보
+            <div id="video_footer">
+              
+              <div>상태 : <span id="status">학습중 / 자는중 / 자리이탈</span></div>
+              <div>현재 듣고 있는 강의 : <span id="lecture">운영체제</span></div>
+              <div>현재 재생 시간 : <span id="playTime">13:20?</span></div>
+              
+              <div>[개발자] 눈감은 상태 : <span id="dev_eye_status"></span></div>
+              <div>[개발자] 전송내역 <dev id="dev_submit_history"></dev></div>
             </div>
           </div>
-
       </div>
 
     </>

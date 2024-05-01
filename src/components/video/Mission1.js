@@ -1,4 +1,5 @@
 import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
+
 export function Mission1(){
         const { FaceLandmarker, FilesetResolver} = vision;
         let faceLandmarker;
@@ -106,9 +107,23 @@ export function Mission1(){
         // 전역 변수 설정
         let isSleeping = false; // 현재 자고 있는지 여부
         let sleepStart = null; // 자기 시작한 시간
+        let sleepEnd = null; // 깬 시간
         let sleepDuration = 0; // 잔 시간
         let sleepCount = 0; // 잔 횟수
         let faceNotRecognizedStart = null; // 얼굴 인식이 안될 때 시작 시간
+
+        let dev_eye_status = document.querySelector('#dev_eye_status');
+        let status = document.querySelector('#status');
+
+        // data 보내기
+        // const data = {
+            // 회원 : 회원
+            // 상태 : 졸음 or 자리비움
+            // 시작시간
+            // 종료시간
+            // "sleepStart" : sleepStart
+        // }
+
         function checkBlinks(blendShapes) {
             const currentTime = new Date();
             // 얼굴 인식이 안되는 경우
@@ -117,12 +132,14 @@ export function Mission1(){
                     faceNotRecognizedStart = currentTime;
                 }
                 // 얼굴 인식이 실패한 시간 계산
-                const faceNotRecognizedDuration = (currentTime - faceNotRecognizedStart) / 1000;
-                // 얼굴 인식이 안되고 2초 이상 지났을 때
+                // 얼굴 인식이 안되고 2초 이상 지났을 때                // const faceNotRecognizedDuration = (currentTime - faceNotRecognizedStart) / 1000;
+
                     if (isSleeping){
-                        console.log('졸다가 인식 안됨');
+                        status.innerText = '졸다가 인식 안됨';
+
                     } else {
                         console.log('자리이탈');
+                        status.innerText = '자리이탈';
                     }
                 return;
             }
@@ -131,23 +148,34 @@ export function Mission1(){
             // 얼굴 인식이 되는 경우
             if (blendShapes[0].categories[9].score > 0.4500 && blendShapes[0].categories[10].score > 0.4500) {
                 // 눈을 감았을 경우
+                dev_eye_status.innerText = '눈감음';
+
                 if (!isSleeping) {
                     // 자는 상태가 아니라면 자는 상태로 변경하고 현재 시간 기록
                     isSleeping = true;
                     sleepStart = currentTime;
-                    console.log('눈감음');
+                    console.log('눈감음11');                    
                 }
             } else {
                 // 눈을 뜬 경우
+                dev_eye_status.innerText = '눈뜸';
+
                 if (isSleeping) {
                     // 이전에 눈을 감았다가 지금 눈을 뜬 경우
                     sleepDuration = (currentTime - sleepStart) / 1000;
                     if (sleepDuration >= 3) {
                         // 3초 이상 눈을 감았다면, 잔 것으로 간주
-                console.log(`자기 시작한 시간: ${sleepStart.toLocaleTimeString()}, 깬 시간: ${currentTime.toLocaleTimeString()}`);
+                        sleepStart = sleepStart.toLocaleTimeString();
+                        sleepEnd = currentTime.toLocaleTimeString();
+                        
+                        let str = `시작 시간: ${sleepStart}, 종료 시간: ${sleepEnd}`;
+                console.log(str);
                 sleepCount++;
                 console.log(`잔 횟수: ${sleepCount}`);
+                document.querySelector('#dev_submit_history').innerHTML += ` <li> 시작 시간 : ${sleepStart} 종료 시간 :  ${sleepEnd} </li>`;
             }
+
+            
             isSleeping = false;
         }
     }

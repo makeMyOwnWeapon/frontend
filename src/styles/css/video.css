@@ -18,7 +18,6 @@
 
 #align{
     /* border: 1px solid blue; */
-    height: 100vh;
     width: 80%;
     background-color: rgb(85, 107, 126);
     display: flex;
@@ -39,7 +38,6 @@
 }
 
 #video_box{
-    height: 70vh;
     background-color: skyblue;
 }
 
@@ -63,4 +61,17 @@ body{
 }
 
 
+
+#video_footer{
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+}
+
+#video_footer > div {
+    border: 1px solid red;
+    width: 30%;
+}
 
