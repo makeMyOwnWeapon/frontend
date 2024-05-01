@@ -86,7 +86,9 @@ export const ListContainer = styled.li`
 `;
 
 export const SliderContainer = styled.div`
+margin-top: 100px;
 position: relative;
+width: 100%
 
 `;
 

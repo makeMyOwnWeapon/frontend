@@ -16,9 +16,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/workbook" element={<WorkBook/>} />
         <Route path="/create" element={<Create/>}/>
-        <Route path="/question_info" element={<Question_info/>}/>
+        <Route path="/question_info/:quizSetId" element={<Question_info/>}/>
         <Route path="/video" element={<Video/>}/>
-
       </Routes>
     </BrowserRouter>
   );

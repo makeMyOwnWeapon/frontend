@@ -18,6 +18,9 @@ const VideoThumbnail: React.FC<Props> = ({ imageUrl }) => {
 
   const getVideoThumbnail = (url:string) => {
     const domain = url.startsWith('https') ? new URL(url).hostname.replace('www.', '') : '';
+    if (domain === null){
+      return defaultThumbnail;
+    }
     const thumbnail = thumbnailMappings[domain];
     return thumbnail || defaultThumbnail;
   };

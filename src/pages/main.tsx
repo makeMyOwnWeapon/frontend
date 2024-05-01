@@ -1,7 +1,7 @@
 import React from 'react';
 import { MainImage, LoginButton } from '../styles/MainStyles';
 import { MainBackGround } from '../styles/Public';
-import NavBar_main from '../components/public/navbar_main'
+import NavBar from '../components/public/navbar_default'
 import Account from '../components/main/account'
 import image from  '../images/loa2.png'
 
