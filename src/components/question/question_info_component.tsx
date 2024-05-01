@@ -52,7 +52,6 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
   
             deleteCookie('token');
             document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
-            console.log(response);
             setData(response.data);
 
           } catch (error) {
@@ -63,42 +62,13 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
         fetchData();
       }, [quizSetId]);
 
-
-
-
-
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const goToNext = () => {
-        const nextIndex = currentImageIndex === 0?
-        (data ? data.length - 1 : 0 ) : currentImageIndex + 1;
-        setCurrentImageIndex(nextIndex);
-    };
-
-    const goToPrev = () => {
-        const prevIndex = currentImageIndex === 0 ? 
-            (data ? data.length - 1 : 0) : currentImageIndex - 1;
-        setCurrentImageIndex(prevIndex);
-    };
-
-    // const SlickButtonFix = ({ currentSlide, slideCount, children, ...props }) =>(
-    //     <span {...props}>{children}</span>
-    //   );
     const settings = {
         dots: true,
         infinite: data && data.length > 1,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        nextArrow: 			//오른쪽 화살표
-        // <SlickButtonFix>
-          <NextTo />
-        // {/* </SlickButtonFix> */}
-        ,
-        prevArrow: 			//왼쪽 화살표
-            // <SlickButtonFix>
-            <Prev />
-            // </SlickButtonFix>
-        
+
     };
     return (
         <Form>
@@ -121,10 +91,6 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
                 </QuestionContainer>
             ))}
                 </Slider>
-
-                {/* Custom arrows
-                <LeftArrow onClick={goToPrev}><FaArrowAltCircleLeft /></LeftArrow>
-                <RightArrow onClick={goToNext}><FaArrowAltCircleRight /></RightArrow> */}
             </SliderContainer>
         </Form>
     );

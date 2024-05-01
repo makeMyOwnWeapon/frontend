@@ -17,16 +17,16 @@ interface WorkbookCardProps {
 const WorkbookCard: React.FC<WorkbookCardProps> = ({ createdAt, memberNickname, quizSetTitle, quizSetId, recommendationCount, subLectureTitle, subLectureUrl }) => {
   const navigate = useNavigate();
   const handleCardClick = () => {
-    navigate(`/question_info/${quizSetId}`);
+    navigate(`/question_info/${quizSetId}`,{ state: { subLectureUrl } });
   };
 
   return (
     <CardContainer>
-      <a href="#" onClick={handleCardClick}>
+      <a href="" onClick={handleCardClick}>
         <VideoThumbnail imageUrl={subLectureUrl} /> 
       </a>
       <CardContent>
-        <a href="#">
+        <a href="">
           <CardTitle>{quizSetTitle}</CardTitle>
         </a>
         <CardDescription>작성자: {memberNickname}</CardDescription>
