@@ -16,6 +16,9 @@ const NavBar: React.FC = () => {
   const startNavigate = (location:string) => {
     navigate(`/${location}`);
   }
+  const goToVideo = () => {
+    navigate("/video");
+  }
 
   return (
     <NavBarContainer>
@@ -23,6 +26,7 @@ const NavBar: React.FC = () => {
       <NavLink href="" onClick={()=>startNavigate("workbook")}>workbook</NavLink>
       <NavLink href="" onClick={()=>startNavigate("create")}>Create</NavLink>
       <NavLink href="" onClick={handleLogout}>Logout</NavLink>
+      <NavLink href="/video" onClick={goToVideo}>영상촬영</NavLink>
     </NavBarContainer>
   );
 };
