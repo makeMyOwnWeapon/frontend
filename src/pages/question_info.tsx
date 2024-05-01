@@ -8,6 +8,10 @@ const QuestionInfo = () => {
   const {quizSetId} = useParams();
   const location = useLocation();
   const { subLectureUrl } = location.state || { subLectureUrl: "" };
+  
+
+
+  
   return (
     <div>
       <NavBarContainer>
