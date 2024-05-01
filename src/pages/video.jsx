@@ -1,18 +1,26 @@
+
+import { useNavigate } from 'react-router-dom';
 import NavBar_main_jsx from '../components/public/navbar_main_jsx';
 import { Mission1 } from '../components/video/Mission1';
 import "../styles/css/video.css"
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+
 
 const Video = () => {
   const navigate = useNavigate();
-
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (!token) {
+      alert('로그인 해 주세요!')
       navigate('/main');
     }
+  }, [navigate]);
 
+  useEffect(() => {
+
+
+
+    
     // 컴포넌트가 마운트된 후 실행될 코드
     Mission1();
 

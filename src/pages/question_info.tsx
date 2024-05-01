@@ -1,29 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { NavBarContainer, PageBackGround } from '../styles/Public';
 import NavBar from '../components/public/navbar_default';
 import QuestionInfoComponent from '../components/question/question_info_component';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const QuestionInfo = () => {
-  const {quizSetId} = useParams();
+  const navigate = useNavigate();
   const location = useLocation();
+  const { quizSetId } = useParams();
   const { subLectureUrl } = location.state || { subLectureUrl: "" };
-  
 
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      alert('로그인 해 주세요!')
+      navigate('/main');
+    }
+  }, [navigate]);
 
-  
   return (
     <div>
       <NavBarContainer>
-        <NavBar/>
+        <NavBar />
       </NavBarContainer>
-
       <PageBackGround>
-
-       {quizSetId&& <QuestionInfoComponent videoUrl={subLectureUrl}  quizSetId={quizSetId} />}
-
+        {quizSetId && <QuestionInfoComponent videoUrl={subLectureUrl} quizSetId={quizSetId} />}
       </PageBackGround>
-      
     </div>
   );
 };
