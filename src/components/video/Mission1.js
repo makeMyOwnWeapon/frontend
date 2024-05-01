@@ -127,6 +127,7 @@ export function Mission1(){
 
         function checkBlinks(blendShapes) {
             const currentTime = new Date();
+            document.querySelector('#title').innerText = currentTime.toLocaleTimeString();
             // 얼굴 인식이 안되는 경우
             if (!blendShapes[0]){
                 if (faceNotRecognizedStart === null) {
@@ -151,6 +152,15 @@ export function Mission1(){
                 // 눈을 감았을 경우
                 dev_eye_status.innerText = '눈감음';
 
+                if(isSleeping){
+                    sleepDuration = (currentTime - sleepStart) / 1000;
+                    if(sleepDuration >= 3){
+                        console.log('자는중');
+                        status.innerText = '자는중';
+
+                    }
+                }
+
                 if (!isSleeping) {
                     // 자는 상태가 아니라면 자는 상태로 변경하고 현재 시간 기록
                     isSleeping = true;
@@ -162,43 +172,43 @@ export function Mission1(){
                 dev_eye_status.innerText = '눈뜸';
 
                 if (isSleeping) {
-                    // 이전에 눈을 감았다가 지금 눈을 뜬 경우
                     sleepDuration = (currentTime - sleepStart) / 1000;
                     if (sleepDuration >= 3) {
                         // 3초 이상 눈을 감았다면, 잔 것으로 간주
                         sleepStart = formatLocalTime(sleepStart);
                         sleepEnd = formatLocalTime(currentTime);
-                        
+
                         let str = `시작 시간: ${sleepStart}, 종료 시간: ${sleepEnd}`;
-                alert(getAuthToken('jwt'));
-                
-                request(
-                    "POST",
-                    "/api/analytics/occur",
-                    {
-                        startAt : sleepStart,
-                        endAt : sleepEnd,
-                        analysisType : "0",
-                        sublectureId : "16"
-                    }).then(
-                        (response) => {
-                            alert(response);
-                        }).catch(
-                        (error) => {
-                            alert(error);
-                        }
-                )
+                        alert(getAuthToken('jwt'));
+                        
+                        request(
+                            "POST",
+                            "/api/analytics/occur",
+                            {
+                                startAt : sleepStart,
+                                endAt : sleepEnd,
+                                analysisType : "0",
+                                sublectureId : "16"
+                            }).then(
+                                (response) => {
+                                    console.dir(response.data.message);
+                                    alert(response.data.message);
+                                }).catch(
+                                (error) => {
+                                    alert(error);
+                                }
+                        )
+                        sleepCount++;
+                        console.log(`잔 횟수: ${sleepCount}`);
+                        document.querySelector('#dev_submit_history').innerHTML += ` <li> 시작 시간 : ${sleepStart} 종료 시간 :  ${sleepEnd} </li>`;
+                    }
+                    else {
+                        // 3초 미만으로 눈을 감았다면, '학습중'으로 유지
+                        status.innerText = '학습중';
+                    }
 
-
-
-                sleepCount++;
-                console.log(`잔 횟수: ${sleepCount}`);
-                document.querySelector('#dev_submit_history').innerHTML += ` <li> 시작 시간 : ${sleepStart} 종료 시간 :  ${sleepEnd} </li>`;
-            }
-
-            
-            isSleeping = false;
-        }
+                    isSleeping = false;
+    }
     }
 
 }
