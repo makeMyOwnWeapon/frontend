@@ -8,7 +8,7 @@ import image from  '../images/loa2.png'
 const Main: React.FC = () => {
   return (
     <MainBackGround>
-      <NavBar_main /> 
+      <NavBar/> 
         <LoginButton left="65%" top="60%">
           <Account />
         </LoginButton>
