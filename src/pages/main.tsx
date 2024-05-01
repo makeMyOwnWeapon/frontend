@@ -12,7 +12,7 @@ const Main: React.FC = () => {
         <LoginButton left="65%" top="60%">
           <Account />
         </LoginButton>
-        <MainImage src={image} alt="Example" width="50%" left="20px" top="10px" />
+        <MainImage src={image} alt="Example" width="40%" left="9%" top="10%" />
     </MainBackGround>
   );
 };
