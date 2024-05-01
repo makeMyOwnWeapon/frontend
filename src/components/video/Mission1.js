@@ -1,4 +1,5 @@
 import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
+import {request, getValueInCookie} from "../../helpers/axios_helper"
 
 export function Mission1(){
         const { FaceLandmarker, FilesetResolver} = vision;
@@ -165,11 +166,31 @@ export function Mission1(){
                     sleepDuration = (currentTime - sleepStart) / 1000;
                     if (sleepDuration >= 3) {
                         // 3초 이상 눈을 감았다면, 잔 것으로 간주
-                        sleepStart = sleepStart.toLocaleTimeString();
-                        sleepEnd = currentTime.toLocaleTimeString();
+                        sleepStart = formatLocalTime(sleepStart);
+                        sleepEnd = formatLocalTime(currentTime);
                         
                         let str = `시작 시간: ${sleepStart}, 종료 시간: ${sleepEnd}`;
-                console.log(str);
+                alert(getValueInCookie('token'));
+                
+                request(
+                    "POST",
+                    "/api/analytics/occur",
+                    {
+                        startAt : sleepStart,
+                        endAt : sleepEnd,
+                        analysisType : "0",
+                        sublectureId : "16"
+                    }).then(
+                        (response) => {
+                            alert(response);
+                        }).catch(
+                        (error) => {
+                            alert(error);
+                        }
+                )
+
+
+
                 sleepCount++;
                 console.log(`잔 횟수: ${sleepCount}`);
                 document.querySelector('#dev_submit_history').innerHTML += ` <li> 시작 시간 : ${sleepStart} 종료 시간 :  ${sleepEnd} </li>`;
@@ -182,4 +203,14 @@ export function Mission1(){
 
 }
 return <></>
+}
+
+function formatLocalTime(date) {
+    let year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+    let hours = date.getHours().toString().padStart(2, '0');
+    let minutes = date.getMinutes().toString().padStart(2, '0');
+    let seconds = date.getSeconds().toString().padStart(2, '0');
+    return `${year}${month}${day} ${hours}:${minutes}:${seconds}`;
 }
