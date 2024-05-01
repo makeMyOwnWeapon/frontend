@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Form } from '../../styles/CreateQuestion';
 import VideoThumbnail from "../public/url_to_image";
@@ -8,11 +8,13 @@ import { ListContainer, SliderContainer, TextContainer } from "../../styles/Publ
 import { FaArrowAltCircleLeft,  FaArrowAltCircleRight,  FaChevronRight } from 'react-icons/fa';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
 
 // QuestionComponent의 props에 대한 타입 정의
 interface QuestionComponentProps {
     videoUrl: string;
     questions: Question_[];
+    quizSetId:string | undefined;
 }
 
 // 질문 객체에 대한 타입 정의
@@ -30,19 +32,52 @@ interface Option {
 }
 
 // React component for displaying questions
-const QuestionInfoComponent = ({ videoUrl, questions }: QuestionComponentProps) => {
+const QuestionInfoComponent = ({ videoUrl, questions, quizSetId }: QuestionComponentProps) => {
+
+    useEffect(() => {
+        function deleteCookie(name:string){
+          document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        const fetchData = async () => {
+
+          
+          try {
+            //192.168.0.143
+            const response = await axios.get(`/api/quizsets/${quizSetId}/quizzes?commentary=${true}&answer=${false}`, {
+              headers: {
+                'Authorization': `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`
+              },
+            });
+  
+            console.log('Server Response:', response.data);
+  
+            deleteCookie('token');
+            document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
+  
+          console.log(response);
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        };
+  
+        fetchData();
+      }, [quizSetId]);
+
+
+
+
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    const goToNext = () => {
-        const nextIndex = currentImageIndex === questions.length - 1 ? 0 : currentImageIndex + 1;
-        setCurrentImageIndex(nextIndex);
-    };
+    // const goToNext = () => {
+    //     const nextIndex = currentImageIndex === questions.length - 1 ? 0 : currentImageIndex + 1;
+    //     setCurrentImageIndex(nextIndex);
+    // };
 
-    const goToPrev = () => {
-        const prevIndex = currentImageIndex === 0 ? questions.length - 1 : currentImageIndex - 1;
-        setCurrentImageIndex(prevIndex);
-    };
+    // const goToPrev = () => {
+    //     const prevIndex = currentImageIndex === 0 ? questions.length - 1 : currentImageIndex - 1;
+    //     setCurrentImageIndex(prevIndex);
+    // };
 
     // const SlickButtonFix = ({ currentSlide, slideCount, children, ...props }) =>(
     //     <span {...props}>{children}</span>
@@ -64,14 +99,14 @@ const QuestionInfoComponent = ({ videoUrl, questions }: QuestionComponentProps) 
             // </SlickButtonFix>
         
     };
-
+    // console.log(quizsetId);
     return (
         <Form>
             <SliderContainer>
                 <VideoThumbnailContainer>
                     <VideoThumbnail imageUrl={videoUrl} />
                 </VideoThumbnailContainer>
-                
+{/*                 
                 <Slider {...settings}> 
                     {questions.map((question, index) => (
                         <QuestionContainer key={index}>
@@ -89,7 +124,7 @@ const QuestionInfoComponent = ({ videoUrl, questions }: QuestionComponentProps) 
                             </Question>
                         </QuestionContainer>
                     ))} 
-                </Slider> 
+                </Slider>  */}
 
                 {/* Custom arrows
                 <LeftArrow onClick={goToPrev}><FaArrowAltCircleLeft /></LeftArrow>

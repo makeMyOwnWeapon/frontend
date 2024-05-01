@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavBarContainer, PageBackGround } from '../styles/Public';
 import NavBar from '../components/public/navbar_default';
 import QuestionInfoComponent from '../components/question/question_info_component';
+import { useParams } from 'react-router-dom';
 
 // 옵션 객체에 대한 타입 정의
 interface Option {
@@ -43,15 +44,19 @@ const data : {videoUrl: string; questions: Question__[] } ={
 
 // Wrapper component that passes the data to the QuestionComponent
 const QuestionInfo = () => {
+  const {quizSetId} = useParams();
+  console.log('quizsetid = ',quizSetId);
+
   return (
     <div>
       <NavBarContainer>
         <NavBar/>
       </NavBarContainer>
-      
+
       <PageBackGround>
 
-        <QuestionInfoComponent videoUrl={data.videoUrl} questions={data.questions} />
+       {quizSetId&& <QuestionInfoComponent videoUrl={data.videoUrl} questions={data.questions} quizSetId={quizSetId} />}
+
       </PageBackGround>
       
     </div>

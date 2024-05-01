@@ -143,8 +143,8 @@ const quizzes = this.state.answers.map((answerSet, index) => {
 
     try {
 
-
-      const response = await fetch('http://192.168.0.143:3000/api/quizsets', {
+      //192.168.0.143
+      const response = await fetch('http://localhost:3000/api/quizsets', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

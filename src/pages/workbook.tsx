@@ -12,6 +12,7 @@ interface Card {
   createdAt: string;
   memberNickname: string;
   quizSetTitle: string;
+  quizSetId: number;
   recommendationCount: number;
   subLectureTitle: string;
   subLectureUrl:string;
@@ -35,10 +36,12 @@ const WorkBook: React.FC = () => {
             document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
           }
           const fetchData = async () => {
+
+            
             try {
-    
+              //192.168.0.143
               // 로그인 상태인 경우 GET 요청 보내기
-              const response = await axios.get('http://192.168.0.143:3000/api/quizsets/', {
+              const response = await axios.get('http://localhost:3000/api/quizsets/', {
                 headers: {
                   'Authorization': `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`
                 },
@@ -51,7 +54,7 @@ const WorkBook: React.FC = () => {
               document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
     
               setCards(response.data)
-    
+            console.log(response);
               // 로그인 상태를 갱신합니다.
             } catch (error) {
               console.error('Error:', error);
@@ -64,17 +67,19 @@ const WorkBook: React.FC = () => {
         const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
         const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
         const renderWorkbookCards = () => {
+          console.log(currentItems);
           return currentItems.map((card, index) => (
             <WorkbookCard
             key={index}
             createdAt={card.createdAt}
             memberNickname={card.memberNickname}
             quizSetTitle={card.quizSetTitle}
+            quizSetId={card.quizSetId}
             recommendationCount={card.recommendationCount}
             subLectureTitle={card.subLectureTitle}
             subLectureUrl={card.subLectureUrl}
             />
-          ));
+          )); 
         }
 
   return (

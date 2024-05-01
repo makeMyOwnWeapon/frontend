@@ -19,7 +19,8 @@ export async function handleSubmit({
   event.preventDefault();
   try {
     console.log('start');
-    const response: AxiosResponse = await axios.post('http://192.168.0.143:3000/api/member/signup', {
+    //192.168.0.143
+    const response: AxiosResponse = await axios.post('http://localhost:3000/api/member/signup', {
       authorizationCode: selectedButton === 1 ? 0 : 1,
       nickname: nickname
     }, {

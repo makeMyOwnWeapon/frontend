@@ -35,14 +35,14 @@ const Account: React.FC = () => {
         const userToken: UserToken = JSON.parse(userTokenString);
        credential = userToken.credential;
      }else{return;}
-      
-      const response = await axios.get('http://192.168.0.143:3000/api/member/signin', {
+      //192.168.0.143
+      const response = await axios.get('http://localhost:3000/api/member/signin', {
         headers: {
           'Authorization': `Bearer ${credential}`
         },
       });
       
-      
+      console.log(response.data.token);
       if (response.data === '') {
         navigate('/signup');
       } else {
