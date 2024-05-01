@@ -9,7 +9,6 @@ type PaginationProps = {
   currentPage: number;
 };
 
-// 페이지네이션 컴포넌트
 const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
   const pageNumbers = [];
 
@@ -20,7 +19,7 @@ const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems, pagin
   return (
     <PaginationContainer>
       {pageNumbers.map(number => (
-        <PageItem key={number} isActive={number === currentPage} onClick={() => paginate(number)}>
+        <PageItem key={number} isactive={number === currentPage} onClick={() => paginate(number)}>
           {number}
         </PageItem>
       ))}

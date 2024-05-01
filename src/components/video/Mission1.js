@@ -1,5 +1,5 @@
 import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
-import {request, getValueInCookie} from "../../helpers/axios_helper"
+import {request, getValueInCookie, getAuthToken} from "../../helpers/axios_helper"
 
 export function Mission1(){
         const { FaceLandmarker, FilesetResolver} = vision;
@@ -170,7 +170,7 @@ export function Mission1(){
                         sleepEnd = formatLocalTime(currentTime);
                         
                         let str = `시작 시간: ${sleepStart}, 종료 시간: ${sleepEnd}`;
-                alert(getValueInCookie('token'));
+                alert(getAuthToken('jwt'));
                 
                 request(
                     "POST",
