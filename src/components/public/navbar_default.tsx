@@ -9,24 +9,33 @@ function deleteCookie(name:string){
 const NavBar: React.FC = () => {
 
   const handleLogout = () => {
-    deleteCookie('token'); // 'username'은 예시 쿠키 이름입니다.
+    localStorage.removeItem('jwt');
     navigate("/");
   };
   const navigate = useNavigate();
+  const goHome = ()=>{
+    navigate('/');
+
+  }
   const startNavigate = (location:string) => {
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+        alert('로그인 해 주세요!')
+        navigate('/');
+        return;
+    }
+
     navigate(`/${location}`);
   }
-  const goToVideo = () => {
-    navigate("/video");
-  }
+  
 
   return (
     <NavBarContainer>
-      <NavLink href="" onClick={()=>startNavigate("")}>Home</NavLink>
+      <NavLink href="" onClick={()=>goHome}>Home</NavLink>
       <NavLink href="" onClick={()=>startNavigate("workbook")}>workbook</NavLink>
       <NavLink href="" onClick={()=>startNavigate("create")}>Create</NavLink>
+            <NavLink href="" onClick={()=>startNavigate("video")}>영상촬영</NavLink>
       <NavLink href="" onClick={handleLogout}>Logout</NavLink>
-      <NavLink href="/video" onClick={goToVideo}>영상촬영</NavLink>
     </NavBarContainer>
   );
 };
