@@ -29,22 +29,22 @@ export function Mission1(){
             body.appendChild(webcamButton);
             // 비디오와 캔버스를 포함할 div 생성
             const container = document.createElement('div');
-            container.style.position = 'relative';
+            container.id = 'containers';
+    
             body.appendChild(container);
+
+            
             // 비디오 요소 생성
             const video = document.createElement('video');
             video.id = 'webcam';
-            video.style.position = 'absolute';
             video.autoplay = true;
             video.playsInline = true; // iOS에서 인라인 재생을 위한 속성
             container.appendChild(video);
             // 캔버스 요소 생성
             const canvas = document.createElement('canvas');
             canvas.id = 'output_canvas';
-            canvas.style.position = 'absolute';
-            canvas.style.left = '0px';
-            canvas.style.top = '0px';
-            container.appendChild(canvas);
+
+            // container.appendChild(canvas);
             return { webcamButton, video, canvas };
         }
         const { webcamButton, video, canvas } = createHTMLElements();
@@ -83,18 +83,17 @@ export function Mission1(){
         let lastVideoTime = -1;
         let results = undefined;
         async function predictWebcam() {
-            const radio = video.videoHeight / video.videoWidth;
-            video.style.width = videoWidth + "px";
-            video.style.height = videoWidth * radio + "px";
-            canvasElement.style.width = videoWidth + "px";
-            canvasElement.style.height = videoWidth * radio + "px";
-            canvasElement.width = video.videoWidth;
-            canvasElement.height = video.videoHeight;
+            // video.style.width = '100px';
+            // video.style.height = '100px';
+            
+
             if (runningMode === "IMAGE") {
                 runningMode = "VIDEO";
                 await faceLandmarker.setOptions({ runningMode: runningMode });
             }
             let startTimeMs = performance.now();
+
+            // 비디오 프레임 연속 촬영 
             if (lastVideoTime !== video.currentTime) {
                 lastVideoTime = video.currentTime;
                 results = faceLandmarker.detectForVideo(video, startTimeMs);

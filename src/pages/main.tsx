@@ -1,14 +1,14 @@
 import React from 'react';
 import { MainImage, LoginButton } from '../styles/MainStyles';
 import { MainBackGround } from '../styles/Public';
-import NavBar from '../components/public/navbar_main'
+import NavBar_main from '../components/public/navbar_main'
 import Account from '../components/main/account'
 import image from  '../images/loa2.png'
 
 const Main: React.FC = () => {
   return (
     <MainBackGround>
-      <NavBar /> 
+      <NavBar_main /> 
         <LoginButton left="65%" top="60%">
           <Account />
         </LoginButton>
