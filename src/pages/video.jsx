@@ -1,9 +1,9 @@
 
 import { useNavigate } from 'react-router-dom';
 import NavBar_main_jsx from '../components/public/navbar_main_jsx';
-import { Mission1 } from '../components/video/Mission1';
 import "../styles/css/video.css"
 import React, {useEffect, useState} from 'react';
+import { MediaLogic } from '../components/video/MediaLogic';
 
 
 const Video = () => {
@@ -22,7 +22,7 @@ const Video = () => {
 
     
     // 컴포넌트가 마운트된 후 실행될 코드
-    Mission1();
+    MediaLogic();
 
     console.log('컴포넌트가 마운트되었습니다.');
     const video_box = document.querySelector('#video_box');
