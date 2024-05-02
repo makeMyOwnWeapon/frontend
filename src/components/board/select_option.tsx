@@ -11,10 +11,10 @@ const SidebarOptions = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const options = [
-      { id: 1, label: 'Option 1' },
-      { id: 2, label: 'Option 2' },
-      { id: 3, label: 'Option 3' },
-      { id: 4, label: 'Option 4' }
+      { id: 1, label: '인증번호 확인하기' },
+      { id: 2, label: '-' },
+      { id: 3, label: '문의하기' },
+      { id: 4, label: '탈퇴하기' }
     ];
   
     const handleOptionClick = (id: number) => {

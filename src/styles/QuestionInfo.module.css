@@ -3,14 +3,14 @@
     /* NavBar 컨테이너의 스타일 정의 */
   }
   
-  .pageBackGround {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f5f5f5;
-    padding: 20px;
+.pageBackGround {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
   }
   
 /* QuestionInfo.module.css */
