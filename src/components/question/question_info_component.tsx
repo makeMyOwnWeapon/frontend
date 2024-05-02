@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { Cookies } from "react-cookie";
-
+import '../../styles/css/fad.css';
 // QuestionComponent의 props에 대한 타입 정의
 interface QuestionComponentProps {
     videoUrl: string;
@@ -28,7 +28,6 @@ interface Question_ {
     instruction:string;
     popupTime:string;
 }
-
 
 // 옵션 객체에 대한 타입 정의
 
@@ -63,14 +62,13 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
   
         fetchData();
       }, [quizSetId]);
-
+    
     const settings = {
         dots: true,
         infinite: data && data.length > 1,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1,
-
+        slidesToScroll: 1
     };
     return (
         <Form>
@@ -79,7 +77,7 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
                     <VideoThumbnail imageUrl={videoUrl} />
                 </VideoThumbnailContainer>
                 
-                <Slider {...settings}> 
+                <Slider className="custom-slider" {...settings}> 
                 
                 {data && data.map((question, index) => (
                 <QuestionContainer key={index}>
