@@ -42,7 +42,14 @@ const Account: React.FC = () => {
         navigate('/signup');
       } else {
         const cookies = new Cookies();
-        cookies.set('jwt', response.data.token, { expires: new Date(Date.now() + response.data.expire*1000) });
+        const expireTimeUTC = Date.now() + response.data.expire * 1000; // 현재 시간에 expire 초를 더함
+        const expireTimeKST = expireTimeUTC + (9 * 60 * 60 * 1000); // 한국 시간대로 보정
+        const expireDateKST = new Date(expireTimeKST).toUTCString(); // UTC로 변환
+        
+        cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });
+        console.log(Date.now())
+        
+        
         localStorage.removeItem('token');
         navigate('/workbook');
       }
