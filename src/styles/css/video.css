@@ -5,29 +5,29 @@
 }
 
 #container{
-    /* border: 1px solid red; */
+    border: 1px solid red;
     width: 100%;
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 1000;
+    height: 30%;
     
 }
 
 #align{
-    /* border: 1px solid blue; */
+    border: 1px solid blue;
     width: 80%;
-    background-color: rgb(85, 107, 126);
+    background-color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
 }
 
 #align > div {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     width: 100%;
 }
 
@@ -38,7 +38,7 @@
 }
 
 #video_box{
-    background-color: skyblue;
+    background-color: black;
 }
 
 body{
@@ -47,17 +47,17 @@ body{
 
 
 #containers{
-    /* border: 10px solid red; */
-    width: 100%;
-    height: 100%;
+    border: 10px solid red;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
 }
 
 #webcam{
-    /* border: 10px solid yellow; */
-    width: 100%;
-    height: 100%;
+    border: 1 solid yellow;
+    border-radius: 10%;
     box-sizing: border-box;
+    width: 50%;
 }
 
 
