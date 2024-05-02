@@ -24,7 +24,7 @@ export const NavLink = styled.a`
 
 export const MainBackGround = styled.div`
   height: 100vh;
-  background: linear-gradient(to bottom, white, lightblue);
+  background: linear-gradient(to bottom, white, #55CCCA);
   display: flex;
   flex-direction: column;
   bottom: 0px;

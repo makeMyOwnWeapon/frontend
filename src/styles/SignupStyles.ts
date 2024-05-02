@@ -37,7 +37,7 @@ export const SmallButton = styled.button<{selected: boolean }>`
 
 export const NameContainer = styled.div`
   display: flex;
-  aliign-items: center;
+  align-items: center;
   margin-top: 16px;
 `;
 
