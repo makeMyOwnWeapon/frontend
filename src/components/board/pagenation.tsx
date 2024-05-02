@@ -1,7 +1,5 @@
 import React from 'react';
-import { PageItem, PaginationContainer } from '../../styles/WorkBook';
-
-
+import styles from '../../styles/Pagination.module.css';
 type PaginationProps = {
   itemsPerPage: number;
   totalItems: number;
@@ -17,13 +15,16 @@ const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems, pagin
   }
 
   return (
-    <PaginationContainer>
+    <ul className={styles.paginationContainer}>
       {pageNumbers.map(number => (
-        <PageItem key={number} isactive={number === currentPage} onClick={() => paginate(number)}>
+        <li 
+          key={number} 
+          className={`${styles.pageItem} ${number === currentPage ? styles.pageItemActive : ''}`}
+          onClick={() => paginate(number)}>
           {number}
-        </PageItem>
+        </li>
       ))}
-    </PaginationContainer>
+    </ul>
   );
 };
 

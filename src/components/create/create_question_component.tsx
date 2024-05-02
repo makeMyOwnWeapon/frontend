@@ -1,6 +1,6 @@
 import React, { Component, ChangeEvent, createRef } from "react";
-import { InputBoxWrapper, Input_text, QuestionContainer, SelectOption } from "../../styles/CreateQuestion";
-import { NameGeneratorButton } from "../../styles/Public";
+import { InputBoxWrapper, Input_text, QuestionContainer, SelectOption } from "../../styles/styledcomponent/CreateQuestion";
+import { NameGeneratorButton } from "../../styles/styledcomponent/Public";
 import { motion } from 'framer-motion';
 
 interface Answer {

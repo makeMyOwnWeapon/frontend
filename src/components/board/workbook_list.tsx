@@ -1,26 +1,25 @@
 import React from "react";
-import { ListItem } from "../../styles/WorkBook";
-import { ListContainer } from "../../styles/WorkBook";
-
+import styles from "../../styles/ListComponent.module.css";
 interface Item{
     id: number;
     name: string;
 }
+
 interface ListComponentProps {
     items: Item[];
     onItemSelect: (item: Item) => void;
-  }
+}
 
-  const ListComponent: React.FC<ListComponentProps> = ({ items, onItemSelect }) => {
+const ListComponent: React.FC<ListComponentProps> = ({ items, onItemSelect }) => {
     return (
-      <ListContainer>
+      <ul className={styles.listContainer}>
         {items.map(item => (
-          <ListItem key={item.id} onClick={() => onItemSelect(item)}>
+          <li key={item.id} className={styles.listItem} onClick={() => onItemSelect(item)}>
             {item.name}
-          </ListItem>
+          </li>
         ))}
-      </ListContainer>
+      </ul>
     );
-  };
-  
-  export default ListComponent;
+};
+
+export default ListComponent;

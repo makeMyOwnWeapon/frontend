@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-import { Option, SidebarBackGround } from "../../styles/WorkBook";
-import { SidebarContainer } from "../../styles/WorkBook";
-import { Input } from "../../styles/Public";
+import styles from "../../styles/SidebarOptions.module.css";
 
 interface OptionItem {
   id: number;
@@ -12,7 +10,6 @@ const SidebarOptions = () => {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
 
-  
     const options = [
       { id: 1, label: 'Option 1' },
       { id: 2, label: 'Option 2' },
@@ -27,32 +24,29 @@ const SidebarOptions = () => {
       setSearchTerm(event.target.value);
     };
 
-  
     return (
-      <SidebarContainer>
-        <SidebarBackGround>
+      <div className={styles.sidebarContainer}>
+        <div className={styles.sidebarBackground}>
         {options.map(option => (
-          <Option
+          <div
             key={option.id}
+            className={`${styles.option} ${selectedOption === option.id ? styles.optionActive : ''}`}
             onClick={() => handleOptionClick(option.id)}
-            style={{ backgroundColor: selectedOption === option.id ? '#ccc' : 'transparent' }}
           >
             {option.label}
-          </Option>
+          </div>
         ))}
-
         <div style={{ display: 'flex', margin: '10px', padding: '5px' }}>
-          <Input
+          <input
+            className={styles.input}
             type="text"
             placeholder="Search options..."
             value={searchTerm}
             onChange={handleSearchChange}
-            style={{ flexGrow: 1, marginRight: '10px' }}
           />
-
         </div>
-        </SidebarBackGround>
-      </SidebarContainer>
+        </div>
+      </div>
     );
   };
   

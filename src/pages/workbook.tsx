@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Content, NavContainer, PageBackGround, PageFooter  } from '../styles/Public';
-import NavBar from '../components/public/navbar_default'
+import styles from '../styles/Public.module.css';
+import NavBar from '../components/public/navbar_default';
 import SidebarOptions from '../components/board/select_option';
 import WorkbookCard from '../components/board/workbook_card';
 import axios from 'axios';
@@ -10,13 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 interface Card {
-  createdAt: string;
-  memberNickname: string;
-  quizSetTitle: string;
-  quizSetId: number;
-  recommendationCount: number;
-  subLectureTitle: string;
-  subLectureUrl:string;
+    createdAt: string;
+    memberNickname: string;
+    quizSetTitle: string;
+    quizSetId: number;
+    recommendationCount: number;
+    subLectureTitle: string;
+    subLectureUrl:string;
 }
 
 const WorkBook: React.FC = () => {
@@ -29,7 +29,8 @@ const WorkBook: React.FC = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
     useEffect(() => {
         
-        const token = cookies.jwt;        if (!token) {
+        const token = cookies.jwt;
+        if (!token) {
             alert('로그인 해 주세요!')
             navigate('/main');
             return;
@@ -72,23 +73,23 @@ const WorkBook: React.FC = () => {
     return (
         <>
             <NavBar /> 
-            <NavContainer />
-            <PageBackGround>
+            <div className={styles.navContainer} />
+            <div className={styles.pageBackGround}>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
                     <SidebarOptions/> 
-                    <Content>
+                    <div className={styles.content}>
                         {renderWorkbookCards()}
-                    </Content>
+                    </div>
                 </motion.div>
-                <PageFooter>
+                <div className={styles.pageFooter}>
                     <Pagination
                         itemsPerPage={itemsPerPage}
                         totalItems={cards.length}
                         paginate={paginate}
                         currentPage={currentPage}
                     />
-                </PageFooter>
-            </PageBackGround>
+                </div>
+            </div>
         </>
     );
 };
