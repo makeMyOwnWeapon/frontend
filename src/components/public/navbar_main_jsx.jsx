@@ -1,15 +1,12 @@
 import React from 'react';
 import { NavBarContainer , NavLink } from '../../styles/Public';
 import { useNavigate } from 'react-router-dom';
-
-function deleteCookie(name){
-  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
+import { useCookies } from 'react-cookie';
 
 const NavBar = () => {
-
+  const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
   const handleLogout = () => {
-    localStorage.removeItem('jwt');
+    removeCookie('jwt');
     navigate("/");
   };
   const navigate = useNavigate();
@@ -18,7 +15,7 @@ const NavBar = () => {
 
   }
   const startNavigate = (location) => {
-    const token = localStorage.getItem('jwt');
+    const token = cookies.jwt;
     if (!token) {
         alert('로그인 해 주세요!')
         navigate('/');

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { AxiosResponse } from 'axios';
+import { Cookies } from 'react-cookie';
 
 interface HandleSubmitArgs {
   event: React.FormEvent<HTMLFormElement>;
@@ -28,9 +29,9 @@ export async function handleSubmit({
     });
     if (response.data !== 'Invalid token') {
       // 쿠키에 토큰과 만료일자 저장
+      const cookies = new Cookies();
+      cookies.set('jwt', response.data.token, { expires: new Date(Date.now() + response.data.expire*1000) });
       localStorage.removeItem('token');
-      localStorage.setItem('jwt', response.data.token);
-      console.log('response.data:', response.data);
       navigate('/workbook');
     }
   } catch (error) {

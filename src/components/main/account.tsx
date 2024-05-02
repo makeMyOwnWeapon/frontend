@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import WorkBook from '../../pages/workbook';
 import Signup from '../../pages/signup';
+import { Cookies } from 'react-cookie';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
 const Account: React.FC = () => {
@@ -40,9 +41,9 @@ const Account: React.FC = () => {
       if (response.data === '') {
         navigate('/signup');
       } else {
+        const cookies = new Cookies();
+        cookies.set('jwt', response.data.token, { expires: new Date(Date.now() + response.data.expire*1000) });
         localStorage.removeItem('token');
-        localStorage.setItem('jwt', response.data.token);
-        console.log('response.data:', response.data);
         navigate('/workbook');
       }
     } catch (error) {
