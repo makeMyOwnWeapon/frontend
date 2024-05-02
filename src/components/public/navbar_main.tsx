@@ -1,14 +1,13 @@
 import React from 'react';
-import { NavBarContainer , NavLink } from '../../styles/Public';
 
 const NavBar_main: React.FC = () => {
   return (
-    <NavBarContainer>
-      <NavLink href="/main">Home</NavLink>
-      <NavLink href="/about">About</NavLink>
-      <NavLink href="/services">Services</NavLink>
-      <NavLink href="/contact">Contact</NavLink>
-    </NavBarContainer>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px', backgroundColor: '#333' }}>
+      <a href="/main" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Home</a>
+      <a href="/about" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>About</a>
+      <a href="/services" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Services</a>
+      <a href="/contact" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Contact</a>
+    </div>
   );
 };
 

@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import WorkBook from '../../pages/workbook';
 import Signup from '../../pages/signup';
+import { Cookies } from 'react-cookie';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
 const Account: React.FC = () => {
@@ -40,9 +41,16 @@ const Account: React.FC = () => {
       if (response.data === '') {
         navigate('/signup');
       } else {
+        const cookies = new Cookies();
+        const expireTimeUTC = Date.now() + response.data.expire * 1000; // 현재 시간에 expire 초를 더함
+        const expireTimeKST = expireTimeUTC + (9 * 60 * 60 * 1000); // 한국 시간대로 보정
+        const expireDateKST = new Date(expireTimeKST).toUTCString(); // UTC로 변환
+        
+        cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });
+        console.log(Date.now())
+        
+        
         localStorage.removeItem('token');
-        localStorage.setItem('jwt', response.data.token);
-        console.log('response.data:', response.data);
         navigate('/workbook');
       }
     } catch (error) {

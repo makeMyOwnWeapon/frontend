@@ -4,13 +4,15 @@ import NavBar_main_jsx from '../components/public/navbar_main_jsx';
 import "../styles/css/video.css"
 import React, {useEffect, useState} from 'react';
 import { MediaLogic } from '../components/video/MediaLogic';
+import { useCookies } from 'react-cookie';
 
 
 const Video = () => {
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
   useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    if (!token) {
+    
+    const token = cookies.jwt;    if (!token) {
       alert('로그인 해 주세요!')
       navigate('/main');
     }

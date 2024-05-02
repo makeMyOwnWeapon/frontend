@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import VideoThumbnail from '../public/url_to_image';
-import { Formdiv, InputContainer, StyledText } from '../../styles/CreateQuestion';
 import QuestionComponent from './create_question_component';
-import { Input, NameGeneratorButton } from '../../styles/Public';
+import { Input, NameGeneratorButton } from '../../styles/styledcomponent/Public';
 import { motion } from 'framer-motion';
 import { NavigateFunction } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 
 
 interface Props {
@@ -141,13 +141,16 @@ const quizzes = this.state.answers.map((answerSet, index) => {
   };
 });
 
+
     try {
+      const cookies = new Cookies(); 
+      const token = cookies.get('jwt');
 
       const response = await fetch('http://localhost:3000/api/quizsets', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           title,
@@ -186,20 +189,20 @@ const quizzes = this.state.answers.map((answerSet, index) => {
 
     return (
       <>
-        <Formdiv>
+        <div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-          <StyledText>나만의 문제 만들기</StyledText>
-          <InputContainer>
+          <text>나만의 문제 만들기</text>
+          <div>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <Input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
-              <Input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={(e) => this.setState({ subLectureUrl: e.target.value })} />
-              <Input type="text" placeholder="대강의명" value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
-              <Input type="text" placeholder="소강의명" value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
-              <Input type="text" placeholder="강사명" value={this.state.lecturerName} onChange={(e) => this.setState({ lecturerName: e.target.value })} />
-              <Input type="text" placeholder="강의 시간 (예: 1:23:45 또는 45:30)" value={this.state.duration} onChange={this.handleDurationChange} />
+              <input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
+              <input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={(e) => this.setState({ subLectureUrl: e.target.value })} />
+              <input type="text" placeholder="대강의명" value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
+              <input type="text" placeholder="소강의명" value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
+              <input type="text" placeholder="강사명" value={this.state.lecturerName} onChange={(e) => this.setState({ lecturerName: e.target.value })} />
+              <input type="text" placeholder="강의 시간 (예: 1:23:45 또는 45:30)" value={this.state.duration} onChange={this.handleDurationChange} />
             </div>
             <VideoThumbnail imageUrl={this.state.subLectureUrl} />
-          </InputContainer>
+          </div>
           </motion.div>
           {this.state.questionComponents.map((component, index) => (
             <QuestionComponent
@@ -214,12 +217,12 @@ const quizzes = this.state.answers.map((answerSet, index) => {
             />
           ))}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-          <NameGeneratorButton type="button" onClick={this.addQuestionComponent}>문제 추가</NameGeneratorButton>
+          <button type="button" onClick={this.addQuestionComponent}>문제 추가</button>
           <form onSubmit={this.postData}>
-            <NameGeneratorButton type="submit">제출하기 버튼</NameGeneratorButton>
+            <button type="submit">제출하기 버튼</button>
           </form>
           </motion.div>
-        </Formdiv>
+        </div>
       </>
     );
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import { CardContainer, CardContent, CardTitle, CardDescription, ReadMoreLink } from "../../styles/WorkBookCard"; 
+import styles from "../../styles/WorkbookCard.module.css";
 import VideoThumbnail from "../public/url_to_image";
 import { FaThumbsUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -11,30 +11,36 @@ interface WorkbookCardProps {
   quizSetId: number;
   recommendationCount: number;
   subLectureTitle: string;
-  subLectureUrl: string;// navigate 함수의 타입 정의
+  subLectureUrl: string;
 }
 
-const WorkbookCard: React.FC<WorkbookCardProps> = ({ createdAt, memberNickname, quizSetTitle, quizSetId, recommendationCount, subLectureTitle, subLectureUrl }) => {
+const WorkbookCard: React.FC<WorkbookCardProps> = ({
+  createdAt,
+  memberNickname,
+  quizSetTitle,
+  quizSetId,
+  recommendationCount,
+  subLectureTitle,
+  subLectureUrl
+}) => {
   const navigate = useNavigate();
-  const handleCardClick = () => {
+
+  const handleCardClick = (e:any) => {
+    e.preventDefault();
     navigate(`/question_info/${quizSetId}`,{ state: { subLectureUrl } });
   };
 
   return (
-    <CardContainer>
-      <a href="" onClick={handleCardClick}>
-        <VideoThumbnail imageUrl={subLectureUrl} /> 
-      </a>
-      <CardContent>
-        <a href="">
-          <CardTitle>{quizSetTitle}</CardTitle>
-        </a>
-        <CardDescription>작성자: {memberNickname}</CardDescription>
-        <ReadMoreLink>
-          <FaThumbsUp />{recommendationCount}
-        </ReadMoreLink>
-      </CardContent>
-    </CardContainer>
+    <div className={styles.cardContainer} onClick={handleCardClick}>
+      <VideoThumbnail imageUrl={subLectureUrl} />
+      <div className={styles.cardContent}>
+        <h3 className={styles.cardTitle}>{quizSetTitle}</h3>
+        <p className={styles.cardDescription}>작성자: {memberNickname}</p>
+        <div className={styles.readMoreLink}>
+          <FaThumbsUp /> {recommendationCount}
+        </div>
+      </div>
+    </div>
   );
 };
 

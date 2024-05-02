@@ -1,10 +1,13 @@
 import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
 axios.defaults.baseURL = 'http://localhost:3000'
 axios.defaults.headers.post["Content-type"] = 'application/json'
 
 export const getAuthToken = () => {
-    return window.localStorage.getItem("jwt");
+    const cookies = new Cookies(); 
+    const token = cookies.get('jwt');
+    return token;
 }
 
 // export function getValueInCookie(name){

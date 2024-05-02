@@ -1,42 +1,40 @@
 import React from 'react';
-import { NavBarContainer , NavLink } from '../../styles/Public';
+import styles from '../../styles/NavBar.module.css';
 import { useNavigate } from 'react-router-dom';
-
-function deleteCookie(name){
-  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
+import { useCookies } from 'react-cookie';
 
 const NavBar = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('jwt');
+    removeCookie('jwt');
     navigate("/");
   };
-  const navigate = useNavigate();
-  const goHome = ()=>{
-    navigate('/main');
 
+  const goHome = () => {
+    navigate('/main');
   }
+
   const startNavigate = (location) => {
-    const token = localStorage.getItem('jwt');
+    const token = cookies.jwt;
     if (!token) {
-        alert('로그인 해 주세요!')
-        navigate('/');
-        return;
+      alert('로그인 해 주세요!');
+      navigate('/');
+      return;
     }
 
     navigate(`/${location}`);
   }
-  
 
   return (
-    <NavBarContainer>
-      <NavLink href="" onClick={goHome}>Home</NavLink>
-      <NavLink href="" onClick={()=>startNavigate("workbook")}>workbook</NavLink>
-      <NavLink href="" onClick={()=>startNavigate("create")}>Create</NavLink>
-            <NavLink href="" onClick={()=>startNavigate("video")}>영상촬영</NavLink>
-      <NavLink href="" onClick={handleLogout}>Logout</NavLink>
-    </NavBarContainer>
+    <div className={styles.navBarContainer}>
+      <a href="#" className={styles.navLink} onClick={goHome}>Home</a>
+      <a href="#" className={styles.navLink} onClick={() => startNavigate("workbook")}>workbook</a>
+      <a href="#" className={styles.navLink} onClick={() => startNavigate("create")}>Create</a>
+      <a href="#" className={styles.navLink} onClick={() => startNavigate("video")}>영상촬영</a>
+      <a href="#" className={styles.navLink} onClick={handleLogout}>Logout</a>
+    </div>
   );
 };
 
