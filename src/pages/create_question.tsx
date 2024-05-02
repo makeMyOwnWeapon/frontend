@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import styles from "../styles/Create.module.css";
+import { PageBackGround } from "../styles/Public";
 import ProblemPage from "../components/create/create_question";
 import NavBar from "../components/public/navbar_default";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+
 
 const Create: React.FC = () => {
     const navigate = useNavigate();
@@ -20,11 +21,11 @@ const Create: React.FC = () => {
     return (
         <>
         <NavBar /> 
-        <div className={styles.pageBackground}>
-            <ProblemPage navigate={navigate}/>
-        </div>
+        <PageBackGround>
+        <ProblemPage navigate={navigate}/>
+        </PageBackGround>
         </>
     );
-};
-
-export default Create;
+  };
+  
+  export default Create;

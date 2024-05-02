@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import VideoThumbnail from '../public/url_to_image';
-import { Formdiv, InputContainer, StyledText } from '../../styles/styledcomponent/CreateQuestion';
+import { Formdiv, InputContainer, StyledText } from '../../styles/CreateQuestion';
 import QuestionComponent from './create_question_component';
-import { Input, NameGeneratorButton } from '../../styles/styledcomponent/Public';
+import { Input, NameGeneratorButton } from '../../styles/Public';
 import { motion } from 'framer-motion';
 import { NavigateFunction } from 'react-router-dom';
 import { Cookies } from 'react-cookie';

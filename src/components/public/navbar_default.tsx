@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavBarContainer , NavLink } from '../../styles/styledcomponent/Public';
+import { NavBarContainer , NavLink } from '../../styles/Public';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { Cookies, useCookies } from 'react-cookie';
 
 const NavBar: React.FC = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['jwt']);

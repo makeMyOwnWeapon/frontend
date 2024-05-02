@@ -1,5 +1,6 @@
+// src/pages/Signup.tsx
 import React, { useState } from 'react';
-import styles from '../styles/Signup.module.css';
+import { Container, Button, Title, SmallButton, NameContainer, Div } from '../styles/SignupStyles';
 import NavBar from '../components/public/navbar_main';
 import { useNavigate } from 'react-router-dom';
 import NicknameGenerator from '../components/signup/nickname_generator';
@@ -19,27 +20,23 @@ function Signup() {
   if (userTokenString) {
     const userToken: UserToken = JSON.parse(userTokenString);
     credential = userToken.credential;
-  } else {
-    return null;
-  }
+  }else{return null;}
 
   return (
-    <div className={styles.container}>
+    <Container>
       <NavBar />
-      <div className={styles.div}>
-        <h1 className={styles.title}>Sign Up</h1>
-        <button className={`${styles.smallButton} ${selectedButton === 0 ? styles.selected : ''}`}
-          onClick={() => handleButtonClick({ buttonIndex: 0, selectedButton, setSelectedButton })}>선생님</button>
-        <button className={`${styles.smallButton} ${selectedButton === 1 ? styles.selected : ''}`}
-          onClick={() => handleButtonClick({ buttonIndex: 1, selectedButton, setSelectedButton })}>학생</button>
-        <div className={styles.nameContainer}>
+      <Div>
+        <Title>Sign Up</Title>
+        <SmallButton selected={selectedButton === 0} onClick={() => handleButtonClick({ buttonIndex: 0, selectedButton, setSelectedButton })}>선생님</SmallButton>
+        <SmallButton selected={selectedButton === 1} onClick={() => handleButtonClick({ buttonIndex: 1, selectedButton, setSelectedButton })}>학생</SmallButton>
+        <NameContainer>
           <NicknameGenerator onNicknameGenerated={setNickname} />
-        </div>
+        </NameContainer>
         <form onSubmit={(event) => handleSubmit({ event, credential, nickname, selectedButton, navigate })}>
-          <button type="submit" className={styles.button}>Join</button>
+          <Button type="submit">Join</Button>
         </form>
-      </div>
-    </div>
+      </Div>
+    </Container>
   );
 }
 
