@@ -9,6 +9,7 @@ import { FaArrowAltCircleLeft,  FaArrowAltCircleRight,  FaChevronRight } from 'r
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
+import { Cookies } from "react-cookie";
 
 // QuestionComponent의 props에 대한 타입 정의
 interface QuestionComponentProps {
@@ -35,6 +36,8 @@ interface Question_ {
 const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) => {
 
     const [data, setData] = useState<Question_[] | undefined>(undefined);
+    const cookies = new Cookies(); 
+    const token = cookies.get('jwt');
     useEffect(() => {
         function deleteCookie(name:string){
           document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -45,7 +48,7 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
           try {
             const response = await axios.get(`http://localhost:3000/api/quizsets/${quizSetId}/quizzes?commentary=${true}&answer=${false}`, {
               headers: {
-                'Authorization': `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`
+                'Authorization': `Bearer ${token}`
               },
             });
   

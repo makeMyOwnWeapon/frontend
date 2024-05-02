@@ -8,8 +8,9 @@ import { useCookies } from "react-cookie";
 
 const Create: React.FC = () => {
     const navigate = useNavigate();
+    const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
     useEffect(() => {
-        const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
+        
         const token = cookies.jwt;
         if (!token) {
             alert('로그인 해 주세요!')

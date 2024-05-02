@@ -10,9 +10,8 @@ const QuestionInfo = () => {
   const location = useLocation();
   const { quizSetId } = useParams();
   const { subLectureUrl } = location.state || { subLectureUrl: "" };
-
-  useEffect(() => {
-    const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
+  const [cookies, setCookie, removeCookie] = useCookies(['jwt']);  useEffect(() => {
+    
     const token = cookies.jwt;
     if (!token) {
       alert('로그인 해 주세요!')

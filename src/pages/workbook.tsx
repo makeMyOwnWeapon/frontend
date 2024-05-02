@@ -26,9 +26,9 @@ const WorkBook: React.FC = () => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const navigate = useNavigate();
-
+    const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
     useEffect(() => {
-        const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
+        
         const token = cookies.jwt;        if (!token) {
             alert('로그인 해 주세요!')
             navigate('/main');

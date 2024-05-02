@@ -5,6 +5,7 @@ import QuestionComponent from './create_question_component';
 import { Input, NameGeneratorButton } from '../../styles/Public';
 import { motion } from 'framer-motion';
 import { NavigateFunction } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 
 
 interface Props {
@@ -141,13 +142,16 @@ const quizzes = this.state.answers.map((answerSet, index) => {
   };
 });
 
+
     try {
+      const cookies = new Cookies(); 
+      const token = cookies.get('jwt');
 
       const response = await fetch('http://localhost:3000/api/quizsets', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           title,
