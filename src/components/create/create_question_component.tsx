@@ -1,4 +1,6 @@
 import React, { Component, ChangeEvent, createRef } from "react";
+import { InputBoxWrapper, Input_text, QuestionContainer, SelectOption } from "../../styles/styledcomponent/CreateQuestion";
+import { NameGeneratorButton } from "../../styles/styledcomponent/Public";
 import { motion } from 'framer-motion';
 
 interface Answer {
@@ -115,10 +117,10 @@ class QuestionComponent extends Component<Props, State> {
     const finalHeight = open ? `${contentHeight}px` : '0px';
 
     return (
-      <div>
+      <QuestionContainer>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-        <button onClick={() => this.toggleExpand()}>{expand ? `문제 접기` : `문제 펼치기`}</button>
-          <button onClick={() => onDelete(id)}>문제 삭제하기</button>
+        <NameGeneratorButton onClick={() => this.toggleExpand()}>{expand ? `문제 접기` : `문제 펼치기`}</NameGeneratorButton>
+          <NameGeneratorButton onClick={() => onDelete(id)}>문제 삭제하기</NameGeneratorButton>
           <motion.div
             initial={{ height: 0 }}
             animate={{ height: finalHeight }}
@@ -129,47 +131,47 @@ class QuestionComponent extends Component<Props, State> {
               {expand && (
                 <>
                   <div>
-                    <div>
+                    <InputBoxWrapper>
                       <label>시간: </label>
-                      <input type="timeInput" placeholder="예: 01:23:45" value={newTime} onChange={this.handleTimeChange} />
-                    </div>
+                      <Input_text type="timeInput" placeholder="예: 01:23:45" value={newTime} onChange={this.handleTimeChange} />
+                    </InputBoxWrapper>
                   </div>
 
                   <div>
                     <label>문제 유형:</label>
-                    <select value={questionType} onChange={this.handleTypeChange}>
+                    <SelectOption value={questionType} onChange={this.handleTypeChange}>
                       <option value="objective">객관식</option>
                       <option value="subjective">주관식</option>
-                    </select>
+                    </SelectOption>
                   </div>
 
-                  <div>
+                  <InputBoxWrapper>
                     <label>문제: </label>
-                    <input type="text" value={answers[0].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)} />
-                  </div>
+                    <Input_text type="text" value={answers[0].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)} />
+                  </InputBoxWrapper>
 
                   {questionType === 'objective' ? (
                     ['1번', '2번', '3번', '4번', '해설'].map((label, index) => (
-                      <div key={index}>
+                      <InputBoxWrapper key={index}>
                         <label>{label}: </label>
-                        <input type="text" value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} />
+                        <Input_text type="text" value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} />
                         {index < 4 && (
-                          <button onClick={() => this.handleSelectionChange(index + 1)}>
+                          <NameGeneratorButton onClick={() => this.handleSelectionChange(index + 1)}>
                             {answers[index + 1].selected ? '정답입니다' : '오답입니다'}
-                          </button>
+                          </NameGeneratorButton>
                         )}
-                      </div>
+                      </InputBoxWrapper>
                     ))
                   ) : (
                     <>
-                      <div>
+                      <InputBoxWrapper>
                         <label>답: </label>
-                        <input type="text" value={answers[1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(1, e.target.value)} />
-                      </div>
-                      <div>
+                        <Input_text type="text" value={answers[1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(1, e.target.value)} />
+                      </InputBoxWrapper>
+                      <InputBoxWrapper>
                         <label>해설: </label>
-                        <input type="text" value={answers[2].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(2, e.target.value)} />
-                      </div>
+                        <Input_text type="text" value={answers[2].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(2, e.target.value)} />
+                      </InputBoxWrapper>
                     </>
                   )}
                   
@@ -178,7 +180,7 @@ class QuestionComponent extends Component<Props, State> {
             </div>
           </motion.div>
         </motion.div>
-      </div>
+      </QuestionContainer>
     );
   }
 }

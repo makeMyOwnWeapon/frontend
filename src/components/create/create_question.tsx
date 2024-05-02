@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import VideoThumbnail from '../public/url_to_image';
+import { Formdiv, InputContainer, StyledText } from '../../styles/styledcomponent/CreateQuestion';
 import QuestionComponent from './create_question_component';
 import { Input, NameGeneratorButton } from '../../styles/styledcomponent/Public';
 import { motion } from 'framer-motion';
@@ -189,20 +190,20 @@ const quizzes = this.state.answers.map((answerSet, index) => {
 
     return (
       <>
-        <div>
+        <Formdiv>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-          <text>나만의 문제 만들기</text>
-          <div>
+          <StyledText>나만의 문제 만들기</StyledText>
+          <InputContainer>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
-              <input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={(e) => this.setState({ subLectureUrl: e.target.value })} />
-              <input type="text" placeholder="대강의명" value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
-              <input type="text" placeholder="소강의명" value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
-              <input type="text" placeholder="강사명" value={this.state.lecturerName} onChange={(e) => this.setState({ lecturerName: e.target.value })} />
-              <input type="text" placeholder="강의 시간 (예: 1:23:45 또는 45:30)" value={this.state.duration} onChange={this.handleDurationChange} />
+              <Input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
+              <Input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={(e) => this.setState({ subLectureUrl: e.target.value })} />
+              <Input type="text" placeholder="대강의명" value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
+              <Input type="text" placeholder="소강의명" value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
+              <Input type="text" placeholder="강사명" value={this.state.lecturerName} onChange={(e) => this.setState({ lecturerName: e.target.value })} />
+              <Input type="text" placeholder="강의 시간 (예: 1:23:45 또는 45:30)" value={this.state.duration} onChange={this.handleDurationChange} />
             </div>
             <VideoThumbnail imageUrl={this.state.subLectureUrl} />
-          </div>
+          </InputContainer>
           </motion.div>
           {this.state.questionComponents.map((component, index) => (
             <QuestionComponent
@@ -217,12 +218,12 @@ const quizzes = this.state.answers.map((answerSet, index) => {
             />
           ))}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-          <button type="button" onClick={this.addQuestionComponent}>문제 추가</button>
+          <NameGeneratorButton type="button" onClick={this.addQuestionComponent}>문제 추가</NameGeneratorButton>
           <form onSubmit={this.postData}>
-            <button type="submit">제출하기 버튼</button>
+            <NameGeneratorButton type="submit">제출하기 버튼</NameGeneratorButton>
           </form>
           </motion.div>
-        </div>
+        </Formdiv>
       </>
     );
   }
