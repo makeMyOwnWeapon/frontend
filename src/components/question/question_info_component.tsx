@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import styles from '../../styles/QuestionInfo.module.css'; // CSS 모듈 경로 변경
 import VideoThumbnail from "../public/url_to_image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { Cookies } from "react-cookie";
 
-// QuestionComponent의 props에 대한 타입 정의
 interface QuestionComponentProps {
     videoUrl: string;
     quizSetId: string | undefined;
@@ -29,7 +27,7 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
     const [data, setData] = useState<Question_[] | undefined>(undefined);
     const cookies = new Cookies();
     const token = cookies.get('jwt');
-    
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -56,20 +54,20 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
     };
 
     return (
-        <div className={styles.form}>
-            <div className={styles.sliderContainer}>
-                <div className={styles.videoThumbnailContainer}>
+        <div style={{ width: '100%', padding: '20px', boxSizing: 'border-box' }}> {/* Form style */}
+            <div style={{ margin: '0 auto', width: '80%' }}> {/* SliderContainer style */}
+                <div style={{ marginBottom: '20px' }}> {/* VideoThumbnailContainer style */}
                     <VideoThumbnail imageUrl={videoUrl} />
                 </div>
                 
-                <Slider {...settings}> 
+                <Slider {...settings}>
                     {data && data.map((question, index) => (
-                        <div className={styles.questionContainer} key={index}>
-                            <div className={styles.textContainer}>시간: {question.popupTime}</div>
-                            <div className={styles.textContainer}>문제: {question.commentary}</div>
+                        <div key={index} style={{ padding: '10px' }}> {/* QuestionContainer style */}
+                            <div style={{ marginBottom: '10px' }}>시간: {question.popupTime}</div>
+                            <div style={{ marginBottom: '10px' }}>문제: {question.commentary}</div>
                             <div key={index}>
                                 {question.choice.map((choice, choiceIndex) => (
-                                    <div className={styles.textContainer} key={choiceIndex}>{choice.content}</div>
+                                    <div key={choiceIndex} style={{ padding: '5px' }}>{choice.content}</div>
                                 ))}
                             </div>
                         </div>

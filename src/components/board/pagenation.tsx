@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../styles/Pagination.module.css';
+
 type PaginationProps = {
   itemsPerPage: number;
   totalItems: number;
@@ -15,12 +15,12 @@ const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems, pagin
   }
 
   return (
-    <ul className={styles.paginationContainer}>
+    <ul>
       {pageNumbers.map(number => (
         <li 
           key={number} 
-          className={`${styles.pageItem} ${number === currentPage ? styles.pageItemActive : ''}`}
-          onClick={() => paginate(number)}>
+          onClick={() => paginate(number)}
+        >
           {number}
         </li>
       ))}

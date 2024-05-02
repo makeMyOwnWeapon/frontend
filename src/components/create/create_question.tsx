@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import VideoThumbnail from '../public/url_to_image';
 import QuestionComponent from './create_question_component';
-import { Input, NameGeneratorButton } from '../../styles/styledcomponent/Public';
 import { motion } from 'framer-motion';
 import { NavigateFunction } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
@@ -117,14 +116,12 @@ class ProblemPage extends Component<Props, State> {
     const durationInSeconds = this.convertTimeToSeconds(duration);
 
 const quizzes = this.state.answers.map((answerSet, index) => {
-  // Check if popupTime is a valid time format
   const timeRegex = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/;
   if (!timeRegex.test(this.state.questionTimes[index])) {
     alert('시간 형식이 잘못되었습니다. "hh:mm:ss" 형식으로 입력해 주세요.');
     return ;
   }
 
-  // Check for null values in answerSet
   if (answerSet.some(answer => answer.text === '')) {
     alert('빈 값이 포함되어 있습니다.');
     return ;
@@ -140,7 +137,6 @@ const quizzes = this.state.answers.map((answerSet, index) => {
     }))
   };
 });
-
 
     try {
       const cookies = new Cookies(); 

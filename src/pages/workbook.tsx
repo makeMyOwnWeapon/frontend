@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../styles/Public.module.css';
 import NavBar from '../components/public/navbar_default';
 import SidebarOptions from '../components/board/select_option';
 import WorkbookCard from '../components/board/workbook_card';
@@ -73,23 +72,16 @@ const WorkBook: React.FC = () => {
     return (
         <>
             <NavBar /> 
-            <div className={styles.navContainer} />
-            <div className={styles.pageBackGround}>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
                     <SidebarOptions/> 
-                    <div className={styles.content}>
                         {renderWorkbookCards()}
-                    </div>
                 </motion.div>
-                <div className={styles.pageFooter}>
                     <Pagination
                         itemsPerPage={itemsPerPage}
                         totalItems={cards.length}
                         paginate={paginate}
                         currentPage={currentPage}
                     />
-                </div>
-            </div>
         </>
     );
 };

@@ -1,10 +1,4 @@
-import React, {useState} from "react";
-import styles from "../../styles/SidebarOptions.module.css";
-
-interface OptionItem {
-  id: number;
-  label: string;
-}
+import React, { useState } from "react";
 
 const SidebarOptions = () => {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -25,29 +19,25 @@ const SidebarOptions = () => {
     };
 
     return (
-      <div className={styles.sidebarContainer}>
-        <div className={styles.sidebarBackground}>
+      <div>
         {options.map(option => (
           <div
             key={option.id}
-            className={`${styles.option} ${selectedOption === option.id ? styles.optionActive : ''}`}
             onClick={() => handleOptionClick(option.id)}
           >
             {option.label}
           </div>
         ))}
-        <div style={{ display: 'flex', margin: '10px', padding: '5px' }}>
+        <div>
           <input
-            className={styles.input}
             type="text"
             placeholder="Search options..."
             value={searchTerm}
             onChange={handleSearchChange}
           />
         </div>
-        </div>
       </div>
     );
-  };
-  
-  export default SidebarOptions;
+};
+
+export default SidebarOptions;
