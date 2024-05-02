@@ -1,4 +1,4 @@
-import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
+import vision from "https://fastly.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
 import {request, getValueInCookie, getAuthToken} from "../../helpers/axios_helper"
 
 export function Mission1(){
@@ -9,7 +9,7 @@ export function Mission1(){
         let webcamRunning = false;
         const videoWidth = 300;
         async function createFaceLandmarker() {
-            const filesetResolver = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm");
+            const filesetResolver = await FilesetResolver.forVisionTasks("https://fastly.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm");
             faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
                 baseOptions: {
                     modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
