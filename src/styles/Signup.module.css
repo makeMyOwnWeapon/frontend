@@ -1,0 +1,48 @@
+/* Signup.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  .div {
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 10px;
+  }
+  
+  .title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .button,
+  .smallButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  .smallButton {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .smallButton.selected {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .nameContainer {
+    margin: 20px 0;
+  }
+  

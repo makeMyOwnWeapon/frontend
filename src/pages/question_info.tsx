@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import styles from '../styles/QuestionInfo.module.css';
 import NavBar from '../components/public/navbar_default';
 import QuestionInfoComponent from '../components/question/question_info_component';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -21,8 +22,12 @@ const QuestionInfo = () => {
 
   return (
     <div>
+      <div className={styles.navBarContainer}>
         <NavBar />
+      </div>
+      <div className={styles.pageBackGround}>
         {quizSetId && <QuestionInfoComponent videoUrl={subLectureUrl} quizSetId={quizSetId} />}
+      </div>
     </div>
   );
 };

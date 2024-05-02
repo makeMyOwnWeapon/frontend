@@ -1,0 +1,20 @@
+/* NavBar.module.css */
+.navBarContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    background-color: #333;
+  }
+  
+  .navLink {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  
+  .navLink:hover {
+    text-decoration: underline;
+  }
+  
