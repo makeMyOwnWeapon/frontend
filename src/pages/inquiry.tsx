@@ -33,6 +33,38 @@ const NotFoundPage: React.FC = () => {
           Go Back
         </button>
       </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div className="not-found-container">
+        <p className="not-found-message">We are kts5927, UkdongKim, 10kseok, jeemh, yunsejin</p>
+        <img
+            className="not-found-image"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuYlFidLek1_MFumIZa_Ag4ogZ4z8LbN1xQCO-y52mmWUInwIO"
+            alt="Cute Not Found"
+          />
+      </div>
     </>
   );
 };
