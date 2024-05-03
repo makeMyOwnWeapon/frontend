@@ -47,9 +47,7 @@ const Account: React.FC = () => {
         const expireDateKST = new Date(expireTimeKST).toUTCString(); // UTC로 변환
         
         cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });
-        console.log(Date.now())
-        
-        
+    
         localStorage.removeItem('token');
         navigate('/workbook');
       }
