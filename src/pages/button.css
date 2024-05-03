@@ -1,0 +1,37 @@
+.not-found-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.not-found-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.not-found-message {
+  font-size: 24px;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+}
+
+.not-found-image {
+  width: 300px;
+  height: auto;
+  margin-bottom: 0px;
+}
+
+.go-back-button {
+  margin: 40px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.go-back-button:hover {
+  background-color: #2980b9;
+}

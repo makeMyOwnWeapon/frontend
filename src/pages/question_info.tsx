@@ -5,6 +5,7 @@ import QuestionInfoComponent from '../components/question/question_info_componen
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
+
 const QuestionInfo = () => {
   const navigate = useNavigate();
   const location = useLocation();

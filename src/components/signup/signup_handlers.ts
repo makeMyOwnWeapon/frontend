@@ -28,7 +28,6 @@ export async function handleSubmit({
       }
     });
     if (response.data !== 'Invalid token') {
-      // 쿠키에 토큰과 만료일자 저장
       const cookies = new Cookies();
       cookies.set('jwt', response.data.token, { expires: new Date(Date.now() + response.data.expire*1000) });
       localStorage.removeItem('token');

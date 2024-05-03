@@ -14,7 +14,7 @@ const Create: React.FC = () => {
         const token = cookies.jwt;
         if (!token) {
             alert('로그인 해 주세요!')
-            navigate('/main');  // Redirect to '/main' if not authenticated
+            navigate('/main');
         }
     }, [navigate]);
     
