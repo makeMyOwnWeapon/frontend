@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavBarContainer , NavLink } from '../../styles/Public';
 import { useNavigate } from 'react-router-dom';
-import { Cookies, useCookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
+ const cookies = new Cookies();
 
 const NavBar: React.FC = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
   const handleLogout = () => {
-    removeCookie('jwt');
+  cookies.remove('jwt');
     navigate("/");
   };
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const NavBar: React.FC = () => {
 
   }
   const startNavigate = (location:string) => {
-    const token = cookies.jwt;
+    const token = cookies.get('jwt');
     if (!token) {
         alert('로그인 해 주세요!')
         navigate('/');
