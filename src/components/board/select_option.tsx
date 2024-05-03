@@ -78,6 +78,7 @@ const SidebarOptions = () => {
                 <h1>회원 탈퇴</h1>
                 <p>정말로 탈퇴하시겠습니까?</p>
                 <button
+                  className="confirm-button"
                   onClick={async () => {
                     try {
                       const response = await fetch("http://localhost:3000/api/member/delete", {
@@ -102,7 +103,7 @@ const SidebarOptions = () => {
                 >
                   네
                 </button>
-                <button onClick={onClose}>아니오</button>
+                <button className="cancel-button" onClick={onClose}>아니오</button>
               </div>
             );
           }
@@ -120,19 +121,17 @@ const SidebarOptions = () => {
     <SidebarContainer>
       <SidebarBackGround>
         {options.map(option => (
-          <>
+          <React.Fragment key={option.id}>
             <Option
-              key={option.id}
               onClick={() => handleOptionClick(option.id)}
               style={{ backgroundColor: selectedOption === option.id ? '#ccc' : 'transparent' }}
             >
               {option.label}
             </Option>
             {selectedOption === option.id && <ToastContainer position="top-center" className="custom-toast-container" />}
-          </>
+          </React.Fragment>
         ))}
-        <div style={{ display: 'flex'}}>
-        </div>
+        <div style={{ display: 'flex' }} />
       </SidebarBackGround>
     </SidebarContainer>
   );
