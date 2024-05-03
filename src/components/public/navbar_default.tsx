@@ -5,10 +5,6 @@ import { Cookies } from 'react-cookie';
  const cookies = new Cookies();
 
 const NavBar: React.FC = () => {
-  const handleLogout = () => {
-  cookies.remove('jwt');
-    navigate("/");
-  };
   const navigate = useNavigate();
   const goHome = ()=>{
     navigate('/');
@@ -32,7 +28,7 @@ const NavBar: React.FC = () => {
       <NavLink href="" onClick={()=>startNavigate("workbook")}>Workbook</NavLink>
       <NavLink href="" onClick={()=>startNavigate("reportlist")}>Report</NavLink>
       <NavLink href="" onClick={()=>startNavigate("video")}>Videography</NavLink>
-      <NavLink href="" onClick={handleLogout}>Logout</NavLink>
+      <NavLink href="" onClick={()=>startNavigate("inquiry")}>Inquiry</NavLink>
     </NavBarContainer>
   );
 };
