@@ -52,6 +52,7 @@ const SidebarOptions = () => {
             toast(
               <div>
                 <span>인증코드: {data.oauthId}</span>
+                
                 <button
                   className="copy-button"
                   onClick={() => copyToClipboard(data.oauthId)}
