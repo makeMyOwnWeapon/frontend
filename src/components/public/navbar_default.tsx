@@ -29,9 +29,9 @@ const NavBar: React.FC = () => {
   return (
     <NavBarContainer>
       <NavLink href="" onClick={goHome}>Home</NavLink>
-      <NavLink href="" onClick={()=>startNavigate("workbook")}>workbook</NavLink>
+      <NavLink href="" onClick={()=>startNavigate("workbook")}>Workbook</NavLink>
       <NavLink href="" onClick={()=>startNavigate("create")}>Create</NavLink>
-      <NavLink href="" onClick={()=>startNavigate("video")}>영상촬영</NavLink>
+      <NavLink href="" onClick={()=>startNavigate("video")}>Videography</NavLink>
       <NavLink href="" onClick={handleLogout}>Logout</NavLink>
     </NavBarContainer>
   );
