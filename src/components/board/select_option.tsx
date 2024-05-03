@@ -22,9 +22,9 @@ const SidebarOptions = () => {
   const [_, __, removeCookie] = useCookies(['jwt']);
   const options: OptionItem[] = [
     { id: 1, label: '내 인증코드 보기' },
-    { id: 2, label: '내 레포트 보기' },
-    { id: 3, label: '회원 탈퇴' },
-    { id: 4, label: '문의 하기' },
+    { id: 2, label: '문제집 만들기' },
+    { id: 3, label: '회원탈퇴' },
+    { id: 4, label: '로그아웃' },
   ];
 
   const copyToClipboard = (text: string) => {
@@ -68,7 +68,7 @@ const SidebarOptions = () => {
         }
         break;
       case 2:
-        navigate("/reportlist");
+        navigate("/create");
         break;
       case 3:
         confirmAlert({
@@ -110,7 +110,8 @@ const SidebarOptions = () => {
         });
         break;
       case 4:
-        navigate("/inquiry");
+        removeCookie("jwt");
+        navigate("/main");
         break;
       default:
         break;

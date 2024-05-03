@@ -30,7 +30,7 @@ const NavBar: React.FC = () => {
     <NavBarContainer>
       <NavLink href="" onClick={goHome}>Home</NavLink>
       <NavLink href="" onClick={()=>startNavigate("workbook")}>Workbook</NavLink>
-      <NavLink href="" onClick={()=>startNavigate("create")}>Create</NavLink>
+      <NavLink href="" onClick={()=>startNavigate("reportlist")}>Report</NavLink>
       <NavLink href="" onClick={()=>startNavigate("video")}>Videography</NavLink>
       <NavLink href="" onClick={handleLogout}>Logout</NavLink>
     </NavBarContainer>
