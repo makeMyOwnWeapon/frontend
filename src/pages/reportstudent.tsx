@@ -18,7 +18,7 @@ interface ReportCard {
   subLectureUrl:string;
 }
 
-const ReportPage: React.FC = () => {
+const ReportStudent: React.FC = () => {
     const [cards, setCards] = useState<ReportCard[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(6);
@@ -91,4 +91,4 @@ const ReportPage: React.FC = () => {
     );
 };
 
-export default ReportPage;
+export default ReportStudent;

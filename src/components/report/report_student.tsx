@@ -10,7 +10,7 @@ interface ReportCardProps {
   subLectureUrl: string;
 }
 
-const ReportCard: React.FC<ReportCardProps> = ({  memberNickname,  quizSetId, subLectureTitle, subLectureUrl }) => {
+const ReportStudent: React.FC<ReportCardProps> = ({  memberNickname,  quizSetId, subLectureTitle, subLectureUrl }) => {
   const navigate = useNavigate();
   const handleCardClick = () => {
     navigate(`/question_info/${quizSetId}`,{ state: { subLectureUrl } });
@@ -32,4 +32,4 @@ const ReportCard: React.FC<ReportCardProps> = ({  memberNickname,  quizSetId, su
   );
 };
 
-export default ReportCard;
+export default ReportStudent;
