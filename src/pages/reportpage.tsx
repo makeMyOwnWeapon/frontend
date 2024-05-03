@@ -28,7 +28,8 @@ const Reportpage: React.FC = () => {
     const navigate = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
     useEffect(() => {
-        const token = cookies.jwt;        if (!token) {
+        const token = cookies.jwt;
+        if (!token) {
             alert('로그인 해 주세요!')
             navigate('/main');
             return;
@@ -36,7 +37,7 @@ const Reportpage: React.FC = () => {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/quizsets/', {
+                const response = await axios.get('http://localhost:3000/api/history/', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     },
