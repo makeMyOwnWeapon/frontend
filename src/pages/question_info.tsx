@@ -3,7 +3,7 @@ import { NavBarContainer, PageBackGround } from '../styles/Public';
 import NavBar from '../components/public/navbar_default';
 import QuestionInfoComponent from '../components/question/question_info_component';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
 
 
 const QuestionInfo = () => {
@@ -11,9 +11,11 @@ const QuestionInfo = () => {
   const location = useLocation();
   const { quizSetId } = useParams();
   const { subLectureUrl } = location.state || { subLectureUrl: "" };
-  const [cookies, setCookie, removeCookie] = useCookies(['jwt']);  useEffect(() => {
+  const cookies = new Cookies();
+  
+  useEffect(() => {
     
-    const token = cookies.jwt;
+    const token = cookies.get('jwt');
     if (!token) {
       alert('로그인 해 주세요!')
       navigate('/main');
