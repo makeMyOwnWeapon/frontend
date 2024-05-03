@@ -19,6 +19,11 @@ export async function handleSubmit({
 }: HandleSubmitArgs) {
   event.preventDefault();
   try {
+    console.log(nickname)
+    if (nickname === '' || selectedButton === null || credential === null){
+        return alert('회원가입 에러!');
+    }
+
     const response: AxiosResponse = await axios.post('http://localhost:3000/api/member/signup', {
       authorizationCode: selectedButton === 1 ? 0 : 1,
       nickname: nickname
