@@ -25,13 +25,13 @@ const WorkBook: React.FC = () => {
     const [itemsPerPage] = useState(6);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const navigate = useNavigate();
+    const navigate = useNavigate();   
     useEffect(() => {
         
-        const cookies = new Cookies();
-        const token = cookies.get('jwt');  
-        console.log('workbook = ', token);     
-        if (!token) {
+        const cookies = new Cookies();    
+        const cookie = cookies.get('jwt') 
+        console.log(cookie);
+        if (!cookie) {
             alert('로그인 해 주세요!')
             navigate('/main');
             return;
@@ -41,7 +41,7 @@ const WorkBook: React.FC = () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/quizsets/', {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${cookie}`
                     },
                 });
                 setCards(response.data);
