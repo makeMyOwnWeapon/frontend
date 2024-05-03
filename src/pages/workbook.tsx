@@ -7,7 +7,7 @@ import axios from 'axios';
 import Pagination from '../components/board/pagenation';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
 
 interface Card {
   createdAt: string;
@@ -26,10 +26,12 @@ const WorkBook: React.FC = () => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const navigate = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
     useEffect(() => {
         
-        const token = cookies.jwt;        if (!token) {
+        const cookies = new Cookies();
+        const token = cookies.get('jwt');  
+        console.log('workbook = ', token);     
+        if (!token) {
             alert('로그인 해 주세요!')
             navigate('/main');
             return;
