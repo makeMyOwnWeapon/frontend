@@ -30,7 +30,6 @@ const WorkBook: React.FC = () => {
         
         const cookies = new Cookies();    
         const cookie = cookies.get('jwt') 
-        console.log(cookie);
         if (!cookie) {
             alert('로그인 해 주세요!')
             navigate('/main');

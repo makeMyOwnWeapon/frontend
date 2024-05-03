@@ -6,7 +6,7 @@ import WorkBook from './pages/workbook';
 import Create from './pages/create_question';
 import Question_info from './pages/question_info';
 import Video from './pages/video';
-import ReportPage from './pages/reportpage';
+import ReportList from './pages/reportlist';
 import Inquiry from './pages/inquiry';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Route path="/workbook" element={<WorkBook/>} />
         <Route path="/create" element={<Create/>}/>
         <Route path="/question_info/:quizSetId" element={<Question_info/>}/>
-        <Route path="/reportpage" element={<ReportPage/>}/>
+        <Route path="/reportlist" element={<ReportList/>}/>
         <Route path="/video" element={<Video/>}/>
         <Route path="/inquiry" element={<Inquiry/>}/>
       </Routes>

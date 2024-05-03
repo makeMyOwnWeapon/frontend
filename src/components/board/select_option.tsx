@@ -68,7 +68,7 @@ const SidebarOptions = () => {
         }
         break;
       case 2:
-        navigate("/reportpage");
+        navigate("/reportlist");
         break;
       case 3:
         confirmAlert({

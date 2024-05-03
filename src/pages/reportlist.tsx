@@ -9,18 +9,17 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 
-interface Card {
+interface ReportCard {
   createdAt: string;
-  memberNickname: string;
+  lecturerName: string;
   quizSetTitle: string;
   quizSetId: number;
-  recommendationCount: number;
   subLectureTitle: string;
   subLectureUrl:string;
 }
 
-const ReportPage: React.FC = () => {
-    const [cards, setCards] = useState<Card[]>([]);
+const ReportList: React.FC = () => {
+    const [cards, setCards] = useState<ReportCard[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(6);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -30,7 +29,6 @@ const ReportPage: React.FC = () => {
         
         const cookies = new Cookies();    
         const cookie = cookies.get('jwt') 
-        console.log(cookie);
         if (!cookie) {
             alert('로그인 해 주세요!')
             navigate('/main');
@@ -39,7 +37,7 @@ const ReportPage: React.FC = () => {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/quizsets/', {
+                const response = await axios.get('http://localhost:3000/api/history/', {
                     headers: {
                         'Authorization': `Bearer ${cookie}`
                     },
@@ -49,6 +47,7 @@ const ReportPage: React.FC = () => {
                 console.error('Error:', error);
             }
         };
+      
 
         fetchData();
     }, [navigate]);
@@ -60,11 +59,8 @@ const ReportPage: React.FC = () => {
         return currentItems.map((card, index) => (
             <ReportCard
                 key={index}
-                createdAt={card.createdAt}
-                memberNickname={card.memberNickname}
-                quizSetTitle={card.quizSetTitle}
+                memberNickname={card.lecturerName}
                 quizSetId={card.quizSetId}
-                recommendationCount={card.recommendationCount}
                 subLectureTitle={card.subLectureTitle}
                 subLectureUrl={card.subLectureUrl}
             />
@@ -95,4 +91,4 @@ const ReportPage: React.FC = () => {
     );
 };
 
-export default ReportPage;
+export default ReportList;
