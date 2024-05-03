@@ -3,15 +3,15 @@ import { PageBackGround } from "../styles/Public";
 import ProblemPage from "../components/create/create_question";
 import NavBar from "../components/public/navbar_default";
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { Cookies } from "react-cookie";
 
+const cookies = new Cookies();
 
 const Create: React.FC = () => {
     const navigate = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
     useEffect(() => {
         
-        const token = cookies.jwt;
+        const token = cookies.get('jwt');
         if (!token) {
             alert('로그인 해 주세요!')
             navigate('/main');
