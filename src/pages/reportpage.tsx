@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Content, NavContainer, PageBackGround, PageFooter  } from '../styles/Public';
 import NavBar from '../components/public/navbar_default'
 import SidebarOptions from '../components/board/select_option';
+import ReportCard from '../components/report/report_card';
 import axios from 'axios';
 import Pagination from '../components/board/pagenation';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
-import ReportCard from '../components/report/report_card';
 
 interface Card {
   createdAt: string;
@@ -19,17 +19,19 @@ interface Card {
   subLectureUrl:string;
 }
 
-const Reportpage: React.FC = () => {
+const ReportPage: React.FC = () => {
     const [cards, setCards] = useState<Card[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(6);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const navigate = useNavigate();
-    const cookies = new Cookies();
+    const navigate = useNavigate();   
     useEffect(() => {
-        const token = cookies.get('jwt');        
-        if (!token) {
+        
+        const cookies = new Cookies();    
+        const cookie = cookies.get('jwt') 
+        console.log(cookie);
+        if (!cookie) {
             alert('로그인 해 주세요!')
             navigate('/main');
             return;
@@ -37,9 +39,9 @@ const Reportpage: React.FC = () => {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/history/', {
+                const response = await axios.get('http://localhost:3000/api/quizsets/', {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${cookie}`
                     },
                 });
                 setCards(response.data);
@@ -54,7 +56,7 @@ const Reportpage: React.FC = () => {
     const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-    const renderWorkbookCards = () => {
+    const renderReportCards = () => {
         return currentItems.map((card, index) => (
             <ReportCard
                 key={index}
@@ -77,7 +79,7 @@ const Reportpage: React.FC = () => {
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
                     <SidebarOptions/> 
                     <Content>
-                        {renderWorkbookCards()}
+                        {renderReportCards()}
                     </Content>
                 </motion.div>
                 <PageFooter>
@@ -93,4 +95,4 @@ const Reportpage: React.FC = () => {
     );
 };
 
-export default Reportpage;
+export default ReportPage;

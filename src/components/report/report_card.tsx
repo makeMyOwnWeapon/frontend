@@ -11,7 +11,7 @@ interface ReportCardProps {
   quizSetId: number;
   recommendationCount: number;
   subLectureTitle: string;
-  subLectureUrl: string;// navigate 함수의 타입 정의
+  subLectureUrl: string;
 }
 
 const ReportCard: React.FC<ReportCardProps> = ({ createdAt, memberNickname, quizSetTitle, quizSetId, recommendationCount, subLectureTitle, subLectureUrl }) => {
