@@ -7,7 +7,9 @@ import Create from './pages/create_question';
 import Question_info from './pages/question_info';
 import Video from './pages/video';
 import ReportList from './pages/reportlist';
+import ReportPage from './pages/reportpage';
 import Inquiry from './pages/inquiry';
+
 
 function App() {
   return (
@@ -20,8 +22,10 @@ function App() {
         <Route path="/create" element={<Create/>}/>
         <Route path="/question_info/:quizSetId" element={<Question_info/>}/>
         <Route path="/reportlist" element={<ReportList/>}/>
+        <Route path="/reportpage" element={<ReportPage/>}/>
         <Route path="/video" element={<Video/>}/>
         <Route path="/inquiry" element={<Inquiry/>}/>
+        
       </Routes>
     </BrowserRouter>
   );
