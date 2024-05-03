@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Content, NavContainer, PageBackGround, PageFooter  } from '../styles/Public';
 import NavBar from '../components/public/navbar_default'
 import SidebarOptions from '../components/board/select_option';
-import WorkbookCard from '../components/board/workbook_card';
 import axios from 'axios';
 import Pagination from '../components/board/pagenation';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import ReportCard from '../components/report/report_card';
 
 interface Card {
   createdAt: string;
@@ -28,7 +28,6 @@ const Reportpage: React.FC = () => {
     const navigate = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
     useEffect(() => {
-        
         const token = cookies.jwt;        if (!token) {
             alert('로그인 해 주세요!')
             navigate('/main');
@@ -56,7 +55,7 @@ const Reportpage: React.FC = () => {
 
     const renderWorkbookCards = () => {
         return currentItems.map((card, index) => (
-            <WorkbookCard
+            <ReportCard
                 key={index}
                 createdAt={card.createdAt}
                 memberNickname={card.memberNickname}

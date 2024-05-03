@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/public/navbar_default";
-import "./button.css"; // CSS 파일을 가져옵니다.
+import "../styles/css/inquiry.css";
 
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();

@@ -1,19 +1,17 @@
 import styled from 'styled-components';
 
-// NavBar 컨테이너 스타일 정의
 export const NavBarContainer = styled.nav`
   display: flex;
   justify-content: space-around;
   position: fixed; // 상단 고정
   top: 0;
   width: 100%;
-  background: #FFFFFF; // 배경색 없음
-  color: darkgray; // 글자색
+  background: #FFFFFF;
+  color: darkgray;
   padding: 10px 0;
   z-index: 1000; // 다른 요소들 위에 위치
 `;
 
-// NavLink 스타일 정의
 export const NavLink = styled.a`
   color: inherit; // 부모 컴포넌트의 색상 상속
   text-decoration: none;
@@ -60,7 +58,6 @@ export const Content = styled.div`
 `;
 
 export const ImageWithShadow = styled.img`
-  /* 그림자 효과를 적용합니다. */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 수평, 수직, 퍼짐 정도, 색상을 설정합니다. */
   border-radius: 8px; /* 이미지에 둥근 모서리를 만듭니다. */
 `;
@@ -120,7 +117,7 @@ export const Input = styled.input`
 export const PageFooter = styled.footer`
   width: 100%;
   border: 1px solid #dee2e6;
-  background-color: #FFFFFF; // 배경색은 원하는 대로 조정 가능
+  background-color: #FFFFFF;
   display: flex;
   justify-content: center;
   align-items: center;
