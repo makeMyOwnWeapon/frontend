@@ -10,6 +10,7 @@ import ReportList from './pages/reportlist';
 import ReportStudent from './pages/reportstudent';
 import ReportTeacher from './pages/reportteacher';
 import Inquiry from './pages/inquiry';
+import BackgroundAnimation from './styles/BackgroundAnimation';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/reportteacher" element={<ReportTeacher/>}/>
         <Route path="/video" element={<Video/>}/>
         <Route path="/inquiry" element={<Inquiry/>}/>
+        <Route path="/background" element={<BackgroundAnimation/>}/>
         
       </Routes>
     </BrowserRouter>
