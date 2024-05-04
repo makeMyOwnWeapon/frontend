@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Content, NavContainer, PageBackGround, PageFooter } from '../styles/Public';
+import { Content, ContentBox, NavContainer, PageBackGround, PageFooter } from '../styles/Public';
 import NavBar from '../components/public/navbar_default';
 import SidebarOptions from '../components/board/select_option';
 import WorkbookCard from '../components/board/workbook_card';
 import axios from 'axios';
-import Pagination from '../components/board/pagenation';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
@@ -21,8 +20,6 @@ interface Card {
 
 const WorkBook: React.FC = () => {
   const [cards, setCards] = useState<Card[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,45 +45,32 @@ const WorkBook: React.FC = () => {
     fetchData();
   }, [navigate]);
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
-
-  const renderWorkbookCards = () => {
-    return currentItems.map((card, index) => (
-      <WorkbookCard
-        key={index}
-        createdAt={card.createdAt}
-        memberNickname={card.memberNickname}
-        quizSetTitle={card.quizSetTitle}
-        quizSetId={card.quizSetId}
-        recommendationCount={card.recommendationCount}
-        subLectureTitle={card.subLectureTitle}
-        subLectureUrl={card.subLectureUrl}
-      />
-    ));
-  };
-
   return (
     <>
       <NavBar />
       <NavContainer />
-      <PageBackGround>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-          <SidebarOptions />
-          <Content>
-            {renderWorkbookCards()}
-          </Content>
-        </motion.div>
-        <PageFooter>
-          <Pagination
-            itemsPerPage={itemsPerPage}
-            totalItems={cards.length}
-            paginate={setCurrentPage}
-            currentPage={currentPage}
-          />
-        </PageFooter>
+        <PageBackGround>
+            <SidebarOptions />
+            <ContentBox>
+                <Content>
+                  {cards.map((card, index) => (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+                    <WorkbookCard
+                      key={index}
+                      createdAt={card.createdAt}
+                      memberNickname={card.memberNickname}
+                      quizSetTitle={card.quizSetTitle}
+                      quizSetId={card.quizSetId}
+                      recommendationCount={card.recommendationCount}
+                      subLectureTitle={card.subLectureTitle}
+                      subLectureUrl={card.subLectureUrl}
+                    />
+                    </motion.div>
+                  ))}
+                </Content>
+            </ContentBox>
       </PageBackGround>
+
     </>
   );
 };
