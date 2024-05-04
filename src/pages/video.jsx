@@ -17,6 +17,7 @@ const VideoComponent = () => {
   const sleepCountRef = useRef(0);
   const faceNotRecognizedStartRef = useRef(null);
   const faceNotRecognizedTimeRef = useRef(null);
+  const count = useRef(0);
 
   useEffect(() => {
     async function createFaceLandmarker() {
@@ -66,7 +67,11 @@ const VideoComponent = () => {
           blendShapes = faceLandmarker.current.detectForVideo(videoRef.current, performance.now()).faceBlendshapes;
 
           if (blendShapes) {
-            checkBlinks(blendShapes);
+            if(count.current % 10 == 0){ // 프레임 수 조절
+              checkBlinks(blendShapes);
+            }
+            count.current+=1;
+
           }
         }
         window.requestAnimationFrame(predictWebcam);
@@ -138,6 +143,7 @@ const VideoComponent = () => {
           //     }
           // );
           sleepCountRef.current++;
+          console.log("잔 시각 : " + sleepStartRef.current + "깬 시각 : " + sleepEndRef.current);
         } else {
           setStatus('학습중');
         }
