@@ -1,19 +1,23 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  width: 100%;
+`
+
 export const NavBarContainer = styled.nav`
   display: flex;
   justify-content: space-around;
-  position: fixed; // 상단 고정
+  position: fixed;
   top: 0;
   width: 100%;
   background: #FFFFFF;
   color: darkgray;
   padding: 10px 0;
-  z-index: 1000; // 다른 요소들 위에 위치
+  z-index: 1000;
 `;
 
 export const NavLink = styled.a`
-  color: inherit; // 부모 컴포넌트의 색상 상속
+  color: inherit;
   text-decoration: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -29,37 +33,38 @@ export const MainBackGround = styled.div`
 `;
 
 export const PageBackGround = styled.div`
-  height: auto;
-  width: 100%;
-  background: #F2F2F2;
+  background-color: #f2f2f2;
   display: flex;
-  // flex-direction: row;
-  justify-content: center; /* 세로 축 중앙 정렬 */
-  // align-items: center;     /* 가로 축 중앙 정렬 */
-  flex-wrap: wrap;
 `;
 
 export const NavContainer = styled.div`
-  height: 200px;
+  height: 70px;
   background: #F2F2F2;
   display: flex;
   flex-direction: row;
-  justify-content: start; /* 세로 축 중앙 정렬 */
-  align-items: start;     /* 가로 축 중앙 정렬 */
+  justify-content: start;
+  align-items: start;
   flex-wrap: wrap;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 섀딩 추가 */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+`;
+export const ContentBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `;
 
 export const Content = styled.div`
-  flex: 1; /* 콘텐츠 영역이 남은 공간을 차지 */
+/* 콘텐츠 영역이 남은 공간을 차지 */
   display: flex;
-  flex-wrap: wrap;
-   margin-left: 400px; /* 왼쪽에 고정된 컴포넌트의 너비에 맞춰 조정 */
+  flex-wrap: wrap;  padding-left: 300px;
+  height: 100%;
+
 `;
 
 export const ImageWithShadow = styled.img`
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 수평, 수직, 퍼짐 정도, 색상을 설정합니다. */
-  border-radius: 8px; /* 이미지에 둥근 모서리를 만듭니다. */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 `;
 
 export const TextContainer = styled.div`

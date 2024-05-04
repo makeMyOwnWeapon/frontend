@@ -18,9 +18,8 @@ export const CreateButton = styled.button`
 export const SidebarContainer = styled.div`
   position: fixed;
   top: 25%;
-  left: 4%;
+  left: 2%;
   width: 230px;
-  padding: 20px;
   box-shadow: 0 2px 5px rgba(1, 1, 0);
 `;
 
@@ -61,9 +60,11 @@ export const SidebarBackGround = styled.div`
 
 export const PaginationContainer = styled.ul`
   display: flex;
-  justify-content: center;
+  justify-content:center;
+  align-items: start;  
   list-style-type: none;
   padding: 0;
+  border: 1px solid green;
 `;
 
 export const PageItem = styled.li<{ isactive: boolean }>`
