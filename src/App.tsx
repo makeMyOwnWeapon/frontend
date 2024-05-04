@@ -5,7 +5,7 @@ import Signup from './pages/signup';
 import WorkBook from './pages/workbook';
 import Create from './pages/create_question';
 import Question_info from './pages/question_info';
-import Video from './pages/video';
+import VideoComponent from './pages/video';
 import Reportpage from './pages/reportpage';
 
 function App() {
@@ -19,10 +19,9 @@ function App() {
         <Route path="/create" element={<Create/>}/>
         <Route path="/question_info/:quizSetId" element={<Question_info/>}/>
         <Route path="/reportpage" element={<Reportpage/>}/>
-        <Route path="/video" element={<Video/>}/>
+        <Route path="/video" element={<VideoComponent/>}/>
       </Routes>
     </BrowserRouter>
   );
 }
-
 export default App;
