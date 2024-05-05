@@ -5,16 +5,7 @@ import Account from '../components/main/account'
 import image from "../images/loa2.png";
 import "../styles/Public"
 
-const fadeInUp = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
@@ -55,14 +46,12 @@ const Title = styled.h1`
   color: #2c3e50;
   margin-bottom: 20px;
   text-align: center;
-  animation: ${fadeInUp} 1s ease-in-out;
 `;
 
 const MainImage = styled.img`
   width: 30%;
   margin-bottom: 20px;
   object-fit: cover;
-  animation: ${fadeInUp} 1s ease-in-out;
 `;
 
 const InfoButton = styled.button`
@@ -75,7 +64,6 @@ const InfoButton = styled.button`
   font-size: 1rem;
   width: 200px;
   margin-bottom: 20px;
-  animation: ${fadeInUp} 1s ease-in-out;
 
   &:hover {
     background-color: #2980b9;

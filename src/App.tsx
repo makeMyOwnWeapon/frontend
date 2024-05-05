@@ -10,25 +10,25 @@ import ReportList from './pages/reportlist';
 import ReportStudent from './pages/reportstudent';
 import ReportTeacher from './pages/reportteacher';
 import Inquiry from './pages/inquiry';
-import BackgroundAnimation from './styles/BackgroundAnimation';
+import BackgroundAnimation from './styles/backgroundanimation';
+import RequireAuth from './helpers/requireauth'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate replace to="/main" />} />
+      <Route path="/" element={<Navigate replace to="/main" />} />
         <Route path="/main" element={<Main />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/workbook" element={<WorkBook/>} />
-        <Route path="/create" element={<Create/>}/>
-        <Route path="/question_info/:quizSetId" element={<Question_info/>}/>
-        <Route path="/video" element={<VideoComponent/>}/>
-        <Route path="/reportlist" element={<ReportList/>}/>
-        <Route path="/reportstudent" element={<ReportStudent/>}/>
-        <Route path="/reportteacher" element={<ReportTeacher/>}/>
-        <Route path="/inquiry" element={<Inquiry/>}/>
+        <Route path="/workbook" element={<RequireAuth><WorkBook/></RequireAuth>} />
+        <Route path="/create" element={<RequireAuth><Create/></RequireAuth>}/>
+        <Route path="/question_info/:quizSetId" element={<RequireAuth><Question_info/></RequireAuth>}/>
+        <Route path="/video" element={<RequireAuth><VideoComponent/></RequireAuth>}/>
+        <Route path="/reportlist" element={<RequireAuth><ReportList/></RequireAuth>}/>
+        <Route path="/reportstudent" element={<RequireAuth><ReportStudent/></RequireAuth>}/>
+        <Route path="/reportteacher" element={<RequireAuth><ReportTeacher/></RequireAuth>}/>
+        <Route path="/inquiry" element={<RequireAuth><Inquiry/></RequireAuth>}/>
         <Route path="/background" element={<BackgroundAnimation/>}/>
-        
       </Routes>
     </BrowserRouter>
   );

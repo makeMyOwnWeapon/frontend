@@ -26,17 +26,10 @@ const ReportList: React.FC = () => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const navigate = useNavigate();   
     useEffect(() => {
-        
-        const cookies = new Cookies();    
-        const cookie = cookies.get('jwt') 
-        if (!cookie) {
-            alert('로그인 해 주세요!')
-            navigate('/main');
-            return;
-        }
-
         const fetchData = async () => {
             try {
+                const cookies = new Cookies();    
+                const cookie = cookies.get('jwt');
                 const response = await axios.get('http://localhost:3000/api/history/', {
                     headers: {
                         'Authorization': `Bearer ${cookie}`
@@ -47,7 +40,6 @@ const ReportList: React.FC = () => {
                 console.error('Error:', error);
             }
         };
-      
 
         fetchData();
     }, [navigate]);

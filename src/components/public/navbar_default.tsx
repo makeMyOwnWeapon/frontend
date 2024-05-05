@@ -1,34 +1,20 @@
 import React from 'react';
-import { NavBarContainer , NavLink } from '../../styles/Public';
+import { NavBarContainer, NavLink } from '../../styles/Public';
 import { useNavigate } from 'react-router-dom';
-import { Cookies } from 'react-cookie';
- const cookies = new Cookies();
 
-const NavBar: React.FC = () => {
+const NavBar = () => {
   const navigate = useNavigate();
-  const goHome = ()=>{
-    navigate('/');
 
+  const goHome = () => {
+    navigate('/main');
   }
-  const startNavigate = (location:string) => {
-    const token = cookies.get('jwt');
-    if (!token) {
-        alert('로그인 해 주세요!')
-        navigate('/');
-        return;
-    }
-
-    navigate(`/${location}`);
-  }
-  
 
   return (
     <NavBarContainer>
       <NavLink href="" onClick={goHome}>Home</NavLink>
-      <NavLink href="" onClick={()=>startNavigate("workbook")}>Workbook</NavLink>
-      <NavLink href="" onClick={()=>startNavigate("reportlist")}>Report</NavLink>
-      <NavLink href="" onClick={()=>startNavigate("video")}>Videography</NavLink>
-      <NavLink href="" onClick={()=>startNavigate("inquiry")}>Inquiry</NavLink>
+      <NavLink href="" onClick={() => navigate("/workbook")}>Workbook</NavLink>
+      <NavLink href="" onClick={() => navigate("/create")}>Create</NavLink>
+      <NavLink href="" onClick={() => navigate("/video")}>Video</NavLink>
     </NavBarContainer>
   );
 };

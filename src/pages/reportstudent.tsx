@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Content, NavContainer, PageBackGround, PageFooter  } from '../styles/Public';
+import { Content, NavContainer, PageBackGround, PageFooter } from '../styles/Public';
 import NavBar from '../components/public/navbar_default'
 import SidebarOptions from '../components/board/select_option';
 import ReportCard from '../components/report/report_card';
 import axios from 'axios';
 import Pagination from '../components/board/pagenation';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 
 interface ReportCard {
@@ -15,7 +14,7 @@ interface ReportCard {
   quizSetTitle: string;
   quizSetId: number;
   subLectureTitle: string;
-  subLectureUrl:string;
+  subLectureUrl: string;
 }
 
 const ReportStudent: React.FC = () => {
@@ -24,19 +23,12 @@ const ReportStudent: React.FC = () => {
     const [itemsPerPage] = useState(6);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const navigate = useNavigate();   
-    useEffect(() => {
-        
-        const cookies = new Cookies();    
-        const cookie = cookies.get('jwt') 
-        if (!cookie) {
-            alert('로그인 해 주세요!')
-            navigate('/main');
-            return;
-        }
 
+    useEffect(() => {
         const fetchData = async () => {
             try {
+                const cookies = new Cookies();    
+                const cookie = cookies.get('jwt');
                 const response = await axios.get('http://localhost:3000/api/history/', {
                     headers: {
                         'Authorization': `Bearer ${cookie}`
@@ -47,10 +39,9 @@ const ReportStudent: React.FC = () => {
                 console.error('Error:', error);
             }
         };
-      
 
         fetchData();
-    }, [navigate]);
+    }, []);
 
     const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -64,16 +55,16 @@ const ReportStudent: React.FC = () => {
                 subLectureTitle={card.subLectureTitle}
                 subLectureUrl={card.subLectureUrl}
             />
-        )); 
+        ));
     }
 
     return (
         <>
-            <NavBar /> 
+            <NavBar />
             <NavContainer />
             <PageBackGround>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-                    <SidebarOptions/> 
+                    <SidebarOptions />
                     <Content>
                         {renderReportCards()}
                     </Content>
