@@ -125,23 +125,23 @@ const VideoComponent = () => {
         if (sleepDurationRef.current >= 3) {
           sleepStartRef.current = formatLocalTime(sleepStartRef.current);
           sleepEndRef.current = formatLocalTime(currentTime);
-          // request(
-          //   "POST",
-          //   "/api/analytics/occur",
-          //   {
-          //     startAt: sleepStartRef.current,
-          //     endAt: sleepEndRef.current,
-          //     analysisType: "0",
-          //     sublectureId: "16"
-          //   }).then(
-          //     (response) => {
-          //       console.dir(response.data.message);
-          //       alert(response.data.message);
-          //     }).catch(
-          //     (error) => {
-          //       alert(error);
-          //     }
-          // );
+          request(
+            "POST",
+            "/api/analytics/occur",
+            {
+              startedAt: sleepStartRef.current,
+              endedAt: sleepEndRef.current,
+              analysisType: 0,
+              sublectureId: 16
+            }).then(
+              (response) => {
+                console.dir(response.data.message);
+                alert(response.data.message);
+              }).catch(
+              (error) => {
+                alert(error);
+              }
+          );
           sleepCountRef.current++;
           console.log("잔 시각 : " + sleepStartRef.current + "깬 시각 : " + sleepEndRef.current);
         } else {
