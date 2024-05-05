@@ -2,10 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as vision from "https://fastly.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
 import "../styles/css/video.css";
 import { request } from '../helpers/axios_helper';
-import { useNavigate } from 'react-router-dom';
-import NavBar_main_jsx from '../components/public/navbar_main_jsx';
-import { Cookies } from 'react-cookie';
-
 
 const VideoComponent = () => {
   const [status, setStatus] = useState('초기값');
@@ -36,17 +32,6 @@ const VideoComponent = () => {
         runningMode: "VIDEO",
         numFaces: 1
       });
-
-
-const Video = () => {
-  const navigate = useNavigate();
-  const cookies = new Cookies();
-  useEffect(() => {
-    
-    const token = cookies.jwt;    
-    if (!token) {
-      alert('로그인 해 주세요!')
-      navigate('/main');
     }
 
     createFaceLandmarker();
@@ -217,3 +202,4 @@ function formatLocalTime(date) {
 }
 
 export default VideoComponent;
+
