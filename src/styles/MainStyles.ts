@@ -14,5 +14,4 @@ export const LoginButton = styled.button<{ left?: string; top?: string }>`
   top: 50%;
   border: none;
   background: transparent;
-  }
 `;

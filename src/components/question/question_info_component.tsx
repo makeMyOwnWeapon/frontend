@@ -38,9 +38,6 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
     const cookies = new Cookies(); 
     const token = cookies.get('jwt');
     useEffect(() => {
-        function deleteCookie(name:string){
-          document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        }
         const fetchData = async () => {
 
           
@@ -51,9 +48,7 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
               },
             });
   
-            deleteCookie('token');
-            document.cookie = `token=${response.data.token}; expires=${response.data.expire}`;
-            setData(response.data);
+        setData(response.data);
 
           } catch (error) {
             console.error('Error:', error);

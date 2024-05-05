@@ -8,8 +8,8 @@ export const CardContainer = styled.div`
   border-radius: 0.5rem;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
   transition: box-shadow 0.2s ease;
-  width: 300px;
-  height:auto;
+  width: 400px;
+  height: 400px;
   margin: 10px;
   transition: transform 0.3s ease-in-out; /* 부드러운 전환 효과 */
   &:hover {

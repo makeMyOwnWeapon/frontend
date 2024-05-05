@@ -6,7 +6,11 @@ import WorkBook from './pages/workbook';
 import Create from './pages/create_question';
 import Question_info from './pages/question_info';
 import VideoComponent from './pages/video';
-import Reportpage from './pages/reportpage';
+import ReportList from './pages/reportlist';
+import ReportStudent from './pages/reportstudent';
+import ReportTeacher from './pages/reportteacher';
+import Inquiry from './pages/inquiry';
+import BackgroundAnimation from './styles/BackgroundAnimation';
 
 function App() {
   return (
@@ -18,8 +22,13 @@ function App() {
         <Route path="/workbook" element={<WorkBook/>} />
         <Route path="/create" element={<Create/>}/>
         <Route path="/question_info/:quizSetId" element={<Question_info/>}/>
-        <Route path="/reportpage" element={<Reportpage/>}/>
         <Route path="/video" element={<VideoComponent/>}/>
+        <Route path="/reportlist" element={<ReportList/>}/>
+        <Route path="/reportstudent" element={<ReportStudent/>}/>
+        <Route path="/reportteacher" element={<ReportTeacher/>}/>
+        <Route path="/inquiry" element={<Inquiry/>}/>
+        <Route path="/background" element={<BackgroundAnimation/>}/>
+        
       </Routes>
     </BrowserRouter>
   );

@@ -18,10 +18,8 @@ export const CreateButton = styled.button`
 export const SidebarContainer = styled.div`
   position: fixed;
   top: 25%;
-  left: 4%;
-  width: 250px;
-  background-color: #f2f2f2;
-  padding: 20px;
+  left: 2%;
+  width: 230px;
   box-shadow: 0 2px 5px rgba(1, 1, 0);
 `;
 
@@ -30,9 +28,7 @@ export const Option = styled.div`
   margin: 5px 0;
   cursor: pointer;
   border-radius: 5px;
-  &:hover {
-    background-color: #ddd;
-  }
+
 `;
 
 export const ListContainer = styled.div`
@@ -56,18 +52,19 @@ export const ListItem = styled.div`
 
 export const SidebarBackGround = styled.div`
   justify-content: space-around;
-  top: 0;
   width: 100%;
   background: #FFFFFF;
-  color: darkgray;
+  color: #374151;
   padding: 10px 0;
 `;
 
 export const PaginationContainer = styled.ul`
   display: flex;
-  justify-content: center;
+  justify-content:center;
+  align-items: start;  
   list-style-type: none;
   padding: 0;
+  border: 1px solid green;
 `;
 
 export const PageItem = styled.li<{ isactive: boolean }>`

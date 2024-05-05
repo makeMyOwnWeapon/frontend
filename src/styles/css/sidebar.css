@@ -1,0 +1,56 @@
+.custom-toast-container {
+    top: 15%;
+    left: 12.5%;
+}
+
+.copy-button {
+    margin-top: 10px;
+    margin-left: 40%;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+.copy-button:hover {
+    background-color: #45a049;
+}
+
+.custom-ui {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+    margin: auto;
+}
+
+.confirm-button, .cancel-button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.confirm-button:hover {
+    background-color: #c0392b;
+}
+
+.cancel-button {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #7f8c8d;
+}

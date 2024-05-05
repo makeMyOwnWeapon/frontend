@@ -19,6 +19,11 @@ export async function handleSubmit({
 }: HandleSubmitArgs) {
   event.preventDefault();
   try {
+    console.log(nickname)
+    if (nickname === '' || selectedButton === null || credential === null){
+        return alert('회원가입 에러!');
+    }
+
     const response: AxiosResponse = await axios.post('http://localhost:3000/api/member/signup', {
       authorizationCode: selectedButton === 1 ? 0 : 1,
       nickname: nickname
@@ -28,10 +33,12 @@ export async function handleSubmit({
       }
     });
     if (response.data !== 'Invalid token') {
-      // 쿠키에 토큰과 만료일자 저장
       const cookies = new Cookies();
-      cookies.set('jwt', response.data.token, { expires: new Date(Date.now() + response.data.expire*1000) });
-      localStorage.removeItem('token');
+      const expireTimeUTC = Date.now() + response.data.expire * 1000; // 현재 시간에 expire 초를 더함
+      const expireTimeKST = expireTimeUTC + (9 * 60 * 60 * 1000); // 한국 시간대로 보정
+      const expireDateKST = new Date(expireTimeKST).toUTCString(); // UTC로 변환
+      
+      cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });localStorage.removeItem('token');
       navigate('/workbook');
     }
   } catch (error) {
