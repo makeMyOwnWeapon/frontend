@@ -40,7 +40,7 @@ const Main: React.FC = () => {
 export default Main;
 
 const InnerContentSection = styled.div`
-  border: 10px solid green;
+  /* border: 10px solid green; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,7 +51,7 @@ const InnerContentSection = styled.div`
     /* border: 1px solid black; */
   }
 
-  /* #title{
+  #title{
     font-weight: bold;
     font-size: 5rem;
     margin-top: 100px;
@@ -60,7 +60,7 @@ const InnerContentSection = styled.div`
   }
 
   #account{
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
   #account > #signInDiv{
     height: 100;
@@ -68,7 +68,7 @@ const InnerContentSection = styled.div`
 
   #info{
 
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     justify-content:space-evenly;
     flex-direction: column;
@@ -76,7 +76,7 @@ const InnerContentSection = styled.div`
     height: 300px;
 
 
-  }   */
+  }  
 `;
 
 const InfoButton = styled.div`

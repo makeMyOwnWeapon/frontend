@@ -198,14 +198,14 @@ ul li div {
 
 #root{
     box-sizing: border-box;
-    border: 10px solid blue;
+    /* border: 10px solid blue; */
     height: 100%;
     display: flex;
     position: relative;
 }
 
 #root > div{
-    border: 10px solid pink;
+    /* border: 10px solid pink; */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -217,7 +217,7 @@ ul li div {
     align-items: center;
     justify-content: center;
     flex: 1;
-    border: 10px solid red;
+    /* border: 10px solid red; */
     height: 100%;
 }
 
