@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
+  height: 100%;
+;
 `
 
 export const NavBarContainer = styled.nav`
@@ -63,8 +65,8 @@ export const Content = styled.div`
 `;
 
 export const ImageWithShadow = styled.img`
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  /* border: 1px solid red; */
+  object-fit: cover;
 `;
 
 export const TextContainer = styled.div`

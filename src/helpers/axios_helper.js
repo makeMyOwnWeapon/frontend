@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://192.168.0.86:3000'
 axios.defaults.headers.post["Content-type"] = 'application/json'
 
 export const getAuthToken = () => {

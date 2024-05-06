@@ -88,7 +88,7 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({
 
   return (
     <CardContainer >
-      <a onClick={handleCardClick}>
+      <a className="cardImg" onClick={handleCardClick}>
       <VideoThumbnail imageUrl={subLectureUrl} />
       </a>
       <CardContent>

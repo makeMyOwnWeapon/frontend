@@ -8,25 +8,24 @@ export const CardContainer = styled.div`
   border-radius: 0.5rem;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
   transition: box-shadow 0.2s ease;
-  width: 400px;
-  height: 400px;
   margin: 10px;
   transition: transform 0.3s ease-in-out; /* 부드러운 전환 효과 */
   &:hover {
     transform: scale(1.05); /* 마우스 오버 시 5% 확대 */
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
   }
+
+  .cardImg{
+    object-fit: cover;
+    /* border: 1px solid red; */
+  }
+  
+
 `;
 
-export const CardImage = styled.img`
-  width: 100%;
-  height: 200px;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-`;
 
 export const CardContent = styled.div`
-  padding: 1.25rem;
+  /* padding: 1.25rem; */
 `;
 
 export const CardTitle = styled.h5`
@@ -46,7 +45,7 @@ export const CardDescription = styled.p`
 `;
 
 export const ReadMoreLink = styled.a`
-  display: inline-flex;
+  /* display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1.25rem;
@@ -55,7 +54,7 @@ export const ReadMoreLink = styled.a`
   text-transform: uppercase;
   color: #ffffff;
   background-color: #3b82f6;
-  border-radius: 0.375rem;
+  border-radius: 0.375rem; */
   
 
   &:hover {

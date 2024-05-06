@@ -33,9 +33,7 @@ const VideoThumbnail: React.FC<Props> = ({ imageUrl }) => {
   };
 
   return (
-      <div>
-        <ImageWithShadow src={getVideoThumbnail(imageUrl)} alt="Video Thumbnail" style={{ width: '300px', height: '200px' }} />
-      </div>
+        <ImageWithShadow src={getVideoThumbnail(imageUrl)} alt="Video Thumbnail" style={{ width: '200px', height: '200px' }} />
   );
 };
 
