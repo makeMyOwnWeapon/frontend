@@ -3,7 +3,9 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
     overflow: hidden;
+    /* border: 10px solid red; */
 }
 
 body {
@@ -13,6 +15,7 @@ body {
         rgba(221, 237, 255, 1) 0%,
         rgb(142, 197, 255) 100%
     );
+    /* border: 10px solid blue; */
 }
 
 ul {
@@ -191,4 +194,32 @@ ul li div {
     top: 0%;
     left: 0%;
     animation: blink 5s infinite 0.6s;
+}
+
+#root{
+    box-sizing: border-box;
+    /* border: 10px solid yellow; */
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+#root > div{
+    /* border: 10px solid pink; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#root > div > div{
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    /* border: 10px solid red; */
+    height: 100%;
+}
+
+#scene{
+    position: absolute;
 }

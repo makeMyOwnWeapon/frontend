@@ -57,7 +57,7 @@ const Account: React.FC = () => {
   };
 
   return (
-    <div>
+    <div id="account">
       <Routes>
         <Route path="/workbook" element={<WorkBook />} />
         <Route path="/signup" element={<Signup />} />
