@@ -120,6 +120,7 @@ const VideoComponent = () => {
         
         
         if (sleepDurationRef.current === 5) {
+          requestAlarm(sleepStartRef.current);
           console.log('알람 보내기');
         }
 
@@ -254,13 +255,13 @@ function formatLocalTime(date) {
   return `${year}${month}${day} ${hours}:${minutes}:${seconds}`;
 }
 
-function requestAlarm(){
+function requestAlarm(startTime){
   //  졸음 0, 자리이탈 1
           request(
             "POST",
             "/api/analytics/alarm",
             {
-              startedAt: sleepStartRef.current,
+              startedAt: startTime,
               analysisType: 0
             }).then(
               (response) => {
