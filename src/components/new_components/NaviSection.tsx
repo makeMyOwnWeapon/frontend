@@ -17,12 +17,13 @@ const gradientAnimation = keyframes`
 
 // Styled-components를 사용하여 스타일을 정의한 NavSection 컴포넌트
 const NavSectionWrapper = styled.div`
-  border: 1px solid red;
+  border: 15px solid red;
   justify-content: center;
   display: flex;
   align-items: center;
-  flex: 1;
   position: relative;
+  height: 15%;
+  box-sizing: border-box;
 
   .navbar {
     width: 6rem;

@@ -6,7 +6,6 @@ import "../styles/Public"
 import BackgroundAnimation from "../styles/BackgroundAnimation"
 import NaviSection from "../components/new_components/NaviSection";
 import Container from "../components/new_components/Container";
-import ContentSection from "../components/new_components/ContentSection";
 
 
 
@@ -21,7 +20,6 @@ const Main: React.FC = () => {
     <BackgroundAnimation>
       <Container>
         <NaviSection></NaviSection>
-        <ContentSection>
             <InnerContentSection>
               <div id="title">Learn On Air</div>
               <div>
@@ -34,7 +32,6 @@ const Main: React.FC = () => {
                 </div>
               </div>
             </InnerContentSection>
-          </ContentSection>        
       </Container>
    </BackgroundAnimation>
   );
@@ -43,7 +40,7 @@ const Main: React.FC = () => {
 export default Main;
 
 const InnerContentSection = styled.div`
-  border: 3px solid green;
+  border: 10px solid green;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,7 +51,7 @@ const InnerContentSection = styled.div`
     /* border: 1px solid black; */
   }
 
-  #title{
+  /* #title{
     font-weight: bold;
     font-size: 5rem;
     margin-top: 100px;
@@ -65,7 +62,7 @@ const InnerContentSection = styled.div`
   #account{
     border: 1px solid red;
   }
-  #accoutn > #signInDiv{
+  #account > #signInDiv{
     height: 100;
   }
 
@@ -79,7 +76,7 @@ const InnerContentSection = styled.div`
     height: 300px;
 
 
-  }  
+  }   */
 `;
 
 const InfoButton = styled.div`
