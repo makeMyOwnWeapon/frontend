@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 // Styled-components에서 사용할 키프레임 애니메이션 정의
@@ -106,6 +107,11 @@ const NavSectionWrapper = styled.div`
 
 // NaviSection 컴포넌트 정의
 const NaviSection = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path:any) => {
+    navigate(path);
+  };
   return (
     <NavSectionWrapper>
       <div id="logo_box">
@@ -118,9 +124,9 @@ const NaviSection = () => {
       </div>
       <div className="navbar">
         <div className="menus">
-          <div className="menu">문제집 조회</div>
-          <div className="menu">문제집 만들기</div>
-          <div className="menu">영상촬영</div>
+          <div className="menu" onClick={() => handleNavigation("/workbook")}>문제집 조회</div>
+          <div className="menu" onClick={() => handleNavigation("/create")}>문제집 만들기</div>
+          <div className="menu" onClick={() => handleNavigation("/video")}>영상촬영</div>
           <div className="menu">레포트 조회</div>
         </div>
       </div>
