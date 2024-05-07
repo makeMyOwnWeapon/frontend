@@ -4,35 +4,41 @@ import axios from 'axios';
 import WorkBook from '../../pages/workbook';
 import Signup from '../../pages/signup';
 import { Cookies } from 'react-cookie';
+import { GoogleOAuthProvider,GoogleLogin,useGoogleOneTapLogin,googleLogout } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
+import { userInfo } from 'os';
+import { getAuthToken } from '../../helpers/axios_helper';
+import styled from 'styled-components';
 
+
+interface CredentialResponse {
+  
+  credential: string;
+}
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
 const Account: React.FC = () => {
 
+  const cookies = new Cookies;
+
+  const handleLogout = () => {
+    cookies.remove('jwt')
+    navigate("/");
+  };
+
   const navigate = useNavigate();
+  let getUserInfoByGoogle = getAuthToken();
+  let userInfo: string | null = null;
 
-  useEffect(() => {
-    window.google?.accounts.id.initialize({
-      client_id: clientId,
-      callback: handleCredentialResponse
-    });
+    if (getUserInfoByGoogle !== null) {
+      userInfo = jwtDecode(getUserInfoByGoogle);
+    }
 
-    window.google?.accounts.id.renderButton(
-      document.getElementById('signInDiv'),
-      { theme: 'outline', size: 'large' }
-    );
+  console.dir(userInfo);
 
-    window.google?.accounts.id.prompt();
-  }, []);
+  const handleCredentialResponse = async (userInfoByGoogle: any) => {
 
-  const handleCredentialResponse = async (userToken: string) => {
+    let credential = userInfoByGoogle.credential;
     try {
-      localStorage.setItem('token', JSON.stringify(userToken));
-      interface UserToken {
-        credential: string;
-      }
-      const userTokenString: string | null = localStorage.getItem('token');
-      if (!userTokenString) return;
-      const { credential } = JSON.parse(userTokenString);
       const response = await axios.get('http://localhost:3000/api/member/signin', {
         headers: {
           'Authorization': `Bearer ${credential}`
@@ -45,11 +51,8 @@ const Account: React.FC = () => {
         const expireTimeUTC = Date.now() + response.data.expire * 1000; // 현재 시간에 expire 초를 더함
         const expireTimeKST = expireTimeUTC + (9 * 60 * 60 * 1000); // 한국 시간대로 보정
         const expireDateKST = new Date(expireTimeKST).toUTCString(); // UTC로 변환
-        
         cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });
-    
-        localStorage.removeItem('token');
-        navigate('/workbook');
+        navigate('/');
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -57,15 +60,53 @@ const Account: React.FC = () => {
   };
 
   return (
-    <div id="account">
-      <Routes>
-        <Route path="/workbook" element={<WorkBook />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
 
-      <div id="signInDiv"></div> {/* 로그인 버튼이 렌더링될 위치 */}
+
+    <div id="account">
+      <GoogleOAuthProvider clientId={clientId}>
+        
+      {
+        userInfo ? (
+          <div>
+            <h2>{(userInfo as any)?.nickname}님 안녕하세요</h2>
+            <Logout onClick={handleLogout}>로그아웃</Logout>
+          </div>
+          
+        ) : (
+        
+          <GoogleLogin
+          onSuccess={(response)=>{
+            handleCredentialResponse(response);
+          }}
+          onError={() => {
+            alert('Login Failed');
+          }}
+        />
+      
+        )
+      }
+        
+    </GoogleOAuthProvider>
     </div>
   );
 };
 
 export default Account;
+
+const Logout = styled.div`
+  margin-top: 100px;
+  padding: 10px 5px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  
+  &:hover {
+    background-color: #2980b9;
+  }
+
+
+`
+

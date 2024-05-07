@@ -6,7 +6,10 @@ axios.defaults.headers.post["Content-type"] = 'application/json'
 
 export const getAuthToken = () => {
     const cookies = new Cookies(); 
-    const token = cookies.get('jwt');
+    let token = cookies.get('jwt');
+    if(!token){
+        token = null;
+    }
     return token;
 }
 

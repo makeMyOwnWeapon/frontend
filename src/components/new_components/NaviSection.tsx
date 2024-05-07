@@ -28,7 +28,7 @@ const NavSectionWrapper = styled.div`
   .navbar {
     width: 6rem;
     height: 6rem;
-    background: linear-gradient(120deg, #9b59b6, #3498db);
+    background: linear-gradient(120deg, #FF0000, #0000FF);
     border-radius: 50%;
     transition: width 0.5s, border-radius 0.5s;
     animation: ${gradientAnimation} 1.5s linear infinite;
@@ -81,7 +81,7 @@ const NavSectionWrapper = styled.div`
   #logo_title {
     flex: 1;
     font-weight: bold;
-    background: linear-gradient(120deg, #9b59b6, #3498db);
+    background: linear-gradient(120deg, #FF0000, #0000FF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -102,7 +102,9 @@ const NavSectionWrapper = styled.div`
     border-radius: 10px;
 
     &:hover {
-      background-color: #3498db;
+        color: gold;
+        font-weight: bolder;
+
     }
   }
 `;
