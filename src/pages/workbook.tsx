@@ -7,6 +7,7 @@ import Container from "../components/new_components/Container";
 import { Cookies } from "react-cookie";
 import axios from "axios";
 import WorkbookCard from "../components/board/workbook_card";
+import SidebarOptions from "../components/board/select_option";
 
 interface Card {
   createdAt: string;
@@ -41,32 +42,18 @@ const WorkBook: React.FC = () => {
 
   return (
     <>
-
-{/* <BackgroundAnimation>
-      <Container>
-        <NaviSection></NaviSection>
-            <InnerContentSection>
-              <div id="title">Learn On Air</div>
-              <div>
-                <div id="info">
-                  <Account/>
-                <InfoButton onClick={() => navigateTo("/info")}>
-                  Info for New Users
-                </InfoButton>
-                  
-                </div>
-              </div>
-            </InnerContentSection>
-      </Container>
-   </BackgroundAnimation> */}
-
 <BackgroundAnimation>
       <Container>
         <NaviSection></NaviSection>
         <InnerContentSection>
               <div id="side">
-                <div id="searchBox">1</div>
-                <div id="profileBox">2</div>
+
+                  <SidebarOptions/>
+
+                <div id="searchBox">
+
+                </div>
+                
               </div>
                 
               <div id="main">

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Option, SidebarBackGround } from "../../styles/WorkBook";
-import { SidebarContainer } from "../../styles/WorkBook";
 import { useNavigate } from "react-router-dom";
 import { Cookies, useCookies } from "react-cookie";
 import { ToastContainer, toast } from 'react-toastify';
@@ -92,7 +91,7 @@ const SidebarOptions = () => {
                       if (response.ok) {
                         toast.success("회원 탈퇴가 성공적으로 이루어졌습니다.");
                         removeCookie("jwt");
-                        navigate("/main");
+                        navigate("/");
                       } else {
                         throw new Error("회원 탈퇴에 실패했습니다.");
                       }
@@ -120,7 +119,6 @@ const SidebarOptions = () => {
   };
 
   return (
-    <SidebarContainer>
       <SidebarBackGround>
         {options.map(option => (
           <React.Fragment key={option.id}>
@@ -135,7 +133,6 @@ const SidebarOptions = () => {
         ))}
         <div style={{ display: 'flex' }} />
       </SidebarBackGround>
-    </SidebarContainer>
   );
 };
 

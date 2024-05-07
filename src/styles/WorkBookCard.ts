@@ -3,13 +3,15 @@ import styled from 'styled-components';
 // 스타일드 컴포넌트 정의
 export const CardContainer = styled.div`
   max-width: 20rem;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.5); /* 배경색을 투명하게 설정합니다. */
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
   transition: box-shadow 0.2s ease;
   margin: 10px;
   transition: transform 0.3s ease-in-out; /* 부드러운 전환 효과 */
+  overflow: hidden;
+  cursor: pointer;
   &:hover {
     transform: scale(1.05); /* 마우스 오버 시 5% 확대 */
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);

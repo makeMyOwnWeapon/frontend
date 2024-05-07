@@ -15,13 +15,6 @@ export const CreateButton = styled.button`
   left: 75%; // 수치값에서 퍼센트값으로 수정
 `;
 
-export const SidebarContainer = styled.div`
-  position: fixed;
-  top: 25%;
-  left: 2%;
-  width: 230px;
-  box-shadow: 0 2px 5px rgba(1, 1, 0);
-`;
 
 export const Option = styled.div`
   padding: 10px 15px;
@@ -56,6 +49,9 @@ export const SidebarBackGround = styled.div`
   background: #FFFFFF;
   color: #374151;
   padding: 10px 0;
+  // 투명색
+  background-color: rgba(255, 255, 255, 0.5); /* 배경색을 투명하게 설정합니다. */
+  border-radius: 5%;
 `;
 
 export const PaginationContainer = styled.ul`

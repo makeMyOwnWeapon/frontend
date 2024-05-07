@@ -14,7 +14,12 @@ export const Form = styled.form`
 `;
 
 export const Div = styled.div`
-  ${tw`p-10  bg-white rounded-lg shadow-md`}
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: 0 auto;
+
+  
 `;
 
 export const Button = styled.button`
@@ -42,5 +47,9 @@ export const NameContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-  ${tw`text-2xl font-bold text-gray-900`}
+  padding: 20px 0;
+  ${tw`text-2xl font-bold text-gray-900`};
+  margin: 0 auto;
+  font-size: 30px;
+  margin-bottom : 30px;
 `;

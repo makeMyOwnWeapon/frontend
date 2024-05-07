@@ -45,6 +45,7 @@ const Account: React.FC = () => {
         },
       });
       if (response.data === '') {
+        cookies.set('tempGoogleToken', credential);
         navigate('/signup');
       } else {
         const cookies = new Cookies();
