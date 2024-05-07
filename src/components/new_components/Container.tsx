@@ -6,10 +6,11 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: 20px solid purple;
+  /* border: 20px solid purple; */
   box-sizing: border-box;
 
 
 `;
 
 export default Container;
+ 
