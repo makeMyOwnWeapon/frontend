@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, PropsWithChildren } from 'react';
 import Parallax from 'parallax-js';
-import './css/BackgroundAnimation.css';
+import './css/background.css';
 
 const BackgroundAnimation: React.FC<PropsWithChildren> = ({ children }) => {
   const sceneRef = useRef<HTMLUListElement>(null);

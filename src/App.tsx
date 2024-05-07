@@ -10,7 +10,7 @@ import ReportList from './pages/reportlist';
 import ReportStudent from './pages/reportstudent';
 import ReportTeacher from './pages/reportteacher';
 import Inquiry from './pages/inquiry';
-import BackgroundAnimation from './styles/BackgroundAnimation';
+import BackgroundAnimation from './styles/Background';
 import RequireAuth from './helpers/requireauth'
 
 function App() {

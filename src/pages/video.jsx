@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as vision from "https://fastly.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
 import "../styles/Public"
 import { request } from '../helpers/axios_helper';
-import BackgroundAnimation from '../styles/BackgroundAnimation';
+import BackgroundAnimation from '../styles/Background';
 import { Container } from '../styles/Public';
 import NaviSection from '../components/new_components/NaviSection';
 import styled from 'styled-components';
