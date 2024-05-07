@@ -65,6 +65,7 @@ const NavSectionWrapper = styled.div`
     height: 20%;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
   }
 
   #logo_img {
@@ -115,7 +116,7 @@ const NaviSection = () => {
   };
   return (
     <NavSectionWrapper>
-      <div id="logo_box">
+      <div id="logo_box" onClick={() => handleNavigation("/")}>
         <div id="logo_img">
           <img src="loa.png" alt="" />
         </div>

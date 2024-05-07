@@ -17,13 +17,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Navigate replace to="/main" />} />
-        <Route path="/main" element={<Main />} />
+        <Route path="/" element={<Main/>}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/workbook" element={<RequireAuth><WorkBook/></RequireAuth>} />
         <Route path="/create" element={<RequireAuth><Create/></RequireAuth>}/>
         <Route path="/question_info/:quizSetId" element={<RequireAuth><Question_info/></RequireAuth>}/>
-        <Route path="/video" element={<RequireAuth><VideoComponent/></RequireAuth>}/>
+        <Route path="/video" element={<VideoComponent/>}/>
         <Route path="/reportlist" element={<RequireAuth><ReportList/></RequireAuth>}/>
         <Route path="/reportstudent" element={<RequireAuth><ReportStudent/></RequireAuth>}/>
         <Route path="/reportteacher" element={<RequireAuth><ReportTeacher/></RequireAuth>}/>
