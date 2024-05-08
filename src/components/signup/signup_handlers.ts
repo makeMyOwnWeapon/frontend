@@ -38,7 +38,9 @@ export async function handleSubmit({
       const expireTimeKST = expireTimeUTC + (9 * 60 * 60 * 1000); // 한국 시간대로 보정
       const expireDateKST = new Date(expireTimeKST).toUTCString(); // UTC로 변환
       
-      cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });localStorage.removeItem('token');
+      cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });
+      cookies.remove('tempGoogleToken');
+      // localStorage.removeItem('userInfoByGoogle');
       navigate('/');
     }
   } catch (error) {

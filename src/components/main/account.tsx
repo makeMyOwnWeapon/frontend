@@ -46,6 +46,7 @@ const Account: React.FC = () => {
         },
       });
       if (response.data === '') {
+        // 처음 로그인시 쿠키에 구글토큰 임시 저장
         cookies.set('tempGoogleToken', credential);
         navigate('/signup');
       } else {
