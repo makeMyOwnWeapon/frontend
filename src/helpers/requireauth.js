@@ -10,7 +10,7 @@ const RequireAuth = ({ children }) => {
 
   if (!token) {
     alert('먼저 로그인을 해주세요.');
-    return <Navigate to="/main" state={{ from: location }} replace />;
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 
   return children;
