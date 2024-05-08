@@ -13,6 +13,15 @@ export const getAuthToken = () => {
     return token;
 }
 
+const getAuthTempToken = () => {
+    const cookies = new Cookies(); 
+    let token = cookies.get('tempGoogleToken');
+    if(!token){
+        token = null;
+    }
+    return token;
+}
+
 // export function getValueInCookie(name){
 //     let nameEQ = name + "="; // key와 '='를 연결해줍니다.
 //     let ca = document.cookie.split(';'); // 쿠키를 ';' 기준으로 분리하여 배열로 만듭니다.
@@ -59,4 +68,20 @@ export const googleRequest = async (method, url, googleToken) => {
     } catch (error) {
         throw error;
     }
+}
+
+export const tempRequest = async (method, url, data) => {
+    let headers = {};
+
+    if (getAuthTempToken('tempGoogleToken') !== null && getAuthTempToken('tempGoogleToken') !== "null"){
+        headers = {"Authorization" : `Bearer ${getAuthTempToken('tempGoogleToken')}`};
+    }
+
+
+    return axios({
+        method : method,
+        headers : headers,
+        url : url,
+        data : data
+    })
 }

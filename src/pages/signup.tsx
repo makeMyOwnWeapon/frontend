@@ -1,11 +1,9 @@
 // src/pages/Signup.tsx
 import React, { useState } from 'react';
-import { Container, Button, Title, SmallButton, NameContainer, Div } from '../styles/SignupStyles';
-import NavBar from '../components/public/navbar_main';
+import { Button, Title, SmallButton, NameContainer, Div } from '../styles/SignupStyles';
 import { useNavigate } from 'react-router-dom';
 import NicknameGenerator from '../components/signup/nickname_generator';
 import { handleButtonClick, handleSubmit } from '../components/signup/signup_handlers';
-import { getAuthToken } from '../helpers/axios_helper';
 import { Cookies } from 'react-cookie';
 import BackgroundAnimation from '../styles/Background';
 

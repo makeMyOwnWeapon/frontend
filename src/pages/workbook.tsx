@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import "../styles/Public"
 import BackgroundAnimation from "../styles/Background"
 import NaviSection from "../components/new_components/NaviSection";
 import Container from "../components/new_components/Container";
-import { Cookies } from "react-cookie";
-import axios from "axios";
 import WorkbookCard from "../components/board/workbook_card";
 import SidebarOptions from "../components/board/select_option";
 import { Side } from "../components/new_components/Side";
 import { Main } from "../components/new_components/Main";
+import { request } from "../helpers/axios_helper";
 
 
 interface Card {
@@ -30,11 +29,7 @@ const WorkBook: React.FC = () => {
 
     const fetchData = async () => {
       try {
-        const cookies = new Cookies();
-        const cookie = cookies.get('jwt');
-        const response = await axios.get('http://localhost:3000/api/quizsets/', {
-          headers: { 'Authorization': `Bearer ${cookie}` },
-        });
+        const response = await request('GET','/api/quizsets/');
         setCards(response.data);
         console.log(response.data);
       } catch (error) {

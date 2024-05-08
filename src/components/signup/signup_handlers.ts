@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { AxiosResponse } from 'axios';
 import { Cookies } from 'react-cookie';
+import { tempRequest } from '../../helpers/axios_helper';
 
 interface HandleSubmitArgs {
   event: React.FormEvent<HTMLFormElement>;
@@ -24,13 +25,9 @@ export async function handleSubmit({
         return alert('회원가입 에러!');
     }
 
-    const response: AxiosResponse = await axios.post('http://localhost:3000/api/member/signup', {
+    const response = await tempRequest('POST', 'api/member/signup', {
       authorizationCode: selectedButton === 1 ? 0 : 1,
       nickname: nickname
-    }, {
-      headers: {
-        'Authorization': `Bearer ${credential}`
-      }
     });
     if (response.data !== 'Invalid token') {
       const cookies = new Cookies();
@@ -40,7 +37,6 @@ export async function handleSubmit({
       
       cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });
       cookies.remove('tempGoogleToken');
-      // localStorage.removeItem('userInfoByGoogle');
       navigate('/');
     }
   } catch (error) {

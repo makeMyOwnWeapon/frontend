@@ -7,6 +7,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/css/sidebar.css';
+import { request } from "../../helpers/axios_helper";
 
 interface OptionItem {
   id: number;
@@ -39,15 +40,11 @@ const SidebarOptions = () => {
     switch (id) {
       case 1:
         try {
-          const response = await fetch("http://localhost:3000/api/member/oauthId", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
-            }
-          });
-          if (response.ok) {
-            const data = await response.json();
+          const response = await request("GET","/api/member/oauthId");
+          
+          if (response.status === 200) {
+            
+            const data = response.data;
             toast(
               <div>
                 <span>인증코드: {data.oauthId}</span>
@@ -81,14 +78,8 @@ const SidebarOptions = () => {
                   className="confirm-button"
                   onClick={async () => {
                     try {
-                      const response = await fetch("http://localhost:3000/api/member/delete", {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                          "Authorization": `Bearer ${token}`
-                        }
-                      });
-                      if (response.ok) {
+                      const response = await request("POST","/api/member/delete");
+                      if (response.status >= 200 && response.status < 300) {
                         toast.success("회원 탈퇴가 성공적으로 이루어졌습니다.");
                         removeCookie("jwt");
                         navigate("/");
