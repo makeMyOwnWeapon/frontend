@@ -90,8 +90,6 @@ const ReportStudent  = () => {
             <div id="side">
 
                 <SidebarOptions/>
-                <div id="profileBox">2</div>
-
             </div>
 
 
