@@ -26,6 +26,8 @@ const VideoComponent = () => {
   const faceNotRecognizedStartRef = useRef(null);
   const faceNotRecognizedTimeRef = useRef(null);
   const count = useRef(0);
+  const sleep = 0;
+  const exit = 1;
 
   useEffect(() => {
     async function createFaceLandmarker() {
@@ -60,6 +62,7 @@ const VideoComponent = () => {
       const constraints = { video: true };
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
+      console.dir(stream);
       videoRef.current.addEventListener("loadeddata", predictWebcam);
     };
 
@@ -124,7 +127,7 @@ const VideoComponent = () => {
         
         
         if (sleepDurationRef.current === 5) {
-          requestAlarm(sleepStartRef.current);
+          requestAlarm(sleepStartRef.current, sleep);
           console.log('알람 보내기');
         }
 
@@ -259,21 +262,21 @@ function formatLocalTime(date) {
   return `${year}${month}${day} ${hours}:${minutes}:${seconds}`;
 }
 
-function requestAlarm(startTime){
+function requestAlarm(startTime, type){
   //  졸음 0, 자리이탈 1
           request(
             "POST",
             "/api/analytics/alarm",
             {
               startedAt: startTime,
-              analysisType: 0
+              analysisType: type
             }).then(
               (response) => {
                 console.dir(response.data.message);
                 alert(response.data.message);
               }).catch(
               (error) => {
-                alert(error);
+                alert(error.message);
               }
           );
 }
