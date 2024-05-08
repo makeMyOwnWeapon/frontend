@@ -25,6 +25,7 @@ export const Formdiv = styled.div`
   min-height:100vh;
   max-width: 800px;
   margin: auto;
+    overflow-y: scroll;
   
 `;
 
