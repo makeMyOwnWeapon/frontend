@@ -5,8 +5,7 @@ import QuestionComponent from './create_question_component';
 import { Input, NameGeneratorButton } from '../../styles/Public';
 import { motion } from 'framer-motion';
 import { NavigateFunction } from 'react-router-dom';
-import { Cookies } from 'react-cookie';
-
+import { request } from '../../helpers/axios_helper';
 
 interface Props {
   navigate: NavigateFunction;
@@ -29,11 +28,8 @@ interface State {
   questionTimes: string[];
   subLectureTitle: string;
   mainLectureTitle: string;
-  lecturerName: string;
   duration: string; 
 }
-
-interface Props {}
 
 class ProblemPage extends Component<Props, State> {
   constructor(props: Props) {
@@ -46,7 +42,6 @@ class ProblemPage extends Component<Props, State> {
       questionTimes: [],
       subLectureTitle: '',
       mainLectureTitle: '',
-      lecturerName: '',
       duration: '',
     };
   }
@@ -105,84 +100,62 @@ class ProblemPage extends Component<Props, State> {
     return hours * 3600 + minutes * 60 + seconds;
   };
 
-  
   postData = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     
-    const { title, subLectureUrl, mainLectureTitle, subLectureTitle, lecturerName, duration } = this.state;
-    if (!title || !subLectureUrl || !mainLectureTitle || !subLectureTitle || !lecturerName || !duration) {
+    const { title, subLectureUrl, mainLectureTitle, subLectureTitle, duration } = this.state;
+    if (!title || !subLectureUrl || !mainLectureTitle || !subLectureTitle || !duration) {
       alert('모든 필드를 채워주세요.');
       return;
     }
-
+  
     const durationInSeconds = this.convertTimeToSeconds(duration);
-
-const quizzes = this.state.answers.map((answerSet, index) => {
-  // Check if popupTime is a valid time format
-  const timeRegex = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/;
-  if (!timeRegex.test(this.state.questionTimes[index])) {
-    alert('시간 형식이 잘못되었습니다. "hh:mm:ss" 형식으로 입력해 주세요.');
-    return ;
-  }
-
-  // Check for null values in answerSet
-  if (answerSet.some(answer => answer.text === '')) {
-    alert('빈 값이 포함되어 있습니다.');
-    return ;
-  }
-
-  return {
-    instruction: answerSet[0].text,
-    commentary: answerSet[answerSet.length - 1].text,
-    popupTime: this.state.questionTimes[index],
-    choices: answerSet.slice(1,answerSet.length-1).map((answer, idx) => ({
-      content: answer.text,
-      isAnswer: answer.selected
-    }))
-  };
-});
-
-
-    try {
-      const cookies = new Cookies(); 
-      const token = cookies.get('jwt');
-
-      const response = await fetch('http://localhost:3000/api/quizsets', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title,
-          subLectureUrl,
-          subLectureTitle,
-          mainLectureTitle,
-          lecturerName,
-          duration: durationInSeconds,
-          quizzes,
-        }),
-      });
-
-      if (!response.ok) {
-        switch(response.status){
-          case 412:
-            alert('same title');
-            break;
-          default:
-            alert('Network response was not ok')
-            break;
+    if (durationInSeconds === undefined) {
+      return;
+    }
+  
+    const quizzes = this.state.answers.map((answerSet, index) => {
+      const time = this.state.questionTimes[index];
+      if (!time.match(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/)) {
+        alert('시간 형식이 잘못되었습니다. "hh:mm:ss" 형식으로 입력해 주세요.');
+        return;
       }
-        }else{this.props.navigate('/workbook');}
-        
-
-      const responseData = await response.json();
-        // 여기에 navigate되게
-      
+  
+      if (answerSet.some(answer => answer.text === '')) {
+        alert('빈 값이 포함되어 있습니다.');
+        return;
+      }
+  
+      return {
+        instruction: answerSet[0].text,
+        commentary: answerSet[answerSet.length - 1].text,
+        popupTime: time,
+        choices: answerSet.slice(1, answerSet.length - 1).map((answer, idx) => ({
+          content: answer.text,
+          isAnswer: answer.selected
+        }))
+      };
+    }).filter(quiz => quiz !== undefined);
+  
+    try {
+      const response = await request('POST', '/api/quizsets', {
+        title,
+        subLectureUrl,
+        subLectureTitle,
+        mainLectureTitle,
+        duration: durationInSeconds,
+        quizzes,
+      });
+  
+      if (response.status >= 200 && response.status < 300) {
+        this.props.navigate('/workbook');
+      } else {
+        alert(`Error ${response.status}: ${response.statusText}`);
+      }
     } catch (error) {
       console.error('Error:', error);
+      alert('네트워크 오류가 발생했습니다.');
     }
-
   };
 
   render() {
@@ -199,7 +172,6 @@ const quizzes = this.state.answers.map((answerSet, index) => {
               <Input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={(e) => this.setState({ subLectureUrl: e.target.value })} />
               <Input type="text" placeholder="대강의명" value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
               <Input type="text" placeholder="소강의명" value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
-              <Input type="text" placeholder="강사명" value={this.state.lecturerName} onChange={(e) => this.setState({ lecturerName: e.target.value })} />
               <Input type="text" placeholder="강의 시간 (예: 1:23:45 또는 45:30)" value={this.state.duration} onChange={this.handleDurationChange} />
             </div>
             <VideoThumbnail imageUrl={this.state.subLectureUrl} />

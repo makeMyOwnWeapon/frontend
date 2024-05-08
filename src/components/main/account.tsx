@@ -7,7 +7,7 @@ import { Cookies } from 'react-cookie';
 import { GoogleOAuthProvider,GoogleLogin,useGoogleOneTapLogin,googleLogout } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { userInfo } from 'os';
-import { getAuthToken } from '../../helpers/axios_helper';
+import { getAuthToken, googleRequest } from '../../helpers/axios_helper';
 import styled from 'styled-components';
 
 
@@ -40,11 +40,7 @@ const Account: React.FC = () => {
 
     let credential = userInfoByGoogle.credential;
     try {
-      const response = await axios.get('http://localhost:3000/api/member/signin', {
-        headers: {
-          'Authorization': `Bearer ${credential}`
-        },
-      });
+      const response = await googleRequest('GET', 'api/member/signin', credential);
       if (response.data === '') {
         // 처음 로그인시 쿠키에 구글토큰 임시 저장
         cookies.set('tempGoogleToken', credential);

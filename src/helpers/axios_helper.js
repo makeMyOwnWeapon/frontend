@@ -43,3 +43,20 @@ export const request = (method, url, data) => {
         data : data
     })
 }
+
+export const googleRequest = async (method, url, googleToken) => {
+    let headers = {
+        "Authorization": `Bearer ${googleToken}`
+    };
+
+    try {
+        const response = await axios({
+            method: method,
+            headers: headers,
+            url: url,
+        });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}

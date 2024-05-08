@@ -4,6 +4,7 @@ import VideoThumbnail from "../public/url_to_image";
 import { FaThumbsUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Cookies } from "react-cookie";
+import { request } from "../../helpers/axios_helper";
 
 interface WorkbookCardProps {
   createdAt: string;
@@ -15,18 +16,11 @@ interface WorkbookCardProps {
   subLectureUrl: string;
 }
 
-interface RecommendationProps {
-  numOfRecommendation: number;
-  quizSetId: number;
-}
-
 const WorkbookCard: React.FC<WorkbookCardProps> = ({
-  createdAt,
   memberNickname,
   quizSetTitle,
   quizSetId,
   recommendationCount,
-  subLectureTitle,
   subLectureUrl
 }) => {
   const navigate = useNavigate();
@@ -38,22 +32,19 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({
 
   async function recommendationPost(numOfRecommendation: number, quizSetId: number): Promise<void> {
     try {
-      const cookies = new Cookies();
-      const token = cookies.get('jwt');
-  
-      const response = await fetch('http://localhost:3000/api/quizsets/recommendation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          numOfRecommendation,
-          quizSetId,
-        }),
+      const response = await request('POST', '/api/quizsets/recommendation', {
+        numOfRecommendation,
+        quizSetId,
       });
   
-      if (!response.ok) {
+      if (response.status >= 200 && response.status < 300) {
+        const responseData = await response.data;
+        if (responseData !== undefined) {
+          setRecommendation(responseData);
+        } else {
+          console.error('No updated count returned from the API');
+        }
+      } else {
         switch (response.status) {
           case 412:
             alert('Same title');
@@ -62,19 +53,11 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({
             alert('Network response was not ok');
             break;
         }
-      } else {
-        const responseData = await response.json();
-        if (responseData  !== undefined) {
-          setRecommendation(responseData);
-        } else {
-          console.error('No updated count returned from the API');
-        }
       }
     } catch (error) {
       console.error('Error:', error);
     }
   }
-  
 
   const handleCardClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault();

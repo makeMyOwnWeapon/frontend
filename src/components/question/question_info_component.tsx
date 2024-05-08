@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Form } from '../../styles/CreateQuestion';
 import VideoThumbnail from "../public/url_to_image";
-import { NextTo, Prev, Question, VideoThumbnailContainer } from '../../styles/QuestionInfo';
+import { Question, VideoThumbnailContainer } from '../../styles/QuestionInfo';
 import { QuestionContainer } from "../../styles/QuestionInfo";
-import { ListContainer, SliderContainer, TextContainer } from "../../styles/Public";
-import { FaArrowAltCircleLeft,  FaArrowAltCircleRight,  FaChevronRight } from 'react-icons/fa';
+import { SliderContainer, TextContainer } from "../../styles/Public";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import axios from "axios";
-import { Cookies } from "react-cookie";
 import '../../styles/css/fad.css';
-// QuestionComponent의 props에 대한 타입 정의
+import { request } from "../../helpers/axios_helper";
+
 interface QuestionComponentProps {
     videoUrl: string;
     quizSetId:string | undefined;
@@ -29,34 +27,22 @@ interface Question_ {
     popupTime:string;
 }
 
-// 옵션 객체에 대한 타입 정의
-
-// React component for displaying questions
 const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) => {
 
     const [data, setData] = useState<Question_[] | undefined>(undefined);
-    const cookies = new Cookies(); 
-    const token = cookies.get('jwt');
+
     useEffect(() => {
         const fetchData = async () => {
-
-          
-          try {
-            const response = await axios.get(`http://localhost:3000/api/quizsets/${quizSetId}/quizzes?commentary=${true}&answer=${false}`, {
-              headers: {
-                'Authorization': `Bearer ${token}`
-              },
-            });
-  
-        setData(response.data);
-
-          } catch (error) {
-            console.error('Error:', error);
-          }
+            try {
+                const response = await request('GET', `/api/quizsets/${quizSetId}/quizzes?commentary=true&answer=false`);
+                setData(response.data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
         };
-  
+    
         fetchData();
-      }, [quizSetId]);
+    }, [quizSetId]);
     
     const settings = {
         dots: true,
