@@ -39,7 +39,7 @@ export async function handleSubmit({
       const expireDateKST = new Date(expireTimeKST).toUTCString(); // UTC로 변환
       
       cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });localStorage.removeItem('token');
-      navigate('/workbook');
+      navigate('/');
     }
   } catch (error) {
     console.error('Error:', error);

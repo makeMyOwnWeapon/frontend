@@ -22,6 +22,7 @@ const Account: React.FC = () => {
 
   const handleLogout = () => {
     cookies.remove('jwt')
+    console.log('로그아웃 핸들');
     navigate("/");
   };
 

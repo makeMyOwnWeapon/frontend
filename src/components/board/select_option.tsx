@@ -111,7 +111,7 @@ const SidebarOptions = () => {
         break;
       case 4:
         removeCookie("jwt");
-        navigate("/main");
+        navigate("/");
         break;
       default:
         break;
