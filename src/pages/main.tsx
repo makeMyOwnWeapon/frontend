@@ -71,6 +71,7 @@ const InnerContentSection = styled.div`
 
   #title span{
     display: block;
+    font-size: 50%;
   }
 
   #account{
