@@ -1,20 +1,13 @@
-import React, { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import WorkBook from '../../pages/workbook';
-import Signup from '../../pages/signup';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
-import { GoogleOAuthProvider,GoogleLogin,useGoogleOneTapLogin,googleLogout } from '@react-oauth/google';
+import { GoogleOAuthProvider,GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
-import { userInfo } from 'os';
 import { getAuthToken, googleRequest } from '../../helpers/axios_helper';
 import styled from 'styled-components';
 
 
-interface CredentialResponse {
-  
-  credential: string;
-}
+
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
 const Account: React.FC = () => {
 
@@ -74,7 +67,7 @@ const Account: React.FC = () => {
         ) : (
         
           <GoogleLogin
-          onSuccess={(response)=>{
+          onSuccess={(response:any)=>{
             handleCredentialResponse(response);
           }}
           onError={() => {

@@ -5,10 +5,8 @@ import "../styles/Public"
 import BackgroundAnimation from "../styles/Background"
 import NaviSection from "../components/new_components/NaviSection";
 import Container from "../components/new_components/Container";
-import { Cookies } from "react-cookie";
-import axios from "axios";
 import ReportCard from "../components/report/report_card";
-import { motion } from 'framer-motion';
+import { request } from "../helpers/axios_helper";
 
 interface ReportCard {
   createdAt: string;
@@ -30,13 +28,7 @@ const ReportList: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const cookies = new Cookies();    
-                const cookie = cookies.get('jwt');
-                const response = await axios.get('http://localhost:3000/api/history/', {
-                    headers: {
-                        'Authorization': `Bearer ${cookie}`
-                    },
-                });
+                const response = await request('GET','/api/history/');
                 setCards(response.data);
             } catch (error) {
                 console.error('Error:', error);

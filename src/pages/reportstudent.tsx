@@ -10,7 +10,6 @@ import axios from "axios";
 import PieChart from "../components/report/report_pie";
 import LineChart from "../components/report/report_line";
 import ReportQuestionInfoComponent from "../components/report/report_question_review";
-import { da } from "date-fns/locale";
 import ReportSolveAnalyze from "../components/report/report_solve_analyze";
 import ReportApplicationQuestion from "../components/report/report_application_question";
 
