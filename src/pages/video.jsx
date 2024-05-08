@@ -6,6 +6,10 @@ import BackgroundAnimation from '../styles/Background';
 import { Container } from '../styles/Public';
 import NaviSection from '../components/new_components/NaviSection';
 import styled from 'styled-components';
+import { Side } from '../components/new_components/Side';
+import SidebarOptions from '../components/board/select_option';
+import { Main } from '../components/new_components/Main';
+
 
 const VideoComponent = () => {
   const [status, setStatus] = useState('초기값');
@@ -183,12 +187,12 @@ const VideoComponent = () => {
           <Container>
             <NaviSection></NaviSection>
               <InnerContentSection>
-                <div id="side">
-                  <div id="searchBox">1</div>
-                  <div id="profileBox">2</div>
-                </div>
+                <Side>
+                  <SidebarOptions></SidebarOptions>
+
+                </Side>
                   
-                <div id="main">
+                <Main>
                     <div id="screen">
                       <div id='video_box'>
                         <video ref={videoRef} id="webcam" autoPlay playsInline></video>
@@ -211,7 +215,7 @@ const VideoComponent = () => {
                         <button onClick={() => {updateEyeStatus('업데이트')}}>눈 상태 업데이트</button>
                     </div>
 
-                </div>
+                  </Main>
               </InnerContentSection>
           </Container>
         </div>
@@ -285,22 +289,9 @@ const InnerContentSection = styled.div`
   /* border: 1px solid black; */
 }
 
-#main{
-  padding: 30px 100px;
-  width: 100%;
-  overflow-y: auto;
-  flex-wrap: wrap;
-  display: flex;
-  height: 100%;
-  /* border: 1px solid aliceblue; */
-  background-color: aliceblue;
-  /* opacity: 50%; */
-  border-radius: 20px;
-}
 
-#main > #screen{
+#screen{
   /* border: 1px solid black; */
-  width: 70%;
   background-color: black;
   border-radius: 30px;
   overflow: hidden;
@@ -333,23 +324,11 @@ const InnerContentSection = styled.div`
   
 }
 
-#side{
-  width: 15%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 #side > div{
   border: 1px solid black;
 }
 
 
-#searchBox{
-  height: 30%;
-  margin-bottom: 100px;
-  
-}
 
 #profileBox{
   height: 40%;

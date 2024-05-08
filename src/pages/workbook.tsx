@@ -8,6 +8,9 @@ import { Cookies } from "react-cookie";
 import axios from "axios";
 import WorkbookCard from "../components/board/workbook_card";
 import SidebarOptions from "../components/board/select_option";
+import { Side } from "../components/new_components/Side";
+import { Main } from "../components/new_components/Main";
+
 
 interface Card {
   createdAt: string;
@@ -21,6 +24,8 @@ interface Card {
 
 const WorkBook: React.FC = () => {
   const [cards, setCards] = useState<Card[]>([]);
+  const [searchOption, setSearchOption] = useState<string>("all"); // 기본 검색 옵션은 '문제집명'
+  const [searchText, setSearchText] = useState<string>("");
   useEffect(() => {
 
     const fetchData = async () => {
@@ -40,24 +45,54 @@ const WorkBook: React.FC = () => {
     fetchData();
   }, []);
 
+   // 검색어에 따라 카드 필터링 함수
+   const filterCards = (card: Card) => {
+    // 선택된 옵션에 따라 검색
+
+    if (searchOption === "all") {
+      return true;
+    } else if (searchOption === "quizSetTitle" && card.quizSetTitle.includes(searchText)) {
+      return true;
+    } else if (searchOption === "memberNickname" && card.memberNickname.includes(searchText)) {
+      return true;
+    } else if (searchOption === "subLectureTitle" && card.subLectureTitle.includes(searchText)) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <>
 <BackgroundAnimation>
       <Container>
         <NaviSection></NaviSection>
         <InnerContentSection>
-              <div id="side">
+              
+              <Side>
+                <SidebarOptions/>
 
-                  <SidebarOptions/>
-
-                <div id="searchBox">
-
-                </div>
+                <SearchBox>
+                    <select onChange={(e) => setSearchOption(e.target.value)}>
+                      <option value="all">전체</option>
+                      <option value="quizSetTitle">문제집명</option>
+                      <option value="memberNickname">작성자</option>
+                      <option value="subLectureTitle">강의명</option>
+                    </select>
+                    <input
+                      id="input_"
+                      type="text"
+                      value={searchText}
+                      onChange={(e) => setSearchText(e.target.value)}
+                      placeholder="입력하세요"
+                    />
+                    
+                </SearchBox>
                 
-              </div>
+              </Side>
                 
-              <div id="main">
-                {cards.map((card, index) => (
+              <Main>
+                {cards.filter(filterCards)
+                  .map((card, index) => (
                       // <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
                         <WorkbookCard
                           createdAt={card.createdAt}
@@ -70,7 +105,7 @@ const WorkBook: React.FC = () => {
                         />
                       // </motion.div>
                     ))}
-              </div>
+              </Main>
              </InnerContentSection>
       </Container>
    </BackgroundAnimation>
@@ -81,34 +116,13 @@ const WorkBook: React.FC = () => {
 export default WorkBook;
 
 const InnerContentSection = styled.div`
-  border: 10px solid green;
+  /* border: 10px solid green; */
   display: flex;
 
   height: 85%;
 
 >div{
-  border: 1px solid black;
-}
-
-#main{
-  width: 85%;
-  overflow-y: auto;
-  flex-wrap: wrap;
-  display: flex;
-  height: 100%;
-  border: 10px solid pink;
-  justify-content: space-evenly;
-}
-
-#side{
-  width: 15%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-#side > div{
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 
@@ -123,5 +137,36 @@ const InnerContentSection = styled.div`
 
 }
 
+`
+const SearchBox = styled.div`
+display: flex;
+align-items: start;
+flex-direction: column;
+margin-top: 50px;
 
-  `
+select,
+input {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#input_{
+  width: 100%;
+}
+`;

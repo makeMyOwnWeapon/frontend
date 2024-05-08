@@ -8,7 +8,8 @@ export const CardContainer = styled.div`
   border-radius: 0.5rem;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
   transition: box-shadow 0.2s ease;
-  margin: 10px;
+  margin: 0 10px;
+  margin-bottom: 10px;
   transition: transform 0.3s ease-in-out; /* 부드러운 전환 효과 */
   overflow: hidden;
   cursor: pointer;
@@ -19,7 +20,7 @@ export const CardContainer = styled.div`
   }
 
   .cardImg{
-    object-fit: cover;
+    object-fit : contain;
     /* border: 1px solid red; */
   }
   
