@@ -22,13 +22,9 @@ const LineChart = ({ response }) => {
             const distractionDuration = new Array((new Date(response.studyEndTime).getTime() - new Date(response.studyStartTime).getTime()) / 1000).fill(NaN);
             const startTime = new Date(response.studyStartTime);
             const endTime = new Date(response.studyEndTime);
-            
-            // 한국 표준시(UTC+9)로 변환
-            const krStartTime = new Date(startTime.getTime() + (9 * 60 * 60 * 1000));
-            const krEndTime = new Date(endTime.getTime() + (9 * 60 * 60 * 1000));
     
             for (let i = 0; i < sleepinessDuration.length; i++) {
-                const time = new Date(krStartTime.getTime() + i * 1000);
+                const time = new Date(startTime.getTime() + i * 1000);
                 labels.push(time.toISOString());
             }
     
@@ -52,8 +48,8 @@ const LineChart = ({ response }) => {
     
             setSleepinessData(sleepinessDuration);
             setDistractionData(distractionDuration);
-            setStartTime(krStartTime.toISOString()); 
-            setEndTime(krEndTime.toISOString());
+            setStartTime(startTime.toISOString()); 
+            setEndTime(endTime.toISOString());
             setLabels(labels);
         }
     }, [response]);
