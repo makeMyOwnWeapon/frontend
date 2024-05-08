@@ -7,5 +7,5 @@ export const Main = styled.div`
   display: flex;
   height: 100%;
   /* border: 1px solid pink; */
-  justify-content: space-evenly;
+  justify-content: center;
 `;
