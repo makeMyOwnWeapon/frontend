@@ -12,6 +12,7 @@ export const CardContainer = styled.div`
   transition: transform 0.3s ease-in-out; /* 부드러운 전환 효과 */
   overflow: hidden;
   cursor: pointer;
+  padding: 10px;
   &:hover {
     transform: scale(1.05); /* 마우스 오버 시 5% 확대 */
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
