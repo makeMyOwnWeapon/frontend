@@ -24,10 +24,11 @@ function App() {
         <Route path="/question_info/:quizSetId" element={<RequireAuth><Question_info/></RequireAuth>}/>
         <Route path="/video" element={<VideoComponent/>}/>
         <Route path="/reportlist" element={<RequireAuth><ReportList/></RequireAuth>}/>
-        <Route path="/reportstudent" element={<RequireAuth><ReportStudent/></RequireAuth>}/>
+        <Route path="/reportstudent/:subLectureId" element={<ReportStudent/>}/>
         <Route path="/reportteacher" element={<RequireAuth><ReportTeacher/></RequireAuth>}/>
         <Route path="/inquiry" element={<RequireAuth><Inquiry/></RequireAuth>}/>
         <Route path="/background" element={<BackgroundAnimation/>}/>
+
       </Routes>
     </BrowserRouter>
   );

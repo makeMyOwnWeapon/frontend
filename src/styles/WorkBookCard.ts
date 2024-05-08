@@ -43,6 +43,15 @@ export const CardTitle = styled.h5`
   color: #374151;
 `;
 
+export const CardComponent = styled.h5`
+  margin-bottom: 0.5rem;
+  margin-top: 0rem;
+  font-size: 0%.75;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #374151;
+`;
+
 export const CardDescription = styled.p`
   margin-bottom: 1rem;
   font-size: 1rem;
