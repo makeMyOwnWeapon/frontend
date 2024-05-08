@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-import Account from '../components/main/account'
+import styled from "styled-components";
 import "../styles/Public"
 import BackgroundAnimation from "../styles/Background"
 import NaviSection from "../components/new_components/NaviSection";
@@ -9,22 +8,24 @@ import Container from "../components/new_components/Container";
 import { Cookies } from "react-cookie";
 import axios from "axios";
 import ReportCard from "../components/report/report_card";
+import { motion } from 'framer-motion';
 
 interface ReportCard {
   createdAt: string;
   lecturerName: string;
   quizSetTitle: string;
-  quizSetId: number;
+  subLectureId: number;
   subLectureTitle: string;
   subLectureUrl:string;
+  registrationDate:string;
 }
-
+//paging 관련 코드들은 전부 주석처리
 const ReportList: React.FC = () => {
     const [cards, setCards] = useState<ReportCard[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(6);
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [itemsPerPage] = useState(6);
+    // const indexOfLastItem = currentPage * itemsPerPage;
+    // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const navigate = useNavigate();   
     useEffect(() => {
         const fetchData = async () => {
@@ -40,25 +41,26 @@ const ReportList: React.FC = () => {
             } catch (error) {
                 console.error('Error:', error);
             }
+            
         };
-
+        
         fetchData();
     }, [navigate]);
 
-    const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
-    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+    // const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
+    // const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-    const renderReportCards = () => {
-        return currentItems.map((card, index) => (
-            <ReportCard
-                key={index}
-                memberNickname={card.lecturerName}
-                quizSetId={card.quizSetId}
-                subLectureTitle={card.subLectureTitle}
-                subLectureUrl={card.subLectureUrl}
-            />
-        )); 
-    }
+    // const renderReportCards = () => {
+    //     return cards.map((card, index) => (
+    //         <ReportCard
+    //             key={index}
+    //             memberNickname={card.lecturerName}
+    //             quizSetId={card.quizSetId}
+    //             subLectureTitle={card.subLectureTitle}
+    //             subLectureUrl={card.subLectureUrl}
+    //         />
+    //     )); 
+    // }
 
     return (
         <>
@@ -72,19 +74,18 @@ const ReportList: React.FC = () => {
                     </div>
                             
                         <div id="main">
-                            {/* {cards.map((card, index) => (
+                            {cards.map((card, index) => (
                                 // <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-                                    <WorkbookCard
-                                    createdAt={card.createdAt}
-                                    memberNickname={card.memberNickname}
-                                    quizSetTitle={card.quizSetTitle}
-                                    quizSetId={card.quizSetId}
-                                    recommendationCount={card.recommendationCount}
+                                    <ReportCard
+                                    key={index}
+                                    memberNickname={card.lecturerName}
+                                    subLectureId={card.subLectureId}
                                     subLectureTitle={card.subLectureTitle}
                                     subLectureUrl={card.subLectureUrl}
+                                    registrationDate={card.registrationDate}
                                     />
-                                // </motion.div> 
-                                ))} */}
+                                //  </motion.div> 
+                                ))}
                         </div>
                     </InnerContentSection>
             </Container>

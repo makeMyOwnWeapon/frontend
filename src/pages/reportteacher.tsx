@@ -46,17 +46,17 @@ const ReportTeacher: React.FC = () => {
     const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-    const renderReportCards = () => {
-        return currentItems.map((card, index) => (
-            <ReportCard
-                key={index}
-                memberNickname={card.lecturerName}
-                quizSetId={card.quizSetId}
-                subLectureTitle={card.subLectureTitle}
-                subLectureUrl={card.subLectureUrl}
-            />
-        ));
-    }
+    // const renderReportCards = () => {
+    //     return currentItems.map((card, index) => (
+    //         // <ReportCard
+    //         //     key={index}
+    //         //     memberNickname={card.lecturerName}
+    //         //     quizSetId={card.quizSetId}
+    //         //     subLectureTitle={card.subLectureTitle}
+    //         //     subLectureUrl={card.subLectureUrl}
+    //         // />
+    //     ));
+    // }
 
     return (
         <>
@@ -66,7 +66,7 @@ const ReportTeacher: React.FC = () => {
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
                     <SidebarOptions />
                     <Content>
-                        {renderReportCards()}
+                        {/* {renderReportCards()} */}
                     </Content>
                 </motion.div>
                 <PageFooter>
