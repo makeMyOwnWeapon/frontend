@@ -11,6 +11,8 @@ import PieChart from "../components/report/report_pie";
 import LineChart from "../components/report/report_line";
 import ReportQuestionInfoComponent from "../components/report/report_question_review";
 import { da } from "date-fns/locale";
+import ReportSolveAnalyze from "../components/report/report_solve_analyze";
+import ReportApplicationQuestion from "../components/report/report_application_question";
 
 interface SleepinessAndDistraction {
   sleepinessStart: string | null;
@@ -100,27 +102,42 @@ const ReportStudent  = () => {
                     </LineChartSize>
 
                     <PieChartSize>
+                      <div id = "chart" >
                       <PieChart response = {data} setstudyTime={setStudyTime} />
-                      <PieText>
-                          <div>
-                              - 총 공부시간 = {studyTime[2]}분  
-                          </div>
-                          <div>
-                              - 자리 비운 시간 : {studyTime[1]}분
-                          </div>
-                          <div>
-                              - 졸은 시간 : {studyTime[0]}분
-                          </div>
-                          <div>
-                              - 총 공부 시간 : {studyTime[3]}분
-                          </div>
-                     </PieText>
-                    </PieChartSize>
-                    
-                    <div>
-                      <ReportQuestionInfoComponent quizzes={data.quizzes}/>
+                      </div>
+                      <div id = "text" >
 
-                    </div>
+                        <PieText>
+                              <div>
+                                  - 총 공부시간 = {studyTime[2]}분  
+                              </div>
+                              <div>
+                                  - 자리 비운 시간 : {studyTime[1]}분
+                              </div>
+                              <div>
+                                  - 졸은 시간 : {studyTime[0]}분
+                              </div>
+                              <div>
+                                  - 총 공부 시간 : {studyTime[3]}분
+                              </div>
+                        </PieText>
+
+                      </div>
+
+                      
+                      
+                      
+                    </PieChartSize>
+
+                    <ReportTextContainer>
+
+                          <ReportSolveAnalyze/>
+
+                          <ReportQuestionInfoComponent quizzes={data.quizzes}/>
+
+                          <ReportApplicationQuestion />
+
+                    </ReportTextContainer>
                     
                 </ReportStudentBackground>
 
@@ -134,12 +151,33 @@ const ReportStudent  = () => {
     );
     };
 
+
+const ReportTextContainer = styled.div`
+  
+
+`;
+  
 const PieChartSize = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center; 
   padding : 30px;
-  width:70%;
+  width:100%;
   height:70%;
+  /* border:1px solid red; */
+ 
+  >div{
+    /* border: 1px solid blue; */
+    height:70%;
+  }
+
+
+  #chart{
+    display: flex;
+    max-width: 100%;
+  }
+
+  
 
   
 `;
@@ -159,26 +197,28 @@ const ReportStudentBackground = styled.div`
     overflow-y: scroll;
 `;
 
-const ReportStudentTitle = styled.h1`
+const ReportStudentTitle = styled.div`
+    font-weight: bold; 
+    font-size : 4.0em;
     display: flex;
-    margin:30px;
+    margin:40px;
 
 
 `;
 
-const ReportStudentSubTitle = styled.h3`
-    margin:30px;
+const ReportStudentSubTitle = styled.div`
+    font-size: 2.5em;
+    margin:50px;
 
 
 `;
 
-const PieText = styled.h1`
+const PieText = styled.div`
+    font-size: 1.5em;
     margin:30px;
     flex-direction: column; // 내부 컴포넌트를 세로로 쌓기
-
     /* justify-content: center; */
     align-items: center;
-    display: absolute;
     width : 100%;
 
 

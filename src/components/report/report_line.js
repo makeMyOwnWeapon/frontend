@@ -48,7 +48,7 @@ const LineChart = ({ response }) => {
     
             setSleepinessData(sleepinessDuration);
             setDistractionData(distractionDuration);
-            setStartTime(startTime.toISOString());
+            setStartTime(startTime.toISOString()); 
             setEndTime(endTime.toISOString());
             setLabels(labels);
         }
@@ -102,8 +102,9 @@ const LineChart = ({ response }) => {
                 type: 'time', 
                 time: {
                     unit: 'minute', 
-                    min: startTime, 
-                    max: endTime, 
+                    min: startTime, // 시작 시간을 사용
+                    max: new Date(endTime).getTime() - new Date(startTime).getTime(), // 밀리초 값으로 변환된 시간 간격을 사용
+        
                     displayFormats: {
                         minute: 'HH:mm',
                         hour: 'HH:mm:ss', 
