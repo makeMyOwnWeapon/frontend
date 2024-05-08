@@ -12,6 +12,7 @@ import LineChart from "../components/report/report_line";
 import ReportQuestionInfoComponent from "../components/report/report_question_review";
 import ReportSolveAnalyze from "../components/report/report_solve_analyze";
 import ReportApplicationQuestion from "../components/report/report_application_question";
+import SidebarOptions from "../components/board/select_option";
 
 interface SleepinessAndDistraction {
   sleepinessStart: string | null;
@@ -87,8 +88,10 @@ const ReportStudent  = () => {
             <NaviSection></NaviSection>
             <InnerContentSection>
             <div id="side">
-                <div id="searchBox">1</div>
+
+                <SidebarOptions/>
                 <div id="profileBox">2</div>
+
             </div>
 
 
@@ -226,13 +229,13 @@ const PieText = styled.div`
 export default ReportStudent;
 
 const InnerContentSection = styled.div`
-  border: 10px solid green;
+  /* border: 10px solid green; */
   display: flex;
 
   height: 85%;
 
 >div{
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 #main{
@@ -241,7 +244,7 @@ const InnerContentSection = styled.div`
   flex-wrap: wrap;
   display: flex;
   height: 100%;
-  border: 10px solid pink;
+  /* border: 10px solid pink; */
   justify-content: space-evenly;
 }
 
