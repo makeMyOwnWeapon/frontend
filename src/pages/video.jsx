@@ -145,25 +145,22 @@ const VideoComponent = () => {
           sleepStartRef.current = formatLocalTime(sleepStartRef.current);
           sleepEndRef.current = formatLocalTime(currentTime);
 
-          alert('서버전송 저장용');
-          // 졸음 0, 자리이탈 1
-          // request(
-          //   "POST",
-          //   "/api/analytics/occur",
-          //   {
-          //     startedAt: sleepStartRef.current,
-          //     endedAt: sleepEndRef.current,
-          //     analysisType: 0,
-          //     sublectureId: 16
-          //   }).then(
-          //     (response) => {
-          //       console.dir(response.data.message);
-          //       alert(response.data.message);
-          //     }).catch(
-          //     (error) => {
-          //       alert(error);
-          //     }
-          // );
+          request(
+            "POST",
+            "/api/analytics/save",
+            {
+              startedAt: sleepStartRef.current,
+              endedAt: sleepEndRef.current,
+              analysisType: 0,
+            }).then(
+              (response) => {
+                console.dir(response.data.message);
+                alert(response.data.message);
+              }).catch(
+              (error) => {
+                alert(error);
+              }
+          );
           sleepCountRef.current++;
           console.log("잔 시각 : " + sleepStartRef.current + "깬 시각 : " + sleepEndRef.current);
         } else {
