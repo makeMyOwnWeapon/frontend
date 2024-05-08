@@ -18,49 +18,49 @@ interface ReportCard {
 }
 
 const ReportTeacher: React.FC = () => {
-    const [cards, setCards] = useState<ReportCard[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(6);
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // const [cards, setCards] = useState<ReportCard[]>([]);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [itemsPerPage] = useState(6);
+    // const indexOfLastItem = currentPage * itemsPerPage;
+    // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const cookies = new Cookies();    
-                const cookie = cookies.get('jwt');
-                const response = await axios.get('http://localhost:3000/api/history/', {
-                    headers: {
-                        'Authorization': `Bearer ${cookie}`
-                    },
-                });
-                setCards(response.data);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const cookies = new Cookies();    
+    //             const cookie = cookies.get('jwt');
+    //             const response = await axios.get('http://localhost:3000/api/history/', {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${cookie}`
+    //                 },
+    //             });
+    //             setCards(response.data);
+    //         } catch (error) {
+    //             console.error('Error:', error);
+    //         }
+    //     };
 
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
 
-    const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
-    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+    // const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
+    // const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
     // const renderReportCards = () => {
     //     return currentItems.map((card, index) => (
-    //         // <ReportCard
-    //         //     key={index}
-    //         //     memberNickname={card.lecturerName}
-    //         //     quizSetId={card.quizSetId}
-    //         //     subLectureTitle={card.subLectureTitle}
-    //         //     subLectureUrl={card.subLectureUrl}
-    //         // />
+    //         <ReportCard
+    //             key={index}
+    //             memberNickname={card.lecturerName}
+    //             quizSetId={card.quizSetId}
+    //             subLectureTitle={card.subLectureTitle}
+    //             subLectureUrl={card.subLectureUrl}
+    //         />
     //     ));
     // }
 
     return (
         <>
-            <NavBar />
+            {/* <NavBar />
             <NavContainer />
             <PageBackGround>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
@@ -77,7 +77,7 @@ const ReportTeacher: React.FC = () => {
                         currentPage={currentPage}
                     />
                 </PageFooter>
-            </PageBackGround>
+            </PageBackGround> */}
         </>
     );
 };
