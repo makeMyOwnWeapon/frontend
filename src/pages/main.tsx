@@ -8,8 +8,6 @@ import NaviSection from "../components/new_components/NaviSection";
 import Container from "../components/new_components/Container";
 import { Cookies } from "react-cookie";
 
-
-
 const Main: React.FC = () => {
   const navigate = useNavigate();
   const cookies = new Cookies();
@@ -82,7 +80,6 @@ const InnerContentSection = styled.div`
   }
 
   #info{
-
     /* border: 1px solid black; */
     display: flex;
     justify-content:space-evenly;
@@ -94,7 +91,6 @@ const InnerContentSection = styled.div`
 
   }  
 
-  
 `;
 
 const Info = styled.div`

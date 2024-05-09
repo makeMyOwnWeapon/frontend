@@ -3,7 +3,6 @@ import { CardContainer, CardContent, CardTitle, CardDescription, ReadMoreLink } 
 import VideoThumbnail from "../public/url_to_image";
 import { FaThumbsUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { Cookies } from "react-cookie";
 import { request } from "../../helpers/axios_helper";
 
 interface WorkbookCardProps {

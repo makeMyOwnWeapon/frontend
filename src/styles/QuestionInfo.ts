@@ -4,7 +4,7 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 export const Info_page = styled.div`
 
 height: 100vh;
-background: white;z
+background: white;
 display: flex;
 flex-direction: column;
 justify-content: center; /* 세로 축 중앙 정렬 */

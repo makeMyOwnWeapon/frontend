@@ -1,8 +1,7 @@
 import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
-// Styled-components에서 사용할 키프레임 애니메이션 정의
 const gradientAnimation = keyframes`
   0% {
     transform: scale(1);
@@ -15,7 +14,6 @@ const gradientAnimation = keyframes`
   }
 `;
 
-// Styled-components를 사용하여 스타일을 정의한 NavSection 컴포넌트
 const NavSectionWrapper = styled.div`
   /* border: 15px solid red; */
   justify-content: center;
@@ -82,7 +80,7 @@ const NavSectionWrapper = styled.div`
     flex: 1;
     font-weight: bold;
     background: linear-gradient(120deg, #FF0000, #0000FF);
-    -webkit-background-clip: text;
+    //-webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 

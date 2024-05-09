@@ -24,12 +24,7 @@ interface Question_ {
     userChoice:string;
 }
 
-// 옵션 객체에 대한 타입 정의
-
-// React component for displaying questions
 const ReportSolveAnalyze = ()=> {
-
-
     return (
         <Form>
             
@@ -40,10 +35,6 @@ const ReportSolveAnalyze = ()=> {
                 <text>더미데이터</text>
 
                 </ComponentContainer>
-
-
-
-
 
             </SolveAnalyzeContainer>
         </Form>
@@ -58,13 +49,13 @@ const ApplicationQuestionTitle = styled.div`
 `;
 
 const ComponentContainer = styled.div`
-    flex: 1; /* 콘텐츠 영역이 남은 공간을 차지 */
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #ccc; /* 테두리 스타일 지정 */
-    border-radius: 5px; /* 테두리 모서리를 둥글게 만듦 */
-    padding: 10px; /* 내부 여백 추가 */
-    margin: 10px; /* 외부 패딩 추가 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
     flex-direction:column;
     width: 100%;
     min-height: 200px;
@@ -72,10 +63,7 @@ const ComponentContainer = styled.div`
 `;
 
 const SolveAnalyzeContainer = styled.div`
-
     margin-top: 100px;
     position: relative;
     width: 100%
-
-
 `;

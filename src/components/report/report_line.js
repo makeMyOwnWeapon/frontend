@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Chart from 'chart.js/auto';
 import 'chartjs-adapter-moment';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, TimeScale } from 'chart.js';

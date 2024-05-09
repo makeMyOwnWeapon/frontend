@@ -12,7 +12,7 @@ export const CreateButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   position: relative;
-  left: 75%; // 수치값에서 퍼센트값으로 수정
+  left: 75%;
 `;
 
 
@@ -49,8 +49,7 @@ export const SidebarBackGround = styled.div`
   background: #FFFFFF;
   color: #374151;
   padding: 10px 0;
-  // 투명색
-  background-color: rgba(255, 255, 255, 0.5); /* 배경색을 투명하게 설정합니다. */
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5%;
 `;
 

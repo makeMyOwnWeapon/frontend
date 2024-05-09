@@ -6,8 +6,6 @@ import { jwtDecode } from 'jwt-decode';
 import { getAuthToken, googleRequest } from '../../helpers/axios_helper';
 import styled from 'styled-components';
 
-
-
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
 const Account: React.FC = () => {
 
@@ -35,14 +33,13 @@ const Account: React.FC = () => {
     try {
       const response = await googleRequest('GET', 'api/member/signin', credential);
       if (response.data === '') {
-        // 처음 로그인시 쿠키에 구글토큰 임시 저장
         cookies.set('tempGoogleToken', credential);
         navigate('/signup');
       } else {
         const cookies = new Cookies();
-        const expireTimeUTC = Date.now() + response.data.expire * 1000; // 현재 시간에 expire 초를 더함
-        const expireTimeKST = expireTimeUTC + (9 * 60 * 60 * 1000); // 한국 시간대로 보정
-        const expireDateKST = new Date(expireTimeKST).toUTCString(); // UTC로 변환
+        const expireTimeUTC = Date.now() + response.data.expire * 1000;
+        const expireTimeKST = expireTimeUTC + (9 * 60 * 60 * 1000);
+        const expireDateKST = new Date(expireTimeKST).toUTCString();
         cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });
         navigate('/');
       }
@@ -56,7 +53,6 @@ const Account: React.FC = () => {
 
     <div id="account">
       <GoogleOAuthProvider clientId={clientId}>
-        
       {
         userInfo ? (
           <div>
@@ -74,10 +70,8 @@ const Account: React.FC = () => {
             alert('Login Failed');
           }}
         />
-      
         )
       }
-        
     </GoogleOAuthProvider>
     </div>
   );

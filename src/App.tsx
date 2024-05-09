@@ -9,7 +9,7 @@ import VideoComponent from './pages/video';
 import ReportList from './pages/reportlist';
 import ReportStudent from './pages/reportstudent';
 import ReportTeacher from './pages/reportteacher';
-import Inquiry from './pages/inquiry';
+import Inquiry from './pages/404page';
 import BackgroundAnimation from './styles/Background';
 import RequireAuth from './helpers/requireauth'
 

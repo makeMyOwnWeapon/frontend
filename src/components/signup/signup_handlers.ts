@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { AxiosResponse } from 'axios';
 import { Cookies } from 'react-cookie';
 import { tempRequest } from '../../helpers/axios_helper';
 
@@ -31,9 +29,9 @@ export async function handleSubmit({
     });
     if (response.data !== 'Invalid token') {
       const cookies = new Cookies();
-      const expireTimeUTC = Date.now() + response.data.expire * 1000; // 현재 시간에 expire 초를 더함
-      const expireTimeKST = expireTimeUTC + (9 * 60 * 60 * 1000); // 한국 시간대로 보정
-      const expireDateKST = new Date(expireTimeKST).toUTCString(); // UTC로 변환
+      const expireTimeUTC = Date.now() + response.data.expire * 1000;
+      const expireTimeKST = expireTimeUTC + (9 * 60 * 60 * 1000);
+      const expireDateKST = new Date(expireTimeKST).toUTCString();
       
       cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });
       cookies.remove('tempGoogleToken');

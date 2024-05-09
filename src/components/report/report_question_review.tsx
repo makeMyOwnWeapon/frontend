@@ -28,11 +28,7 @@ interface Question_ {
     userChoice:string;
 }
 
-// 옵션 객체에 대한 타입 정의
-
-// React component for displaying questions
 const ReportQuestionReview = ({ quizzes }:quizzes )=> {
-
     const [data, setData] = useState<Question_[]>();
     useEffect(()=>{
     setData(quizzes);
@@ -70,7 +66,6 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
 
                     </Question>
                     
-                    
                     <AnswerContainer> 
 
                     <TextContainer>{question.commentary}</TextContainer>
@@ -83,7 +78,6 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
                     ))}
 
                     </AnswerContainer>  
-
 
                 </QuestionContainer>
             ))}
@@ -103,9 +97,6 @@ const ReportQuestionTitle = styled.div`
 `;
 
 const AnswerContainer = styled.div`
-    
-
-
 `;
 
 const ReportCorrectTextContainer = styled.div`
