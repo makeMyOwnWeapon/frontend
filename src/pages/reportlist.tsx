@@ -19,6 +19,7 @@ interface ReportCard {
   subLectureTitle: string;
   subLectureUrl:string;
   registrationDate:string;
+  lectureHistoryId:number;
 }
 //paging 관련 코드들은 전부 주석처리
 const ReportList: React.FC = () => {
@@ -33,13 +34,16 @@ const ReportList: React.FC = () => {
             try {
                 const response = await request('GET','/api/history/');
                 setCards(response.data);
+
             } catch (error) {
                 console.error('Error:', error);
             }
             
+            
         };
         
         fetchData();
+        
     }, [navigate]);
 
     // const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
@@ -76,6 +80,7 @@ const ReportList: React.FC = () => {
                                     subLectureTitle={card.subLectureTitle}
                                     subLectureUrl={card.subLectureUrl}
                                     registrationDate={card.registrationDate}
+                                    lectureHistoryId={card.lectureHistoryId}
                                     />
                                 //  </motion.div> 
                                 ))}

@@ -10,13 +10,14 @@ interface ReportCardProps {
   subLectureTitle: string;
   subLectureUrl: string;
   registrationDate:string;
+  lectureHistoryId:number;
 }
 
-const ReportCard: React.FC<ReportCardProps> = ({  memberNickname,  subLectureId, subLectureTitle, subLectureUrl,registrationDate }) => {
+const ReportCard: React.FC<ReportCardProps> = ({  memberNickname,  subLectureId, subLectureTitle, subLectureUrl,registrationDate,lectureHistoryId }) => {
   const navigate = useNavigate();
   const handleCardClick = () => {
     
-    navigate(`/reportstudent/${subLectureId}`);
+    navigate(`/reportstudent/`, {state: {lectureHistoryId:lectureHistoryId ,subLectureId:subLectureId }});
     
   };
   const formatDate = (dateString: string) => {
@@ -31,8 +32,10 @@ const ReportCard: React.FC<ReportCardProps> = ({  memberNickname,  subLectureId,
     <ReportCardContainer>
       <CardContent>
         <a href="" onClick={handleCardClick}>
+
           <ReportCardTitle>{subLectureTitle}</ReportCardTitle>
           <ReportCardComponent>공부 시간 : {formatDate(registrationDate)}</ReportCardComponent>
+          <ReportCardComponent>{lectureHistoryId}</ReportCardComponent>
         </a>
         {/* <CardDescription>작성자: {memberNickname}</CardDescription> */}
 

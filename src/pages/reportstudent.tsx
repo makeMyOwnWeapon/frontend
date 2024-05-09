@@ -4,7 +4,7 @@ import BackgroundAnimation from "../styles/Background"
 import NaviSection from "../components/new_components/NaviSection";
 import Container from "../components/new_components/Container";
 import "../styles/Public"
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Cookies } from "react-cookie";
 import axios from "axios";
 import PieChart from "../components/report/report_pie";
@@ -43,20 +43,24 @@ interface Data {
 }
 
 const ReportStudent  = () => {
-    const { subLectureId } = useParams();
+    const location = useLocation();
     const [data, setData] = useState<Data>();
     const [studyTime, setStudyTime] = useState<string[]>(['0', '0', '0', '0']);
+    const subLectureId = location.state.subLectureId;
+    const lectureHistoryId = location.state.lectureHistoryId;
     useEffect(() => {
         const fetchData = async () => {
             try{
             const cookies = new Cookies();
             const cookie = cookies.get('jwt');
-            const response = await axios.get(`/api/history/?subLectureId=${subLectureId}`,{
+            const response = await axios.get(`/api/history/?subLectureId=${subLectureId}&lectureHistoryId=${lectureHistoryId}`,{
                 headers: {
                   'Authorization': `Bearer ${cookie}`
                 }
             });
             setData(response.data);
+            console.log(response);
+            console.log(subLectureId, lectureHistoryId)
             // data structure
             //  (sleepinessAndDistraction) : [졸기 시작한 시간(sleepinessStart), 조는거 끝난 시간(sleepinessEnd),자리이탈 시작시간(distractionStart), 다시 돌아온 시간(distractionEnd)],
             
@@ -75,7 +79,7 @@ const ReportStudent  = () => {
         }
         };
         fetchData();
-    }, [])
+    }, [location])
 
     if (!data) {
       return <div>Loading...</div>; // 또는 다른 로딩 컴포넌트
