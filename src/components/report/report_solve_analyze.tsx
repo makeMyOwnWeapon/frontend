@@ -30,7 +30,7 @@ const ReportSolveAnalyze = ()=> {
         <Form>
             
             <SolveAnalyzeContainer>
-                <ReportQuestionTitle>문제 풀이 해석</ReportQuestionTitle>
+                <ReportQuestionTitle>문제 풀이 분석</ReportQuestionTitle>
                 <ComponentContainer>
 
                 <text>더미데이터</text>

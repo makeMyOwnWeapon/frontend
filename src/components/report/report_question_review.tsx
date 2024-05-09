@@ -36,7 +36,6 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
 
     },[quizzes])
     
-    console.log('reportquestion: ',data);
     const settings = {
         dots: true,
         infinite: data && data.length > 1,

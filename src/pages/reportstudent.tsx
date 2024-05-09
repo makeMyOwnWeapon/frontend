@@ -41,6 +41,27 @@ interface Data {
   studyStartTime: string;
   studyEndTime: string;
 }
+function formatDate(inputDate: string): string {
+  const date = new Date(inputDate);
+  if (inputDate === null){
+    return "0";
+  }
+  // 날짜 및 시간 추출
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hour = String(date.getHours()).padStart(2, '0');
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  const second = String(date.getSeconds()).padStart(2, '0');
+
+  // 원하는 형식으로 변환
+  const formattedDate = `${year}/${month}/${day}/${hour}:${minute}:${second}`;
+
+  return formattedDate;
+}
+
+// 사용 예시
+const inputDate = "2024-05-09T01:34:14.000Z";
 
 const ReportStudent  = () => {
     const location = useLocation();
@@ -48,6 +69,7 @@ const ReportStudent  = () => {
     const [studyTime, setStudyTime] = useState<string[]>(['0', '0', '0', '0']);
     const subLectureId = location.state.subLectureId;
     const lectureHistoryId = location.state.lectureHistoryId;
+    const subLectureTitle = location.state.subLectureTitle;
     useEffect(() => {
         const fetchData = async () => {
             try{
@@ -59,8 +81,6 @@ const ReportStudent  = () => {
                 }
             });
             setData(response.data);
-            console.log(response);
-            console.log(subLectureId, lectureHistoryId)
             // data structure
             //  (sleepinessAndDistraction) : [졸기 시작한 시간(sleepinessStart), 조는거 끝난 시간(sleepinessEnd),자리이탈 시작시간(distractionStart), 다시 돌아온 시간(distractionEnd)],
             
@@ -85,6 +105,8 @@ const ReportStudent  = () => {
       return <div>Loading...</div>; // 또는 다른 로딩 컴포넌트
    }
 
+   
+
     return (
         <>
     <BackgroundAnimation>
@@ -98,8 +120,9 @@ const ReportStudent  = () => {
 
 
                 <ReportStudentBackground>
-                    <ReportStudentTitle>OOO 강의 레포트 페이지</ReportStudentTitle>
-                    <ReportStudentSubTitle>강의명 : aaaa</ReportStudentSubTitle>
+                    <ReportStudentTitle>{subLectureTitle} 레포트 페이지</ReportStudentTitle>
+                    <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.studyStartTime)}</ReportStudentSubTitle>
+                    <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.studyEndTime)}</ReportStudentSubTitle>
                     
                     <LineChartSize>
                       <LineChart response = {data}/>
@@ -211,7 +234,7 @@ const ReportStudentTitle = styled.div`
 `;
 
 const ReportStudentSubTitle = styled.div`
-    font-size: 2.5em;
+    font-size: 1.5em;
     margin:50px;
 
 

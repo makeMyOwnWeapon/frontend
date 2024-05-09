@@ -16,8 +16,8 @@ interface ReportCardProps {
 const ReportCard: React.FC<ReportCardProps> = ({  memberNickname,  subLectureId, subLectureTitle, subLectureUrl,registrationDate,lectureHistoryId }) => {
   const navigate = useNavigate();
   const handleCardClick = () => {
-    
-    navigate(`/reportstudent/`, {state: {lectureHistoryId:lectureHistoryId ,subLectureId:subLectureId }});
+    console.log(subLectureTitle);
+    navigate(`/reportstudent/`, {state: {lectureHistoryId:lectureHistoryId ,subLectureId:subLectureId , subLectureTitle:subLectureTitle}});
     
   };
   const formatDate = (dateString: string) => {
