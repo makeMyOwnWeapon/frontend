@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as vision from "https://fastly.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
-import "../styles/Public";
+import "../styles/Public"
 import { request } from '../helpers/axios_helper';
+import BackgroundAnimation from '../styles/Background';
 import { Container } from '../styles/Public';
 import NaviSection from '../components/new_components/NaviSection';
 import styled from 'styled-components';
 import { Side } from '../components/new_components/Side';
 import SidebarOptions from '../components/board/select_option';
 import { Main } from '../components/new_components/Main';
+
 
 const VideoComponent = () => {
   const [status, setStatus] = useState('초기값');
@@ -60,6 +62,7 @@ const VideoComponent = () => {
       const constraints = { video: true };
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
+      console.dir(stream);
       videoRef.current.addEventListener("loadeddata", predictWebcam);
     };
 
@@ -72,13 +75,14 @@ const VideoComponent = () => {
       if (faceLandmarker.current && webcamRunning) {
         if (lastVideoTime !== videoRef.current.currentTime) {
           lastVideoTime = videoRef.current.currentTime;
-          blendShapes = await faceLandmarker.current.detectForVideo(videoRef.current, performance.now());
+          blendShapes = faceLandmarker.current.detectForVideo(videoRef.current, performance.now()).faceBlendshapes;
 
-          if (blendShapes && blendShapes.faceBlendshapes) {
-            if(count.current % 25 === 0){ // 프레임 수 조절
-              checkBlinks(blendShapes.faceBlendshapes);
+          if (blendShapes) {
+            if(count.current % 25 == 0){ // 프레임 수 조절
+              checkBlinks(blendShapes);
             }
-            count.current += 1;
+            count.current+=1;
+
           }
         }
         window.requestAnimationFrame(predictWebcam);
@@ -93,6 +97,7 @@ const VideoComponent = () => {
   }, [webcamRunning]);
 
   function checkBlinks(blendShapes) {
+    console.log('check');
     const currentTime = new Date();
 
     if (!blendShapes[0]) {
@@ -115,14 +120,17 @@ const VideoComponent = () => {
       setEyeStatus('눈감음');
       if (isSleepingRef.current) {
         sleepDurationRef.current = Math.floor((currentTime - sleepStartRef.current) / 1000);
+        console.log(sleepDurationRef.current);
         if (sleepDurationRef.current >= 3) {
           setStatus('자는중');
         }
         
+        
         if (sleepDurationRef.current === 5) {
-          requestAlarm(formatUTCDate(sleepStartRef.current), sleep);
+          requestAlarm(sleepStartRef.current, sleep);
           console.log('알람 보내기');
         }
+
       }
       if (!isSleepingRef.current) {
         isSleepingRef.current = true;
@@ -134,8 +142,8 @@ const VideoComponent = () => {
       if (isSleepingRef.current) {
         sleepDurationRef.current = (currentTime - sleepStartRef.current) / 1000;
         if (sleepDurationRef.current >= 3) {
-          sleepStartRef.current = formatUTCDate(sleepStartRef.current);
-          sleepEndRef.current = formatUTCDate(currentTime);
+          sleepStartRef.current = formatLocalTime(sleepStartRef.current);
+          sleepEndRef.current = formatLocalTime(currentTime);
 
           request(
             "POST",
@@ -173,43 +181,45 @@ const VideoComponent = () => {
 
   return (
     <>
-      <div id="backgroundNoAnimation">
-        <Container>
-          <NaviSection></NaviSection>
-          <InnerContentSection>
-            <Side>
-              <SidebarOptions></SidebarOptions>
-            </Side>
-            <Main>
-              <div id="screen">
-                <div id='video_box'>
-                  <video ref={videoRef} id="webcam" autoPlay playsInline></video>
-                  <canvas ref={canvasRef} id="output_canvas"></canvas>
-                </div>
-              </div>
-              <div id="screen_info">
-                <div>
-                  <button onClick={() => setWebcamRunning(!webcamRunning)} id="webcamButton">
-                    {webcamRunning ? "DISABLE PREDICTIONS" : "ENABLE WEBCAM"}
-                  </button>
-                </div>
-                <div>현재 듣고 있는 강의 : <span></span></div>
-                <div>상태 : <span id="status">{status}</span></div>
-                <div>잔 횟 수 : {sleepCountRef.current}</div>
-                <div id="eyestatus">[개발자] 눈감은 상태 : <span id="dev_eye_status">{eyeStatus}</span></div>
-                <div>캠 시작 시간 : <span>13:33</span></div>
-                <div>잔 이력 : </div>
-                <button onClick={() => {updateStatus('업데이트')}}>상태 업데이트</button>
-                <button onClick={() => {updateEyeStatus('업데이트')}}>눈 상태 업데이트</button>
-              </div>
-            </Main>
-          </InnerContentSection>
-        </Container>
-      </div>
-    </>
-  );
-};
- {/* </BackgroundAnimation> */}
+
+    {/* <BackgroundAnimation> */}
+    <div id="backgroundNoAnimation">
+          <Container>
+            <NaviSection></NaviSection>
+              <InnerContentSection>
+                <Side>
+                  <SidebarOptions></SidebarOptions>
+
+                </Side>
+                  
+                <Main>
+                    <div id="screen">
+                      <div id='video_box'>
+                        <video ref={videoRef} id="webcam" autoPlay playsInline></video>
+                        <canvas ref={canvasRef} id="output_canvas"></canvas>
+                      </div>
+                    </div>
+                    <div id="screen_info">
+                        <div>
+                        <button onClick={() => setWebcamRunning(!webcamRunning)} id="webcamButton">
+                          {webcamRunning ? "DISABLE PREDICTIONS" : "ENABLE WEBCAM"}
+                        </button>
+                    </div>
+                        <div>현재 듣고 있는 강의 : <span></span></div>
+                        <div>상태 : <span id="status">{status}</span></div>
+                        <div>잔 횟 수 : {sleepCountRef.current}</div>
+                        <div id="eyestatus">[개발자] 눈감은 상태 : <span id="dev_eye_status">{eyeStatus}</span></div>
+                        <div>캠 시작 시간 : <span>13:33</span></div>
+                        <div>잔 이력 : </div>
+                        <button onClick={() => {updateStatus('업데이트')}}>상태 업데이트</button>
+                        <button onClick={() => {updateEyeStatus('업데이트')}}>눈 상태 업데이트</button>
+                    </div>
+
+                  </Main>
+              </InnerContentSection>
+          </Container>
+        </div>
+      {/* </BackgroundAnimation> */}
       {/* <div id="container">
         <div id="align">
           <div id='title'>제목</div>
@@ -235,67 +245,96 @@ const VideoComponent = () => {
           </div>
         </div>
       </div> */}
-    function formatUTCDate(date) {
-      if (!(date instanceof Date)) {
-        date = new Date(date); // 입력이 Date 객체가 아니라면 Date 객체로 변환
-      }
-      return date.toISOString();
-    }
-    
-
-function requestAlarm(startTime, type){
-  // 졸음 0, 자리이탈 1
-  request(
-    "POST",
-    "/api/analytics/alarm",
-    {
-      startedAt: startTime,
-      analysisType: type
-    }).then(
-      (response) => {
-        console.dir(response.data.message);
-        alert(response.data.message);
-      }).catch(
-      (error) => {
-        alert(error.message);
-      }
+    </>
   );
+};
+
+function formatLocalTime(date) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const seconds = date.getSeconds().toString().padStart(2, '0');
+  return `${year}${month}${day} ${hours}:${minutes}:${seconds}`;
 }
 
+function requestAlarm(startTime, type){
+  //  졸음 0, 자리이탈 1
+          request(
+            "POST",
+            "/api/analytics/alarm",
+            {
+              startedAt: startTime,
+              analysisType: type
+            }).then(
+              (response) => {
+                console.dir(response.data.message);
+                alert(response.data.message);
+              }).catch(
+              (error) => {
+                alert(error.message);
+              }
+          );
+}
+
+
 const InnerContentSection = styled.div`
+  /* border: 10px solid green; */
   display: flex;
+
   height: 85%;
-  >div{
-  }
-  #screen{
-    background-color: black;
-    border-radius: 30px;
-    overflow: hidden;
-  }
-  #video_box{
-    width: 100%;
-    height: 100%;
-  }
-  #webcam{
-    width: 100%;
-  }
-  #main > #screen_info{
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    font-size: large;
-    font-weight: bold;
-    padding-left: 20px;
-  }
-  #screen_info > div{
-    margin-bottom: 10px;
-  }
-  #side > div{
-    border: 1px solid black;
-  }
-  #profileBox{
-    height: 40%;
-  }
+
+>div{
+  /* border: 1px solid black; */
+}
+
+
+#screen{
+  /* border: 1px solid black; */
+  background-color: black;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+#video_box{
+  width: 100%;
+  height: 100%;
+
+}
+
+#webcam{
+  width: 100%;
+}
+
+#main > #screen_info{
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  font-size: large;
+  font-weight: bold;
+  padding-left: 20px;
+
+}
+
+#screen_info > div{
+  /* border: 1px solid red; */
+  margin-bottom: 10px;
+  
+}
+
+#side > div{
+  border: 1px solid black;
+}
+
+
+#profileBox{
+  height: 40%;
+
+}
+
 `
+
 
 export default VideoComponent;
