@@ -46,6 +46,18 @@ class ProblemPage extends Component<Props, State> {
     };
   }
 
+  trimSubLectureUrl = (url:any) => {
+    const ampersandPosition = url.indexOf('&tab');
+    console.log(ampersandPosition);
+    return ampersandPosition !== -1 ? url.substring(0, ampersandPosition) : url;
+  };
+
+  handleSubLectureUrlChange = (e:any) => {
+    const trimmedUrl = this.trimSubLectureUrl(e.target.value);
+    console.log(trimmedUrl);
+    this.setState({ subLectureUrl: trimmedUrl });
+  };
+  
   addQuestionComponent = (): void => {
     this.setState(prevState => ({
       questionComponents: [...prevState.questionComponents, { id: prevState.questionComponents.length, expanded: false }],
@@ -169,7 +181,7 @@ class ProblemPage extends Component<Props, State> {
           <InputContainer>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
               <Input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
-              <Input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={(e) => this.setState({ subLectureUrl: e.target.value })} />
+              <Input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={this.handleSubLectureUrlChange} />
               <Input type="text" placeholder="대강의명" value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
               <Input type="text" placeholder="소강의명" value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
               <Input type="text" placeholder="강의 시간 (예: 1:23:45 또는 45:30)" value={this.state.duration} onChange={this.handleDurationChange} />
