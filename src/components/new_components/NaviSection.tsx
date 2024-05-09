@@ -80,7 +80,7 @@ const NavSectionWrapper = styled.div`
     flex: 1;
     font-weight: bold;
     background: linear-gradient(120deg, #FF0000, #0000FF);
-    //-webkit-background-clip: text;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
@@ -107,7 +107,6 @@ const NavSectionWrapper = styled.div`
   }
 `;
 
-// NaviSection 컴포넌트 정의
 const NaviSection = () => {
   const navigate = useNavigate();
 
