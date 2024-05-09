@@ -58,10 +58,11 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({
     }
   }
 
-  const handleCardClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleCardClick = (event: React.MouseEvent) => {
     event.preventDefault();
     navigate(`/question_info/${quizSetId}`, { state: { subLectureUrl } });
   };
+  
 
   const recommendationClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.stopPropagation();
@@ -69,8 +70,8 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({
   };
 
   return (
-    <CardContainer >
-      <a className="cardImg" onClick={handleCardClick}>
+    <CardContainer onClick={handleCardClick}>
+      <a className="cardImg" >
       <VideoThumbnail imageUrl={subLectureUrl} />
       </a>
       <CardContent>
