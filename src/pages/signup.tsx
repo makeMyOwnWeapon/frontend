@@ -15,15 +15,6 @@ function Signup() {
   const credential = cookies.get('tempGoogleToken');
 
   return (
-
-    // <div>
-    //   ddd
-    // </div>
-
-              // <NicknameGenerator onNicknameGenerated={setNickname} />
-
-     
-      // {/* <NavBar />
       <BackgroundAnimation>
         <Div>
         <Title>Sign Up</Title>

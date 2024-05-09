@@ -57,7 +57,6 @@ export const ContentBox = styled.div`
 `;
 
 export const Content = styled.div`
-/* 콘텐츠 영역이 남은 공간을 차지 */
   display: flex;
   flex-wrap: wrap;  padding-left: 300px;
   height: 100%;

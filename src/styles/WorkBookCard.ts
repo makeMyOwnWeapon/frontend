@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-// 스타일드 컴포넌트 정의
 export const CardContainer = styled.div`
   max-width: 20rem;
-  background-color: rgba(255, 255, 255, 0.5); /* 배경색을 투명하게 설정합니다. */
+  background-color: rgba(255, 255, 255, 0.5);
   /* border: 10px solid red; */
   max-height: 20rem;
   border-radius: 0.5rem;
@@ -31,7 +30,6 @@ export const CardContainer = styled.div`
 
 export const CardContent = styled.div`
   /* padding: 1.25rem; */
-  
 `;
 
 export const CardTitle = styled.h5`
@@ -70,7 +68,6 @@ export const ReadMoreLink = styled.a`
   color: #ffffff;
   background-color: #3b82f6;
   border-radius: 0.375rem; */
-  
 
   &:hover {
     background-color: #2563eb;
