@@ -147,14 +147,14 @@ class QuestionComponent extends Component<Props, State> {
 
                   <InputBoxWrapper>
                     <label>문제: </label>
-                    <Input_text type="text" value={answers[0].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)} />
+                    <Input_text type="text" value={answers[0].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)} maxLength={20} />
                   </InputBoxWrapper>
 
                   {questionType === 'objective' ? (
                     ['1번', '2번', '3번', '4번', '해설'].map((label, index) => (
                       <InputBoxWrapper key={index}>
                         <label>{label}: </label>
-                        <Input_text type="text" value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} />
+                        <Input_text type="text" value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} maxLength={20} />
                         {index < 4 && (
                           <NameGeneratorButton onClick={() => this.handleSelectionChange(index + 1)}>
                             {answers[index + 1].selected ? '정답입니다' : '오답입니다'}
@@ -166,11 +166,11 @@ class QuestionComponent extends Component<Props, State> {
                     <>
                       <InputBoxWrapper>
                         <label>답: </label>
-                        <Input_text type="text" value={answers[1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(1, e.target.value)} />
+                        <Input_text type="text" value={answers[1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(1, e.target.value)} maxLength={20} />
                       </InputBoxWrapper>
                       <InputBoxWrapper>
                         <label>해설: </label>
-                        <Input_text type="text" value={answers[2].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(2, e.target.value)} />
+                        <Input_text type="text" value={answers[2].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(2, e.target.value)} maxLength={20} />
                       </InputBoxWrapper>
                     </>
                   )}
