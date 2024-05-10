@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/css/fad.css';
 import { request } from "../../helpers/axios_helper";
+import { useNavigate } from "react-router-dom";
 
 interface QuestionComponentProps {
     videoUrl: string;
@@ -29,7 +30,12 @@ interface Question_ {
 const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) => {
     const [data, setData] = useState<Question_[] | undefined>(undefined);
     const [showDeleteButton, setShowDeleteButton] = useState(false);
+    const navigate = useNavigate();
 
+    function goBack(){
+        navigate("/workbook");
+    }
+        
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -55,6 +61,19 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
         slidesToScroll: 1
     };
 
+    const handleDelete = async () => {
+        if (quizSetId) {
+            try {
+                console.log(quizSetId);
+                const response = await request('DELETE', `/api/quizsets/${parseInt(quizSetId)}/quizzes`);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        goBack();
+    };
+    
+
     return (
         <Form>
             
@@ -68,7 +87,16 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
                         <QuestionContainer key={index}>
                             <TextContainer>시간: {question.popupTime}</TextContainer>
                             <TextContainer>문제: {question.commentary}</TextContainer>
-                             <button style={{ position: 'absolute', top: 10, right: 10 }}>삭제하기</button>
+
+                            {showDeleteButton && (
+                                <button
+                                    style={{ position: 'absolute', top: 10, right: 10 }}
+                                    onClick={() => handleDelete()}
+                                >
+                                    삭제하기
+                                </button>
+                            )}
+
                             <Question key={index}>
                                 {question.choice ? question.choice.map((choice, choiceIndex) => (
                                     <TextContainer key={choiceIndex}>{choice.content}</TextContainer>
