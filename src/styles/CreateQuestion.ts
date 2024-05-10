@@ -107,3 +107,37 @@ border: 1px solid #ccc;
 border-radius: 4px;
 cursor: pointer;
 `;
+
+export const ButtonContainer = styled.div`
+  position: fixed;    // 위치를 화면에 고정
+  top: 20px;          // 상단에서 20px 떨어진 위치
+  right: 20px;        // 우측에서 20px 떨어진 위치
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const Button = styled.button`
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+`;
