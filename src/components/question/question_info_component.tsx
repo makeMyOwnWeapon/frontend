@@ -27,7 +27,7 @@ interface Question_ {
     commentary: string;
     instruction: string;
     popupTime: string;
-    owner: boolean;  // 본인 레포트인지 아닌지 여부
+    isYours: boolean;  // 본인 레포트인지 아닌지 여부
 }
 
 const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) => {
@@ -73,7 +73,7 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
                                 <TextContainer key={choiceIndex}>{choice.content} ({choice.isAnswer ? '정답' : '오답'})</TextContainer>
                             ))}
                         </Question>
-                        {question.owner && (
+                        {question.isYours && (
                             <ButtonContainer>
                                 <Button onClick={() => {/* 수정 로직 */}}>수정</Button>
                                 <Button onClick={() => {/* 삭제 로직 */}}>삭제</Button>
