@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { Form, ButtonContainer, Button } from '../../styles/CreateQuestion';
+import { Form } from '../../styles/CreateQuestion';
 import VideoThumbnail from "../public/url_to_image";
 import { Question, VideoThumbnailContainer } from '../../styles/QuestionInfo';
 import { QuestionContainer } from "../../styles/QuestionInfo";
@@ -12,22 +12,19 @@ import { request } from "../../helpers/axios_helper";
 
 interface QuestionComponentProps {
     videoUrl: string;
-    quizSetId: string | undefined;
+    quizSetId:string | undefined;
 }
 
 interface Choice {
     choiceId: number;
     content: string;
-    isAnswer: boolean;
 }
 
 interface Question_ {
-    questionId: number;
     choice: Choice[];
-    commentary: string;
-    instruction: string;
-    popupTime: string;
-    isYours: boolean;  // 본인 레포트인지 아닌지 여부
+    commentary:string;
+    instruction:string;
+    popupTime:string;
 }
 
 const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) => {
@@ -37,7 +34,7 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await request('GET', `/api/quizsets/${quizSetId}/quizzes?commentary=true&answer=true`);
+                const response = await request('GET', `/api/quizsets/${quizSetId}/quizzes?commentary=true&answer=false`);
                 setData(response.data);
             } catch (error) {
                 console.error('Error:', error);
@@ -54,7 +51,6 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
         slidesToShow: 1,
         slidesToScroll: 1
     };
-
     return (
         <Form>
             <SliderContainer>
@@ -62,25 +58,19 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
                     <VideoThumbnail imageUrl={videoUrl} />
                 </VideoThumbnailContainer>
                 
-                <Slider className="custom-slider" {...settings}>
+                <Slider className="custom-slider" {...settings}> 
+                
                 {data && data.map((question, index) => (
-                    <QuestionContainer key={index}>
-                        <TextContainer>시간: {question.popupTime}</TextContainer>
-                        <TextContainer>문제: {question.instruction}</TextContainer>
-                        <TextContainer>해설: {question.commentary}</TextContainer>
-                        <Question key={index}>
-                            {question.choice.map((choice, choiceIndex) => (
-                                <TextContainer key={choiceIndex}>{choice.content} ({choice.isAnswer ? '정답' : '오답'})</TextContainer>
-                            ))}
-                        </Question>
-                        {question.isYours && (
-                            <ButtonContainer>
-                                <Button onClick={() => {/* 수정 로직 */}}>수정</Button>
-                                <Button onClick={() => {/* 삭제 로직 */}}>삭제</Button>
-                            </ButtonContainer>
-                        )}
-                    </QuestionContainer>
-                ))}
+                <QuestionContainer key={index}>
+                    <TextContainer>시간: {question.popupTime}</TextContainer>
+                    <TextContainer>문제: {question.commentary}</TextContainer>
+                    <Question key={index}>
+                        {question && question.choice && question.choice.map((choice, choiceIndex) => (
+                            <TextContainer key={choiceIndex}>{choice.content}</TextContainer>
+                        ))}
+                    </Question>
+                </QuestionContainer>
+            ))}
                 </Slider>
             </SliderContainer>
         </Form>
