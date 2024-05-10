@@ -4,7 +4,7 @@ import BackgroundAnimation from "../styles/Background"
 import NaviSection from "../components/new_components/NaviSection";
 import Container from "../components/new_components/Container";
 import "../styles/Public"
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Cookies } from "react-cookie";
 import axios from "axios";
 import PieChart from "../components/report/report_pie";
@@ -63,23 +63,15 @@ function formatDate(inputDate: string): string {
 // 사용 예시
 const inputDate = "2024-05-09T01:34:14.000Z";
 
-const ReportStudent  = () => {
-    const location = useLocation();
+const ReportStudentFroExtention  = () => {
+    const {subLectureId,lectureHistoryId} = useParams();
     const [data, setData] = useState<Data>();
     const [studyTime, setStudyTime] = useState<string[]>(['0', '0', '0', '0']);
-    const subLectureId = location.state.subLectureId;
-    const lectureHistoryId = location.state.lectureHistoryId;
-    const subLectureTitle = location.state.subLectureTitle;
     useEffect(() => {
-      console.log(subLectureId,lectureHistoryId)
         const fetchData = async () => {
             try{
-            const cookies = new Cookies();
-            const cookie = cookies.get('jwt');
-            const response = await axios.get(`/api/history/?subLectureId=${subLectureId}&lectureHistoryId=${lectureHistoryId}`,{
-                headers: {
-                  'Authorization': `Bearer ${cookie}`
-                }
+            const response = await axios.get(`/api/history/extension/?subLectureId=${subLectureId}&lectureHistoryId=${lectureHistoryId}`,{
+
             });
             setData(response.data);
             // data structure
@@ -100,7 +92,7 @@ const ReportStudent  = () => {
         }
         };
         fetchData();
-    }, [location])
+    }, [subLectureId])
 
     if (!data) {
       return <div>Loading...</div>; // 또는 다른 로딩 컴포넌트
@@ -112,16 +104,9 @@ const ReportStudent  = () => {
         <>
     <BackgroundAnimation>
         <Container>
-            <NaviSection></NaviSection>
             <InnerContentSection>
-            <div id="side">
-
-                <SidebarOptions/>
-            </div>
-
-
                 <ReportStudentBackground>
-                    <ReportStudentTitle>{subLectureTitle} 레포트 페이지</ReportStudentTitle>
+                    <ReportStudentTitle> 레포트 페이지</ReportStudentTitle>
                     <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.studyStartTime)}</ReportStudentSubTitle>
                     <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.studyEndTime)}</ReportStudentSubTitle>
                     
@@ -252,13 +237,13 @@ const PieText = styled.div`
 
 `;
 
-export default ReportStudent;
+export default ReportStudentFroExtention;
 
 const InnerContentSection = styled.div`
   /* border: 10px solid green; */
   display: flex;
 
-  height: 85%;
+  height: 100%;
 
 >div{
   /* border: 1px solid black; */
