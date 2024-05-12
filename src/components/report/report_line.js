@@ -16,14 +16,15 @@ const LineChart = ({ response }) => {
     
     useEffect(() => {
         if (response && response.studyStartTime && response.studyEndTime) {
-            const labels = [];
+            
             const sleepinessDuration = new Array((new Date(response.studyEndTime).getTime() - new Date(response.studyStartTime).getTime()) / 1000).fill(NaN);
             const distractionDuration = new Array((new Date(response.studyEndTime).getTime() - new Date(response.studyStartTime).getTime()) / 1000).fill(NaN);
             const startTime = new Date(response.studyStartTime);
             const endTime = new Date(response.studyEndTime);
-    
+            const labels = [];
+
             for (let i = 0; i < sleepinessDuration.length; i++) {
-                const time = new Date(startTime.getTime() + i * 1000);
+                const time = new Date(i * 1000 + 54000000);
                 labels.push(time.toISOString());
             }
     
@@ -61,9 +62,11 @@ const LineChart = ({ response }) => {
                 data: sleepinessData,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.4,
-                borderWidth: 70,
+                borderWidth: 50,
                 pointRadius: 0,  // 데이터 포인트 표시 없음
-                borderCapStyle: 'butt'  // 라인의 끝을 사각형으로 설정
+                borderCapStyle: 'butt',  // 라인의 끝을 사각형으로 설정
+                pointStyle: 'rect',
+                showLine: false  // 라인 표시 여부 (기본적으로 true)
             },
             {
                 label: '자리비움',
@@ -72,12 +75,21 @@ const LineChart = ({ response }) => {
                 tension: 0,
                 // borderCapStyle: 'square',
                 stepped: 'before',
-                borderWidth: 70
+                borderWidth: 100,
+                pointStyle: 'rect',
+                showLine: true  // 라인 표시 여부 (기본적으로 true)
             },
         ]
     };
 
     const options = {
+        elements: {
+            point:{
+                radius:0,
+                hoverRadius:0,
+                hoverBorderWidth:0
+            }
+        },
         responsive: true,
         maintainAspectRatio: false,
         aspectRatio: 2,
@@ -100,14 +112,20 @@ const LineChart = ({ response }) => {
             x: {
                 type: 'time', 
                 time: {
-                    unit: 'minute', 
-                    min: startTime, // 시작 시간을 사용
-                    max: new Date(endTime).getTime() - new Date(startTime).getTime(), // 밀리초 값으로 변환된 시간 간격을 사용
-        
+                    unit: 'second', 
+                    min: 0,  
+                    max: (new Date(endTime).getTime() - new Date(startTime).getTime()) / 1000,
+                    tooltipFormat: 'mm:ss',
                     displayFormats: {
-                        minute: 'HH:mm',
-                        hour: 'HH:mm:ss', 
-                        day: 'YYYY-MM-DD', 
+                        millisecond: 'mm:ss',
+                        second: 'mm:ss',
+                        minute: 'mm:ss',
+                        hour: 'HH:mm:ss',
+                        day: 'HH:mm:ss',
+                        week: 'HH:mm:ss',
+                        month: 'HH:mm:ss',
+                        quarter: 'HH:mm:ss',
+                        year: 'HH:mm:ss'
                     },
                 },
             },

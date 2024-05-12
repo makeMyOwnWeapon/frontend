@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   /* border: 20px solid purple; */
   box-sizing: border-box;
+  
 `;
 
 export default Container;

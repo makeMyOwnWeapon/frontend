@@ -3,14 +3,13 @@ import styled from "styled-components";
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  padding: 20px;
-    align-items: center;
-  background: #f8f9fa;
+  padding:0 20px;
+  align-items: center;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  width: 90%;
-  max-width: 800px;
   margin: auto;
+  /* border: 1px solid red; */
+  width: 70%;
 `;
 
 export const Formdiv = styled.div`
@@ -25,7 +24,7 @@ export const Formdiv = styled.div`
   min-height:100vh;
   max-width: 800px;
   margin: auto;
-    overflow-y: scroll;
+  overflow-y: scroll;
   
 `;
 

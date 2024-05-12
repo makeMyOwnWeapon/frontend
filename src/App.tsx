@@ -12,6 +12,7 @@ import ReportTeacher from './pages/reportteacher';
 import Inquiry from './pages/404page';
 import BackgroundAnimation from './styles/Background';
 import RequireAuth from './helpers/requireauth'
+import ReportStudentFroExtention from './pages/reportstudentforextention';
 
 function App() {
   return (
@@ -25,10 +26,10 @@ function App() {
         <Route path="/video" element={<VideoComponent/>}/>
         <Route path="/reportlist" element={<RequireAuth><ReportList/></RequireAuth>}/>
         <Route path="/reportstudent/" element={<ReportStudent/>}/>
+        <Route path="/reportstudentforextension/:lectureHistoryId" element={<ReportStudentFroExtention/>}/>
         <Route path="/reportteacher" element={<RequireAuth><ReportTeacher/></RequireAuth>}/>
         <Route path="/inquiry" element={<RequireAuth><Inquiry/></RequireAuth>}/>
         <Route path="/background" element={<BackgroundAnimation/>}/>
-
       </Routes>
     </BrowserRouter>
   );

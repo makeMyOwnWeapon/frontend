@@ -20,6 +20,7 @@ export const Question = styled.div`
   padding: 10px; /* 내부 여백 추가 */
   margin: 10px; /* 외부 패딩 추가 */
   flex-direction:column;
+  min-height: 400px;
 `;
 
 export const QuestionContainer = styled.div`

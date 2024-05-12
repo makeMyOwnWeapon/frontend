@@ -48,13 +48,11 @@ class ProblemPage extends Component<Props, State> {
 
   trimSubLectureUrl = (url:any) => {
     const ampersandPosition = url.indexOf('&tab');
-    console.log(ampersandPosition);
     return ampersandPosition !== -1 ? url.substring(0, ampersandPosition) : url;
   };
 
   handleSubLectureUrlChange = (e:any) => {
     const trimmedUrl = this.trimSubLectureUrl(e.target.value);
-    console.log(trimmedUrl);
     this.setState({ subLectureUrl: trimmedUrl });
   };
   

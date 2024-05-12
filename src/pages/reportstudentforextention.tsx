@@ -4,7 +4,7 @@ import BackgroundAnimation from "../styles/Background"
 import NaviSection from "../components/new_components/NaviSection";
 import Container from "../components/new_components/Container";
 import "../styles/Public"
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Cookies } from "react-cookie";
 import axios from "axios";
 import PieChart from "../components/report/report_pie";
@@ -40,17 +40,20 @@ interface gptAppQuestion {
   instruction:string;
 }
 
-interface reviews{
-  title:string;
-  content:string;
+interface summary{
+  reviews:string;
 }
+
 interface gptSummery{
-  reviews: reviews[];
+  summary: summary[];
 }
 
-
-
-interface Data {
+interface Data{
+  gptAppQuestion:gptAppQuestion[];
+  gptSummery:gptSummery;
+  readHistoryReport:readHistoryReport;
+}
+interface readHistoryReport {
   quizzes: Quiz[];
   sleepinessAndDistraction: SleepinessAndDistraction[];
   studyStartTime: string;
@@ -78,27 +81,18 @@ function formatDate(inputDate: string): string {
 // 사용 예시
 const inputDate = "2024-05-09T01:34:14.000Z";
 
-const ReportStudent  = () => {
-    const location = useLocation();
+const ReportStudentFroExtension  = () => {
+    const {lectureHistoryId} = useParams();
     const [data, setData] = useState<Data>();
     const [studyTime, setStudyTime] = useState<string[]>(['0', '0', '0', '0']);
-    const subLectureId = location.state.subLectureId;
-    const lectureHistoryId = location.state.lectureHistoryId;
-    const subLectureTitle = location.state.subLectureTitle;
     useEffect(() => {
-
         const fetchData = async () => {
             try{
-            const cookies = new Cookies();
-            const cookie = cookies.get('jwt');
-            const response = await axios.get(`/api/history/?subLectureId=${subLectureId}&lectureHistoryId=${lectureHistoryId}`,{
-                headers: {
-                  'Authorization': `Bearer ${cookie}`
-                }
+            const response = await axios.get(`/api/history/extension/?lectureHistoryId=${lectureHistoryId}`,{
+
             });
-            console.log(response);
             setData(response.data);
-            
+            console.log(response)
             // data structure
             //  (sleepinessAndDistraction) : [졸기 시작한 시간(sleepinessStart), 조는거 끝난 시간(sleepinessEnd),자리이탈 시작시간(distractionStart), 다시 돌아온 시간(distractionEnd)],
             
@@ -117,38 +111,39 @@ const ReportStudent  = () => {
         }
         };
         fetchData();
-    }, [location])
-
+    }, [lectureHistoryId])
     if (!data) {
-      return <div>Loading...</div>; // 또는 다른 로딩 컴포넌트
-   }
+      return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '20px', color: '#555', backgroundColor: '#f0f0f0' }}>
+          <p>GPT가 데이터를 만들고 있습니다!</p>
+        </div>
+      );
+    }
+    
 
    
+//  내가 풀었던 문제 = 문제관련된거 다, 해설은 눌렀을때 나오는거
+// gpt가 요약해준 키워드 정리, 다맞았을때는 다른 말로
+
+
 
     return (
         <>
     <BackgroundAnimation>
         <Container>
-            <NaviSection></NaviSection>
             <InnerContentSection>
-            <div id="side">
-
-                <SidebarOptions/>
-            </div>
-
-
                 <ReportStudentBackground>
-                    <ReportStudentTitle>{subLectureTitle} 레포트 페이지</ReportStudentTitle>
-                    <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.studyStartTime)}</ReportStudentSubTitle>
-                    <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.studyEndTime)}</ReportStudentSubTitle>
+                    <ReportStudentTitle> 레포트 페이지</ReportStudentTitle>
+                    <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.readHistoryReport.studyStartTime)}</ReportStudentSubTitle>
+                    <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.readHistoryReport.studyEndTime)}</ReportStudentSubTitle>
                     
                     <LineChartSize>
-                      <LineChart response = {data}/>
+                      <LineChart response = {data.readHistoryReport}/>
                     </LineChartSize>
 
                     <PieChartSize>
                       <div id = "chart" >
-                      <PieChart response = {data} setstudyTime={setStudyTime} />
+                      <PieChart response = {data.readHistoryReport} setstudyTime={setStudyTime} />
                       </div>
                       <div id = "text" >
 
@@ -168,10 +163,20 @@ const ReportStudent  = () => {
                         </PieText>
 
                       </div>
+
+                      
+                      
+                      
                     </PieChartSize>
 
                     <ReportTextContainer>
-                          <ReportQuestionInfoComponent quizzes={data.quizzes}/>
+
+                          <ReportQuestionInfoComponent quizzes={data.readHistoryReport.quizzes}/>
+
+                          <ReportApplicationQuestion gptSummery={data.gptSummery.summary} />
+
+                          
+
                     </ReportTextContainer>
                     
                 </ReportStudentBackground>
@@ -226,8 +231,8 @@ const LineChartSize = styled.div`
 const ReportStudentBackground = styled.div`
     width: 100%;
     margin : 10px;
-    /* opacity: 0.6; */
     border-radius: 20px;
+    background: transparent;
     overflow-y: scroll;
 `;
 
@@ -240,9 +245,8 @@ const ReportStudentTitle = styled.div`
 
 `;
 
-const ReportStudentSubTitle = styled.div`
+const ReportStudentSubTitle = styled.h3`
     font-size: 1.5em;
-    margin:50px;
 
 
 `;
@@ -258,13 +262,13 @@ const PieText = styled.div`
 
 `;
 
-export default ReportStudent;
+export default ReportStudentFroExtension;
 
 const InnerContentSection = styled.div`
   /* border: 10px solid green; */
   display: flex;
 
-  height: 85%;
+  height: 100%;
 
 >div{
   /* border: 1px solid black; */
@@ -304,3 +308,4 @@ const InnerContentSection = styled.div`
 }
 
   `
+  
