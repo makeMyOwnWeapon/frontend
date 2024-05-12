@@ -113,8 +113,13 @@ const ReportStudentFroExtension  = () => {
         fetchData();
     }, [lectureHistoryId])
     if (!data) {
-      return <div>Loading...</div>; // 또는 다른 로딩 컴포넌트
-   }
+      return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '20px', color: '#555', backgroundColor: '#f0f0f0' }}>
+          <p>GPT가 데이터를 만들고 있습니다!</p>
+        </div>
+      );
+    }
+    
 
    
 //  내가 풀었던 문제 = 문제관련된거 다, 해설은 눌렀을때 나오는거
@@ -305,3 +310,4 @@ const InnerContentSection = styled.div`
 }
 
   `
+  

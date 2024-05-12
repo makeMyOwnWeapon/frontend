@@ -32,7 +32,7 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
     const [data, setData] = useState<Question_[]>();
     useEffect(()=>{
     setData(quizzes);
-    
+    console.log(data);
     },[quizzes])
     
     const settings = {
@@ -66,9 +66,9 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
 
                         <TextContainer>해설 : {question.commentary}</TextContainer>
                         
-                          정답  {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
+                          {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
                             choice.isAnswer === true  ?
-                            <TextContainer key={choiceIndex}>{choice.content}</TextContainer>:
+                            <TextContainer key={choiceIndex}>정답 : {choice.content}</TextContainer>:
                             null
 
                         ))}
