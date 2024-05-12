@@ -46,29 +46,31 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
     return (
         <Form>
             <SliderContainer>
+                <Problem>
                 <ReportQuestionTitle>문제 다시보기</ReportQuestionTitle>
                 <Slider className="custom-slider" {...settings}> 
                 {data && data.map((question, index) => (
                 <QuestionContainer key={index}>
                    
                     <Question key={index}>
-                         <TextContainer>{index+1}번 문제: {question.question}</TextContainer>
+                         <h3>{index+1}번 문제: {question.question}</h3>
                         {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
-                            choiceIndex.toString() === question.userChoice ?
-                            <ReportCorrectTextContainer key={choiceIndex}>정답 : {choice.content}</ReportCorrectTextContainer>:
-                            <TextContainer key={choiceIndex}>{choice.content}</TextContainer>
-                            
+                            <TextContainer key={choiceIndex}>{choiceIndex + 1}번 : {choice.content}</TextContainer>
                         ))}
-                        {question && question.choices.length === 1 && question.choices.map((choice, choiceIndex) => (
+                        
+                        {/* {question && question.choices.length === 1 && question.choices.map((choice, choiceIndex) => (
                             <TextContainer key={choiceIndex}>제출한 답 : {choice.content}</TextContainer>
-                        ))}
+                        ))} */}
+
                         <AnswerContainer> 
 
-                        <TextContainer>해설 : {question.commentary}</TextContainer>
+                        <h3>해설</h3>
+                        <TextContainer>{question.commentary}</TextContainer>
                         
+                        <h3>정답</h3>
                           {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
                             choice.isAnswer === true  ?
-                            <TextContainer key={choiceIndex}>정답 : {choice.content}</TextContainer>:
+                            <TextContainer key={choiceIndex}>{choiceIndex}번 : {choice.content}</TextContainer>:
                             null
 
                         ))}
@@ -79,8 +81,10 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
                    
 
                 </QuestionContainer>
+                
             ))}
                 </Slider>
+                </Problem>
             </SliderContainer>
         </Form>
     );
@@ -93,6 +97,7 @@ export default ReportQuestionReview;
 const ReportQuestionTitle = styled.div`
     font-size: 2.5em;
     font-weight: bold; 
+    /* border: 1px solid red; */
 `;
 
 const AnswerContainer = styled.div`
@@ -107,3 +112,7 @@ const ReportCorrectTextContainer = styled.div`
   font-size: 16px;
   line-height: 1.5;
 `;
+
+const Problem = styled.div`
+    
+`

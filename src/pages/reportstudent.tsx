@@ -168,16 +168,10 @@ const ReportStudent  = () => {
                         </PieText>
 
                       </div>
-
-                      
-                      
-                      
                     </PieChartSize>
 
                     <ReportTextContainer>
-
                           <ReportQuestionInfoComponent quizzes={data.quizzes}/>
-
                     </ReportTextContainer>
                     
                 </ReportStudentBackground>

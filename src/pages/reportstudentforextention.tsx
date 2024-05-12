@@ -245,9 +245,8 @@ const ReportStudentTitle = styled.div`
 
 `;
 
-const ReportStudentSubTitle = styled.div`
+const ReportStudentSubTitle = styled.h3`
     font-size: 1.5em;
-    margin:50px;
 
 
 `;
