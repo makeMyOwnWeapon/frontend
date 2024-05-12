@@ -26,7 +26,7 @@ function App() {
         <Route path="/video" element={<VideoComponent/>}/>
         <Route path="/reportlist" element={<RequireAuth><ReportList/></RequireAuth>}/>
         <Route path="/reportstudent/" element={<ReportStudent/>}/>
-        <Route path="/reportstudentforextention/:subLectureId/:lectureHistoryId" element={<ReportStudentFroExtention/>}/>
+        <Route path="/reportstudentforextension/:lectureHistoryId" element={<ReportStudentFroExtention/>}/>
         <Route path="/reportteacher" element={<RequireAuth><ReportTeacher/></RequireAuth>}/>
         <Route path="/inquiry" element={<RequireAuth><Inquiry/></RequireAuth>}/>
         <Route path="/background" element={<BackgroundAnimation/>}/>

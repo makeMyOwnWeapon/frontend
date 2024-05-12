@@ -33,7 +33,6 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
     useEffect(()=>{
     setData(quizzes);
     
-
     },[quizzes])
     
     const settings = {
@@ -42,6 +41,7 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1
+
     };
     return (
         <Form>
@@ -50,9 +50,9 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
                 <Slider className="custom-slider" {...settings}> 
                 {data && data.map((question, index) => (
                 <QuestionContainer key={index}>
-                    <TextContainer>{index+1}번 문제: {question.question}</TextContainer>
+                   
                     <Question key={index}>
-                        
+                         <TextContainer>{index+1}번 문제: {question.question}</TextContainer>
                         {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
                             choiceIndex.toString() === question.userChoice ?
                             <ReportCorrectTextContainer key={choiceIndex}>정답 : {choice.content}</ReportCorrectTextContainer>:
@@ -62,21 +62,21 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
                         {question && question.choices.length === 1 && question.choices.map((choice, choiceIndex) => (
                             <TextContainer key={choiceIndex}>제출한 답 : {choice.content}</TextContainer>
                         ))}
+                        <AnswerContainer> 
 
+                        <TextContainer>해설 : {question.commentary}</TextContainer>
+                        
+                          정답  {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
+                            choice.isAnswer === true  ?
+                            <TextContainer key={choiceIndex}>{choice.content}</TextContainer>:
+                            null
+
+                        ))}
+
+                        </AnswerContainer>  
                     </Question>
                     
-                    <AnswerContainer> 
-
-                    <TextContainer>{question.commentary}</TextContainer>
-                    정답
-                    {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
-                        choice.isAnswer === true  ?
-                        <TextContainer key={choiceIndex}>{choice.content}</TextContainer>:
-                        null
-
-                    ))}
-
-                    </AnswerContainer>  
+                   
 
                 </QuestionContainer>
             ))}

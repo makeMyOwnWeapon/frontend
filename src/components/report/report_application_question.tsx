@@ -1,64 +1,84 @@
-import React, { useState } from "react";
-import { Form } from '../../styles/CreateQuestion';
+import React, { useEffect, useState } from "react";
+import { Form, QuestionContainer } from '../../styles/CreateQuestion';
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/css/fad.css';
+import Slider from "react-slick";
+import { Question } from "../../styles/QuestionInfo";
 
 
-interface Choice {
-    content: string;
-    isAnswer: boolean;
-}
+interface gptSummery {
+    gptSummery: summary[];
+  }
 
-interface quizzes{
-    quizzes:Question_[]
-}
+  interface summary{
+    reviews:string;
+  }
 
-interface Question_ {
-    choices: Choice[];
-    commentary:string;
-    isCorrect:boolean;
-    question:string;
-    solvedDuration:number;
-    userChoice:string;
-}
+const ReportRecommand = ({gptSummery}:gptSummery)=> {
 
-const ReportSolveAnalyze = ()=> {
+    const [data, setData] = useState<summary[]>();
+    
+    useEffect(()=>{
+    setData(gptSummery);
+    
+    },[gptSummery])
+
+
     return (
         <Form>
             
             <SolveAnalyzeContainer>
-                <ApplicationQuestionTitle>응용문제</ApplicationQuestionTitle>
-                <ComponentContainer>
+                <ApplicationQuestionTitle>추천 키워드</ApplicationQuestionTitle>
+                    <Summary>
+                        {data&&data.map((summary,index)=>(
+                            <SummaryText key={index}>
+                                <TextContainer>- {summary.reviews}</TextContainer> 
+                            </SummaryText>
+                        ))}
 
-                <text>더미데이터</text>
 
-                </ComponentContainer>
+                    </Summary>
 
             </SolveAnalyzeContainer>
         </Form>
     );
 };
 
-export default ReportSolveAnalyze;
+export default ReportRecommand;
 
 const ApplicationQuestionTitle = styled.div`
     font-size: 2.5em;
     font-weight: bold; 
 `;
 
-const ComponentContainer = styled.div`
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    flex-direction:column;
-    width: 100%;
-    min-height: 200px;
+const Summary = styled.div`
+  flex: 1; /* 콘텐츠 영역이 남은 공간을 차지 */
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #ccc; /* 테두리 스타일 지정 */
+  border-radius: 5px; /* 테두리 모서리를 둥글게 만듦 */
+  padding: 10px; /* 내부 여백 추가 */
+  margin: 10px; /* 외부 패딩 추가 */
+  flex-direction:column;
+  min-height: 400px;
+`;
+
+const TextContainer = styled.div`
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  color: #212529;
+  font-size: 16px;
+  line-height: 1.5;
+`;
+
+
+
+const SummaryText = styled.div`
+    
 
 `;
 

@@ -10,7 +10,6 @@ import axios from "axios";
 import PieChart from "../components/report/report_pie";
 import LineChart from "../components/report/report_line";
 import ReportQuestionInfoComponent from "../components/report/report_question_review";
-import ReportSolveAnalyze from "../components/report/report_solve_analyze";
 import ReportApplicationQuestion from "../components/report/report_application_question";
 import SidebarOptions from "../components/board/select_option";
 
@@ -35,7 +34,26 @@ interface Choice {
   isAnswer: boolean;
 }
 
-interface Data {
+interface gptAppQuestion {
+  choices: Choice[];
+  commentary:string;
+  instruction:string;
+}
+
+interface summary{
+  reviews:string;
+}
+
+interface gptSummery{
+  summary: summary[];
+}
+
+interface Data{
+  gptAppQuestion:gptAppQuestion[];
+  gptSummery:gptSummery;
+  readHistoryReport:readHistoryReport;
+}
+interface readHistoryReport {
   quizzes: Quiz[];
   sleepinessAndDistraction: SleepinessAndDistraction[];
   studyStartTime: string;
@@ -63,17 +81,18 @@ function formatDate(inputDate: string): string {
 // 사용 예시
 const inputDate = "2024-05-09T01:34:14.000Z";
 
-const ReportStudentFroExtention  = () => {
-    const {subLectureId,lectureHistoryId} = useParams();
+const ReportStudentFroExtension  = () => {
+    const {lectureHistoryId} = useParams();
     const [data, setData] = useState<Data>();
     const [studyTime, setStudyTime] = useState<string[]>(['0', '0', '0', '0']);
     useEffect(() => {
         const fetchData = async () => {
             try{
-            const response = await axios.get(`/api/history/extension/?subLectureId=${subLectureId}&lectureHistoryId=${lectureHistoryId}`,{
+            const response = await axios.get(`/api/history/extension/?lectureHistoryId=${lectureHistoryId}`,{
 
             });
             setData(response.data);
+            console.log(response)
             // data structure
             //  (sleepinessAndDistraction) : [졸기 시작한 시간(sleepinessStart), 조는거 끝난 시간(sleepinessEnd),자리이탈 시작시간(distractionStart), 다시 돌아온 시간(distractionEnd)],
             
@@ -92,13 +111,16 @@ const ReportStudentFroExtention  = () => {
         }
         };
         fetchData();
-    }, [subLectureId])
-
+    }, [lectureHistoryId])
     if (!data) {
       return <div>Loading...</div>; // 또는 다른 로딩 컴포넌트
    }
 
    
+//  내가 풀었던 문제 = 문제관련된거 다, 해설은 눌렀을때 나오는거
+// gpt가 요약해준 키워드 정리, 다맞았을때는 다른 말로
+
+
 
     return (
         <>
@@ -107,16 +129,16 @@ const ReportStudentFroExtention  = () => {
             <InnerContentSection>
                 <ReportStudentBackground>
                     <ReportStudentTitle> 레포트 페이지</ReportStudentTitle>
-                    <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.studyStartTime)}</ReportStudentSubTitle>
-                    <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.studyEndTime)}</ReportStudentSubTitle>
+                    <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.readHistoryReport.studyStartTime)}</ReportStudentSubTitle>
+                    <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.readHistoryReport.studyEndTime)}</ReportStudentSubTitle>
                     
                     <LineChartSize>
-                      <LineChart response = {data}/>
+                      <LineChart response = {data.readHistoryReport}/>
                     </LineChartSize>
 
                     <PieChartSize>
                       <div id = "chart" >
-                      <PieChart response = {data} setstudyTime={setStudyTime} />
+                      <PieChart response = {data.readHistoryReport} setstudyTime={setStudyTime} />
                       </div>
                       <div id = "text" >
 
@@ -144,11 +166,11 @@ const ReportStudentFroExtention  = () => {
 
                     <ReportTextContainer>
 
-                          <ReportSolveAnalyze/>
+                          <ReportQuestionInfoComponent quizzes={data.readHistoryReport.quizzes}/>
 
-                          <ReportQuestionInfoComponent quizzes={data.quizzes}/>
+                          <ReportApplicationQuestion gptSummery={data.gptSummery.summary} />
 
-                          <ReportApplicationQuestion />
+                          
 
                     </ReportTextContainer>
                     
@@ -237,7 +259,7 @@ const PieText = styled.div`
 
 `;
 
-export default ReportStudentFroExtention;
+export default ReportStudentFroExtension;
 
 const InnerContentSection = styled.div`
   /* border: 10px solid green; */
