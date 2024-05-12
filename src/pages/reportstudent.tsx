@@ -168,16 +168,10 @@ const ReportStudent  = () => {
                         </PieText>
 
                       </div>
-
-                      
-                      
-                      
                     </PieChartSize>
 
                     <ReportTextContainer>
-
                           <ReportQuestionInfoComponent quizzes={data.quizzes}/>
-
                     </ReportTextContainer>
                     
                 </ReportStudentBackground>
@@ -232,9 +226,8 @@ const LineChartSize = styled.div`
 const ReportStudentBackground = styled.div`
     width: 100%;
     margin : 10px;
-    opacity: 0.6;
+    /* opacity: 0.6; */
     border-radius: 20px;
-    background-color: white;
     overflow-y: scroll;
 `;
 

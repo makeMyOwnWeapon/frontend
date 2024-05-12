@@ -231,9 +231,8 @@ const LineChartSize = styled.div`
 const ReportStudentBackground = styled.div`
     width: 100%;
     margin : 10px;
-    opacity: 0.6;
     border-radius: 20px;
-    background-color: white;
+    background: transparent;
     overflow-y: scroll;
 `;
 
@@ -246,9 +245,8 @@ const ReportStudentTitle = styled.div`
 
 `;
 
-const ReportStudentSubTitle = styled.div`
+const ReportStudentSubTitle = styled.h3`
     font-size: 1.5em;
-    margin:50px;
 
 
 `;
