@@ -128,8 +128,7 @@ const NaviSection = () => {
         <div className="menus">
           <div className="menu" onClick={() => handleNavigation("/workbook")}>문제집 조회</div>
           <div className="menu" onClick={() => handleNavigation("/create")}>문제집 만들기</div>
-          <div className="menu" onClick={() => handleNavigation("/video")}>영상촬영</div>
-          <div className="menu" onClick={() => handleNavigation("/reportlist")}>레포트 조회</div>
+\          <div className="menu" onClick={() => handleNavigation("/reportlist")}>레포트 조회</div>
         </div>
       </div>
     </NavSectionWrapper>
