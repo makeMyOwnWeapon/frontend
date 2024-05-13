@@ -29,8 +29,7 @@ interface Question_ {
 
 const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) => {
     const location = useLocation();
-    const { subLectureTitle, quizSetTitle, memberNickname } = location.state || {}; // 데이터 추출
-
+    const { subLectureTitle, quizSetTitle, memberNickname } = location.state || {};
     const [data, setData] = useState<Question_[] | undefined>(undefined);
         
     useEffect(() => {

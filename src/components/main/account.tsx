@@ -4,15 +4,10 @@ import { Cookies } from 'react-cookie';
 import { GoogleOAuthProvider,GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { getAuthToken, googleRequest } from '../../helpers/axios_helper';
-import styled from 'styled-components';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
 const Account: React.FC = () => {
-
   const cookies = new Cookies;
-
-
-
   const navigate = useNavigate();
   let getUserInfoByGoogle = getAuthToken();
   let userInfo: string | null = null;
@@ -46,7 +41,6 @@ const Account: React.FC = () => {
 
   return (
 
-
     <div id="account">
       <GoogleOAuthProvider clientId={clientId}>
       {
@@ -54,7 +48,6 @@ const Account: React.FC = () => {
           <div>
             <h2>{(userInfo as any)?.nickname}님 안녕하세요</h2>
           </div>
-          
         ) : (
         
           <GoogleLogin
@@ -73,6 +66,3 @@ const Account: React.FC = () => {
 };
 
 export default Account;
-
-
-

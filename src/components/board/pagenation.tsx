@@ -1,7 +1,6 @@
 import React from 'react';
 import { PageItem, PaginationContainer } from '../../styles/WorkBook';
 
-
 type PaginationProps = {
   itemsPerPage: number;
   totalItems: number;

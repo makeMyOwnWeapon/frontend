@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-
-
 
 const gradientAnimation = keyframes`
   0% {
@@ -110,8 +108,6 @@ const NavSectionWrapper = styled.div`
         color: white;
         font-weight: bolder;
     }
-
-
   }
 
   .current_menu {
@@ -130,12 +126,6 @@ const NaviSection = (path:any) => {
   const handleNavigation = (path:any) => {
     navigate(path);
   };
-
-  const handleSetCurrentMenu = (path:string) => {
-    setCurrentMenu(path)
-  }
-
-
  
   return (
     <NavSectionWrapper>

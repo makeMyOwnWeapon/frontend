@@ -63,7 +63,6 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({
   const handleCardClick = (event: React.MouseEvent) => {
     event.preventDefault();
     navigate(`/question_info/${quizSetId}`,{state: {
-      //subLectureUrl,
       subLectureTitle, 
       quizSetTitle,   
       memberNickname   
