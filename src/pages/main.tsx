@@ -7,12 +7,14 @@ import BackgroundAnimation from "../styles/Background"
 import NaviSection from "../components/new_components/NaviSection";
 import Container from "../components/new_components/Container";
 import { Cookies } from "react-cookie";
+import { getAuthToken } from "../helpers/axios_helper";
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
   const cookies = new Cookies();
   const currentMenuName = '홈'
 
+  const jwt = getAuthToken();
 
   const handleLogout = () => {
     cookies.remove('jwt')
@@ -36,7 +38,7 @@ const Main: React.FC = () => {
                   <div id="info">
                     <Account/>
                     <div id="buttonBox">
-                    <Button onClick={handleLogout}>로그아웃</Button>
+                    {jwt && <Button onClick={handleLogout}>로그아웃</Button>}
                     <Button>소개페이지</Button>
                     </div>
                   </div>
@@ -102,9 +104,12 @@ const InnerContentSection = styled.div`
   }  
 
   #info #buttonBox{
+    margin-top: 50px;
+
     display: flex;
     >div:first-of-type{
       margin-right: 10px;
+      /* border: 1px solid red; */
     }
     /* border: 1px solid red; */
   }
