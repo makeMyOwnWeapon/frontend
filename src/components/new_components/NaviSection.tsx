@@ -24,10 +24,10 @@ const NavSectionWrapper = styled.div`
   box-sizing: border-box;
 
   .navbar {
-    width: 6rem;
+    width: 200px;
+    border-radius: 50px;
     height: 6rem;
-    background: linear-gradient(120deg, #FF0000, #0000FF);
-    border-radius: 50%;
+    background-color: #ACE1F4;
     transition: width 0.5s, border-radius 0.5s;
     animation: ${gradientAnimation} 1.5s linear infinite;
     cursor: pointer;
@@ -79,9 +79,10 @@ const NavSectionWrapper = styled.div`
   #logo_title {
     flex: 1;
     font-weight: bold;
-    background: linear-gradient(120deg, #FF0000, #0000FF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: black;
+    /* background: linear-gradient(120deg, #FF0000, #0000FF); */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
   }
 
   .menus {
@@ -117,7 +118,7 @@ const NaviSection = () => {
     <NavSectionWrapper>
       <div id="logo_box" onClick={() => handleNavigation("/")}>
         <div id="logo_img">
-          <img src="loa.png" alt="" />
+          <img src="loa_img6.png" alt="" />
         </div>
         <div id="logo_title">
           <h1>LOA</h1>

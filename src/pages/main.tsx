@@ -12,6 +12,11 @@ const Main: React.FC = () => {
   const navigate = useNavigate();
   const cookies = new Cookies();
 
+  const handleLogout = () => {
+    cookies.remove('jwt')
+    console.log('로그아웃 핸들');
+    navigate("/");
+  };
 
   const navigateTo = (path: string) => {
     navigate(path); 
@@ -30,6 +35,7 @@ const Main: React.FC = () => {
               <div>
                 <div id="info">
                   <Account/>
+                  <Info onClick={handleLogout}>로그아웃</Info>
                   <Info>소개페이지</Info>
                 </div>
               </div>
@@ -60,10 +66,11 @@ const InnerContentSection = styled.div`
     height: 200px;
     display : flex;
     flex-direction: column;
+    color: black;
 
-    background: linear-gradient(120deg, #FF0000, #0000FF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* background: linear-gradient(120deg, #FF0000, #0000FF); */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
 
   }
 
@@ -94,15 +101,15 @@ const InnerContentSection = styled.div`
 `;
 
 const Info = styled.div`
-padding: 10px 5px;
-  background-color: #3498db;
-  color: white;
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #ACE1F4;
+  color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-  width: 100%;
-  
   &:hover {
     background-color: #2980b9;
   }
