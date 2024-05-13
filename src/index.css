@@ -1,5 +1,15 @@
+@font-face{
+  font-family: "Jua-Regular";
+  font-weight: normal;
+  src: url(./fonts/Jua-Regular.ttf)
+}
+
 *{
   box-sizing: border-box;
+}
+
+body{
+  font-family: "Jua-Regular";
 }
 
 /* body {
