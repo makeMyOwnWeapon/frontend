@@ -38,16 +38,17 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
         
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await request('GET', `/api/quizsets/${quizSetId}/quizzes?commentary=true&answer=false`);
-                setData(response.data);
-                const deleteResponse = await request('GET', `/api/quizsets/${quizSetId}/can-delete`);
-                setShowDeleteButton(deleteResponse.data);
-                console.log(deleteResponse.data);
-            } catch (error) {
-                console.error('Error:', error);
-                setShowDeleteButton(false);
-            }
+            // try {
+            const response = await request('GET', `/api/quizsets/${quizSetId}/quizzes?commentary=true&answer=false`);
+            setData(response.data);
+            console.log(response.data);
+                // const deleteResponse = await request('GET', `/api/quizsets/${quizSetId}/can-delete`);
+                // setShowDeleteButton(deleteResponse.data);
+                // console.log(deleteResponse.data);
+            // } catch (error) {
+            //     console.error('Error:', error);
+            //     setShowDeleteButton(false);
+            // }
         };
     
         fetchData();
@@ -61,29 +62,27 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
         slidesToScroll: 1
     };
 
-    const handleDelete = async () => {
-        if (quizSetId) {
-            try {
-                console.log(quizSetId);
-                const response = await request('DELETE', `/api/quizsets/${parseInt(quizSetId)}/quizzes`);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-        goBack();
-    };
+    // const handleDelete = async () => {
+    //     if (quizSetId) {
+    //         try {
+    //             console.log(quizSetId);
+    //             const response = await request('DELETE', `/api/quizsets/${parseInt(quizSetId)}/quizzes`);
+    //         } catch (error) {
+    //             console.error('Error:', error);
+    //         }
+    //     }
+    //     goBack();
+    // };
     
 
     return (
         <Form>
-            
             <SliderContainer>
                 <VideoThumbnailContainer>
                     <VideoThumbnail imageUrl={videoUrl} />
                 </VideoThumbnailContainer>
-                
                 <Slider className="custom-slider" {...settings}>
-                    {data ? data.map((question, index) => (
+                    {data && data.map((question, index) => (
                         <QuestionContainer key={index}>
                             <TextContainer>시간: {question.popupTime}</TextContainer>
                             <TextContainer>문제: {question.commentary}</TextContainer>
@@ -98,12 +97,12 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
                             )} */}
 
                             <Question key={index}>
-                                {question.choice ? question.choice.map((choice, choiceIndex) => (
+                                {question && question.choice && question.choice.map((choice, choiceIndex) => (
                                     <TextContainer key={choiceIndex}>{choice.content}</TextContainer>
-                                )) : null}
+                                ))}
                             </Question>
                         </QuestionContainer>
-                    )) : null}
+                    ))}
                 </Slider>
             </SliderContainer>
         </Form>

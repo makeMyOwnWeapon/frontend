@@ -91,7 +91,7 @@ const WorkBook: React.FC = () => {
                       // <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
                       <WorkbookCard
                       createdAt={card.createdAt}
-                      memberNickname={card.memberNickname}
+                      memberNickname={truncateTitle(card.memberNickname,9)}
                       quizSetTitle={truncateTitle(card.quizSetTitle,10)}
                       quizSetId={card.quizSetId}
                       recommendationCount={card.recommendationCount}
