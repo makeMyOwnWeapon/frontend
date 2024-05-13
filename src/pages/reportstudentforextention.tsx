@@ -142,27 +142,23 @@ const ReportStudentFroExtension  = () => {
                     </LineChartSize>
 
                     <PieChartSize>
-                      <div id = "chart" >
-                      <PieChart response = {data.readHistoryReport} setstudyTime={setStudyTime} />
-                      </div>
-                      <div id = "text" >
+                    <div id="chart">
+    <PieChart response={data.readHistoryReport} setstudyTime={setStudyTime} />
+</div>
+<div id="text">
+    <PieText>
+        <div>
+            - 졸은 시간: {studyTime[0]}분 {studyTime[3]}초
+        </div>
+        <div>
+            - 자리 비운 시간: {studyTime[1]}분 {studyTime[4]}초
+        </div>
+        <div>
+            - 총 공부 시간: {studyTime[2]}분 {studyTime[5]}초
+        </div>
+    </PieText>
+</div>
 
-                        <PieText>
-                              <div>
-                                  - 총 공부시간 = {studyTime[2]}분  
-                              </div>
-                              <div>
-                                  - 자리 비운 시간 : {studyTime[1]}분
-                              </div>
-                              <div>
-                                  - 졸은 시간 : {studyTime[0]}분
-                              </div>
-                              <div>
-                                  - 총 공부 시간 : {studyTime[3]}분
-                              </div>
-                        </PieText>
-
-                      </div>
 
                       
                       

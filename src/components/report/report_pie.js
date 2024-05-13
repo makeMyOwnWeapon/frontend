@@ -30,12 +30,14 @@ const PieChart = ({ response, setstudyTime }) => {
 
             const studyTime = totalStudySeconds - (sleepinessTime + distractionTime);
             setPieData([sleepinessTime, distractionTime, studyTime]);
-            const studySeconds = totalStudySeconds - (sleepinessTime + distractionTime);
+    
             const formattedTimes = [
-                (sleepinessTime / 60).toFixed(0),
-                (distractionTime / 60).toFixed(0),
-                (totalStudySeconds / 60).toFixed(0),
-                (studySeconds/60).toFixed(0)
+                (sleepinessTime / 60).toFixed(0), // 분단위 졸음 시간
+                (distractionTime / 60).toFixed(0), // 분단위 산만함 시간
+                (studyTime / 60).toFixed(0), // 분단위 공부 시간
+                sleepinessTime, // 초단위 졸음 시간
+                distractionTime, // 초단위 산만함 시간
+                studyTime // 초단위 공부 시간
             ];
             setstudyTime(formattedTimes);         }
         
