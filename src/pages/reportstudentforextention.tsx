@@ -1,82 +1,13 @@
 import React, { useEffect, useState }  from "react";
 import styled from "styled-components";
 import BackgroundAnimation from "../styles/Background"
-import NaviSection from "../components/new_components/NaviSection";
 import Container from "../components/new_components/Container";
 import "../styles/Public"
 import { useParams } from "react-router-dom";
-import { Cookies } from "react-cookie";
 import axios from "axios";
-import PieChart from "../components/report/report_pie";
-import LineChart from "../components/report/report_line";
-import ReportQuestionInfoComponent from "../components/report/report_question_review";
-import ReportApplicationQuestion from "../components/report/report_application_question";
-import SidebarOptions from "../components/board/select_option";
+import ReportpageComponent from "../components/report/report_reportpage_component";
+import { Data } from "../components/report/reportpage";
 
-interface SleepinessAndDistraction {
-  sleepinessStart: string | null;
-  sleepinessEnd: string | null;
-  distractionStart: string | null;
-  distractionEnd: string | null;
-}
-
-interface Quiz {
-  choices: Choice[];
-  commentary:string;
-  isCorrect:boolean;
-  question:string;
-  solvedDuration:number;
-  userChoice:string;
-}
-
-interface Choice {
-  content: string;
-  isAnswer: boolean;
-}
-
-interface gptAppQuestion {
-  choices: Choice[];
-  commentary:string;
-  instruction:string;
-}
-
-interface summary{
-  reviews:string;
-}
-
-interface gptSummery{
-  summary: summary[];
-}
-
-interface Data{
-  gptAppQuestion:gptAppQuestion[];
-  gptSummery:gptSummery;
-  readHistoryReport:readHistoryReport;
-}
-interface readHistoryReport {
-  quizzes: Quiz[];
-  sleepinessAndDistraction: SleepinessAndDistraction[];
-  studyStartTime: string;
-  studyEndTime: string;
-}
-function formatDate(inputDate: string): string {
-  const date = new Date(inputDate);
-  if (inputDate === null){
-    return "0";
-  }
-  // 날짜 및 시간 추출
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hour = String(date.getHours()).padStart(2, '0');
-  const minute = String(date.getMinutes()).padStart(2, '0');
-  const second = String(date.getSeconds()).padStart(2, '0');
-
-  // 원하는 형식으로 변환
-  const formattedDate = `${year}/${month}/${day}/${hour}:${minute}:${second}`;
-
-  return formattedDate;
-}
 
 // 사용 예시
 const inputDate = "2024-05-09T01:34:14.000Z";
@@ -84,7 +15,6 @@ const inputDate = "2024-05-09T01:34:14.000Z";
 const ReportStudentFroExtension  = () => {
     const {lectureHistoryId} = useParams();
     const [data, setData] = useState<Data>();
-    const [studyTime, setStudyTime] = useState<string[]>(['0', '0', '0', '0']);
     useEffect(() => {
         const fetchData = async () => {
             try{
@@ -132,52 +62,8 @@ const ReportStudentFroExtension  = () => {
     <BackgroundAnimation>
         <Container>
             <InnerContentSection>
-                <ReportStudentBackground>
-                    <ReportStudentTitle> 레포트 페이지</ReportStudentTitle>
-                    <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.readHistoryReport.studyStartTime)}</ReportStudentSubTitle>
-                    <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.readHistoryReport.studyEndTime)}</ReportStudentSubTitle>
-                    
-                    <LineChartSize>
-                      <LineChart response = {data.readHistoryReport}/>
-                    </LineChartSize>
 
-                    <PieChartSize>
-                    <div id="chart">
-    <PieChart response={data.readHistoryReport} setstudyTime={setStudyTime} />
-</div>
-<div id="text">
-    <PieText>
-        <div>
-            - 자리 비운 시간: {studyTime[0]}분 {studyTime[3]}초
-        </div>
-        <div>
-            - 졸은  시간: {studyTime[1]}분 {studyTime[4]}초
-        </div>
-        <div>
-            - 총 공부 시간: {studyTime[2]}분 {studyTime[5]}초
-        </div>
-    </PieText>
-</div>
-
-
-                      
-                      
-                      
-                    </PieChartSize>
-
-                    <ReportTextContainer>
-
-                          <ReportQuestionInfoComponent quizzes={data.readHistoryReport.quizzes}/>
-
-                          <ReportApplicationQuestion gptSummery={data.gptSummery.summary} />
-
-                          
-
-                    </ReportTextContainer>
-                    
-                </ReportStudentBackground>
-
-
+              <ReportpageComponent data = {data}/>
 
             </InnerContentSection>
         </Container>
@@ -188,75 +74,6 @@ const ReportStudentFroExtension  = () => {
     };
 
 
-const ReportTextContainer = styled.div`
-  
-
-`;
-  
-const PieChartSize = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  padding : 30px;
-  width:100%;
-  height:70%;
-  /* border:1px solid red; */
- 
-  >div{
-    /* border: 1px solid blue; */
-    height:70%;
-  }
-
-
-  #chart{
-    display: flex;
-    max-width: 100%;
-  }
-
-  
-
-  
-`;
-const LineChartSize = styled.div`
-  width:100%;
-  height:50%;
-
-`;
-
-
-const ReportStudentBackground = styled.div`
-    width: 100%;
-    margin : 10px;
-    border-radius: 20px;
-    background: transparent;
-    overflow-y: scroll;
-`;
-
-const ReportStudentTitle = styled.div`
-    font-weight: bold; 
-    font-size : 4.0em;
-    display: flex;
-    margin:40px;
-
-
-`;
-
-const ReportStudentSubTitle = styled.h3`
-    font-size: 1.5em;
-
-
-`;
-
-const PieText = styled.div`
-    font-size: 1.5em;
-    margin:30px;
-    flex-direction: column; // 내부 컴포넌트를 세로로 쌓기
-    /* justify-content: center; */
-    align-items: center;
-    width : 100%;
-
-
-`;
 
 export default ReportStudentFroExtension;
 
