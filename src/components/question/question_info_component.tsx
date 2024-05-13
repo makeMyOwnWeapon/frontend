@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { useLocation } from "react-router-dom"; // useLocation import
 import { Form } from '../../styles/CreateQuestion';
 import VideoThumbnail from "../public/url_to_image";
 import { Question, VideoThumbnailContainer, QuestionContainer } from '../../styles/QuestionInfo';
@@ -8,7 +9,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/css/fad.css';
 import { request } from "../../helpers/axios_helper";
-import { useNavigate } from "react-router-dom";
 
 interface QuestionComponentProps {
     videoUrl: string;
@@ -28,27 +28,16 @@ interface Question_ {
 }
 
 const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) => {
-    const [data, setData] = useState<Question_[] | undefined>(undefined);
-    const [showDeleteButton, setShowDeleteButton] = useState(false);
-    const navigate = useNavigate();
+    const location = useLocation();
+    const { subLectureTitle, quizSetTitle, memberNickname } = location.state || {}; // 데이터 추출
 
-    function goBack(){
-        navigate("/workbook");
-    }
+    const [data, setData] = useState<Question_[] | undefined>(undefined);
         
     useEffect(() => {
         const fetchData = async () => {
-            // try {
-            const response = await request('GET', `/api/quizsets/${quizSetId}/quizzes?commentary=true&answer=false`);
+            const response = await request('GET', `/api/quizsets/${quizSetId}/quizzes`);
             setData(response.data);
             console.log(response.data);
-                // const deleteResponse = await request('GET', `/api/quizsets/${quizSetId}/can-delete`);
-                // setShowDeleteButton(deleteResponse.data);
-                // console.log(deleteResponse.data);
-            // } catch (error) {
-            //     console.error('Error:', error);
-            //     setShowDeleteButton(false);
-            // }
         };
     
         fetchData();
@@ -62,19 +51,6 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
         slidesToScroll: 1
     };
 
-    // const handleDelete = async () => {
-    //     if (quizSetId) {
-    //         try {
-    //             console.log(quizSetId);
-    //             const response = await request('DELETE', `/api/quizsets/${parseInt(quizSetId)}/quizzes`);
-    //         } catch (error) {
-    //             console.error('Error:', error);
-    //         }
-    //     }
-    //     goBack();
-    // };
-    
-
     return (
         <Form>
             <SliderContainer>
@@ -86,18 +62,12 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
                         <QuestionContainer key={index}>
                             <TextContainer>시간: {question.popupTime}</TextContainer>
                             <TextContainer>문제: {question.commentary}</TextContainer>
-
-                            {/* {showDeleteButton && (
-                                <button
-                                    style={{ position: 'absolute', top: 10, right: 10 }}
-                                    onClick={() => handleDelete()}
-                                >
-                                    삭제하기
-                                </button>
-                            )} */}
+                            <TextContainer>소강의명: {subLectureTitle}</TextContainer>
+                            <TextContainer>문제집명: {quizSetTitle}</TextContainer>
+                            <TextContainer>작성자: {memberNickname}</TextContainer>
 
                             <Question key={index}>
-                                {question && question.choice && question.choice.map((choice, choiceIndex) => (
+                                {question.choice && question.choice.map((choice, choiceIndex) => (
                                     <TextContainer key={choiceIndex}>{choice.content}</TextContainer>
                                 ))}
                             </Question>

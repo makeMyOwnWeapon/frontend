@@ -4,6 +4,7 @@ import VideoThumbnail from "../public/url_to_image";
 import { FaThumbsUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { request } from "../../helpers/axios_helper";
+import { truncateTitle } from "../../pages/workbook";
 
 interface WorkbookCardProps {
   createdAt: string;
@@ -20,6 +21,7 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({
   quizSetTitle,
   quizSetId,
   recommendationCount,
+  subLectureTitle,
   subLectureUrl
 }) => {
   const navigate = useNavigate();
@@ -60,7 +62,13 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({
 
   const handleCardClick = (event: React.MouseEvent) => {
     event.preventDefault();
-    navigate(`/question_info/${quizSetId}`, { state: { subLectureUrl } });
+    navigate(`/question_info/${quizSetId}`,{state: {
+      //subLectureUrl,
+      subLectureTitle, 
+      quizSetTitle,   
+      memberNickname   
+    }
+  });
   };
   
 
@@ -77,6 +85,7 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({
       <CardContent>
         <CardTitle>{quizSetTitle}</CardTitle>
         <CardDescription>작성자: {memberNickname}</CardDescription>
+        <CardDescription>강의명: {truncateTitle(subLectureTitle,9)}</CardDescription>
         <ReadMoreLink onClick={recommendationClick}>
           <FaThumbsUp />
           {recommendation}

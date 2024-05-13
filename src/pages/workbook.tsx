@@ -110,13 +110,7 @@ const WorkBook: React.FC = () => {
 
 export default WorkBook;
 
-function truncateTitle(title:any, maxLength:any) {
-  if (typeof title !== 'string') {
-    console.error('Title must be a string:', title);
-    return title;
-  }
-
-  console.log(`Original title: ${title}, Length: ${title.length}`);
+export function truncateTitle(title:any, maxLength:any) {
   return title.length > maxLength ? `${title.substring(0, maxLength)}...` : title;
 }
 
