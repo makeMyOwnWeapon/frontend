@@ -4,7 +4,6 @@ import NavBar from '../components/public/navbar_default';
 import QuestionInfoComponent from '../components/question/question_info_component';
 import { useLocation,  useParams } from 'react-router-dom';
 
-
 const QuestionInfo = () => {
   const location = useLocation();
   const { quizSetId } = useParams();

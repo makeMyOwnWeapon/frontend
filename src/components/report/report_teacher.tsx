@@ -26,7 +26,6 @@ const ReportTeacher: React.FC<ReportCardProps> = ({  memberNickname,  quizSetId,
           <CardTitle>{subLectureTitle}</CardTitle>
         </a>
         <CardDescription>작성자: {memberNickname}</CardDescription>
-
       </CardContent>
     </CardContainer>
   );

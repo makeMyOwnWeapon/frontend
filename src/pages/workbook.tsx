@@ -10,7 +10,6 @@ import { Side } from "../components/new_components/Side";
 import { Main } from "../components/new_components/Main";
 import { request } from "../helpers/axios_helper";
 
-
 interface Card {
   createdAt: string;
   memberNickname: string;
@@ -21,9 +20,9 @@ interface Card {
   subLectureUrl: string;
 }
 
-const WorkBook: React.FC = (props) => {
+const WorkBook: React.FC = () => {
   const [cards, setCards] = useState<Card[]>([]);
-  const [searchOption, setSearchOption] = useState<string>("all"); // 기본 검색 옵션은 '문제집명'
+  const [searchOption, setSearchOption] = useState<string>("all");
   const [searchText, setSearchText] = useState<string>("");
 
   const currentMenuName = '문제집 조회'
@@ -65,14 +64,12 @@ const WorkBook: React.FC = (props) => {
 <BackgroundAnimation>
       <Container>
         <NaviSection currentMenuName = {currentMenuName}></NaviSection>
-        <InnerContentSection>
-              
+        <InnerContentSection>  
               <Side>
                 <SidebarOptions/>
-
                 <SearchBox>
                     <select onChange={(e) => setSearchOption(e.target.value)}>
-                      <option value="all">전체</option>
+                      <option value="all">선택</option>
                       <option value="quizSetTitle">문제집명</option>
                       <option value="memberNickname">작성자</option>
                       <option value="subLectureTitle">강의명</option>
@@ -84,11 +81,8 @@ const WorkBook: React.FC = (props) => {
                       onChange={(e) => setSearchText(e.target.value)}
                       placeholder="입력하세요"
                     />
-                    
                 </SearchBox>
-                
               </Side>
-                
               <Main>
                 {cards.filter(filterCards)
                   .map((card, index) => (
@@ -121,13 +115,11 @@ export function truncateTitle(title:any, maxLength:any) {
 const InnerContentSection = styled.div`
   /* border: 10px solid green; */
   display: flex;
-
   height: 85%;
 
 >div{
   /* border: 1px solid black; */
 }
-
 
 #searchBox{
   height: 30%;
