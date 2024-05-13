@@ -176,10 +176,10 @@ class ProblemPage extends Component<Props, State> {
           <StyledText>나만의 문제 만들기</StyledText>
           <InputContainer>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <Input type="text" placeholder="문제집명" maxLength={15} value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
-              <Input type="text" placeholder="동영상 URL" maxLength={100} value={this.state.subLectureUrl} onChange={this.handleSubLectureUrlChange} />
-              <Input type="text" placeholder="대강의명" maxLength={20} value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
-              <Input type="text" placeholder="소강의명" maxLength={20} value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
+              <Input type="text" placeholder="문제집명" maxLength={40} value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
+              <Input type="text" placeholder="동영상 URL" maxLength={150} value={this.state.subLectureUrl} onChange={this.handleSubLectureUrlChange} />
+              <Input type="text" placeholder="대강의명" maxLength={40} value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
+              <Input type="text" placeholder="소강의명" maxLength={40} value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
               <Input type="text" placeholder="강의 시간 (예: 1:23:45 또는 45:30)" maxLength={8} value={this.state.duration} onChange={this.handleDurationChange} />
             </div>
             <VideoThumbnail imageUrl={this.state.subLectureUrl} />

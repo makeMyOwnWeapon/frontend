@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Option, SidebarBackGround } from "../../styles/WorkBook";
 import { useNavigate } from "react-router-dom";
-import { Cookies, useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -17,14 +17,11 @@ interface OptionItem {
 const SidebarOptions = () => {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const navigate = useNavigate();
-  const cookies = new Cookies();
-  const token = cookies.get('jwt');
   const [_, __, removeCookie] = useCookies(['jwt']);
   const options: OptionItem[] = [
     { id: 1, label: '내 인증코드 보기' },
-    { id: 2, label: '문제집 만들기' },
-    { id: 3, label: '회원탈퇴' },
-    { id: 4, label: '로그아웃' },
+    { id: 2, label: '회원탈퇴' },
+    { id: 3, label: '로그아웃' },
   ];
 
   const copyToClipboard = (text: string) => {
@@ -65,9 +62,6 @@ const SidebarOptions = () => {
         }
         break;
       case 2:
-        navigate("/create");
-        break;
-      case 3:
         confirmAlert({
           customUI: ({ onClose }) => {
             return (
@@ -100,7 +94,7 @@ const SidebarOptions = () => {
           }
         });
         break;
-      case 4:
+      case 3:
         removeCookie("jwt");
         navigate("/");
         break;

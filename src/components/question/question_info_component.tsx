@@ -88,14 +88,14 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
                             <TextContainer>시간: {question.popupTime}</TextContainer>
                             <TextContainer>문제: {question.commentary}</TextContainer>
 
-                            {showDeleteButton && (
+                            {/* {showDeleteButton && (
                                 <button
                                     style={{ position: 'absolute', top: 10, right: 10 }}
                                     onClick={() => handleDelete()}
                                 >
                                     삭제하기
                                 </button>
-                            )}
+                            )} */}
 
                             <Question key={index}>
                                 {question.choice ? question.choice.map((choice, choiceIndex) => (
