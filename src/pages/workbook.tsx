@@ -89,15 +89,15 @@ const WorkBook: React.FC = () => {
                 {cards.filter(filterCards)
                   .map((card, index) => (
                       // <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-                        <WorkbookCard
-                          createdAt={card.createdAt}
-                          memberNickname={card.memberNickname}
-                          quizSetTitle={card.quizSetTitle}
-                          quizSetId={card.quizSetId}
-                          recommendationCount={card.recommendationCount}
-                          subLectureTitle={card.subLectureTitle}
-                          subLectureUrl={card.subLectureUrl}
-                        />
+                      <WorkbookCard
+                      createdAt={card.createdAt}
+                      memberNickname={card.memberNickname}
+                      quizSetTitle={truncateTitle(card.quizSetTitle,10)}
+                      quizSetId={card.quizSetId}
+                      recommendationCount={card.recommendationCount}
+                      subLectureTitle={card.subLectureTitle}
+                      subLectureUrl={card.subLectureUrl}
+                    />             
                       // </motion.div>
                     ))}
               </Main>
@@ -109,6 +109,16 @@ const WorkBook: React.FC = () => {
 };
 
 export default WorkBook;
+
+function truncateTitle(title:any, maxLength:any) {
+  if (typeof title !== 'string') {
+    console.error('Title must be a string:', title);
+    return title;
+  }
+
+  console.log(`Original title: ${title}, Length: ${title.length}`);
+  return title.length > maxLength ? `${title.substring(0, maxLength)}...` : title;
+}
 
 const InnerContentSection = styled.div`
   /* border: 10px solid green; */

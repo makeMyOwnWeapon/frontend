@@ -9,7 +9,7 @@ import VideoComponent from './pages/video';
 import ReportList from './pages/reportlist';
 import ReportStudent from './pages/reportstudent';
 import ReportTeacher from './pages/reportteacher';
-import Inquiry from './pages/404page';
+import NotFoundPage from './pages/404page';
 import BackgroundAnimation from './styles/Background';
 import RequireAuth from './helpers/requireauth'
 import ReportStudentFroExtention from './pages/reportstudentforextention';
@@ -28,7 +28,7 @@ function App() {
         <Route path="/reportstudent/" element={<ReportStudent/>}/>
         <Route path="/reportstudentforextension/:lectureHistoryId" element={<ReportStudentFroExtention/>}/>
         <Route path="/reportteacher" element={<RequireAuth><ReportTeacher/></RequireAuth>}/>
-        <Route path="/inquiry" element={<RequireAuth><Inquiry/></RequireAuth>}/>
+        <Route path="/404page" element={<RequireAuth><NotFoundPage/></RequireAuth>}/>
         <Route path="/background" element={<BackgroundAnimation/>}/>
       </Routes>
     </BrowserRouter>
