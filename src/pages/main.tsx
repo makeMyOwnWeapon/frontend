@@ -11,7 +11,13 @@ import { Cookies } from "react-cookie";
 const Main: React.FC = () => {
   const navigate = useNavigate();
   const cookies = new Cookies();
+  const currentMenuName = '홈'
 
+
+  const handleLogout = () => {
+    cookies.remove('jwt')
+    navigate("/");
+  };
 
   const navigateTo = (path: string) => {
     navigate(path); 
@@ -21,18 +27,19 @@ const Main: React.FC = () => {
   return (
     <BackgroundAnimation>
       <Container>
-        <NaviSection></NaviSection>
+        <NaviSection currentMenuName = {currentMenuName}></NaviSection>
             <InnerContentSection>
-              <div id="title">
-                <span>온라인 학습 헬퍼</span>
-                <span>Learn On-Air</span>
-              </div>
-              <div>
-                <div id="info">
-                  <Account/>
-                  <Info>소개페이지</Info>
+                <div id="title">
+                  <span>온라인 학습 헬퍼</span>
+                  <span>Learn On-Air</span>
                 </div>
-              </div>
+                  <div id="info">
+                    <Account/>
+                    <div id="buttonBox">
+                    <Button onClick={handleLogout}>로그아웃</Button>
+                    <Button>소개페이지</Button>
+                    </div>
+                  </div>
             </InnerContentSection>
       </Container>
    </BackgroundAnimation>
@@ -48,6 +55,7 @@ const InnerContentSection = styled.div`
   align-items: center;
   text-align: center;
   height: 100%;
+  justify-content: space-around;
 
   > div{
     /* border: 1px solid black; */
@@ -60,16 +68,18 @@ const InnerContentSection = styled.div`
     height: 200px;
     display : flex;
     flex-direction: column;
+    color: black;
+    /* border: 1px solid red; */
 
-    background: linear-gradient(120deg, #FF0000, #0000FF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* background: linear-gradient(120deg, #FF0000, #0000FF); */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
 
   }
 
   #title span{
     display: block;
-    font-size: 50%;
+    font-size: 66px;
   }
 
   #account{
@@ -79,32 +89,42 @@ const InnerContentSection = styled.div`
     height: 100;
   }
 
+
+
   #info{
     /* border: 1px solid black; */
     display: flex;
-    justify-content:space-evenly;
     flex-direction: column;
     width: 500px;
     height: 300px;
     align-items: center;
-
-
+    /* border: 1px solid red; */
   }  
+
+  #info #buttonBox{
+    display: flex;
+    >div:first-of-type{
+      margin-right: 10px;
+    }
+    /* border: 1px solid red; */
+  }
+
 
 `;
 
-const Info = styled.div`
-padding: 10px 5px;
-  background-color: #3498db;
-  color: white;
+const Button = styled.div`
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #ACE1F4;
+  color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-  width: 100%;
-  
   &:hover {
-    background-color: #2980b9;
+    background-color: skyblue;
+    color: white;
   }
 
 `

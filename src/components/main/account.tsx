@@ -11,11 +11,7 @@ const Account: React.FC = () => {
 
   const cookies = new Cookies;
 
-  const handleLogout = () => {
-    cookies.remove('jwt')
-    console.log('로그아웃 핸들');
-    navigate("/");
-  };
+
 
   const navigate = useNavigate();
   let getUserInfoByGoogle = getAuthToken();
@@ -57,7 +53,6 @@ const Account: React.FC = () => {
         userInfo ? (
           <div>
             <h2>{(userInfo as any)?.nickname}님 안녕하세요</h2>
-            <Logout onClick={handleLogout}>로그아웃</Logout>
           </div>
           
         ) : (
@@ -79,20 +74,5 @@ const Account: React.FC = () => {
 
 export default Account;
 
-const Logout = styled.div`
-  margin-top: 100px;
-  padding: 10px 5px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  
-  &:hover {
-    background-color: #2980b9;
-  }
 
-
-`
 

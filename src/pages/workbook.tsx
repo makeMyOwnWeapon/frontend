@@ -21,11 +21,15 @@ interface Card {
   subLectureUrl: string;
 }
 
-const WorkBook: React.FC = () => {
+const WorkBook: React.FC = (props) => {
   const [cards, setCards] = useState<Card[]>([]);
   const [searchOption, setSearchOption] = useState<string>("all"); // 기본 검색 옵션은 '문제집명'
   const [searchText, setSearchText] = useState<string>("");
+
+  const currentMenuName = '문제집 조회'
+
   useEffect(() => {
+
 
     const fetchData = async () => {
       try {
@@ -60,7 +64,7 @@ const WorkBook: React.FC = () => {
     <>
 <BackgroundAnimation>
       <Container>
-        <NaviSection></NaviSection>
+        <NaviSection currentMenuName = {currentMenuName}></NaviSection>
         <InnerContentSection>
               
               <Side>
