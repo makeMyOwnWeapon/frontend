@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 
 interface ReportCardProps {
-  memberNickname: string;
   subLectureId: number;
   subLectureTitle: string;
   subLectureUrl: string;
@@ -13,7 +12,7 @@ interface ReportCardProps {
   lectureHistoryId:number;
 }
 
-const ReportCard: React.FC<ReportCardProps> = ({  memberNickname,  subLectureId, subLectureTitle, subLectureUrl,registrationDate,lectureHistoryId }) => {
+const ReportCard: React.FC<ReportCardProps> = ({   subLectureId, subLectureTitle, subLectureUrl,registrationDate,lectureHistoryId }) => {
   const navigate = useNavigate();
   const handleCardClick = () => {
     console.log(subLectureTitle);

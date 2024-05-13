@@ -51,7 +51,7 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
                 <Slider className="custom-slider" {...settings}> 
                 {data && data.map((question, index) => (
                 <QuestionContainer key={index}>
-                   
+
                     <Question key={index}>
                          <h3>{index+1}번 문제: {question.question}</h3>
                         {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
@@ -70,7 +70,7 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
                         <h3>정답</h3>
                           {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
                             choice.isAnswer === true  ?
-                            <TextContainer key={choiceIndex}>{choiceIndex}번 : {choice.content}</TextContainer>:
+                            <TextContainer key={choiceIndex}>{choiceIndex+1}번 : {choice.content}</TextContainer>:
                             null
 
                         ))}

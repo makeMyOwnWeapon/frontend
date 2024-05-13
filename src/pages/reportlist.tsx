@@ -12,9 +12,6 @@ import { Side } from "../components/new_components/Side";
 import { request } from "../helpers/axios_helper";
 
 interface ReportCard {
-  createdAt: string;
-  lecturerName: string;
-  quizSetTitle: string;
   subLectureId: number;
   subLectureTitle: string;
   subLectureUrl:string;
@@ -75,7 +72,6 @@ const ReportList: React.FC = () => {
                                 // <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
                                     <ReportCard
                                     key={index}
-                                    memberNickname={card.lecturerName}
                                     subLectureId={card.subLectureId}
                                     subLectureTitle={card.subLectureTitle}
                                     subLectureUrl={card.subLectureUrl}
