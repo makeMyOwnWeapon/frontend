@@ -7,26 +7,21 @@ import ReportApplicationQuestion from "./report_application_question";
 import { Data } from "./reportpage";
                 
 interface ReportpageProps {
-    data: Data;  // Data 인터페이스는 위에서 정의되었습니다.
+    data: Data;
   }
-
   
 function formatDate(inputDate: string): string {
     const date = new Date(inputDate);
     if (inputDate === null){
       return "0";
     }
-    // 날짜 및 시간 추출
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const hour = String(date.getHours()).padStart(2, '0');
     const minute = String(date.getMinutes()).padStart(2, '0');
     const second = String(date.getSeconds()).padStart(2, '0');
-  
-    // 원하는 형식으로 변환
     const formattedDate = `${year}/${month}/${day}/${hour}:${minute}:${second}`;
-  
     return formattedDate;
   }
 
@@ -63,24 +58,15 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
                 </PieText>
             </div>
         </PieChartSize>
-
         <ReportTextContainer>
-
                 <ReportQuestionInfoComponent quizzes={data.readHistoryReport.quizzes}/>
-
                 <ReportApplicationQuestion gptSummery={data.gptSummery.summary} />
-
-                
-
         </ReportTextContainer>
-        
     </ReportStudentBackground>
-
 )} 
 
 
 const ReportTextContainer = styled.div`
-  
 
 `;
 
@@ -109,14 +95,10 @@ const PieChartSize = styled.div`
     height:70%;
   }
 
-
   #chart{
     display: flex;
     max-width: 100%;
   }
-
-  
-
   
 `;
 const LineChartSize = styled.div`
@@ -140,7 +122,6 @@ const ReportStudentTitle = styled.div`
     display: flex;
     margin:40px;
 
-
 `;
 
 const ReportStudentSubTitle = styled.div`
@@ -152,11 +133,9 @@ const ReportStudentSubTitle = styled.div`
 const PieText = styled.div`
     font-size: 1.5em;
     margin:30px;
-    flex-direction: column; // 내부 컴포넌트를 세로로 쌓기
-    /* justify-content: center; */
+    flex-direction: column;
     align-items: center;
     width : 100%;
-
 
 `;
 export default ReportpageComponent;

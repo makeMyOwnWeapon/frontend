@@ -77,11 +77,7 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
 
                         </AnswerContainer>  
                     </Question>
-                    
-                   
-
                 </QuestionContainer>
-                
             ))}
                 </Slider>
                 </Problem>
@@ -91,8 +87,6 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
 };
 
 export default ReportQuestionReview;
-
-
 
 const ReportQuestionTitle = styled.div`
     font-size: 2.5em;
