@@ -1,3 +1,7 @@
+:root {
+	--bubble-color: #ACE1F4;  /* CSS 전역 변수 선언 */
+}
+
 html,
 body {
     margin: 0;
@@ -9,12 +13,14 @@ body {
 }
 
 body {
-    background: linear-gradient(
+    /* background: linear-gradient(
         to bottom,
         rgba(221, 237, 255, 1) 50%,
         rgba(221, 237, 255, 1) 0%,
         rgb(142, 197, 255) 100%
-    );
+    ); */
+    background: linear-gradient(to bottom, #FFFFFF, #DBFDFC);
+
     /* border: 10px solid blue; */
 }
 
@@ -46,7 +52,8 @@ ul li div {
 .front div:nth-child(1) {
     width: 120px;
     height: 120px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 10%;
     left: 40%;
     animation: blink 5s infinite 0.5s;
@@ -55,7 +62,8 @@ ul li div {
 .front div:nth-child(2) {
     width: 110px;
     height: 110px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 50%;
     left: 80%;
     animation: blink 5s infinite 2s;
@@ -64,7 +72,8 @@ ul li div {
 .front div:nth-child(3) {
     width: 80px;
     height: 80px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 30%;
     left: 10%;
     animation: blink 5s infinite 1s;
@@ -73,7 +82,8 @@ ul li div {
 .second div:nth-child(1) {
     width: 70px;
     height: 70px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 60%;
     left: 40%;
     animation: blink 5s infinite 0.3s;
@@ -82,7 +92,8 @@ ul li div {
 .second div:nth-child(2) {
     width: 60px;
     height: 60px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 80%;
     left: 60%;
     animation: blink 5s infinite 1.2s;
@@ -91,7 +102,8 @@ ul li div {
 .second div:nth-child(3) {
     width: 55px;
     height: 55px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: -90;
     left: 20%;
     animation: blink 5s infinite 1.4s;
@@ -100,7 +112,8 @@ ul li div {
 .third div:nth-child(1) {
     width: 45px;
     height: 45px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 25%;
     left: 18%;
     animation: blink 5s infinite 0.8s;
@@ -109,7 +122,8 @@ ul li div {
 .third div:nth-child(2) {
     width: 60px;
     height: 60px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 75%;
     left: 35%;
     animation: blink 5s infinite 1.6s;
@@ -118,7 +132,8 @@ ul li div {
 .third div:nth-child(3) {
     width: 55px;
     height: 55px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 10%;
     left: 80%;
     animation: blink 5s infinite 1s;
@@ -127,7 +142,8 @@ ul li div {
 .fourth div:nth-child(1) {
     width: 60px;
     height: 60px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 45%;
     left: 68%;
     animation: blink 5s infinite 0.4s;
@@ -136,7 +152,8 @@ ul li div {
 .fourth div:nth-child(2) {
     width: 80px;
     height: 80px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 77%;
     left: 25%;
     animation: blink 5s infinite 0.9s;
@@ -145,7 +162,8 @@ ul li div {
 .fourth div:nth-child(3) {
     width: 90px;
     height: 90px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 94%;
     left: 40%;
     animation: blink 5s infinite 1.6s;
@@ -154,7 +172,8 @@ ul li div {
 .fifth div:nth-child(1) {
     width: 30px;
     height: 30px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 90%;
     left: 28%;
     animation: blink 5s infinite 0.4s;
@@ -163,7 +182,8 @@ ul li div {
 .fifth div:nth-child(2) {
     width: 20px;
     height: 20px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 57%;
     left: 55%;
     animation: blink 5s infinite 0.9s;
@@ -172,7 +192,8 @@ ul li div {
 .fifth div:nth-child(3) {
     width: 35px;
     height: 35px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 24%;
     left: 70%;
     animation: blink 5s infinite 0.2s;
@@ -181,7 +202,8 @@ ul li div {
 .fifth div:nth-child(4) {
     width: 35px;
     height: 35px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 1%;
     left: 25%;
     animation: blink 5s infinite 1s;
@@ -190,7 +212,8 @@ ul li div {
 .fifth div:nth-child(5) {
     width: 35px;
     height: 35px;
-    background: rgb(104, 177, 255);
+    background-color: var(--bubble-color);
+    /* background: rgb(104, 177, 255); */
     top: 0%;
     left: 0%;
     animation: blink 5s infinite 0.6s;

@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+
+
 
 const gradientAnimation = keyframes`
   0% {
@@ -24,10 +27,10 @@ const NavSectionWrapper = styled.div`
   box-sizing: border-box;
 
   .navbar {
-    width: 6rem;
+    width: 200px;
+    border-radius: 50px;
     height: 6rem;
-    background: linear-gradient(120deg, #FF0000, #0000FF);
-    border-radius: 50%;
+    background-color: #ACE1F4;
     transition: width 0.5s, border-radius 0.5s;
     animation: ${gradientAnimation} 1.5s linear infinite;
     cursor: pointer;
@@ -42,16 +45,17 @@ const NavSectionWrapper = styled.div`
       border-radius: 50px;
       animation: none;
       transition: width 0.5s, border-radius 0.5s;
-    }
-
-    &:hover div {
-      opacity: 1;
-      animation: none;
+      background-color: skyblue;
     }
 
     &:hover .menus {
       opacity: 1;
       transition: 0.5s;
+      /* border: 1px solid red; */
+    }
+
+    &:hover .current_menu{
+      opacity: 0;
     }
   }
 
@@ -67,7 +71,8 @@ const NavSectionWrapper = styled.div`
   }
 
   #logo_img {
-    flex: 1;
+    flex: 0.5;
+    /* border: 1px solid red; */
   }
 
   #logo_img > img {
@@ -79,9 +84,10 @@ const NavSectionWrapper = styled.div`
   #logo_title {
     flex: 1;
     font-weight: bold;
-    background: linear-gradient(120deg, #FF0000, #0000FF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: black;
+    /* background: linear-gradient(120deg, #FF0000, #0000FF); */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
   }
 
   .menus {
@@ -89,45 +95,65 @@ const NavSectionWrapper = styled.div`
     align-items: center;
     justify-content: center;
     opacity: 0;
+
   }
 
   .menu {
     width: 100px;
     height: 50px;
-    color: white;
+    color: black;
     line-height: 50px;
     text-align: center;
     border-radius: 10px;
 
     &:hover {
-        color: gold;
+        color: white;
         font-weight: bolder;
-
     }
+
+
   }
+
+  .current_menu {
+    /* border: 1px solid red; */
+    position: absolute;
+  
+}
+
 `;
 
-const NaviSection = () => {
+const NaviSection = (path:any) => {
+
   const navigate = useNavigate();
+  const [currentMenu, setCurrentMenu] = useState('');
 
   const handleNavigation = (path:any) => {
     navigate(path);
   };
+
+  const handleSetCurrentMenu = (path:string) => {
+    setCurrentMenu(path)
+  }
+
+
+ 
   return (
     <NavSectionWrapper>
       <div id="logo_box" onClick={() => handleNavigation("/")}>
         <div id="logo_img">
-          <img src="loa.png" alt="" />
+          <img src="loa_img6.png" alt="" />
         </div>
         <div id="logo_title">
           <h1>LOA</h1>
         </div>
       </div>
+
       <div className="navbar">
+      <div className="current_menu">{path.currentMenuName}</div>
+
         <div className="menus">
           <div className="menu" onClick={() => handleNavigation("/workbook")}>문제집 조회</div>
           <div className="menu" onClick={() => handleNavigation("/create")}>문제집 만들기</div>
-          <div className="menu" onClick={() => handleNavigation("/video")}>영상촬영</div>
           <div className="menu" onClick={() => handleNavigation("/reportlist")}>레포트 조회</div>
         </div>
       </div>

@@ -74,4 +74,5 @@ const BackgroundAnimation: React.FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
+
 export default BackgroundAnimation;
