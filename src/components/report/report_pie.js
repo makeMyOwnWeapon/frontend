@@ -45,7 +45,7 @@ const PieChart = ({ response, setstudyTime }) => {
 
 
     const data = {
-        labels: ['졸은 시간', '자리 비움', '공부 시간'],
+        labels: [ '자리 비움', '졸은 시간',  '공부 시간'],
         datasets: [
             {
                 label: '# of Votes',

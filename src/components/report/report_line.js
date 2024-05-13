@@ -53,31 +53,34 @@ const LineChart = ({ response }) => {
             setLabels(labels);
         }
     }, [response]);
+    useEffect(()=>{
 
+        console.log(sleepinessData);
+
+    },[sleepinessData])
     const data = {
         labels: labels,
         datasets: [
             {
-                label: '졸음',
+                label: '자리비움',
                 data: sleepinessData,
                 borderColor: 'rgb(75, 192, 192)',
-                tension: 0.4,
-                borderWidth: 50,
-                pointRadius: 0,  // 데이터 포인트 표시 없음
-                borderCapStyle: 'butt',  // 라인의 끝을 사각형으로 설정
-                pointStyle: 'rect',
-                showLine: false  // 라인 표시 여부 (기본적으로 true)
-            },
-            {
-                label: '자리비움',
-                data: distractionData,
-                borderColor: 'rgb(255, 99, 132)',
                 tension: 0,
-                // borderCapStyle: 'square',
                 stepped: 'before',
                 borderWidth: 100,
                 pointStyle: 'rect',
-                showLine: true  // 라인 표시 여부 (기본적으로 true)
+                showLine: true  
+
+            },
+            {
+                label: '졸음',
+                data: distractionData,
+                borderColor: 'rgb(255, 99, 132)',
+                tension: 0,
+                stepped: 'before',
+                borderWidth: 100,
+                pointStyle: 'rect',
+                showLine: true  
             },
         ]
     };

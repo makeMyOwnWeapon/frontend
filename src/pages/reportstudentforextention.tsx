@@ -148,10 +148,10 @@ const ReportStudentFroExtension  = () => {
 <div id="text">
     <PieText>
         <div>
-            - 졸은 시간: {studyTime[0]}분 {studyTime[3]}초
+            - 자리 비운 시간: {studyTime[0]}분 {studyTime[3]}초
         </div>
         <div>
-            - 자리 비운 시간: {studyTime[1]}분 {studyTime[4]}초
+            - 졸은  시간: {studyTime[1]}분 {studyTime[4]}초
         </div>
         <div>
             - 총 공부 시간: {studyTime[2]}분 {studyTime[5]}초

@@ -96,7 +96,7 @@ const ReportStudent  = () => {
                   'Authorization': `Bearer ${cookie}`
                 }
             });
-            console.log(response);
+            console.log(subLectureId);
             setData(response.data);
             
             // data structure
