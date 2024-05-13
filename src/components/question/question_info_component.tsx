@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { useLocation } from "react-router-dom"; // useLocation import
+import { useLocation } from "react-router-dom";
 import { Form } from '../../styles/CreateQuestion';
 import VideoThumbnail from "../public/url_to_image";
 import { Question, VideoThumbnailContainer, QuestionContainer } from '../../styles/QuestionInfo';
@@ -60,10 +60,8 @@ const QuestionInfoComponent = ({ videoUrl, quizSetId }: QuestionComponentProps) 
                 <Slider className="custom-slider" {...settings}>
                     {data && data.map((question, index) => (
                         <QuestionContainer key={index}>
-                            <TextContainer>시간: {question.popupTime}</TextContainer>
-                            <TextContainer>문제: {question.commentary}</TextContainer>
-                            <TextContainer>소강의명: {subLectureTitle}</TextContainer>
                             <TextContainer>문제집명: {quizSetTitle}</TextContainer>
+                            <TextContainer>소강의명: {subLectureTitle}</TextContainer>
                             <TextContainer>작성자: {memberNickname}</TextContainer>
 
                             <Question key={index}>
