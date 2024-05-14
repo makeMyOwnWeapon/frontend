@@ -5,7 +5,7 @@ const Main = styled.div`
   overflow-y: auto;
   flex-wrap: wrap;
   display: flex;
-  height: 100%;
+  height: 85vh;
   /* border: 1px solid pink; */
   justify-content: center;
 `;
