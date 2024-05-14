@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Account from '../components/main/account'
 import "../styles/Public"
 import BackgroundAnimation from "../styles/Background"
@@ -20,11 +20,6 @@ const Main: React.FC = () => {
     cookies.remove('jwt')
     navigate("/");
   };
-
-  const navigateTo = (path: string) => {
-    navigate(path); 
-  };
-
 
   return (
     <BackgroundAnimation>
@@ -72,7 +67,6 @@ const InnerContentSection = styled.div`
     flex-direction: column;
     color: black;
     /* border: 1px solid red; */
-
     /* background: linear-gradient(120deg, #FF0000, #0000FF); */
     /* -webkit-background-clip: text; */
     /* -webkit-text-fill-color: transparent; */
@@ -91,8 +85,6 @@ const InnerContentSection = styled.div`
     height: 100;
   }
 
-
-
   #info{
     /* border: 1px solid black; */
     display: flex;
@@ -105,7 +97,6 @@ const InnerContentSection = styled.div`
 
   #info #buttonBox{
     margin-top: 50px;
-
     display: flex;
     >div:first-of-type{
       margin-right: 10px;
@@ -113,7 +104,6 @@ const InnerContentSection = styled.div`
     }
     /* border: 1px solid red; */
   }
-
 
 `;
 
