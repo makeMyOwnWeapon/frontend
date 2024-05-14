@@ -13,10 +13,13 @@ interface ReportCardProps {
 
 const ReportCard: React.FC<ReportCardProps> = ({   subLectureId, subLectureTitle, subLectureUrl,registrationDate,lectureHistoryId }) => {
   const navigate = useNavigate();
-  const handleCardClick = () => {
-    console.log(subLectureTitle);
-    navigate(`/reportstudent/`, {state: {lectureHistoryId:lectureHistoryId ,subLectureId:subLectureId , subLectureTitle:subLectureTitle}});
-    
+
+
+
+
+  const handleCardClick = (event: React.MouseEvent) => {
+    event.preventDefault();
+    navigate(`/reportDetail/${lectureHistoryId}`);
   };
   const formatDate = (dateString: string) => {
     // ISO 8601 형식의 문자열을 Date 객체로 변환

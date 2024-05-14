@@ -5,11 +5,13 @@ import Signup from './pages/signup';
 import WorkBook from './pages/quizSet';
 import Create from './pages/quizSetCreate';
 import Question_info from './pages/quizSetDetail';
-import ReportList from './pages/reportlist';
-import ReportStudent from './pages/reportstudent';
 import NotFoundPage from './pages/404page';
 import RequireAuth from './helpers/requireauth'
 import ReportStudentFroExtention from './pages/reportstudentforextention';
+import ReportDetail from './pages/reportDetail';
+import ReportList from './pages/reportlist';
+
+
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
         <Route path="/create" element={<RequireAuth><Create/></RequireAuth>}/>
         <Route path="/question_info/:quizSetId" element={<RequireAuth><Question_info/></RequireAuth>}/>
         <Route path="/reportlist" element={<RequireAuth><ReportList/></RequireAuth>}/>
-        <Route path="/reportstudent/" element={<ReportStudent/>}/>
+        <Route path="/reportDetail/:lectureHistoryId" element={<ReportDetail/>}/>
         <Route path="/reportstudentforextension/:lectureHistoryId" element={<ReportStudentFroExtention/>}/>
         <Route path="/404page" element={<RequireAuth><NotFoundPage/></RequireAuth>}/>
       </Routes>

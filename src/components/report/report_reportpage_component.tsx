@@ -4,8 +4,7 @@ import LineChart from "./report_line";
 import PieChart from "./report_pie";
 import ReportQuestionInfoComponent from "./report_question_review";
 import ReportApplicationQuestion from "./report_application_question";
-import { Data } from "./reportpage";
-                
+import { Data } from "../reportList/reportInterface";
 interface ReportpageProps {
     data: Data;
   }
@@ -29,20 +28,22 @@ function formatDate(inputDate: string): string {
 
 const ReportpageComponent = ({data}: ReportpageProps) => {        
     const [studyTime, setStudyTime] = useState<string[]>(['0', '0', '0', '0']);
-    
+    console.log('=====report======');
+    console.dir(data);
+    console.log('=====report======');
     return (
     <ReportStudentBackground>
         <ReportStudentTitle> 레포트 페이지</ReportStudentTitle>
-        <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.readHistoryReport.studyStartTime)}</ReportStudentSubTitle>
-        <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.readHistoryReport.studyEndTime)}</ReportStudentSubTitle>
+        <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.reports.studyStartTime)}</ReportStudentSubTitle>
+        <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.reports.studyEndTime)}</ReportStudentSubTitle>
         
         <LineChartSize>
-            <LineChart response = {data.readHistoryReport}/>
+            <LineChart response = {data.reports}/>
         </LineChartSize>
 
         <PieChartSize>
             <div id="chart">
-                <PieChart response={data.readHistoryReport} setstudyTime={setStudyTime} />
+                <PieChart response={data.reports} setstudyTime={setStudyTime} />
             </div>
             <div id="text">
                 <PieText>
@@ -59,7 +60,7 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
             </div>
         </PieChartSize>
         <ReportTextContainer>
-                <ReportQuestionInfoComponent quizzes={data.readHistoryReport.quizzes}/>
+                <ReportQuestionInfoComponent quizzes={data.reports.quizzes}/>
                 <ReportApplicationQuestion gptSummery={data.gptSummery.summary} />
         </ReportTextContainer>
     </ReportStudentBackground>

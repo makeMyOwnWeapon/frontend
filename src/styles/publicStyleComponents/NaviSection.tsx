@@ -16,14 +16,19 @@ const gradientAnimation = keyframes`
 `;
 
 const NavSectionWrapper = styled.div`
+
   justify-content: center;
   display: flex;
   align-items: center;
   position: relative;
   height: 15%;
   box-sizing: border-box;
+  /* border: 1px solid red; */
+  padding-top : 20px;
+
 
   .navbar {
+    /* border: 1px solid red; */
     width: 200px;
     border-radius: 50px;
     height: 6rem;
@@ -152,7 +157,7 @@ const NaviSection = (path:any) => {
     <NavSectionWrapper>
       <div id="logo_box" onClick={() => handleNavigation("/")}>
         <div id="logo_img">
-          <img src="blue_loa.png" alt="LOA Logo" />
+          <img src={`${process.env.PUBLIC_URL}/blueLoa.png`}></img>
         </div>
         <div id="logo_title">
           <h1>LOA</h1>

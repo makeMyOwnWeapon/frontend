@@ -3,10 +3,7 @@ import styled from "styled-components";
 import "../styles/Public";
 import WorkbookCard from "../components/quizSet/quizSetCard";
 import ToastModal from "../components/public/toastModal";
-
 import { request } from "../helpers/axios_helper";
-
-
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
 import Main from "../styles/publicStyleComponents/Main";
 import Side from "../styles/publicStyleComponents/Side";

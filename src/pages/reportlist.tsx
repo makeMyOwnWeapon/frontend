@@ -6,7 +6,7 @@ import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
 
-import ReportCard from "../components/report/report_card";
+import ReportCard from "../components/reportList/reportCard";
 import ToastModal from "../components/public/toastModal";
 import { request } from "../helpers/axios_helper";
 import Side from "../styles/publicStyleComponents/Side";
@@ -22,6 +22,8 @@ interface ReportCard {
 const ReportList: React.FC = () => {
     const [cards, setCards] = useState<ReportCard[]>([]);
     const navigate = useNavigate();   
+    const currentMenuName = '레포트 조회'
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -40,7 +42,7 @@ const ReportList: React.FC = () => {
         <>
         <BackgroundAnimation>
             <Container>
-                <NaviSection></NaviSection>
+            <NaviSection currentMenuName = {currentMenuName}></NaviSection>
                     <InnerContentSection>
                       <Side>
                         <ToastModal/>
@@ -81,7 +83,6 @@ const InnerContentSection = styled.div`
   display: flex;
   height: 100%;
   justify-content: space-evenly;
-  border: 1px solid red;
 }
 
 #side{

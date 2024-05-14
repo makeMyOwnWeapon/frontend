@@ -36,9 +36,9 @@ interface SleepinessAndDistraction {
   export interface Data{
     gptAppQuestion:gptAppQuestion[];
     gptSummery:gptSummery;
-    readHistoryReport:readHistoryReport;
+    reports:reports;
   }
-  interface readHistoryReport {
+  interface reports {
     quizzes: Quiz[];
     sleepinessAndDistraction: SleepinessAndDistraction[];
     studyStartTime: string;
