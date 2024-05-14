@@ -106,7 +106,7 @@ const ReportCorrectTextContainer = styled.div`
 `;
 
 const Problem = styled.div`
-    
+
 `
 
 const Question = styled.div`

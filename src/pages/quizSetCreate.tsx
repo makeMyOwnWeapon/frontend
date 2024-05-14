@@ -21,8 +21,9 @@ const Create: React.FC = () => {
                     <ToastModal/>
                 </Side>
 
+                <Main>
                 <ProblemPage navigate={navigate}/> 
-
+                </Main>
               </InnerContentSection>
         </Container>
      </BackgroundAnimation>
@@ -48,4 +49,14 @@ export const Side = styled.div`
   padding: 0 20px;
   /* border: 1px solid red; */
   width: 20%;
+`;
+
+const Main = styled.div`
+  width: 70%;
+  overflow-y: auto;
+  flex-wrap: wrap;
+  display: flex;
+  height: 85vh;
+  /* border: 1px solid pink; */
+  justify-content: center;
 `;

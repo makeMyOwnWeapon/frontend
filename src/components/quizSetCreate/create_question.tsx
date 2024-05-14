@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import VideoThumbnail from '../public/url_to_image';
 import QuestionComponent from './create_question_component';
-import {PublicButton } from '../../styles/Public';
-import { motion } from 'framer-motion';
 import { NavigateFunction } from 'react-router-dom';
 import { request } from '../../helpers/axios_helper';
 import styled from 'styled-components';
@@ -174,7 +172,6 @@ class ProblemPage extends Component<Props, State> {
     return (
       <>
         <Formdiv>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
           <StyledText>나만의 문제 만들기</StyledText>
           <InputContainer>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -186,7 +183,6 @@ class ProblemPage extends Component<Props, State> {
             </div>
             <VideoThumbnail imageUrl={this.state.subLectureUrl} />
           </InputContainer>
-          </motion.div>
           {this.state.questionComponents.map((component, index) => (
             <QuestionComponent
               key={component.id}
@@ -199,12 +195,12 @@ class ProblemPage extends Component<Props, State> {
               updateTime={(index, timeExchange) => this.updateQuestionTime(index, timeExchange)}
             />
           ))}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-          <PublicButton type="button" onClick={this.addQuestionComponent}>문제 추가</PublicButton>
-          <form onSubmit={this.postData}>
-            <PublicButton type="submit">제출하기 버튼</PublicButton>
-          </form>
-          </motion.div>
+          <ButtonContainer>
+            <Button type="button" onClick={this.addQuestionComponent}>문제 추가</Button>
+            <form onSubmit={this.postData}>
+              <Button type="submit">제출하기 버튼</Button>
+            </form>
+          </ButtonContainer>
         </Formdiv>
       </>
     );
@@ -214,50 +210,71 @@ class ProblemPage extends Component<Props, State> {
 export default ProblemPage;
 
 
+const Button = styled.button`
+  margin: 10px;
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #ACE1F4;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center; /* 중앙 정렬을 위해 추가 */
+  &:hover {
+    background-color: skyblue;
+    color: white;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+`;
+
 const Input = styled.input`
   flex: 1;
   padding: 10px;
+  margin: 5px;
   margin-right: 20px;
   border: 2px solid #dee2e6;
   border-radius: 5px;
   outline: none;
   font-size: 16px;
+  transition: border 0.3s ease-in-out;
   &:focus {
     border-color: #007bff;
   }
 `;
 
-
 const Formdiv = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
   align-items: center;
-  background: #f8f9fa;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
-  min-height:100vh;
-  max-width: 800px;
+  min-height: 100vh;
   margin: auto;
-  overflow-y: scroll;
-  
 `;
 
 const InputContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
-  padding:20px;
+  width: 60%;
+  padding: 20px;
   justify-content: space-between;
   margin-bottom: 20px;
 `;
 
-
 const StyledText = styled.p`
-font-size: 24px;
-color: black;
-margin-top: 70px;
-margin-bottom: 30px;
-text-align:left;
+  font-size: 48px;
+  color: black;
+  margin-top: 70px;
+  margin-bottom: 30px;
+  text-align: left;
 `;
