@@ -8,8 +8,9 @@ import Question_info from './pages/quizSetDetail';
 import NotFoundPage from './pages/404page';
 import RequireAuth from './helpers/requireauth'
 import ReportStudentFroExtention from './pages/reportstudentforextention';
-import ReportList from './pages/reportList';
 import ReportDetail from './pages/reportDetail';
+import ReportList from './pages/reportlist';
+
 
 
 function App() {
