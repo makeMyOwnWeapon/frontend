@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Main = styled.div`
+const Main = styled.div`
   width: 85%;
   overflow-y: auto;
   flex-wrap: wrap;
@@ -9,3 +9,5 @@ export const Main = styled.div`
   /* border: 1px solid pink; */
   justify-content: center;
 `;
+
+export default Main;

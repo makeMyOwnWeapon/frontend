@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Option, SidebarBackGround } from "../../styles/WorkBook";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'react-toastify/dist/ReactToastify.css';
-import '../../styles/css/sidebar.css';
+import '../../styles/css/toastModal.css';
 import { request } from "../../helpers/axios_helper";
+import styled from "styled-components";
 
 interface OptionItem {
   id: number;
@@ -104,7 +104,7 @@ const SidebarOptions = () => {
   };
 
   return (
-      <SidebarBackGround>
+    <>
         {options.map(option => (
           <React.Fragment key={option.id}>
             <Option
@@ -117,8 +117,17 @@ const SidebarOptions = () => {
           </React.Fragment>
         ))}
         <div style={{ display: 'flex' }} />
-      </SidebarBackGround>
+    </>
   );
 };
 
 export default SidebarOptions;
+
+
+const Option = styled.div`
+  padding: 10px 15px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 5px;
+
+`;

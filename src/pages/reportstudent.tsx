@@ -1,8 +1,8 @@
 import React, { useEffect, useState }  from "react";
 import styled from "styled-components";
-import BackgroundAnimation from "../styles/Background"
-import NaviSection from "../components/new_components/NaviSection";
-import Container from "../components/new_components/Container";
+import BackgroundAnimation from "../components/public/BackgroundAnimation"
+import Container from "../styles/publicStyleComponents/Container";
+import NaviSection from "../styles/publicStyleComponents/NaviSection";
 import "../styles/Public"
 import { useLocation } from "react-router-dom";
 import { Cookies } from "react-cookie";
@@ -10,7 +10,7 @@ import axios from "axios";
 import PieChart from "../components/report/report_pie";
 import LineChart from "../components/report/report_line";
 import ReportQuestionInfoComponent from "../components/report/report_question_review";
-import SidebarOptions from "../components/board/select_option";
+import SidebarOptions from "../components/public/SidebarOptions";
 
 interface SleepinessAndDistraction {
   sleepinessStart: string | null;

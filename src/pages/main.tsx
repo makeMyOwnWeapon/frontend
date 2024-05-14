@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Account from '../components/main/account'
 import "../styles/Public"
-import BackgroundAnimation from "../styles/Background"
-import NaviSection from "../components/new_components/NaviSection";
-import Container from "../components/new_components/Container";
+import BackgroundAnimation from "../components/public/BackgroundAnimation"
+import Container from "../styles/publicStyleComponents/Container";
+import NaviSection from "../styles/publicStyleComponents/NaviSection";
 import { Cookies } from "react-cookie";
 import { getAuthToken } from "../helpers/axios_helper";
 

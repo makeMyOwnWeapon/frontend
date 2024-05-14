@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import VideoThumbnail from '../public/url_to_image';
-import { Formdiv, InputContainer, StyledText } from '../../styles/CreateQuestion';
 import QuestionComponent from './create_question_component';
-import { Input, NameGeneratorButton } from '../../styles/Public';
+import {PublicButton } from '../../styles/Public';
 import { motion } from 'framer-motion';
 import { NavigateFunction } from 'react-router-dom';
 import { request } from '../../helpers/axios_helper';
+import styled from 'styled-components';
 
 interface Props {
   navigate: NavigateFunction;
@@ -200,9 +200,9 @@ class ProblemPage extends Component<Props, State> {
             />
           ))}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-          <NameGeneratorButton type="button" onClick={this.addQuestionComponent}>문제 추가</NameGeneratorButton>
+          <PublicButton type="button" onClick={this.addQuestionComponent}>문제 추가</PublicButton>
           <form onSubmit={this.postData}>
-            <NameGeneratorButton type="submit">제출하기 버튼</NameGeneratorButton>
+            <PublicButton type="submit">제출하기 버튼</PublicButton>
           </form>
           </motion.div>
         </Formdiv>
@@ -212,3 +212,52 @@ class ProblemPage extends Component<Props, State> {
 }
 
 export default ProblemPage;
+
+
+const Input = styled.input`
+  flex: 1;
+  padding: 10px;
+  margin-right: 20px;
+  border: 2px solid #dee2e6;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  &:focus {
+    border-color: #007bff;
+  }
+`;
+
+
+const Formdiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  min-height:100vh;
+  max-width: 800px;
+  margin: auto;
+  overflow-y: scroll;
+  
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding:20px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+
+const StyledText = styled.p`
+font-size: 24px;
+color: black;
+margin-top: 70px;
+margin-bottom: 30px;
+text-align:left;
+`;

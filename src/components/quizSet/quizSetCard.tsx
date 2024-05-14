@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { CardContainer, CardContent, CardTitle, CardDescription, ReadMoreLink } from "../../styles/WorkBookCard"; 
+import { PublicCardContent, PublicCardTitle, PublicCardDescription } from "../../styles/Public";
 import VideoThumbnail from "../public/url_to_image";
 import { FaThumbsUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { request } from "../../helpers/axios_helper";
-import { truncateTitle } from "../../pages/workbook";
+import { truncateTitle } from "../../pages/quizSet";
+import { PublicCardContainer } from "../../styles/Public";
+import styled from "styled-components";
 
 interface WorkbookCardProps {
   createdAt: string;
@@ -16,7 +18,7 @@ interface WorkbookCardProps {
   subLectureUrl: string;
 }
 
-const WorkbookCard: React.FC<WorkbookCardProps> = ({
+const QuizSetCard: React.FC<WorkbookCardProps> = ({
   memberNickname,
   quizSetTitle,
   quizSetId,
@@ -77,21 +79,40 @@ const WorkbookCard: React.FC<WorkbookCardProps> = ({
   };
 
   return (
-    <CardContainer onClick={handleCardClick}>
+    <PublicCardContainer onClick={handleCardClick}>
       <a className="cardImg" >
       <VideoThumbnail imageUrl={subLectureUrl} />
       </a>
-      <CardContent>
-        <CardTitle>{quizSetTitle}</CardTitle>
-        <CardDescription>작성자: {memberNickname}</CardDescription>
-        <CardDescription>강의명: {truncateTitle(subLectureTitle,9)}</CardDescription>
+      <PublicCardContent>
+        <PublicCardTitle>{quizSetTitle}</PublicCardTitle>
+        <PublicCardDescription>작성자: {memberNickname}</PublicCardDescription>
+        <PublicCardDescription>강의명: {truncateTitle(subLectureTitle,9)}</PublicCardDescription>
         <ReadMoreLink onClick={recommendationClick}>
           <FaThumbsUp />
           {recommendation}
         </ReadMoreLink>
-      </CardContent>
-    </CardContainer>
+      </PublicCardContent>
+    </PublicCardContainer>
   );
 };
 
-export default WorkbookCard;
+export default QuizSetCard;
+
+const ReadMoreLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #3b82f6;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  margin-top: 0.5rem;
+
+  &:hover {
+    background-color: #2563eb;
+  }
+`;

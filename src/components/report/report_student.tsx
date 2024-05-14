@@ -1,7 +1,7 @@
 import React from "react";
-import { CardContainer, CardContent, CardTitle, CardDescription, ReadMoreLink } from "../../styles/WorkBookCard"; 
 import VideoThumbnail from "../public/url_to_image";
 import { useNavigate } from "react-router-dom";
+import { PublicCardContainer, PublicCardContent,PublicCardDescription, PublicCardTitle } from "../../styles/Public";
 
 interface ReportCardProps {
   memberNickname: string;
@@ -17,17 +17,17 @@ const ReportStudent: React.FC<ReportCardProps> = ({  memberNickname,  quizSetId,
   };
 
   return (
-    <CardContainer>
+    <PublicCardContainer>
       <a href="" onClick={handleCardClick}>
         <VideoThumbnail imageUrl={subLectureUrl} /> 
       </a>
-      <CardContent>
+      <PublicCardContent>
         <a href="">
-          <CardTitle>{subLectureTitle}</CardTitle>
+          <PublicCardTitle>{subLectureTitle}</PublicCardTitle>
         </a>
-        <CardDescription>작성자: {memberNickname}</CardDescription>
-      </CardContent>
-    </CardContainer>
+        <PublicCardDescription>작성자: {memberNickname}</PublicCardDescription>
+      </PublicCardContent>
+    </PublicCardContainer>
   );
 };
 

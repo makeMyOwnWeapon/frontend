@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import "../styles/Public"
-import BackgroundAnimation from "../styles/Background"
-import NaviSection from "../components/new_components/NaviSection";
-import Container from "../components/new_components/Container";
-import WorkbookCard from "../components/board/workbook_card";
-import SidebarOptions from "../components/board/select_option";
-import { Side } from "../components/new_components/Side";
-import { Main } from "../components/new_components/Main";
+import "../styles/Public";
+import WorkbookCard from "../components/quizSet/quizSetCard";
+import SidebarOptions from "../components/public/SidebarOptions";
+
 import { request } from "../helpers/axios_helper";
+
+
+import NaviSection from "../styles/publicStyleComponents/NaviSection";
+import Main from "../styles/publicStyleComponents/Main";
+import Side from "../styles/publicStyleComponents/Side";
+import Container from "../styles/publicStyleComponents/Container";
+import BackgroundAnimation from "../components/public/BackgroundAnimation";
 
 interface Card {
   createdAt: string;

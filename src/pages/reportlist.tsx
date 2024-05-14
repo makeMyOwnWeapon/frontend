@@ -2,12 +2,13 @@ import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "../styles/Public"
-import BackgroundAnimation from "../styles/Background"
-import NaviSection from "../components/new_components/NaviSection";
-import Container from "../components/new_components/Container";
+import BackgroundAnimation from "../components/public/BackgroundAnimation"
+import Container from "../styles/publicStyleComponents/Container";
+import NaviSection from "../styles/publicStyleComponents/NaviSection";
+import Side from "../styles/publicStyleComponents/NaviSection";
+
 import ReportCard from "../components/report/report_card";
-import SidebarOptions from "../components/board/select_option";
-import { Side } from "../components/new_components/Side";
+import SidebarOptions from "../components/public/SidebarOptions";
 import { request } from "../helpers/axios_helper";
 
 interface ReportCard {

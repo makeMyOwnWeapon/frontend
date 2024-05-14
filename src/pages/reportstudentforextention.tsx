@@ -1,7 +1,8 @@
 import React, { useEffect, useState }  from "react";
 import styled from "styled-components";
-import BackgroundAnimation from "../styles/Background"
-import Container from "../components/new_components/Container";
+import BackgroundAnimation from "../components/public/BackgroundAnimation"
+import Container from "../styles/publicStyleComponents/Container";
+import Side from "../styles/publicStyleComponents/NaviSection";
 import "../styles/Public"
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -67,28 +68,5 @@ const InnerContentSection = styled.div`
   height: 100%;
   /* border: 10px solid pink; */
   justify-content: space-evenly;
-}
-
-#side{
-  width: 15%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-#side > div{
-  border: 1px solid black;
-}
-
-
-#searchBox{
-  height: 30%;
-  margin-bottom: 100px;
-  
-}
-
-#profileBox{
-  height: 40%;
-
 }
   `

@@ -1,7 +1,9 @@
 import React, { Component, ChangeEvent, createRef } from "react";
-import { InputBoxWrapper, Input_text, QuestionContainer, SelectOption } from "../../styles/CreateQuestion";
-import { NameGeneratorButton } from "../../styles/Public";
+import { SelectOption } from "../../styles/CreateQuestion";
+import { PublicButton} from "../../styles/Public";
 import { motion } from 'framer-motion';
+import styled from "styled-components";
+
 
 interface Answer {
   text: string;
@@ -119,8 +121,8 @@ class QuestionComponent extends Component<Props, State> {
     return (
       <QuestionContainer>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-        <NameGeneratorButton onClick={() => this.toggleExpand()}>{expand ? `문제 접기` : `문제 펼치기`}</NameGeneratorButton>
-          <NameGeneratorButton onClick={() => onDelete(id)}>문제 삭제하기</NameGeneratorButton>
+        <PublicButton onClick={() => this.toggleExpand()}>{expand ? `문제 접기` : `문제 펼치기`}</PublicButton>
+          <PublicButton onClick={() => onDelete(id)}>문제 삭제하기</PublicButton>
           <motion.div
             initial={{ height: 0 }}
             animate={{ height: finalHeight }}
@@ -156,9 +158,9 @@ class QuestionComponent extends Component<Props, State> {
                         <label>{label}: </label>
                         <Input_text type="text" value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} maxLength={40} />
                         {index < 4 && (
-                          <NameGeneratorButton onClick={() => this.handleSelectionChange(index + 1)}>
+                          <PublicButton onClick={() => this.handleSelectionChange(index + 1)}>
                             {answers[index + 1].selected ? '정답입니다' : '오답입니다'}
-                          </NameGeneratorButton>
+                          </PublicButton>
                         )}
                       </InputBoxWrapper>
                     ))
@@ -186,3 +188,40 @@ class QuestionComponent extends Component<Props, State> {
 }
 
 export default QuestionComponent;
+
+
+const QuestionContainer = styled.div`
+  width: 50%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  display:flex;
+  justify-content: center; /* 세로 축 중앙 정렬 */
+  align-items: center; 
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+`;
+
+export const InputBoxWrapper = styled.div`
+  display: block;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+`;
+
+const Input_text = styled.input`
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+  &:focus {
+    border-color: #0056b3;
+  }
+`;

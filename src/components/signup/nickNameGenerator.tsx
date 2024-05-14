@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NameGeneratorButton } from '../../styles/Public';
+import { PublicButton } from '../../styles/Public';
 
 interface NicknameGeneratorProps {
   onNicknameGenerated: (nickname: string) => void;
@@ -39,7 +39,7 @@ const NicknameGenerator: React.FC<NicknameGeneratorProps> = ({ onNicknameGenerat
 
   return (
     <div>
-      <NameGeneratorButton type="button" onClick={generateNickname}>Generate Nickname</NameGeneratorButton>
+      <PublicButton type="button" onClick={generateNickname}>Generate Nickname</PublicButton>
       {nickname && <p>{nickname}</p>}
     </div>
   );

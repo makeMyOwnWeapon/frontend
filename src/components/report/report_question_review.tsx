@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Form } from '../../styles/CreateQuestion';
-import {  Question } from '../../styles/QuestionInfo';
-import { QuestionContainer } from "../../styles/QuestionInfo";
-import { SliderContainer, TextContainer } from "../../styles/Public";
+import { PublicSliderContainer, PublicTextContainer, PublicQuestionContainer } from "../../styles/Public";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import '../../styles/css/fad.css';
+import '../../styles/css/slick.css';
 
 
 interface Choice {
@@ -45,43 +43,43 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
     };
     return (
         <Form>
-            <SliderContainer>
+            <PublicSliderContainer>
                 <Problem>
                 <ReportQuestionTitle>문제 다시보기</ReportQuestionTitle>
                 <Slider className="custom-slider" {...settings}> 
                 {data && data.map((question, index) => (
-                <QuestionContainer key={index}>
+                <PublicQuestionContainer key={index}>
 
                     <Question key={index}>
                          <h3>{index+1}번 문제: {question.question}</h3>
                         {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
-                            <TextContainer key={choiceIndex}>{choiceIndex + 1}번 : {choice.content}</TextContainer>
+                            <PublicTextContainer key={choiceIndex}>{choiceIndex + 1}번 : {choice.content}</PublicTextContainer>
                         ))}
                         
                         {/* {question && question.choices.length === 1 && question.choices.map((choice, choiceIndex) => (
-                            <TextContainer key={choiceIndex}>제출한 답 : {choice.content}</TextContainer>
+                            <PublicTextContainer key={choiceIndex}>제출한 답 : {choice.content}</PublicTextContainer>
                         ))} */}
 
                         <AnswerContainer> 
 
                         <h3>해설</h3>
-                        <TextContainer>{question.commentary}</TextContainer>
+                        <PublicTextContainer>{question.commentary}</PublicTextContainer>
                         
                         <h3>정답</h3>
                           {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
                             choice.isAnswer === true  ?
-                            <TextContainer key={choiceIndex}>{choiceIndex+1}번 : {choice.content}</TextContainer>:
+                            <PublicTextContainer key={choiceIndex}>{choiceIndex+1}번 : {choice.content}</PublicTextContainer>:
                             null
 
                         ))}
 
                         </AnswerContainer>  
                     </Question>
-                </QuestionContainer>
+                </PublicQuestionContainer>
             ))}
                 </Slider>
                 </Problem>
-            </SliderContainer>
+            </PublicSliderContainer>
         </Form>
     );
 };
@@ -110,3 +108,15 @@ const ReportCorrectTextContainer = styled.div`
 const Problem = styled.div`
     
 `
+
+const Question = styled.div`
+  flex: 1; /* 콘텐츠 영역이 남은 공간을 차지 */
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #ccc; /* 테두리 스타일 지정 */
+  border-radius: 5px; /* 테두리 모서리를 둥글게 만듦 */
+  padding: 10px; /* 내부 여백 추가 */
+  margin: 10px; /* 외부 패딩 추가 */
+  flex-direction:column;
+  min-height: 400px;
+`;

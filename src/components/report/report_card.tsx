@@ -1,5 +1,5 @@
 import React from "react";
-import { CardContent } from "../../styles/WorkBookCard"; 
+import { PublicCardContent } from "../../styles/Public";
 import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 
@@ -28,7 +28,7 @@ const ReportCard: React.FC<ReportCardProps> = ({   subLectureId, subLectureTitle
 
   return (
     <ReportCardContainer>
-      <CardContent>
+      <PublicCardContent>
         <a href="" onClick={handleCardClick}>
 
           <ReportCardTitle>{subLectureTitle}</ReportCardTitle>
@@ -37,7 +37,7 @@ const ReportCard: React.FC<ReportCardProps> = ({   subLectureId, subLectureTitle
         </a>
         {/* <CardDescription>작성자: {memberNickname}</CardDescription> */}
 
-      </CardContent>
+      </PublicCardContent>
     </ReportCardContainer>
   );
 };

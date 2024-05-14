@@ -1,74 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-;
-`
 
-export const NavBarContainer = styled.nav`
-  display: flex;
-  justify-content: space-around;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #FFFFFF;
-  color: darkgray;
-  padding: 10px 0;
-  z-index: 1000;
-`;
 
-export const NavLink = styled.a`
-  color: inherit;
-  text-decoration: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-`;
-
-export const MainBackGround = styled.div`
-  height: 100vh;
-  background: linear-gradient(to bottom, white, #55CCCA);
-  display: flex;
-  flex-direction: column;
-  bottom: 0px;
-`;
-
-export const PageBackGround = styled.div`
-  background-color: #f2f2f2;
-  display: flex;
-`;
-
-export const NavContainer = styled.div`
-  height: 70px;
-  background: #F2F2F2;
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: start;
-  flex-wrap: wrap;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-`;
-export const ContentBox = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`;
-
-export const Content = styled.div`
-  display: flex;
-  flex-wrap: wrap;  padding-left: 300px;
-  height: 100%;
-
-`;
-
-export const ImageWithShadow = styled.img`
-  /* border: 1px solid red; */
-  object-fit: cover;
-`;
-
-export const TextContainer = styled.div`
+export const PublicTextContainer = styled.div`
   padding: 10px;
   margin: 5px 0;
   background-color: #f8f9fa;
@@ -78,25 +12,14 @@ export const TextContainer = styled.div`
   line-height: 1.5;
 `;
 
-export const ListContainer = styled.li`
-  padding: 10px;
-  margin: 5px 0;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-  color: #212529;
-  font-size: 16px;
-  line-height: 1.5;
-`;
-
-export const SliderContainer = styled.div`
+export const PublicSliderContainer = styled.div`
 margin-top: 100px;
 position: relative;
-width: 100%
+width: 100%;
 
 `;
 
-
-export const NameGeneratorButton = styled.button`
+export const PublicButton = styled.button`
 padding: 8px 16px;
 margin-right: 8px;
 margin-top:8px;
@@ -107,27 +30,59 @@ border-radius: 4px;
 cursor: pointer;
 `;
 
-export const Input = styled.input`
-  flex: 1;
-  padding: 10px;
-  margin-right: 20px;
-  border: 2px solid #dee2e6;
-  border-radius: 5px;
-  outline: none;
-  font-size: 16px;
-  &:focus {
-    border-color: #007bff;
+export const PublicCardContainer = styled.div`
+  max-width: 20rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease, transform 0.3s ease-in-out;
+  margin: 10px;
+  cursor: pointer;
+  padding: 20px;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
+
+  .cardImg {
+    object-fit: cover;
+    width: 100%;
+    height: 150px;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  
 `;
 
-export const PageFooter = styled.footer`
-  width: 100%;
-  border: 1px solid #dee2e6;
-  background-color: #FFFFFF;
+export const PublicCardContent = styled.div`
+  padding: 0.5rem 0;
+`;
+
+
+export const PublicCardTitle = styled.h5`
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #111827;
+`;
+
+
+
+export const PublicCardDescription = styled.p`
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #4b5563;
+`;
+
+export const PublicQuestionContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%; /* 최대 너비 제한 */
+  overflow-x: auto; /* 가로 스크롤 활성화 */
+  
 `;

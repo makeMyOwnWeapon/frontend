@@ -3,7 +3,7 @@ import { Form } from '../../styles/CreateQuestion';
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import '../../styles/css/fad.css';
+import '../../styles/css/slick.css';
 
 interface gptSummery {
     gptSummery: summary[];
@@ -28,7 +28,7 @@ const ReportRecommand = ({gptSummery}:gptSummery)=> {
                     <Summary>
                         {data&&data.map((summary,index)=>(
                             <SummaryText key={index}>
-                                <TextContainer>- {summary.reviews}</TextContainer> 
+                                <PublicTextContainer>- {summary.reviews}</PublicTextContainer> 
                             </SummaryText>
                         ))}
                     </Summary>
@@ -56,7 +56,7 @@ const Summary = styled.div`
   min-height: 400px;
 `;
 
-const TextContainer = styled.div`
+const PublicTextContainer = styled.div`
   padding: 10px;
   margin: 5px 0;
   background-color: #f8f9fa;

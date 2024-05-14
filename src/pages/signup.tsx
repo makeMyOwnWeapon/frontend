@@ -1,11 +1,12 @@
 // src/pages/Signup.tsx
 import React, { useState } from 'react';
-import { Button, Title, SmallButton, NameContainer, Div } from '../styles/SignupStyles';
 import { useNavigate } from 'react-router-dom';
-import NicknameGenerator from '../components/signup/nickname_generator';
-import { handleButtonClick, handleSubmit } from '../components/signup/signup_handlers';
+import NicknameGenerator from '../components/signup/nickNameGenerator';
+import { handleButtonClick, handleSubmit } from '../components/signup/signupHandlers';
 import { Cookies } from 'react-cookie';
-import BackgroundAnimation from '../styles/Background';
+import BackgroundAnimation from '../components/public/BackgroundAnimation';
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
 function Signup() {
   const [nickname, setNickname] = useState('');
@@ -32,3 +33,45 @@ function Signup() {
 }
 
 export default Signup;
+
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: 0 auto;
+
+  
+`;
+
+const Button = styled.button`
+  ${tw`w-full py-3 px-4 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-700`}
+  box-sizing: border-box; 
+  border: none;         
+  font-size: 16px;
+  cursor: pointer;
+`;
+
+const SmallButton = styled.button<{selected: boolean }>`
+  padding: 8px 16px;
+  margin-right: 8px;
+  background-color: ${({ selected }) => (selected ? '#4CAF50' : '#CCCCCC')};
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+const NameContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+`;
+
+const Title = styled.h1`
+  padding: 20px 0;
+  ${tw`text-2xl font-bold text-gray-900`};
+  margin: 0 auto;
+  font-size: 30px;
+  margin-bottom : 30px;
+`;

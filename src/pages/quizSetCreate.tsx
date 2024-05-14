@@ -1,12 +1,11 @@
 import React from "react";
-import { Container, PageBackGround } from "../styles/Public";
-import ProblemPage from "../components/create/create_question";
-import NavBar from "../components/public/navbar_default";
+import ProblemPage from "../components/quizSetCreate/create_question";
 import { useNavigate } from "react-router-dom";
-import BackgroundAnimation from "../styles/Background";
-import NaviSection from "../components/new_components/NaviSection";
+import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import styled from "styled-components";
-import SidebarOptions from "../components/board/select_option";
+import SidebarOptions from "../components/public/SidebarOptions";
+import Container from "../styles/publicStyleComponents/Container";
+import NaviSection from "../styles/publicStyleComponents/NaviSection";
 
 const Create: React.FC = () => {
     const navigate = useNavigate();
@@ -15,7 +14,7 @@ const Create: React.FC = () => {
     return (
 
     <BackgroundAnimation>
-        <Container>
+      <Container>
           <NaviSection currentMenuName = {currentMenuName}></NaviSection>
               <InnerContentSection>
                 <Side>

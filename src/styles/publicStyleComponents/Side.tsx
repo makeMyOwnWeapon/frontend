@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Side = styled.div`
+const Side = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -8,3 +8,5 @@ export const Side = styled.div`
   /* border: 1px solid red; */
   width: 20%;
 `;
+
+export default Side;

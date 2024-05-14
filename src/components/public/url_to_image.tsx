@@ -2,7 +2,7 @@ import React from 'react';
 import inflearn from '../../images/inflearn.png';
 import krafton from '../../images/krafton.png';
 import defaultThumbnail from '../../images/default_thumbnail.png';
-import { ImageWithShadow } from '../../styles/Public';
+import styled from 'styled-components';
 
 interface Props {
     imageUrl: string;
@@ -37,3 +37,9 @@ const VideoThumbnail: React.FC<Props> = ({ imageUrl }) => {
 };
 
 export default VideoThumbnail;
+
+
+const ImageWithShadow = styled.img`
+  /* border: 1px solid red; */
+  object-fit: cover;
+`;
