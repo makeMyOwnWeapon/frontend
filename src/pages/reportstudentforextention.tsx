@@ -2,7 +2,6 @@ import React, { useEffect, useState }  from "react";
 import styled from "styled-components";
 import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
-import Side from "../styles/publicStyleComponents/NaviSection";
 import "../styles/Public"
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -16,9 +15,12 @@ const ReportStudentFroExtension  = () => {
         const fetchData = async () => {
             try{
             const response = await axios.get(`/api/history/extension/?lectureHistoryId=${lectureHistoryId}`,{
-
+            
             });
             setData(response.data);
+            console.log('=======');
+            console.dir(response.data);
+            console.log('=======');
         }catch(error){
             console.error('Error:', error);
         }

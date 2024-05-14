@@ -5,7 +5,6 @@ import PieChart from "./report_pie";
 import ReportQuestionInfoComponent from "./report_question_review";
 import ReportApplicationQuestion from "./report_application_question";
 import { Data } from "../reportList/reportInterface";
-                
 interface ReportpageProps {
     data: Data;
   }
@@ -29,10 +28,12 @@ function formatDate(inputDate: string): string {
 
 const ReportpageComponent = ({data}: ReportpageProps) => {        
     const [studyTime, setStudyTime] = useState<string[]>(['0', '0', '0', '0']);
-    
+    console.log('=====report======');
+    console.dir(data);
+    console.log('=====report======');
     return (
     <ReportStudentBackground>
-        <ReportStudentTitle> 레포트 페이지</ReportStudentTitle>
+        {/* <ReportStudentTitle> 레포트 페이지</ReportStudentTitle>
         <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.readHistoryReport.studyStartTime)}</ReportStudentSubTitle>
         <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.readHistoryReport.studyEndTime)}</ReportStudentSubTitle>
         
@@ -61,7 +62,7 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
         <ReportTextContainer>
                 <ReportQuestionInfoComponent quizzes={data.readHistoryReport.quizzes}/>
                 <ReportApplicationQuestion gptSummery={data.gptSummery.summary} />
-        </ReportTextContainer>
+        </ReportTextContainer> */}
     </ReportStudentBackground>
 )} 
 
