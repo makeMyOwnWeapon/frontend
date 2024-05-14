@@ -22,6 +22,8 @@ interface ReportCard {
 const ReportList: React.FC = () => {
     const [cards, setCards] = useState<ReportCard[]>([]);
     const navigate = useNavigate();   
+    const currentMenuName = '레포트 조회'
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -40,7 +42,7 @@ const ReportList: React.FC = () => {
         <>
         <BackgroundAnimation>
             <Container>
-                <NaviSection></NaviSection>
+            <NaviSection currentMenuName = {currentMenuName}></NaviSection>
                     <InnerContentSection>
                       <Side>
                         <ToastModal/>
@@ -81,7 +83,6 @@ const InnerContentSection = styled.div`
   display: flex;
   height: 100%;
   justify-content: space-evenly;
-  border: 1px solid red;
 }
 
 #side{

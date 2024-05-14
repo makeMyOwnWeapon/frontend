@@ -152,7 +152,7 @@ const NaviSection = (path:any) => {
     <NavSectionWrapper>
       <div id="logo_box" onClick={() => handleNavigation("/")}>
         <div id="logo_img">
-          <img src="blue_loa.png" alt="LOA Logo" />
+          <img src={`${process.env.PUBLIC_URL}/blueLoa.png`}></img>
         </div>
         <div id="logo_title">
           <h1>LOA</h1>
