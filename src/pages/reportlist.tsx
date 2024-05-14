@@ -5,11 +5,11 @@ import "../styles/Public"
 import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
-import Side from "../styles/publicStyleComponents/NaviSection";
 
 import ReportCard from "../components/report/report_card";
-import SidebarOptions from "../components/public/SidebarOptions";
+import ToastModal from "../components/public/toastModal";
 import { request } from "../helpers/axios_helper";
+import Side from "../styles/publicStyleComponents/Side";
 
 interface ReportCard {
   subLectureId: number;
@@ -27,6 +27,7 @@ const ReportList: React.FC = () => {
             try {
                 const response = await request('GET','/api/history/');
                 setCards(response.data);
+                console.dir(response.data);
 
             } catch (error) {
                 console.error('Error:', error);
@@ -42,7 +43,7 @@ const ReportList: React.FC = () => {
                 <NaviSection></NaviSection>
                     <InnerContentSection>
                       <Side>
-                        <SidebarOptions/>
+                        <ToastModal/>
                       </Side>
                         <div id="main">
                             {cards.map((card, index) => (
@@ -80,6 +81,7 @@ const InnerContentSection = styled.div`
   display: flex;
   height: 100%;
   justify-content: space-evenly;
+  border: 1px solid red;
 }
 
 #side{

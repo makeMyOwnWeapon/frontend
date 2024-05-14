@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "../styles/Public";
 import WorkbookCard from "../components/quizSet/quizSetCard";
-import SidebarOptions from "../components/public/SidebarOptions";
+import ToastModal from "../components/public/toastModal";
 
 import { request } from "../helpers/axios_helper";
 
@@ -69,7 +69,7 @@ const WorkBook: React.FC = () => {
         <NaviSection currentMenuName = {currentMenuName}></NaviSection>
         <InnerContentSection>  
               <Side>
-                <SidebarOptions/>
+                <ToastModal/>
                 <SearchBox>
                     <select onChange={(e) => setSearchOption(e.target.value)}>
                       <option value="all">선택</option>

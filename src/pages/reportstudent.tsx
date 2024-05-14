@@ -10,7 +10,7 @@ import axios from "axios";
 import PieChart from "../components/report/report_pie";
 import LineChart from "../components/report/report_line";
 import ReportQuestionInfoComponent from "../components/report/report_question_review";
-import SidebarOptions from "../components/public/SidebarOptions";
+import ToastModal from "../components/public/toastModal";
 
 interface SleepinessAndDistraction {
   sleepinessStart: string | null;
@@ -107,7 +107,7 @@ const ReportStudent  = () => {
             <NaviSection></NaviSection>
             <InnerContentSection>
             <div id="side">
-                <SidebarOptions/>
+                <ToastModal/>
             </div>
                 <ReportStudentBackground>
                     <ReportStudentTitle>{subLectureTitle} 레포트 페이지</ReportStudentTitle>

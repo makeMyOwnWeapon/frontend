@@ -14,7 +14,7 @@ interface OptionItem {
   label: string;
 }
 
-const SidebarOptions = () => {
+const ToastModal = () => {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const navigate = useNavigate();
   const [_, __, removeCookie] = useCookies(['jwt']);
@@ -121,7 +121,7 @@ const SidebarOptions = () => {
   );
 };
 
-export default SidebarOptions;
+export default ToastModal;
 
 
 const Option = styled.div`

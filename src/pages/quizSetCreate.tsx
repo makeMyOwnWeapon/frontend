@@ -3,7 +3,7 @@ import ProblemPage from "../components/quizSetCreate/create_question";
 import { useNavigate } from "react-router-dom";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import styled from "styled-components";
-import SidebarOptions from "../components/public/SidebarOptions";
+import ToastModal from "../components/public/toastModal";
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
 
@@ -18,7 +18,7 @@ const Create: React.FC = () => {
           <NaviSection currentMenuName = {currentMenuName}></NaviSection>
               <InnerContentSection>
                 <Side>
-                    <SidebarOptions/>
+                    <ToastModal/>
                 </Side>
 
                 <ProblemPage navigate={navigate}/> 
