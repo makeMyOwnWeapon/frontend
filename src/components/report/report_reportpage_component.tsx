@@ -33,17 +33,17 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
     console.log('=====report======');
     return (
     <ReportStudentBackground>
-        {/* <ReportStudentTitle> 레포트 페이지</ReportStudentTitle>
-        <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.readHistoryReport.studyStartTime)}</ReportStudentSubTitle>
-        <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.readHistoryReport.studyEndTime)}</ReportStudentSubTitle>
+        <ReportStudentTitle> 레포트 페이지</ReportStudentTitle>
+        <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.reports.studyStartTime)}</ReportStudentSubTitle>
+        <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.reports.studyEndTime)}</ReportStudentSubTitle>
         
         <LineChartSize>
-            <LineChart response = {data.readHistoryReport}/>
+            <LineChart response = {data.reports}/>
         </LineChartSize>
 
         <PieChartSize>
             <div id="chart">
-                <PieChart response={data.readHistoryReport} setstudyTime={setStudyTime} />
+                <PieChart response={data.reports} setstudyTime={setStudyTime} />
             </div>
             <div id="text">
                 <PieText>
@@ -60,9 +60,9 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
             </div>
         </PieChartSize>
         <ReportTextContainer>
-                <ReportQuestionInfoComponent quizzes={data.readHistoryReport.quizzes}/>
+                <ReportQuestionInfoComponent quizzes={data.reports.quizzes}/>
                 <ReportApplicationQuestion gptSummery={data.gptSummery.summary} />
-        </ReportTextContainer> */}
+        </ReportTextContainer>
     </ReportStudentBackground>
 )} 
 

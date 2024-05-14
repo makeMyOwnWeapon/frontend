@@ -38,7 +38,7 @@ const ReportDetail  = () => {
         // 레포트 정보 요청
         const fetchData = async () => {
             try{
-            const response = await request('GET','/api/history/?lectureHistoryId=' + lectureHistoryId);
+            const response = await request('GET','/api/history?lectureHistoryId=' + lectureHistoryId);
             setData(response.data);
             console.dir(response.data);
         }catch(error){
