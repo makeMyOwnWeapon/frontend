@@ -4,7 +4,7 @@ import LineChart from "./report_line";
 import PieChart from "./report_pie";
 import ReportQuestionInfoComponent from "./report_question_review";
 import ReportApplicationQuestion from "./report_application_question";
-import { Data } from "./reportpage";
+import { Data } from "../reportList/reportInterface";
                 
 interface ReportpageProps {
     data: Data;

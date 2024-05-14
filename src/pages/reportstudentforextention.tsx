@@ -7,7 +7,7 @@ import "../styles/Public"
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReportpageComponent from "../components/report/report_reportpage_component";
-import { Data } from "../components/report/reportpage";
+import { Data } from "../components/reportList/reportInterface";
 
 const ReportStudentFroExtension  = () => {
     const {lectureHistoryId} = useParams();

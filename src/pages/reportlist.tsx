@@ -6,7 +6,7 @@ import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
 
-import ReportCard from "../components/report/report_card";
+import ReportCard from "../components/reportList/reportCard";
 import ToastModal from "../components/public/toastModal";
 import { request } from "../helpers/axios_helper";
 import Side from "../styles/publicStyleComponents/Side";

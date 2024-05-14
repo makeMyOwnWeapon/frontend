@@ -5,11 +5,12 @@ import Signup from './pages/signup';
 import WorkBook from './pages/quizSet';
 import Create from './pages/quizSetCreate';
 import Question_info from './pages/quizSetDetail';
-import ReportList from './pages/reportlist';
 import ReportStudent from './pages/reportstudent';
 import NotFoundPage from './pages/404page';
 import RequireAuth from './helpers/requireauth'
 import ReportStudentFroExtention from './pages/reportstudentforextention';
+import ReportList from './pages/reportList';
+
 
 function App() {
   return (
