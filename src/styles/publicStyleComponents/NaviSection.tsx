@@ -73,19 +73,20 @@ const NavSectionWrapper = styled.div`
 
   #logo_img {
     flex: 0.5;
+    margin-left: 5px;
+    margin-right: -15px;
   }
 
   #logo_img > img {
-    width: 100%;
+    width: 90%;
     height: auto;
     object-fit: cover;
   }
 
   #logo_title {
     flex: 1;
-    font-weight: bold;
     color: black;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
   }
 
   .menus {
@@ -102,7 +103,6 @@ const NavSectionWrapper = styled.div`
     line-height: 50px;
     text-align: center;
     border-radius: 10px;
-    margin: 0 5px;
     transition: color 0.3s, background-color 0.3s, transform 0.3s;
 
     &:hover {
