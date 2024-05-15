@@ -11,7 +11,6 @@ import ToastModal from '../components/public/toastModal';
 const QuestionInfo = () => {
   const location = useLocation();
   const { quizSetId } = useParams();
-  const { subLectureUrl } = location.state || { subLectureUrl: "" };
   const currentMenuName = '문제집 조회';
   const { subLectureTitle, quizSetTitle, memberNickname } = location.state || {};
 
@@ -27,7 +26,7 @@ const QuestionInfo = () => {
             <Title>{quizSetTitle}</Title>
             <Subtitle>소강의명: {subLectureTitle}</Subtitle>
             <Author>작성자: {memberNickname}</Author>
-            {quizSetId && <QuestionInfoComponent videoUrl={subLectureUrl} quizSetId={quizSetId} />}
+            {quizSetId && <QuestionInfoComponent quizSetId={quizSetId} />}
           </Main>
         </InnerContentSection>
       </Container>
@@ -58,14 +57,14 @@ const Title = styled.div`
   font-weight: bold;
   margin-top: 10px;
   margin-left: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
   color: #333;
 `;
 
 const Subtitle = styled.div`
   font-size: 1.4em;
   margin-left: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   color: #555;
 `;
 
