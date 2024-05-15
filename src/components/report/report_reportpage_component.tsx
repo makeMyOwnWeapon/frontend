@@ -96,7 +96,7 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
                 <ReportQuestionInfoComponent quizzes={data.reports.quizzes} />
             </div>
             )}
-            {data.gptSummery.summary.length > 0 && (
+            {data.gptSummery && data.gptSummery.summary.length > 0 && (
             <div className="section white" id="aiSection">
                 {/* AI 키워드 */}
                 <ReportApplicationQuestion gptSummery={data.gptSummery.summary} />
@@ -266,7 +266,7 @@ const ReportStudentBackground = styled.div`
 
 
 const ReportStudentSubTitle = styled.div`
-    font-size: small;
+    font-size: medium;
     font-weight: lighter;
     
 
