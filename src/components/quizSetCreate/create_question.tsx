@@ -58,7 +58,7 @@ class ProblemPage extends Component<Props, State> {
   
   addQuestionComponent = (): void => {
     this.setState(prevState => ({
-      questionComponents: [...prevState.questionComponents, { id: prevState.questionComponents.length, expanded: false }],
+      questionComponents: [...prevState.questionComponents, { id: prevState.questionComponents.length, expanded: true }],
       answers: [...prevState.answers, Array(6).fill({ text: '', selected: false })],
       questionTimes: [...prevState.questionTimes, '']
     }));
@@ -221,7 +221,7 @@ const Button = styled.button`
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-  text-align: center; /* 중앙 정렬을 위해 추가 */
+  text-align: center;
   &:hover {
     background-color: skyblue;
     color: white;

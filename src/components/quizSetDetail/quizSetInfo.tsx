@@ -6,10 +6,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/css/slick.css';
 import { request } from "../../helpers/axios_helper";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 interface QuestionComponentProps {
-    videoUrl: string;
     quizSetId: string | undefined;
 }
 
@@ -42,7 +41,7 @@ const formatTime = (seconds: number) => {
 const QuizSetInfo = ({ quizSetId }: QuestionComponentProps) => {
     const [data, setData] = useState<Question_[]>([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [currentCommentary, setCurrentCommentary] = useState("");
+    const [modalContent, setModalContent] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -71,13 +70,12 @@ const QuizSetInfo = ({ quizSetId }: QuestionComponentProps) => {
     };
 
     const openModal = (commentary: string) => {
-        setCurrentCommentary(commentary);
+        setModalContent(commentary);
         setModalIsOpen(true);
     };
 
     const closeModal = () => {
         setModalIsOpen(false);
-        setCurrentCommentary("");
     };
 
     if (data.length === 0) {
@@ -109,21 +107,80 @@ const QuizSetInfo = ({ quizSetId }: QuestionComponentProps) => {
                     </PublicQuestionContainer>
                 ))}
             </StyledSlider>
-            <Modal
+            <StyledModal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
-                style={customStyles}
                 contentLabel="Commentary Modal"
+                ariaHideApp={false}
             >
-                <h2>해설</h2>
-                <p>{currentCommentary}</p>
-                <CloseButton onClick={closeModal}>닫기</CloseButton>
-            </Modal>
+                <ModalContent>
+                    <h2>해설</h2>
+                    <p>{modalContent}</p>
+                    <CloseButton onClick={closeModal}>닫기</CloseButton>
+                </ModalContent>
+            </StyledModal>
         </PublicSliderContainer>
     );
 };
 
 export default QuizSetInfo;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const StyledModal = styled(Modal)`
+  animation: ${fadeIn} 0.5s ease-out;
+
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ModalContent = styled.div`
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CloseButton = styled.button`
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #82b8f2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(104, 178, 253, 0.7);
+  }
+`;
 
 const Question = styled.div`
   flex: 1;
@@ -191,19 +248,6 @@ const CommentaryButton = styled.button`
   }
 `;
 
-const CloseButton = styled.button`
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: rgba(104, 178, 253, 0.7);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: #82b8f2;
-  }
-`;
-
 const ArrowButton = styled.div`
   display: block;
   padding: 10px;
@@ -235,16 +279,3 @@ const StyledSlider = styled(Slider)`
     bottom: -90%;
   }
 `;
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    width: '50%',
-    maxWidth: '600px',
-  }
-};

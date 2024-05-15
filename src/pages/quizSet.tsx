@@ -43,9 +43,7 @@ const WorkBook: React.FC = () => {
     fetchData();
   }, []);
 
-   // 검색어에 따라 카드 필터링 함수
    const filterCards = (card: Card) => {
-    // 선택된 옵션에 따라 검색
 
     if (searchOption === "all") {
       return true;
@@ -86,7 +84,6 @@ const WorkBook: React.FC = () => {
               <Main>
                 {cards.filter(filterCards)
                   .map((card, index) => (
-                      // <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
                       <WorkbookCard
                       createdAt={card.createdAt}
                       memberNickname={truncateTitle(card.memberNickname,12)}
@@ -96,7 +93,6 @@ const WorkBook: React.FC = () => {
                       subLectureTitle={card.subLectureTitle}
                       subLectureUrl={card.subLectureUrl}
                     />             
-                      // </motion.div>
                     ))}
               </Main>
              </InnerContentSection>
