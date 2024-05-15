@@ -12,7 +12,6 @@ const Create: React.FC = () => {
     const currentMenuName = '문제집 만들기'
 
     return (
-
     <BackgroundAnimation>
       <Container>
           <NaviSection currentMenuName = {currentMenuName}></NaviSection>
@@ -20,19 +19,12 @@ const Create: React.FC = () => {
                 <Side>
                     <ToastModal/>
                 </Side>
-
                 <Main>
                 <ProblemPage navigate={navigate}/> 
                 </Main>
               </InnerContentSection>
         </Container>
      </BackgroundAnimation>
-        
-
-
-
-         
-        
     );
 };
 

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-
-
 export const PublicTextContainer = styled.div`
   padding: 10px;
   margin: 5px 0;
@@ -16,7 +14,6 @@ export const PublicSliderContainer = styled.div`
 margin-top: 100px;
 position: relative;
 width: 100%;
-
 `;
 
 export const PublicButton = styled.button`
@@ -61,8 +58,6 @@ export const PublicCardContainer = styled.div`
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
   }
-
-  
 `;
 
 export const PublicCardContent = styled.div`
@@ -77,8 +72,6 @@ export const PublicCardTitle = styled.h5`
   color: #111827;
 `;
 
-
-
 export const PublicCardDescription = styled.p`
   margin-bottom: 0.5rem;
   font-size: 1rem;
@@ -91,7 +84,6 @@ export const PublicQuestionContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 100%; /* 최대 너비 제한 */
-  overflow-x: auto; /* 가로 스크롤 활성화 */
-  
+  max-width: 100%;
+  overflow-x: auto;
 `;

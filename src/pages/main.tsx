@@ -67,10 +67,6 @@ const InnerContentSection = styled.div`
     flex-direction: column;
     color: black;
     /* border: 1px solid red; */
-    /* background: linear-gradient(120deg, #FF0000, #0000FF); */
-    /* -webkit-background-clip: text; */
-    /* -webkit-text-fill-color: transparent; */
-
   }
 
   #title span{
