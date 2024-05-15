@@ -261,7 +261,7 @@ const ReportStudentBackground = styled.div`
 
 
 const ReportStudentSubTitle = styled.div`
-    font-size: small;
+    font-size: medium;
     font-weight: lighter;
     
 
