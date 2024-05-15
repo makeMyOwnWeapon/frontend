@@ -132,38 +132,28 @@ class QuestionComponent extends Component<Props, State> {
             <div ref={this.contentRef}>
               {expand && (
                 <>
-                    <InputBoxWrapper>
-                      <Time_Input_text type="timeInput" placeholder="시간 (예 : 01:23:45)" value={newTime} onChange={this.handleTimeChange} />
-                    </InputBoxWrapper>
-
+                    <Time_Input_text type="timeInput" placeholder="시간 (예 : 01:23:45)" value={newTime} onChange={this.handleTimeChange} />
                     <SelectOption value={questionType} onChange={this.handleTypeChange}>
                       <option value="objective">객관식</option>
                       <option value="subjective">주관식</option>
                     </SelectOption>
-
-                  <InputBoxWrapper>
                     <Input_text type="text" placeholder= "문제집명" value={answers[0].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)} maxLength={40} />
-                  </InputBoxWrapper>
 
                   {questionType === 'objective' ? (
                     ['1번', '2번', '3번', '4번', '해설'].map((label, index) => (
-                      <InputBoxWrapper key={index}>
+                      <div key={index}>
                         <Input_text type="text" placeholder= {`${label}`}value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} maxLength={40} />
                         {index < 4 && (
                           <OptionButton onClick={() => this.handleSelectionChange(index + 1)}>
                             {answers[index + 1].selected ? '정답' : '오답'}
                           </OptionButton>
                         )}
-                      </InputBoxWrapper>
+                      </div>
                     ))
                   ) : (
                     <>
-                      <InputBoxWrapper>
                         <Input_text type="text" placeholder= "답 : " value={answers[1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(1, e.target.value)} maxLength={20} />
-                      </InputBoxWrapper>
-                      <InputBoxWrapper>
                         <Input_text type="text" placeholder= "해설 : " value={answers[2].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(2, e.target.value)} maxLength={20} />
-                      </InputBoxWrapper>
                     </>
                   )}
                   
@@ -180,11 +170,11 @@ class QuestionComponent extends Component<Props, State> {
 export default QuestionComponent;
 
 const Time_Input_text = styled.input`
-  width: 50%;
+  width: 55%;
   flex: 1;
   padding: 10px;
   margin-left: 10px;
-  border: 2px solid #ccc;
+  border: 2px solid #dee2e6;
   border-radius: 5px;
   font-size: 16px;
   outline: none;
@@ -254,23 +244,15 @@ const QuestionContainer = styled.div`
 
 `;
 
-export const InputBoxWrapper = styled.div`
-  width: 100%;
-  /* display: block; */
-  /* flex-direction: row; */
-  /* align-items: center; */
-  /* margin-bottom: 15px; */
-`;
-
 const Input_text = styled.input`
   display: inline-block;
   flex: 1;
-  width: 70%;
+  width: 75%;
   padding: 10px;
   margin-left: 10px;
   margin-top:10px;
   margin-bottom: 10px;
-  border: 2px solid #ccc;
+  border: 2px solid #dee2e6;
   border-radius: 5px;
   font-size: 16px;
   outline: none;
@@ -287,6 +269,7 @@ margin-left:10px;
 margin-top:10px;
 margin-bottom:10px;
 color: #000;
+background-color: skyblue;
 border: 1px solid #ccc;
 border-radius: 4px;
 cursor: pointer;

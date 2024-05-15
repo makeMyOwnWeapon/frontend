@@ -49,6 +49,11 @@ const Main = styled.div`
   flex-wrap: wrap;
   display: flex;
   height: 85vh;
-  /* border: 1px solid pink; */
   justify-content: center;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
 `;
