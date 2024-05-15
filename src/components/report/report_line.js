@@ -23,7 +23,7 @@ const LineChart = ({ response }) => {
             const endTime = new Date(response.studyEndTime);
             const labels = [];
 
-            for (let i = 0; i < sleepinessDuration.length; i++) {
+            for (let i = 0; i <= sleepinessDuration.length; i++) {
                 const time = new Date(i * 1000 + 54000000);
                 labels.push(time.toISOString());
             }
