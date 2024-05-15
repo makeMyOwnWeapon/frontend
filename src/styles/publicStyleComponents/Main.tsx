@@ -6,7 +6,7 @@ const Main = styled.div`
   flex-wrap: wrap;
   display: flex;
   height: 85vh;
-  /* border: 1px solid pink; */
+
   justify-content: center;
 `;
 

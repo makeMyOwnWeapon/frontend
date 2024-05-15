@@ -10,6 +10,7 @@ import ReportCard from "../components/reportList/reportCard";
 import ToastModal from "../components/public/toastModal";
 import { request } from "../helpers/axios_helper";
 import Side from "../styles/publicStyleComponents/Side";
+import Main from "../styles/publicStyleComponents/Main";
 
 interface ReportCard {
   subLectureId: number;
@@ -47,7 +48,7 @@ const ReportList: React.FC = () => {
                       <Side>
                         <ToastModal/>
                       </Side>
-                        <div id="main">
+                        <Main>
                             {cards.map((card, index) => (
                                     <ReportCard
                                     key={index}
@@ -58,7 +59,7 @@ const ReportList: React.FC = () => {
                                     lectureHistoryId={card.lectureHistoryId}
                                     />
                                 ))}
-                        </div>
+                        </Main>
                     </InnerContentSection>
             </Container>
         </BackgroundAnimation>

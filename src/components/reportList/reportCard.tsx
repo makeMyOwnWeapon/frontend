@@ -24,25 +24,31 @@ const ReportCard: React.FC<ReportCardProps> = ({   subLectureId, subLectureTitle
   const formatDate = (dateString: string) => {
     // ISO 8601 형식의 문자열을 Date 객체로 변환
     const date = new Date(dateString);
-
+  
     // 연도, 월, 일을 추출
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줌
     const day = String(date.getDate()).padStart(2, '0'); // 일
-
+  
+    // 시간, 분, 초를 추출
+    const hours = String(date.getHours()).padStart(2, '0'); // 시
+    const minutes = String(date.getMinutes()).padStart(2, '0'); // 분
+    const seconds = String(date.getSeconds()).padStart(2, '0'); // 초
+  
     // 원하는 형식으로 문자열 조합
-    return `${year}년 ${month}월 ${day}일`;
+    return `${year}년 ${month}월 ${day}일 ${hours}:${minutes}:${seconds}`;
   };
+  
 
   return (
     <ReportCardContainer>
       <PublicCardContent>
-        <a href="" onClick={handleCardClick}>
+        <div onClick={handleCardClick}>
 
           <ReportCardTitle>{subLectureTitle}</ReportCardTitle>
-          <ReportCardComponent>공부 시간 : {formatDate(registrationDate)}</ReportCardComponent>
+          <ReportCardComponent>생성일 : {formatDate(registrationDate)}</ReportCardComponent>
           <ReportCardComponent>{lectureHistoryId}</ReportCardComponent>
-        </a>
+        </div>
         {/* <CardDescription>작성자: {memberNickname}</CardDescription> */}
 
       </PublicCardContent>
@@ -83,7 +89,6 @@ margin: 2rem;
   margin-top: 2rem;
   font-size: 1.25rem;
   font-weight: bold;
-  line-height: 1.5;
   color: #374151;
 `;
 
@@ -93,6 +98,5 @@ const ReportCardComponent = styled.h5`
   margin-top: 1rem;
   font-size: 0%.75;
   font-weight: bold;
-  line-height: 1.5;
   color: #374151;
 `;
