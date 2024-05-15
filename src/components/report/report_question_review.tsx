@@ -28,6 +28,10 @@ interface Question_ {
 
 const ReportQuestionReview = ({ quizzes }:quizzes )=> {
     const [data, setData] = useState<Question_[]>();
+
+    {/* 정답이랑 선택한답안 넣기, 복수정답일 경우도 생각하기*/}
+    const [selectedNumber, setSelectedNumber] = useState('');
+    const [answerNumber, setAnswerNumber] = useState([]);
     useEffect(()=>{
     setData(quizzes);
     console.log(data);
@@ -49,29 +53,34 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
                 <PublicQuestionContainer key={index}>
 
                     <Question key={index}>
-                         <div className="questionName">{index+1}번 문제: {question.question}</div>
-                        {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
+                        {/* 정답이랑 선택한답안 넣기 */}
+                        <div className="quizPart">
+                            <div className="title">문제</div>
+                            <div className="questionName">{question.question}</div>
+                            <br />
+                            {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
                             <PublicTextContainer key={choiceIndex}>{choiceIndex + 1}번 : {choice.content}</PublicTextContainer>
-                        ))}
-                        
-                        {/* {question && question.choices.length === 1 && question.choices.map((choice, choiceIndex) => (
-                            <PublicTextContainer key={choiceIndex}>제출한 답 : {choice.content}</PublicTextContainer>
-                        ))} */}
+                            ))}
+                        </div>
 
-                        <AnswerContainer> 
-
-                        <h3>해설</h3>
-                        <PublicTextContainer>{question.commentary}</PublicTextContainer>
+                        <div className="quizAnswerPart">
+                            <div className="title">해설</div>
+                            <div>내가 제출한 답안 : 1번</div>
+                            <div>정답 : 1번</div>
+                            <br />
+                            <PublicTextContainer>{question.commentary}</PublicTextContainer>
+                            <br />
                         
-                        <h3>정답</h3>
-                          {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
+                            {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
                             choice.isAnswer === true  ?
                             <PublicTextContainer key={choiceIndex}>{choiceIndex+1}번 : {choice.content}</PublicTextContainer>:
                             null
 
-                        ))}
+                      ))}
 
-                        </AnswerContainer>  
+                        </div>
+                       
+
                     </Question>
                 </PublicQuestionContainer>
             ))}
@@ -87,40 +96,50 @@ const ReportQuestionTitle = styled.div`
     font-weight: bold; 
     
     /* border: 1px solid red; */
+
+   
 `;
 
-const AnswerContainer = styled.div`
-`;
-
-const ReportCorrectTextContainer = styled.div`
-  padding: 10px;
-  margin: 5px 0;
-  background-color: #bcddff;
-  border-radius: 5px;
-  color: #212529;
-  font-size: 16px;
-  line-height: 1.5;
-`;
-
-const Problem = styled.div`
-
-`
 
 const Question = styled.div`
   flex: 1; /* 콘텐츠 영역이 남은 공간을 차지 */
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid #ccc; /* 테두리 스타일 지정 */
-  border-radius: 5px; /* 테두리 모서리를 둥글게 만듦 */
-  padding: 10px; /* 내부 여백 추가 */
-  margin: 10px; /* 외부 패딩 추가 */
+
   flex-direction:column;
-  min-height: 400px;
+
+  .quizPart{
+    border: 1px solid #ccc; /* 테두리 스타일 지정 */
+    border-radius: 5px; /* 테두리 모서리를 둥글게 만듦 */
+    padding: 10px; /* 내부 여백 추가 */
+    margin: 10px; /* 외부 패딩 추가 */
+}
+
+.quizAnswerPart{
+    border: 1px solid #ccc; /* 테두리 스타일 지정 */
+    border-radius: 5px; /* 테두리 모서리를 둥글게 만듦 */
+    padding: 10px; /* 내부 여백 추가 */
+    margin: 10px; /* 외부 패딩 추가 */
+}
+
+
+.title{
+font-size: large;
+background-color: aliceblue;
+padding: 10px 20px;
+width: 75px;
+text-align: center;
+
+
+
+}
 
 
 .questionName{
-    /* background-color: white; */
-    opacity: 1;
+
+
+
+
 
 }
 

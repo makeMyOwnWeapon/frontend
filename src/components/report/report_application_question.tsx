@@ -53,7 +53,6 @@ const Summary = styled.div`
   padding: 10px;
   margin: 10px;
   flex-direction:column;
-  min-height: 400px;
 `;
 
 const PublicTextContainer = styled.div`
