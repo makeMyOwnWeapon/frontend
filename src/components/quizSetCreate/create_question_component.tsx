@@ -1,5 +1,4 @@
 import React, { Component, ChangeEvent, createRef } from "react";
-import { SelectOption } from "../../styles/CreateQuestion";
 import { motion } from 'framer-motion';
 import styled from "styled-components";
 
@@ -133,47 +132,37 @@ class QuestionComponent extends Component<Props, State> {
             <div ref={this.contentRef}>
               {expand && (
                 <>
-                  <div>
                     <InputBoxWrapper>
-                      <label>시간: </label>
-                      <Time_Input_text type="timeInput" placeholder="예: 01:23:45" value={newTime} onChange={this.handleTimeChange} />
+                      <Time_Input_text type="timeInput" placeholder="시간 (예 : 01:23:45)" value={newTime} onChange={this.handleTimeChange} />
                     </InputBoxWrapper>
-                  </div>
 
-                  <div>
-                    <label>문제 유형:</label>
                     <SelectOption value={questionType} onChange={this.handleTypeChange}>
                       <option value="objective">객관식</option>
                       <option value="subjective">주관식</option>
                     </SelectOption>
-                  </div>
 
                   <InputBoxWrapper>
-                    <label>문제: </label>
-                    <Input_text type="text" value={answers[0].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)} maxLength={40} />
+                    <Input_text type="text" placeholder= "문제집명" value={answers[0].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)} maxLength={40} />
                   </InputBoxWrapper>
 
                   {questionType === 'objective' ? (
                     ['1번', '2번', '3번', '4번', '해설'].map((label, index) => (
                       <InputBoxWrapper key={index}>
-                        <label>{label}: </label>
-                        <Input_text type="text" value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} maxLength={40} />
+                        <Input_text type="text" placeholder= {`${label}`}value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} maxLength={40} />
                         {index < 4 && (
-                          <Button onClick={() => this.handleSelectionChange(index + 1)}>
-                            {answers[index + 1].selected ? '정답입니다' : '오답입니다'}
-                          </Button>
+                          <OptionButton onClick={() => this.handleSelectionChange(index + 1)}>
+                            {answers[index + 1].selected ? '정답' : '오답'}
+                          </OptionButton>
                         )}
                       </InputBoxWrapper>
                     ))
                   ) : (
                     <>
                       <InputBoxWrapper>
-                        <label>답:&nbsp;&nbsp;&nbsp;</label>
-                        <Input_text type="text" value={answers[1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(1, e.target.value)} maxLength={20} />
+                        <Input_text type="text" placeholder= "답 : " value={answers[1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(1, e.target.value)} maxLength={20} />
                       </InputBoxWrapper>
                       <InputBoxWrapper>
-                        <label>해설: </label>
-                        <Input_text type="text" value={answers[2].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(2, e.target.value)} maxLength={20} />
+                        <Input_text type="text" placeholder= "해설 : " value={answers[2].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(2, e.target.value)} maxLength={20} />
                       </InputBoxWrapper>
                     </>
                   )}
@@ -191,9 +180,10 @@ class QuestionComponent extends Component<Props, State> {
 export default QuestionComponent;
 
 const Time_Input_text = styled.input`
-  width: 10em;
+  width: 50%;
   flex: 1;
-  padding: 8px;
+  padding: 10px;
+  margin-left: 10px;
   border: 2px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -223,34 +213,63 @@ const Button = styled.button`
   }
 `;
 
+const OptionButton = styled.button`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  margin-left:30px;
+  width: 80px;
+  height: 50px;
+  background-color: #ACE1F4;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  &:hover {
+    background-color: skyblue;
+    color: white;
+  }
+`;
+
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   margin-top: 20px;
+  margin-bottom:40px;
+
 `;
 
 const QuestionContainer = styled.div`
-  display:flex;
-  justify-content: center;
-  width: 100%;
+  display:inline-block;
+  /* justify-content: center; */
+  width: 60%;
   padding: 15px;
   margin-bottom: 20px;
 
 `;
 
 export const InputBoxWrapper = styled.div`
-  display: block;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 15px;
+  width: 100%;
+  /* display: block; */
+  /* flex-direction: row; */
+  /* align-items: center; */
+  /* margin-bottom: 15px; */
 `;
 
 const Input_text = styled.input`
-  width: 30em;
+  display: inline-block;
   flex: 1;
-  padding: 8px;
+  width: 70%;
+  padding: 10px;
+  margin-left: 10px;
+  margin-top:10px;
+  margin-bottom: 10px;
   border: 2px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -259,4 +278,16 @@ const Input_text = styled.input`
   &:focus {
     border-color: #007bff;
   }
+`;
+
+const SelectOption = styled.select`
+padding: 8px 16px;
+margin-right: 8px;
+margin-left:10px;
+margin-top:10px;
+margin-bottom:10px;
+color: #000;
+border: 1px solid #ccc;
+border-radius: 4px;
+cursor: pointer;
 `;

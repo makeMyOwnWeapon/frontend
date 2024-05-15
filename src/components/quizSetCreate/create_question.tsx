@@ -58,7 +58,7 @@ class ProblemPage extends Component<Props, State> {
   
   addQuestionComponent = (): void => {
     this.setState(prevState => ({
-      questionComponents: [...prevState.questionComponents, { id: prevState.questionComponents.length, expanded: false }],
+      questionComponents: [...prevState.questionComponents, { id: prevState.questionComponents.length, expanded: true }],
       answers: [...prevState.answers, Array(6).fill({ text: '', selected: false })],
       questionTimes: [...prevState.questionTimes, '']
     }));
