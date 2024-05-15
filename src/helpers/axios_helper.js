@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
-axios.defaults.baseURL = 'http://localhost:3000'
+// axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'https://api.learn-on-air.site'
+
 axios.defaults.headers.post["Content-type"] = 'application/json'
 
 export const getAuthToken = () => {
