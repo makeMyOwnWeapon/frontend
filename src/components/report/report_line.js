@@ -55,7 +55,9 @@ const LineChart = ({ response }) => {
     }, [response]);
     useEffect(()=>{
 
-        console.log(sleepinessData);
+        console.log('sleepdata = ', sleepinessData.length);
+        console.log('labeldata = ', labels.length);
+        console.log('data duration = ',(new Date(endTime).getTime() - new Date(startTime).getTime()) / 1000)
 
     },[sleepinessData])
     const data = {

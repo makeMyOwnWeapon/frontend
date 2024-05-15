@@ -6,6 +6,7 @@ import styled from "styled-components";
 import ToastModal from "../components/public/toastModal";
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
+import Side from "../styles/publicStyleComponents/Side";
 
 const Create: React.FC = () => {
     const navigate = useNavigate();
@@ -34,14 +35,6 @@ const InnerContentSection = styled.div`
     display: flex;
     height: 85%;
 `
-export const Side = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px;
-  /* border: 1px solid red; */
-  width: 20%;
-`;
 
 const Main = styled.div`
   width: 70%;

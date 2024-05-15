@@ -4,6 +4,9 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+ChartJS.defaults.font.family = 'Jua-Regular';
+ChartJS.defaults.font.size = 16;
+
 const PieChart = ({ response, setstudyTime }) => {
     const [pieData, setPieData] = useState([]);
 
@@ -16,14 +19,12 @@ const PieChart = ({ response, setstudyTime }) => {
             let distractionTime = 0;
             
             response.sleepinessAndDistraction.forEach((item) => {
-                // 누적된 졸은시간
                 if (item.sleepinessStart && item.sleepinessEnd) {
                     const sleepStart = new Date(item.sleepinessStart).getTime();
                     const sleepEnd = new Date(item.sleepinessEnd).getTime();
                     sleepinessTime += (sleepEnd - sleepStart) / 1000;
                 }
 
-                // 누적된 자리비운 시간
                 if (item.distractionStart && item.distractionEnd) {
                     const distractStart = new Date(item.distractionStart).getTime();
                     const distractEnd = new Date(item.distractionEnd).getTime();
@@ -31,33 +32,31 @@ const PieChart = ({ response, setstudyTime }) => {
                 }
             });
             
-            
             const realStudyTime = totalStudySeconds - (sleepinessTime + distractionTime);
             setPieData([sleepinessTime, distractionTime, realStudyTime]);
     
             const formattedTimes = [
-               totalStudySeconds ,sleepinessTime + distractionTime, realStudyTime
+                totalStudySeconds, sleepinessTime + distractionTime, realStudyTime
             ];
             setstudyTime(formattedTimes);         
         }
         
     }, [response]);
 
-
     const data = {
-        labels: [ '자리 비움', '졸은 시간',  '공부 시간'],
+        labels: ['졸은 시간', '자리 비움', '공부 시간'],
         datasets: [
             {
                 label: '# of Votes',
                 data: pieData,
                 backgroundColor: [
-                    'rgba(75, 192, 192, 0.8)',
                     'rgba(255, 99, 132, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
                     'rgba(255, 206, 86, 0.8)',
                 ],
                 borderColor: [
-                    'rgba(75, 192, 192, 1)',
                     'rgba(255, 99, 132, 1)',
+                    'rgba(75, 192, 192, 1)',
                     'rgba(255, 206, 86, 1)',
                 ],
                 borderWidth: 1
@@ -72,8 +71,6 @@ const PieChart = ({ response, setstudyTime }) => {
             }
         }
     };
-
-    
 
     return <Pie data={data} options={options} />;
 };
