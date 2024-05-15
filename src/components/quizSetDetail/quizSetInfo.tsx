@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Modal from "react-modal";
-import { PublicSliderContainer, PublicQuestionContainer } from "../../styles/Public";
+import { PublicQuestionContainer } from "../../styles/Public";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/css/slick.css';
@@ -83,7 +83,7 @@ const QuizSetInfo = ({ quizSetId }: QuestionComponentProps) => {
     }
 
     return (
-        <PublicSliderContainer>
+        <SliderContainer>
             <StyledSlider {...settings}>
                 {data.map((question, index) => (
                     <PublicQuestionContainer key={index}>
@@ -119,7 +119,7 @@ const QuizSetInfo = ({ quizSetId }: QuestionComponentProps) => {
                     <CloseButton onClick={closeModal}>닫기</CloseButton>
                 </ModalContent>
             </StyledModal>
-        </PublicSliderContainer>
+        </SliderContainer>
     );
 };
 
@@ -155,6 +155,12 @@ const StyledModal = styled(Modal)`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const SliderContainer = styled.div`
+margin-top: 100px;
+position: relative;
+width: 100%;
 `;
 
 const ModalContent = styled.div`
