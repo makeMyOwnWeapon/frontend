@@ -22,9 +22,9 @@ const ReportRecommand = ({gptSummery}:gptSummery)=> {
 
 
     return (
-        <Form>
+        <div>
             <SolveAnalyzeContainer>
-                <ApplicationQuestionTitle>추천 키워드</ApplicationQuestionTitle>
+                <ApplicationQuestionTitle>AI 키워드</ApplicationQuestionTitle>
                     <Summary>
                         {data&&data.map((summary,index)=>(
                             <SummaryText key={index}>
@@ -33,14 +33,14 @@ const ReportRecommand = ({gptSummery}:gptSummery)=> {
                         ))}
                     </Summary>
             </SolveAnalyzeContainer>
-        </Form>
+        </div>
     );
 };
 
 export default ReportRecommand;
 
 const ApplicationQuestionTitle = styled.div`
-    font-size: 2.5em;
+    font-size: x-large;
     font-weight: bold; 
 `;
 
@@ -71,7 +71,5 @@ const SummaryText = styled.div`
 `;
 
 const SolveAnalyzeContainer = styled.div`
-    margin-top: 100px;
-    position: relative;
-    width: 100%
+
 `;

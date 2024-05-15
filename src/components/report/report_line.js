@@ -33,7 +33,7 @@ const LineChart = ({ response }) => {
                     const sleepinessStart = (new Date(item.sleepinessStart).getTime() - startTime.getTime()) / 1000;
                     const sleepinessEnd = (new Date(item.sleepinessEnd).getTime() - startTime.getTime()) / 1000;
                     for (let i = sleepinessStart; i <= sleepinessEnd; i++) {
-                        sleepinessDuration[i] = 1;
+                        sleepinessDuration[i] = 0.5;
                     }
                 }
     
@@ -41,7 +41,7 @@ const LineChart = ({ response }) => {
                     const distractionStart = (new Date(item.distractionStart).getTime() - startTime.getTime()) / 1000;
                     const distractionEnd = (new Date(item.distractionEnd).getTime() - startTime.getTime()) / 1000;
                     for (let i = distractionStart; i <= distractionEnd; i++) {
-                        distractionDuration[i] = 1;
+                        distractionDuration[i] = 0.5;
                     }
                 }
             });
@@ -67,9 +67,7 @@ const LineChart = ({ response }) => {
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0,
                 stepped: 'before',
-                borderWidth: 100,
-                pointStyle: 'rect',
-                showLine: true  
+                borderWidth: 50,  
 
             },
             {
@@ -78,9 +76,7 @@ const LineChart = ({ response }) => {
                 borderColor: 'rgb(255, 99, 132)',
                 tension: 0,
                 stepped: 'before',
-                borderWidth: 100,
-                pointStyle: 'rect',
-                showLine: true  
+                borderWidth: 50,
             },
         ]
     };
@@ -98,16 +94,17 @@ const LineChart = ({ response }) => {
         aspectRatio: 2,
         plugins: {
             legend: {
-                position: 'top',
-                labels: {
-                    padding: 10,
-                    usePointStyle: true,
-                    boxWidth: 0.01,
-                    boxHeight: 0.01
-                }
+                display:false,
+                // position: 'top',
+                // labels: {
+                //     padding: 10,
+                //     usePointStyle: true,
+                //     boxWidth: 0.01,
+                //     boxHeight: 0.0001
+                // }
             },
             tooltip: {
-                mode: 'index',
+                mode: 'point',
                 intersect: false,
             },
         },
@@ -131,13 +128,20 @@ const LineChart = ({ response }) => {
                         year: 'HH:mm:ss'
                     },
                 },
+                grid:{
+                    display : false
+                }
             },
             
             y: {
+                display:false,
                 beginAtZero: true,
-                max: 2,
+                max: 1,
                 ticks: {
                     stepSize: 1
+                },
+                grid:{
+                    display:false
                 }
             }
         },

@@ -11,8 +11,6 @@ import ReportStudentFroExtention from './pages/reportstudentforextention';
 import ReportDetail from './pages/reportDetail';
 import ReportList from './pages/reportlist';
 
-
-
 function App() {
   return (
     <BrowserRouter>
