@@ -16,30 +16,30 @@ const PieChart = ({ response, setstudyTime }) => {
             let distractionTime = 0;
             
             response.sleepinessAndDistraction.forEach((item) => {
+                // 누적된 졸은시간
                 if (item.sleepinessStart && item.sleepinessEnd) {
                     const sleepStart = new Date(item.sleepinessStart).getTime();
                     const sleepEnd = new Date(item.sleepinessEnd).getTime();
                     sleepinessTime += (sleepEnd - sleepStart) / 1000;
                 }
+
+                // 누적된 자리비운 시간
                 if (item.distractionStart && item.distractionEnd) {
                     const distractStart = new Date(item.distractionStart).getTime();
                     const distractEnd = new Date(item.distractionEnd).getTime();
                     distractionTime += (distractEnd - distractStart) / 1000;
                 }
             });
-
-            const studyTime = totalStudySeconds - (sleepinessTime + distractionTime);
-            setPieData([sleepinessTime, distractionTime, studyTime]);
+            
+            
+            const realStudyTime = totalStudySeconds - (sleepinessTime + distractionTime);
+            setPieData([sleepinessTime, distractionTime, realStudyTime]);
     
             const formattedTimes = [
-                (sleepinessTime / 60).toFixed(0),
-                (distractionTime / 60).toFixed(0),
-                (studyTime / 60).toFixed(0),
-                sleepinessTime,
-                distractionTime,
-                studyTime
+               totalStudySeconds ,sleepinessTime + distractionTime, realStudyTime
             ];
-            setstudyTime(formattedTimes);         }
+            setstudyTime(formattedTimes);         
+        }
         
     }, [response]);
 
@@ -65,7 +65,17 @@ const PieChart = ({ response, setstudyTime }) => {
         ]
     };
 
-    return <Pie data={data} />;
+    const options = {
+        plugins: {
+            tooltip: {
+                enabled: false,
+            }
+        }
+    };
+
+    
+
+    return <Pie data={data} options={options} />;
 };
 
 export default PieChart;

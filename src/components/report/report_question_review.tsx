@@ -42,16 +42,14 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
 
     };
     return (
-        <Form>
-            <PublicSliderContainer>
-                <Problem>
+        <div>
                 <ReportQuestionTitle>문제 다시보기</ReportQuestionTitle>
                 <Slider className="custom-slider" {...settings}> 
                 {data && data.map((question, index) => (
                 <PublicQuestionContainer key={index}>
 
                     <Question key={index}>
-                         <h3>{index+1}번 문제: {question.question}</h3>
+                         <div className="questionName">{index+1}번 문제: {question.question}</div>
                         {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
                             <PublicTextContainer key={choiceIndex}>{choiceIndex + 1}번 : {choice.content}</PublicTextContainer>
                         ))}
@@ -78,17 +76,16 @@ const ReportQuestionReview = ({ quizzes }:quizzes )=> {
                 </PublicQuestionContainer>
             ))}
                 </Slider>
-                </Problem>
-            </PublicSliderContainer>
-        </Form>
+        </div>
     );
 };
 
 export default ReportQuestionReview;
 
 const ReportQuestionTitle = styled.div`
-    font-size: 2.5em;
+    font-size: x-large;
     font-weight: bold; 
+    
     /* border: 1px solid red; */
 `;
 
@@ -119,4 +116,12 @@ const Question = styled.div`
   margin: 10px; /* 외부 패딩 추가 */
   flex-direction:column;
   min-height: 400px;
+
+
+.questionName{
+    /* background-color: white; */
+    opacity: 1;
+
+}
+
 `;
