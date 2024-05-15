@@ -44,17 +44,21 @@ class ProblemPage extends Component<Props, State> {
     };
   }
 
-  trimSubLectureUrl = (url:any) => {
-    const ampersandPosition = url.indexOf('&tab');
-    return ampersandPosition !== -1 ? url.substring(0, ampersandPosition) : url;
+  trimSubLectureUrl = (url: string): string => {
+    const urlObj = new URL(url);
+    const courseSlug = urlObj.searchParams.get('courseSlug');
+    const unitId = urlObj.searchParams.get('unitId');
+
+    if (courseSlug && unitId) {
+      return `https://www.inflearn.com/course/lecture?courseSlug=${encodeURIComponent(courseSlug)}&unitId=${encodeURIComponent(unitId)}`;
+    }
+    return url;
   };
 
   handleSubLectureUrlChange = (e: any) => {
     const url = e.target.value;
-    const encodedUrl = encodeURIComponent(url);
-    this.setState({ subLectureUrl: encodedUrl });
+    this.setState({ subLectureUrl: url });
   };
-  
   
   addQuestionComponent = (): void => {
     this.setState(prevState => ({
@@ -96,7 +100,7 @@ class ProblemPage extends Component<Props, State> {
     this.setState({ duration: e.target.value });
   };
 
-  convertTimeToSeconds = (timeStr: string): number|void => {
+  convertTimeToSeconds = (timeStr: string): number | void => {
     const timeRegex = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/;
   
     if (!timeRegex.test(timeStr)) {
@@ -118,7 +122,8 @@ class ProblemPage extends Component<Props, State> {
       alert('모든 필드를 채워주세요.');
       return;
     }
-  
+
+    const trimmedSubLectureUrl = this.trimSubLectureUrl(subLectureUrl);
     const durationInSeconds = this.convertTimeToSeconds(duration);
     if (durationInSeconds === undefined) {
       return;
@@ -150,7 +155,7 @@ class ProblemPage extends Component<Props, State> {
     try {
       const response = await request('POST', '/api/quizsets', {
         title,
-        subLectureUrl,
+        subLectureUrl: trimmedSubLectureUrl,
         subLectureTitle,
         mainLectureTitle,
         duration: durationInSeconds,
@@ -208,7 +213,6 @@ class ProblemPage extends Component<Props, State> {
 }
 
 export default ProblemPage;
-
 
 const Button = styled.button`
   margin: 10px;
