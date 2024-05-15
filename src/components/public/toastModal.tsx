@@ -17,7 +17,7 @@ interface OptionItem {
 const ToastModal = () => {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const navigate = useNavigate();
-  const [_, __, removeCookie] = useCookies(['jwt']);
+  const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
   const options: OptionItem[] = [
     { id: 1, label: '내 인증코드 보기' },
     { id: 2, label: '회원탈퇴' },
@@ -38,14 +38,11 @@ const ToastModal = () => {
       case 1:
         try {
           const response = await request("GET","/api/member/oauthId");
-          
           if (response.status === 200) {
-            
             const data = response.data;
             toast(
               <div>
                 <span>인증코드: {data.oauthId}</span>
-                
                 <button
                   className="copy-button"
                   onClick={() => copyToClipboard(data.oauthId)}
@@ -75,8 +72,9 @@ const ToastModal = () => {
                       const response = await request("POST","/api/member/delete");
                       if (response.status >= 200 && response.status < 300) {
                         toast.success("회원 탈퇴가 성공적으로 이루어졌습니다.");
-                        removeCookie("jwt");
+                        removeCookie("jwt", { path: '/' });
                         navigate("/");
+                        window.location.reload();
                       } else {
                         throw new Error("회원 탈퇴에 실패했습니다.");
                       }
@@ -95,39 +93,60 @@ const ToastModal = () => {
         });
         break;
       case 3:
-        removeCookie("jwt");
-        navigate("/");
+        handleLogout();
         break;
       default:
         break;
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      console.log('Logging out...');
+      removeCookie('jwt', { path: '/' });
+
+      const jwt = cookies.jwt;
+      if (jwt) {
+        console.error('JWT cookie was not removed');
+        toast.error('로그아웃에 실패했습니다. 다시 시도해주세요.');
+        return;
+      } else {
+        console.log('JWT cookie removed successfully');
+      }
+
+      navigate("/");
+      window.location.reload();
+      console.log('Navigated to home page');
+
+    } catch (error) {
+      console.error('Error during logout:', error);
+      toast.error('로그아웃 중 오류가 발생했습니다.');
+    }
+  };
+
   return (
     <>
-        {options.map(option => (
-          <React.Fragment key={option.id}>
-            <Option
-              onClick={() => handleOptionClick(option.id)}
-              style={{ backgroundColor: selectedOption === option.id ? '#ccc' : 'transparent' }}
-            >
-              {option.label}
-            </Option>
-            {selectedOption === option.id && <ToastContainer position="top-center" className="custom-toast-container" />}
-          </React.Fragment>
-        ))}
-        <div style={{ display: 'flex' }} />
+      {options.map(option => (
+        <React.Fragment key={option.id}>
+          <Option
+            onClick={() => handleOptionClick(option.id)}
+            style={{ backgroundColor: selectedOption === option.id ? '#ccc' : 'transparent' }}
+          >
+            {option.label}
+          </Option>
+          {selectedOption === option.id && <ToastContainer position="top-center" className="custom-toast-container" />}
+        </React.Fragment>
+      ))}
+      <div style={{ display: 'flex' }} />
     </>
   );
 };
 
 export default ToastModal;
 
-
 const Option = styled.div`
   padding: 10px 15px;
   margin: 5px 0;
   cursor: pointer;
   border-radius: 5px;
-
 `;
