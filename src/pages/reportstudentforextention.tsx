@@ -56,7 +56,8 @@ export default ReportStudentFroExtension;
 const InnerContentSection = styled.div`
   /* border: 10px solid green; */
   display: flex;
-  height: 100%;
+  height: 100vh;
+  /* border: 5px solid red; */
 
 >div{
   /* border: 1px solid black; */
