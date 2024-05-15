@@ -3,17 +3,10 @@ import styled from 'styled-components';
 
 
 export const PublicTextContainer = styled.div`
-  padding: 10px;
-  margin: 5px 0;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-  color: #212529;
-  font-size: 16px;
-  line-height: 1.5;
+
 `;
 
 export const PublicSliderContainer = styled.div`
-margin-top: 100px;
 position: relative;
 width: 100%;
 
@@ -67,6 +60,7 @@ export const PublicCardContainer = styled.div`
 
 export const PublicCardContent = styled.div`
   padding: 0.5rem 0;
+  cursor: pointer;
 `;
 
 
