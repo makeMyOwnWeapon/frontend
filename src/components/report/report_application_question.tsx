@@ -10,7 +10,7 @@ interface gptSummery {
   }
 
   interface summary{
-    reviews:string;
+    keyword:string;
   }
 
 const ReportRecommand = ({gptSummery}:gptSummery)=> {
@@ -28,7 +28,7 @@ const ReportRecommand = ({gptSummery}:gptSummery)=> {
                     <Summary>
                         {data&&data.map((summary,index)=>(
                             <SummaryText key={index}>
-                                <PublicTextContainer>- {summary.reviews}</PublicTextContainer> 
+                                <PublicTextContainer>- {summary.keyword}</PublicTextContainer> 
                             </SummaryText>
                         ))}
                     </Summary>
@@ -53,7 +53,6 @@ const Summary = styled.div`
   padding: 10px;
   margin: 10px;
   flex-direction:column;
-  min-height: 400px;
 `;
 
 const PublicTextContainer = styled.div`
