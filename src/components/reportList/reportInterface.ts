@@ -26,7 +26,7 @@ interface SleepinessAndDistraction {
   }
   
   interface summary{
-    reviews:string;
+    keyword:string;
   }
   
   interface gptSummery{

@@ -89,15 +89,20 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
                 <PieChart response={data.reports} setstudyTime={setStudyTime} />
             </div>
         </div>
-        <div className="section white" id="quizSection">
-            {/* 문제 다시보기 */}
-                <ReportQuestionInfoComponent quizzes={data.reports.quizzes}/>
-        </div>
-        <div className="section white" id="aiSection">
-            {/* AI 키워드 */}
-            <ReportApplicationQuestion gptSummery={data.gptSummery.summary} />
+        
+        {data.reports.quizzes.length > 0 && (
+            <div className="section white" id="quizSection">
+                {/* 문제 다시보기 */}
+                <ReportQuestionInfoComponent quizzes={data.reports.quizzes} />
+            </div>
+            )}
+            {data.gptSummery.summary.length > 0 && (
+            <div className="section white" id="aiSection">
+                {/* AI 키워드 */}
+                <ReportApplicationQuestion gptSummery={data.gptSummery.summary} />
+            </div>
+              )}
 
-        </div>
       
 
         
