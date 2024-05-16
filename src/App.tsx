@@ -11,6 +11,7 @@ import ReportStudentFroExtention from './pages/reportstudentforextention';
 import ReportDetail from './pages/reportDetail';
 import ReportList from './pages/reportlist';
 import Introduce from './pages/introduce';
+import AiCreateLoading from './components/report/report_AiCreateLoading';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/reportlist" element={<RequireAuth><ReportList /></RequireAuth>} />
         <Route path="/reportDetail/:lectureHistoryId" element={<ReportDetail />} />
         <Route path="/reportstudentforextension/:lectureHistoryId" element={<ReportStudentFroExtention />} />
+        <Route path="/aicreate" element={<AiCreateLoading />} />
         <Route path="/introduce" element={<Introduce />} />
         <Route path="/404page" element={<NotFoundPage />} />
         <Route path="*" element={<NotFoundPage />} />

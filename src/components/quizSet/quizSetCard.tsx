@@ -5,7 +5,6 @@ import { FaThumbsUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { request } from "../../helpers/axios_helper";
 import { truncateTitle } from "../../pages/quizSet";
-import { PublicCardContainer } from "../../styles/Public";
 import styled from "styled-components";
 
 interface WorkbookCardProps {
@@ -114,5 +113,30 @@ const ReadMoreLink = styled.a`
 
   &:hover {
     background-color: #2563eb;
+  }
+`;
+
+const PublicCardContainer = styled.div`
+  max-width: 20rem;
+  max-height: 30rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease, transform 0.3s ease-in-out;
+  margin: 10px;
+  cursor: pointer;
+  padding: 20px;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .cardImg {
+    object-fit: cover;
+    width: 100%;
+    height: 150px;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 `;

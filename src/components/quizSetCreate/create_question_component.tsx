@@ -137,12 +137,12 @@ class QuestionComponent extends Component<Props, State> {
                       <option value="objective">객관식</option>
                       <option value="subjective">주관식</option>
                     </SelectOption>
-                    <Input_text type="text" placeholder= "문제집명" value={answers[0].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)} maxLength={40} />
+                    <Input_text type="text" placeholder= "문제집명" value={answers[0].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(0, e.target.value)}/>
 
                   {questionType === 'objective' ? (
                     ['1번', '2번', '3번', '4번', '해설'].map((label, index) => (
                       <div key={index}>
-                        <Input_text type="text" placeholder= {`${label}`}value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)} maxLength={40} />
+                        <Input_text type="text" placeholder= {`${label}`}value={answers[index + 1].text||''} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(index + 1, e.target.value)}/>
                         {index < 4 && (
                           <OptionButton onClick={() => this.handleSelectionChange(index + 1)}>
                             {answers[index + 1].selected ? '정답' : '오답'}
@@ -152,8 +152,8 @@ class QuestionComponent extends Component<Props, State> {
                     ))
                   ) : (
                     <>
-                        <Input_text type="text" placeholder= "답 : " value={answers[1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(1, e.target.value)} maxLength={20} />
-                        <Input_text type="text" placeholder= "해설 : " value={answers[2].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(2, e.target.value)} maxLength={20} />
+                        <Input_text type="text" placeholder= "답 : " value={answers[1].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(1, e.target.value)}/>
+                        <Input_text type="text" placeholder= "해설 : " value={answers[2].text} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleAnswerChange(2, e.target.value)}/>
                     </>
                   )}
                   
