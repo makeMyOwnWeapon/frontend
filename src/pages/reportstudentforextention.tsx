@@ -4,9 +4,9 @@ import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
 import "../styles/Public"
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import ReportpageComponent from "../components/report/report_reportpage_component";
 import { Data } from "../components/reportList/reportInterface";
+import { request } from "../helpers/axios_helper";
 
 const ReportStudentFroExtension  = () => {
     const {lectureHistoryId} = useParams();
@@ -14,7 +14,7 @@ const ReportStudentFroExtension  = () => {
     useEffect(() => {
         const fetchData = async () => {
             try{
-            const response = await axios.get(`/api/history/extension/?lectureHistoryId=${lectureHistoryId}`,{
+            const response = await request('GET',`/api/history/extension/?lectureHistoryId=${lectureHistoryId}`,{
             
             });
             setData(response.data);
