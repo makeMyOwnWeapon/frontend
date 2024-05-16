@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const PublicTextContainer = styled.div`
+  font-size: larger;
 
 `;
 

@@ -11,7 +11,7 @@ interface ReportCardProps {
   lectureHistoryId:number;
 }
 
-const ReportCard: React.FC<ReportCardProps> = ({   subLectureId, subLectureTitle, subLectureUrl,registrationDate,lectureHistoryId }) => {
+const ReportCard: React.FC<ReportCardProps> = ({  subLectureTitle, registrationDate,lectureHistoryId }) => {
   const navigate = useNavigate();
 
 
@@ -21,23 +21,22 @@ const ReportCard: React.FC<ReportCardProps> = ({   subLectureId, subLectureTitle
     event.preventDefault();
     navigate(`/reportDetail/${lectureHistoryId}`);
   };
-  const formatDate = (dateString: string) => {
-    // ISO 8601 형식의 문자열을 Date 객체로 변환
-    const date = new Date(dateString);
-  
-    // 연도, 월, 일을 추출
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줌
-    const day = String(date.getDate()).padStart(2, '0'); // 일
-  
-    // 시간, 분, 초를 추출
-    const hours = String(date.getHours()).padStart(2, '0'); // 시
-    const minutes = String(date.getMinutes()).padStart(2, '0'); // 분
-    const seconds = String(date.getSeconds()).padStart(2, '0'); // 초
-  
-    // 원하는 형식으로 문자열 조합
-    return `${year}년 ${month}월 ${day}일 ${hours}:${minutes}:${seconds}`;
-  };
+
+  function formatUTCDateTime(utcDateTimeString:string) {
+    // UTC 시간 문자열을 Date 객체로 변환
+    const date = new Date(utcDateTimeString);
+
+    // UTC 시간대의 연, 월, 일, 시, 분, 초 추출
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth() + 1; // getUTCMonth()는 0부터 시작하므로 +1 필요
+    const day = date.getUTCDate();
+    const hour = date.getUTCHours();
+    const minute = date.getUTCMinutes();
+    const second = date.getUTCSeconds();
+
+    // 결과 형식: YYYY년 M월 DD일 HH시 MM분 SS초
+    return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분 ${second}초`;
+}
   
 
   return (
@@ -46,7 +45,7 @@ const ReportCard: React.FC<ReportCardProps> = ({   subLectureId, subLectureTitle
         <div onClick={handleCardClick}>
 
           <ReportCardTitle>{subLectureTitle}</ReportCardTitle>
-          <ReportCardComponent>생성일 : {formatDate(registrationDate)}</ReportCardComponent>
+          <ReportCardComponent>생성일 : {formatUTCDateTime(registrationDate)}</ReportCardComponent>
           <ReportCardComponent>{lectureHistoryId}</ReportCardComponent>
         </div>
         {/* <CardDescription>작성자: {memberNickname}</CardDescription> */}
@@ -60,7 +59,7 @@ export default ReportCard;
 
 
 const ReportCardContainer = styled.div`
-  height: 150px;
+  height: 200px;
   max-width: 20rem;
   background-color: #fff;
   border: 1px solid #e5e7eb;

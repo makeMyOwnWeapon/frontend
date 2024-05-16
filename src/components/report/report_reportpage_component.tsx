@@ -10,20 +10,22 @@ interface ReportpageProps {
     data: Data;
   }
   
-function formatDate(inputDate: string): string {
-    const date = new Date(inputDate);
-    if (inputDate === null){
-      return "0";
-    }
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hour = String(date.getHours()).padStart(2, '0');
-    const minute = String(date.getMinutes()).padStart(2, '0');
-    const second = String(date.getSeconds()).padStart(2, '0');
-    const formattedDate = `${year}/${month}/${day}/${hour}:${minute}:${second}`;
-    return formattedDate;
-  }
+
+  function formatUTCDateTime(utcDateTimeString:string) {
+    // UTC 시간 문자열을 Date 객체로 변환
+    const date = new Date(utcDateTimeString);
+
+    // UTC 시간대의 연, 월, 일, 시, 분, 초 추출
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth() + 1; // getUTCMonth()는 0부터 시작하므로 +1 필요
+    const day = date.getUTCDate();
+    const hour = date.getUTCHours();
+    const minute = date.getUTCMinutes();
+    const second = date.getUTCSeconds();
+
+    // 결과 형식: YYYY년 M월 DD일 HH시 MM분 SS초
+    return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분 ${second}초`;
+}
 
   /**
    * 초를 분/초 로 바꿔주는 함수
@@ -43,14 +45,15 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
     // 총학습시간, 졸은시간 + 자리비운시간, 순공시간
     console.log('=====report======');
     console.dir(data);
+    console.dir(studyTime);
     console.log('=====report======');
     return (
     <ReportStudentBackground>
-        <ReportStudentTitle> 000님의 운영체제 레포트</ReportStudentTitle>
+        <ReportStudentTitle>레포트</ReportStudentTitle>
         <div className="section">
             <div id="lectureTimeInfo">
-            <ReportStudentSubTitle>공부 시작 시간 : {formatDate(data.reports.studyStartTime)}</ReportStudentSubTitle>
-            <ReportStudentSubTitle>공부 종료 시간 : {formatDate(data.reports.studyEndTime)}</ReportStudentSubTitle>
+            <ReportStudentSubTitle>공부 시작 시간 : {formatUTCDateTime(data.reports.studyStartTime)}</ReportStudentSubTitle>
+            <ReportStudentSubTitle>공부 종료 시간 : {formatUTCDateTime(data.reports.studyEndTime)}</ReportStudentSubTitle>
             </div>
         </div>
         <div className="section" id="dashBoards">
@@ -127,7 +130,6 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
 const ReportStudentBackground = styled.div`
     width: 100%;
     margin : 10px;
-    border-radius: 20px;
     background: transparent;
     overflow-y: auto;
     /* border: 1px solid red; */
@@ -136,7 +138,6 @@ const ReportStudentBackground = styled.div`
         display: flex;
         flex-direction: column;
         /* border: 1px solid red; */
-        width: 26%;
         justify-content: space-around;
         /* background: linear-gradient(to bottom, #c5e9f6, #b3d9f2, #a1c9ee, #8fb9ea, #7da9e6); */
         background-color: white;
@@ -266,7 +267,7 @@ const ReportStudentBackground = styled.div`
 
 
 const ReportStudentSubTitle = styled.div`
-    font-size: medium;
+    font-size: large;
     font-weight: lighter;
     
 

@@ -34,6 +34,8 @@ const PieChart = ({ response, setstudyTime }) => {
             
             const realStudyTime = totalStudySeconds - (sleepinessTime + distractionTime);
             setPieData([sleepinessTime, distractionTime, realStudyTime]);
+            console.log("pie data : ");
+            console.dir(pieData);
     
             const formattedTimes = [
                 totalStudySeconds, sleepinessTime + distractionTime, realStudyTime
@@ -47,7 +49,7 @@ const PieChart = ({ response, setstudyTime }) => {
         labels: ['졸은 시간', '자리 비움', '공부 시간'],
         datasets: [
             {
-                label: '# of Votes',
+                label: '초',
                 data: pieData,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.8)',
@@ -67,7 +69,23 @@ const PieChart = ({ response, setstudyTime }) => {
     const options = {
         plugins: {
             tooltip: {
-                enabled: false,
+                enabled: true,
+                callbacks: {
+                    label: function(tooltipItem) {
+                        const dataset = tooltipItem.dataset;
+                        const dataIndex = tooltipItem.dataIndex;
+                        const data = dataset.data[dataIndex];
+                        const minutes = Math.floor(data / 60);
+                        const seconds = data % 60;
+                        let label = '';
+    
+                        if (minutes > 0) {
+                            label += `${minutes}분 `;
+                        }
+                        label += `${seconds}초`;
+                        return label;
+                    }
+                }
             }
         }
     };
