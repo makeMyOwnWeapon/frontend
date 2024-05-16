@@ -129,7 +129,8 @@ background-color: aliceblue;
 padding: 10px 20px;
 width: 75px;
 text-align: center;
-
+border-radius: 20px;
+margin-bottom: 10px;
 
 
 }
