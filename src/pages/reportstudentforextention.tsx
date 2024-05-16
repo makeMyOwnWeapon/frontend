@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import ReportpageComponent from "../components/report/report_reportpage_component";
 import { Data } from "../components/reportList/reportInterface";
 import { request } from "../helpers/axios_helper";
+import AiCreateLoading from "../components/report/report_AiCreateLoading";
 
 const ReportStudentFroExtension  = () => {
     const {lectureHistoryId} = useParams();
@@ -17,7 +18,9 @@ const ReportStudentFroExtension  = () => {
             const response = await request('GET',`/api/history/extension/?lectureHistoryId=${lectureHistoryId}`,{
             
             });
-            setData(response.data);
+            setTimeout(() => {
+              setData(response.data);
+          }, 10000); // 10초 레이턴시를 만드는 함수. setData를 n/1000초 만큼 늦게 로딩시킴
             console.log('=======');
             console.dir(response.data);
             console.log('=======');
@@ -28,12 +31,11 @@ const ReportStudentFroExtension  = () => {
         fetchData();
     }, [lectureHistoryId])
     if (!data) {
-      return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '20px', color: '#555', backgroundColor: '#f0f0f0' }}>
-          <p>GPT가 데이터를 만들고 있습니다!</p>
-        </div>
-      );
+      return (       
+        <AiCreateLoading/>
+      )
     }
+    
     
 //  내가 풀었던 문제 = 문제관련된거 다, 해설은 눌렀을때 나오는거
 // gpt가 요약해준 키워드 정리, 다맞았을때는 다른 말로
