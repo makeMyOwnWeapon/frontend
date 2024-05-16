@@ -24,11 +24,11 @@ const ReportRecommand = ({gptSummery}:gptSummery)=> {
     return (
         <div>
             <SolveAnalyzeContainer>
-                <ApplicationQuestionTitle>AI 키워드</ApplicationQuestionTitle>
+                <ApplicationQuestionTitle>AI 추천 키워드</ApplicationQuestionTitle>
                     <Summary>
                         {data&&data.map((summary,index)=>(
                             <SummaryText key={index}>
-                                <PublicTextContainer>- {summary.keyword}</PublicTextContainer> 
+                                - {summary.keyword}
                             </SummaryText>
                         ))}
                     </Summary>
@@ -40,7 +40,7 @@ const ReportRecommand = ({gptSummery}:gptSummery)=> {
 export default ReportRecommand;
 
 const ApplicationQuestionTitle = styled.div`
-    font-size: x-large;
+    font-size: xx-large;
     font-weight: bold; 
 `;
 
@@ -66,6 +66,7 @@ const PublicTextContainer = styled.div`
 `;
 
 const SummaryText = styled.div`
+    font-size: large;
 
 `;
 

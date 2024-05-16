@@ -49,7 +49,7 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
     console.log('=====report======');
     return (
     <ReportStudentBackground>
-        <ReportStudentTitle> 000님의 운영체제 레포트</ReportStudentTitle>
+        <ReportStudentTitle>레포트</ReportStudentTitle>
         <div className="section">
             <div id="lectureTimeInfo">
             <ReportStudentSubTitle>공부 시작 시간 : {formatUTCDateTime(data.reports.studyStartTime)}</ReportStudentSubTitle>
@@ -130,7 +130,6 @@ const ReportpageComponent = ({data}: ReportpageProps) => {
 const ReportStudentBackground = styled.div`
     width: 100%;
     margin : 10px;
-    border-radius: 20px;
     background: transparent;
     overflow-y: auto;
     /* border: 1px solid red; */
@@ -139,7 +138,6 @@ const ReportStudentBackground = styled.div`
         display: flex;
         flex-direction: column;
         /* border: 1px solid red; */
-        width: 26%;
         justify-content: space-around;
         /* background: linear-gradient(to bottom, #c5e9f6, #b3d9f2, #a1c9ee, #8fb9ea, #7da9e6); */
         background-color: white;
@@ -269,7 +267,7 @@ const ReportStudentBackground = styled.div`
 
 
 const ReportStudentSubTitle = styled.div`
-    font-size: medium;
+    font-size: large;
     font-weight: lighter;
     
 

@@ -45,7 +45,7 @@ const ReportCard: React.FC<ReportCardProps> = ({  subLectureTitle, registrationD
         <div onClick={handleCardClick}>
 
           <ReportCardTitle>{subLectureTitle}</ReportCardTitle>
-          <ReportCardComponent>생성일! : {formatUTCDateTime(registrationDate)}</ReportCardComponent>
+          <ReportCardComponent>생성일 : {formatUTCDateTime(registrationDate)}</ReportCardComponent>
           <ReportCardComponent>{lectureHistoryId}</ReportCardComponent>
         </div>
         {/* <CardDescription>작성자: {memberNickname}</CardDescription> */}
@@ -59,7 +59,7 @@ export default ReportCard;
 
 
 const ReportCardContainer = styled.div`
-  height: 150px;
+  height: 200px;
   max-width: 20rem;
   background-color: #fff;
   border: 1px solid #e5e7eb;
