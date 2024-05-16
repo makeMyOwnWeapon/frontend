@@ -51,7 +51,7 @@ const ReportDetail  = () => {
 
       return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '20px', color: '#555', backgroundColor: '#f0f0f0' }}>
-          <p>GPT가 데이터를 만들고 있습니다!</p>
+          <p>조회중입니다!</p>
         </div>
       );
     }

@@ -7,6 +7,8 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, TimeScale);
 
 const LineChart = ({ response }) => {
+    console.log('response');
+    console.log(response);
 
     const [sleepinessData, setSleepinessData] = useState([]);
     const [distractionData, setDistractionData] = useState([]);
@@ -65,7 +67,7 @@ const LineChart = ({ response }) => {
         datasets: [
             {
                 label: '자리비움',
-                data: sleepinessData,
+                data: distractionData,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0,
                 stepped: 'before',
@@ -74,7 +76,7 @@ const LineChart = ({ response }) => {
             },
             {
                 label: '졸음',
-                data: distractionData,
+                data: sleepinessData,
                 borderColor: 'rgb(255, 99, 132)',
                 tension: 0,
                 stepped: 'before',

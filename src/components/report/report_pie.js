@@ -34,6 +34,8 @@ const PieChart = ({ response, setstudyTime }) => {
             
             const realStudyTime = totalStudySeconds - (sleepinessTime + distractionTime);
             setPieData([sleepinessTime, distractionTime, realStudyTime]);
+            console.log("pie data : ");
+            console.dir(pieData);
     
             const formattedTimes = [
                 totalStudySeconds, sleepinessTime + distractionTime, realStudyTime
