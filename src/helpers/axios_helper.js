@@ -31,12 +31,19 @@ export const request = (method, url, data) => {
         headers = {"Authorization" : `Bearer ${getAuthToken('jwt')}`};
     }
 
-
     return axios({
         method : method,
         headers : headers,
         url : url,
         data : data
+    })
+}
+
+export const bodyRequest = (method, url, data) => {
+
+    return axios({
+        method : method,
+        url : url
     })
 }
 
