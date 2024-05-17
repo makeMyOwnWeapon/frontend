@@ -7,6 +7,7 @@ import NaviSection from '../styles/publicStyleComponents/NaviSection';
 import styled from 'styled-components';
 import Side from '../styles/publicStyleComponents/Side';
 import ToastModal from '../components/public/toastModal';
+import Main from '../styles/publicStyleComponents/Main';
 
 const QuestionInfo = () => {
   const location = useLocation();
@@ -23,10 +24,10 @@ const QuestionInfo = () => {
             <ToastModal />
           </Side>
           <Main>
-            <Title>{quizSetTitle}</Title>
-            <Subtitle>소강의명: {subLectureTitle}</Subtitle>
-            <Author>작성자: {memberNickname}</Author>
-            {quizSetId && <QuestionInfoComponent quizSetId={quizSetId} />}
+              <Title>{quizSetTitle}</Title>
+              <Subtitle>소강의명: {subLectureTitle}</Subtitle>
+              <Author>작성자: {memberNickname}</Author>
+              {quizSetId && <QuestionInfoComponent quizSetId={quizSetId} />}            
           </Main>
         </InnerContentSection>
       </Container>
@@ -39,18 +40,9 @@ export default QuestionInfo;
 const InnerContentSection = styled.div`
   display: flex;
   height: 85%;
+  border: 10px solid red;
 `;
 
-const Main = styled.div`
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 10px;
-  padding: 20px;
-  border: 1px solid #ccc;
-`;
 
 const Title = styled.div`
   font-size: 2em;

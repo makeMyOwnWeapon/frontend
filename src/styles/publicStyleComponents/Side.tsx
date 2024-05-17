@@ -5,9 +5,8 @@ const Side = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 20px;
-  margin-top: 3%;
-  /* border: 1px solid red; */
-  width: 20%;
+  border: 5px solid green;
+  width: 20%
 `;
 
 export default Side;

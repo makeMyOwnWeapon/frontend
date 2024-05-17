@@ -109,7 +109,7 @@ export function truncateTitle(title:any, maxLength:any) {
 }
 
 const InnerContentSection = styled.div`
-  /* border: 10px solid green; */
+  border: 10px solid red;
   display: flex;
   height: 85%;
 
@@ -123,10 +123,6 @@ const InnerContentSection = styled.div`
   
 }
 
-#profileBox{
-  height: 40%;
-
-}
 
 `
 const SearchBox = styled.div`

@@ -62,13 +62,13 @@ const ReportCardContainer = styled.div`
   height: 200px;
   max-width: 20rem;
   background-color: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid red;
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   box-shadow: 10px 10px 2px 0 rgba(0,0,0,0.05);
   transition: box-shadow 0.2s ease;
-  margin: 20px;
+  margin-right: 20px;
   transition: transform 0.3s ease-in-out;
   &:hover {
     transform: scale(1.05);

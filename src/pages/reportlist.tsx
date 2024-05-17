@@ -72,31 +72,11 @@ export default ReportList;
 const InnerContentSection = styled.div`
   display: flex;
   height: 85%;
+  border: 10px solid red;
 
 >div{
 
 }
-
-#main{
-  width: 85%;
-  overflow-y: auto;
-  flex-wrap: wrap;
-  display: flex;
-  height: 100%;
-  justify-content: space-evenly;
-}
-
-#side{
-  width: 15%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-#side > div{
-  border: 1px solid black;
-}
-
 
 #searchBox{
   height: 30%;
@@ -104,9 +84,5 @@ const InnerContentSection = styled.div`
   
 }
 
-#profileBox{
-  height: 40%;
-
-}
 
 `

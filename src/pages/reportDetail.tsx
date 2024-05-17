@@ -54,7 +54,7 @@ const ReportDetail  = () => {
 export default ReportDetail;
 
 const InnerContentSection = styled.div`
-  /* border: 10px solid green; */
+  border: 10px solid red;
   display: flex;
   height: 85%;
 `

@@ -7,6 +7,7 @@ import ToastModal from "../components/public/toastModal";
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
 import Side from "../styles/publicStyleComponents/Side";
+import Main from "../styles/publicStyleComponents/Main";
 
 const Create: React.FC = () => {
     const navigate = useNavigate();
@@ -34,19 +35,6 @@ export default Create;
 const InnerContentSection = styled.div`
     display: flex;
     height: 85%;
+    border: 10px solid red;
 `
 
-const Main = styled.div`
-  width: 70%;
-  overflow-y: auto;
-  flex-wrap: wrap;
-  display: flex;
-  height: 85vh;
-  justify-content: center;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
-`;
