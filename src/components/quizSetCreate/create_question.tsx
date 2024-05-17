@@ -177,9 +177,10 @@ class ProblemPage extends Component<Props, State> {
     return (
       <>
         <Formdiv>
-          <StyledText>나만의 문제 만들기</StyledText>
           <InputContainer>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+            <StyledText>나만의 문제 만들기</StyledText>
+
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', width:'100%'}}>
               <Input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
               <Input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={this.handleSubLectureUrlChange} />
               <Input type="text" placeholder="대강의명" value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
@@ -248,7 +249,7 @@ const Input = styled.input`
   border: 2px solid #dee2e6;
   border-radius: 5px;
   outline: none;
-  font-size: 16px;
+  font-size: 1rem;
   transition: border 0.3s ease-in-out;
   &:focus {
     border-color: #007bff;
@@ -268,6 +269,7 @@ const Formdiv = styled.div`
 
 const InputContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 60%;
   padding: 20px;
@@ -275,10 +277,11 @@ const InputContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-const StyledText = styled.p`
-  font-size: 48px;
+const StyledText = styled.div`
+  font-size: 3rem;
   color: black;
-  margin-top: 70px;
+  /* border: 1px solid red; */
+  /* margin-top: 70px; */
   margin-bottom: 30px;
-  text-align: left;
+  /* text-align: left; */
 `;

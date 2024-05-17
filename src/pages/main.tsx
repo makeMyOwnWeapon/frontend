@@ -62,7 +62,7 @@ const InnerContentSection = styled.div`
 
   #title {
     font-weight: bold;
-    font-size: 5rem;
+    font-size: 4rem;
     margin-top: 100px;
     height: 200px;
     display: flex;
@@ -72,7 +72,6 @@ const InnerContentSection = styled.div`
 
   #title span {
     display: block;
-    font-size: 66px;
   }
 
   #account {
@@ -108,7 +107,7 @@ const Button = styled.div`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.5rem;
   &:hover {
     background-color: skyblue;
     color: white;

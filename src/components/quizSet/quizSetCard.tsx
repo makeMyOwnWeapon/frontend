@@ -101,8 +101,7 @@ const ReadMoreLink = styled.a`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.25rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;

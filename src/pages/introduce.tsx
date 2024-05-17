@@ -21,7 +21,7 @@ const Main: React.FC = () => {
 export default Main;
 
 const InnerContentSection = styled.div`
-  border: 10px solid green;
+  /* border: 10px solid green; */
   display: flex;
   flex-direction: column;
   align-items: center;

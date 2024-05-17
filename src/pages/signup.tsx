@@ -48,7 +48,7 @@ const Button = styled.button`
   ${tw`w-full py-3 px-4 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-700`}
   box-sizing: border-box; 
   border: none;         
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
 `;
 
@@ -72,6 +72,6 @@ const Title = styled.h1`
   padding: 20px 0;
   ${tw`text-2xl font-bold text-gray-900`};
   margin: 0 auto;
-  font-size: 30px;
+  font-size: 1rem;
   margin-bottom : 30px;
 `;

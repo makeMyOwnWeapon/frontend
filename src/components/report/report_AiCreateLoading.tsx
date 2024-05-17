@@ -59,7 +59,7 @@ const TitleContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-right: 50px;
-  font-size: 100px;
+  font-size: 6rem;
 `;
 
 const TextContainer = styled.div`
@@ -67,7 +67,7 @@ const TextContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-right: 50px;
-  font-size: 50px;
+  font-size: 3rem;
 `;
 
 const RedText = styled.span`

@@ -40,8 +40,8 @@ const ReportRecommand = ({gptSummery}:gptSummery)=> {
 export default ReportRecommand;
 
 const ApplicationQuestionTitle = styled.div`
-    font-size: xx-large;
     font-weight: bold; 
+    font-size: 2rem;
 `;
 
 const Summary = styled.div`
@@ -61,15 +61,13 @@ const PublicTextContainer = styled.div`
   background-color: #f8f9fa;
   border-radius: 5px;
   color: #212529;
-  font-size: 16px;
   line-height: 1.5;
 `;
 
 const SummaryText = styled.div`
-    font-size: large;
 
 `;
 
 const SolveAnalyzeContainer = styled.div`
-
+  font-size: 1.5rem;
 `;
