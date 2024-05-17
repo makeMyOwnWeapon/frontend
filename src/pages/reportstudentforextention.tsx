@@ -6,7 +6,7 @@ import "../styles/Public"
 import { useParams } from "react-router-dom";
 import ReportpageComponent from "../components/report/report_reportpage_component";
 import { Data } from "../components/reportList/reportInterface";
-import { request } from "../helpers/axios_helper";
+import { bodyRequest } from "../helpers/axios_helper";
 import AiCreateLoading from "../components/report/report_AiCreateLoading";
 
 const ReportStudentFroExtension  = () => {
@@ -15,7 +15,7 @@ const ReportStudentFroExtension  = () => {
     useEffect(() => {
         const fetchData = async () => {
             try{
-            const response = await request('GET',`/api/history/extension/?lectureHistoryId=${lectureHistoryId}`,{
+            const response = await bodyRequest('GET',`/api/history/extension/?lectureHistoryId=${lectureHistoryId}`,{
             
             });
             setTimeout(() => {
