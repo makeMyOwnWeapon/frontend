@@ -196,6 +196,7 @@ const Question = styled.div`
   padding: 10px;
   flex-direction: column;
   min-height: 350px;
+  font-size: 1.5rem;
 `;
 
 const QuizSetInfoTextContainer = styled.div`
@@ -211,7 +212,6 @@ const QuizSetInfoTextContainer = styled.div`
 `;
 
 const Instruction = styled.div`
-  font-size: 1.3em;
   margin-bottom: 20px;
 `;
 
@@ -282,6 +282,7 @@ const CustomNextArrow = (props: any) => (
 
 const StyledSlider = styled(Slider)`
   .slick-dots {
-    bottom: -90%;
+    /* bottom: -90%; */
+    position: relative;
   }
 `;

@@ -176,7 +176,7 @@ const Time_Input_text = styled.input`
   margin-left: 10px;
   border: 2px solid #dee2e6;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 1rem;
   outline: none;
   transition: border 0.3s ease-in-out;
   &:focus {
@@ -254,7 +254,7 @@ const Input_text = styled.input`
   margin-bottom: 10px;
   border: 2px solid #dee2e6;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 1rem;
   outline: none;
   transition: border 0.3s ease-in-out;
   &:focus {

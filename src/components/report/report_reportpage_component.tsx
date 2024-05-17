@@ -183,7 +183,7 @@ const ReportStudentBackground = styled.div`
     }
 
     .dashBoard > .dashBoardTitle{
-        font-size: x-large;
+        font-size: 1.8rem;
     }
 
     .dashBoard > .dashBoardDesc{
@@ -191,7 +191,7 @@ const ReportStudentBackground = styled.div`
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        font-size: xx-large;
+        font-size: 2rem;
     }
 
     /* 그래프 */
@@ -267,7 +267,7 @@ const ReportStudentBackground = styled.div`
 
 
 const ReportStudentSubTitle = styled.div`
-    font-size: large;
+  font-size: 1.5rem;
     font-weight: lighter;
     
 
@@ -279,7 +279,7 @@ const ReportStudentSubTitle = styled.div`
 
 const ReportStudentTitle = styled.div`
     font-weight: bold; 
-    font-size : xx-large;
+    font-size: 3rem;
     display: flex;
 
 `;
@@ -294,7 +294,7 @@ const LineChartSize = styled.div`
 
 
 const PieText = styled.div`
-    font-size: larger;
+  font-size: 1rem;
     margin:30px;
     flex-direction: column;
     align-items: center;
@@ -310,6 +310,6 @@ const PieTextComponent = styled.div`
     background-color: white;
     border-radius: 5px;
     height : 40px;
-    font-size: 1.0em;
+    font-size: 1rem;
 `;
 export default ReportpageComponent;

@@ -25,13 +25,14 @@ const NavSectionWrapper = styled.div`
   box-sizing: border-box;
   /* border: 1px solid red; */
   padding-top : 20px;
+  margin-bottom: 30px;
 
 
   .navbar {
     /* border: 1px solid red; */
     width: 200px;
     border-radius: 50px;
-    height: 6rem;
+    height: 3rem;
     background: linear-gradient(270deg, #ACE1F4, #00C6FF, #0073E6);
     background-size: 400% 400%;
     animation: ${gradientAnimation} 15s ease infinite;
@@ -43,6 +44,7 @@ const NavSectionWrapper = styled.div`
     padding: 0 10px;
     transition: width 0.5s, border-radius 0.5s, background-color 0.5s;
 
+    font-size: 1.5rem;
     &:hover {
       width: 400px;
       border-radius: 50px;
@@ -86,7 +88,7 @@ const NavSectionWrapper = styled.div`
   #logo_title {
     flex: 1;
     color: black;
-    font-size: 0.9rem;
+    font-size: 2rem;
   }
 
   .menus {
@@ -97,7 +99,7 @@ const NavSectionWrapper = styled.div`
   }
 
   .menu {
-    width: 100px;
+    width: 130px;
     height: 50px;
     color: black;
     line-height: 50px;
@@ -108,8 +110,6 @@ const NavSectionWrapper = styled.div`
     &:hover {
       color: white;
       font-weight: bold;
-      background-color: #0073E6;
-      transform: scale(1.1);
     }
   }
 
@@ -125,7 +125,6 @@ const NavSectionWrapper = styled.div`
     }
 
     #logo_title {
-      font-size: 1.2rem;
     }
 
     .navbar {
@@ -140,7 +139,6 @@ const NavSectionWrapper = styled.div`
       width: 80px;
       height: 40px;
       line-height: 40px;
-      font-size: 0.9rem;
     }
   }
 `;
