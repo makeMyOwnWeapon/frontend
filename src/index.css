@@ -4,6 +4,10 @@
   src: url(./fonts/Jua-Regular.ttf) format('truetype');
 }
 
+html{
+  font-size: 16px;
+}
+
 * {
   box-sizing: border-box;
 }

@@ -76,8 +76,7 @@ const ReportQuestionReview = ({ quizzes }: quizzes) => {
 export default ReportQuestionReview;
 
 const ReportQuestionTitle = styled.div`
-    font-size: xx-large;
-    font-weight: bold; 
+  font-size: 2rem;
 `;
 
 const Question = styled.div`
@@ -91,6 +90,7 @@ const Question = styled.div`
         border-radius: 5px;
         padding: 10px;
         margin: 10px;
+        font-size: 1.5rem;
     }
 
     .quizAnswerPart {
@@ -98,10 +98,11 @@ const Question = styled.div`
         border-radius: 5px;
         padding: 10px;
         margin: 10px;
+        font-size: 1.5rem;
     }
 
     .title {
-        font-size: x-large;
+        font-size: 1.5rem;
         background-color: aliceblue;
         padding: 10px 20px;
         width: 100px;
@@ -111,11 +112,9 @@ const Question = styled.div`
     }
 
     .desc {
-        font-size: large;
     }
 
     .questionName {
-        font-size: x-large;
     }
 `;
 

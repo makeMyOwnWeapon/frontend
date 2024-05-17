@@ -109,7 +109,7 @@ export function truncateTitle(title:any, maxLength:any) {
 }
 
 const InnerContentSection = styled.div`
-  border: 10px solid red;
+  /* border: 10px solid red; */
   display: flex;
   height: 85%;
 

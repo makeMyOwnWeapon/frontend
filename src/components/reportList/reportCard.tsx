@@ -45,7 +45,9 @@ const ReportCard: React.FC<ReportCardProps> = ({  subLectureTitle, registrationD
         <div onClick={handleCardClick}>
 
           <ReportCardTitle>{subLectureTitle}</ReportCardTitle>
-          <ReportCardComponent>생성일 : {formatUTCDateTime(registrationDate)}</ReportCardComponent>
+          <ReportCardComponent>생성일 
+            <div>{formatUTCDateTime(registrationDate)}</div>
+            </ReportCardComponent>
           <ReportCardComponent>{lectureHistoryId}</ReportCardComponent>
         </div>
         {/* <CardDescription>작성자: {memberNickname}</CardDescription> */}
@@ -59,10 +61,13 @@ export default ReportCard;
 
 
 const ReportCardContainer = styled.div`
-  height: 200px;
-  max-width: 20rem;
+
+  width: 350px;
+  padding: 20px;
+  margin-bottom: 30px;
+
   background-color: #fff;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
@@ -83,10 +88,10 @@ const ReportCardContainer = styled.div`
 `;
 
 const ReportCardTitle = styled.h5`
-margin: 2rem;
+  margin: 2rem;
   margin-bottom: 0.5rem;
   margin-top: 2rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #374151;
 `;
@@ -95,7 +100,7 @@ const ReportCardComponent = styled.h5`
   margin: 2rem;
   margin-bottom: 0.5rem;
   margin-top: 1rem;
-  font-size: 0%.75;
+  font-size: 1rem;
   font-weight: bold;
   color: #374151;
 `;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const PublicTextContainer = styled.div`
-  font-size: larger;
+  font-size: 1.5rem;
 
 `;
 
@@ -31,23 +31,16 @@ export const PublicButton = styled.button`
 `;
 
 export const PublicCardContent = styled.div`
-  padding: 0.5rem 0;
-  cursor: pointer;
+  /* cursor: pointer; */
 `;
 
 
-export const PublicCardTitle = styled.h5`
-  margin-bottom: 0.5rem;
+export const PublicCardTitle = styled.div`
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #111827;
 `;
 
 export const PublicCardDescription = styled.p`
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #4b5563;
+  font-size: 1.2rem;
 `;
 
 export const PublicQuestionContainer = styled.div`

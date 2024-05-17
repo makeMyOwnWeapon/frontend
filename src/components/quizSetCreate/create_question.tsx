@@ -248,7 +248,7 @@ const Input = styled.input`
   border: 2px solid #dee2e6;
   border-radius: 5px;
   outline: none;
-  font-size: 16px;
+  font-size: 1rem;
   transition: border 0.3s ease-in-out;
   &:focus {
     border-color: #007bff;
@@ -276,7 +276,7 @@ const InputContainer = styled.div`
 `;
 
 const StyledText = styled.p`
-  font-size: 48px;
+  font-size: 1rem;
   color: black;
   margin-top: 70px;
   margin-bottom: 30px;

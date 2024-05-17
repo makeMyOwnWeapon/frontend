@@ -24,10 +24,13 @@ const QuestionInfo = () => {
             <ToastModal />
           </Side>
           <Main>
+            <div id="main">
               <Title>{quizSetTitle}</Title>
-              <Subtitle>소강의명: {subLectureTitle}</Subtitle>
-              <Author>작성자: {memberNickname}</Author>
-              {quizSetId && <QuestionInfoComponent quizSetId={quizSetId} />}            
+                <Subtitle>소강의명: {subLectureTitle}</Subtitle>
+                <Author>작성자: {memberNickname}</Author>
+                {quizSetId && <QuestionInfoComponent quizSetId={quizSetId} />}      
+            </div>
+      
           </Main>
         </InnerContentSection>
       </Container>
@@ -40,12 +43,19 @@ export default QuestionInfo;
 const InnerContentSection = styled.div`
   display: flex;
   height: 85%;
-  border: 10px solid red;
+  /* border: 10px solid red; */
+
+
+
+  #main{
+    width: 100%;
+    font-size: 1.5rem;
+  }
 `;
 
 
 const Title = styled.div`
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: bold;
   margin-top: 10px;
   margin-left: 10px;
@@ -54,7 +64,6 @@ const Title = styled.div`
 `;
 
 const Subtitle = styled.div`
-  font-size: 1.4em;
   margin-left: 10px;
   margin-bottom: 15px;
   color: #555;
@@ -62,7 +71,6 @@ const Subtitle = styled.div`
 
 const Author = styled.div`
   margin-left: 10px;  
-  font-size: 1.1em;
   color: #777;
   margin-bottom: -80px;
 `;

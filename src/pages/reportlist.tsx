@@ -72,7 +72,7 @@ export default ReportList;
 const InnerContentSection = styled.div`
   display: flex;
   height: 85%;
-  border: 10px solid red;
+  /* border: 10px solid red; */
 
 >div{
 

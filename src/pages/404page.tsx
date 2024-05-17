@@ -44,11 +44,11 @@ const StyledImage = styled.img`
 `;
 
 const Title = styled.h1`
-  font-size: 4.5rem;
+  font-size: 1rem;
   margin-bottom: 1.5rem;
 `;
 
 const Description = styled.p`
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-bottom: 2rem;
 `;
