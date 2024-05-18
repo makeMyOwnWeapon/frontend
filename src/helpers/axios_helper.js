@@ -5,6 +5,11 @@ import { Cookies } from 'react-cookie';
 axios.defaults.baseURL = 'https://api.learn-on-air.site'
 
 axios.defaults.headers.post["Content-type"] = 'application/json'
+export const HOST = 'http://localhost:3002';
+// export const HOST = 'https://www.learn-on-air.site';
+export const REPORT_PROCESSING_HOST = axios.defaults.baseURL; // 실제 호스트 이름 사용
+
+
 
 export const getAuthToken = () => {
     const cookies = new Cookies(); 

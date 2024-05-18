@@ -12,6 +12,7 @@ import ReportDetail from './pages/reportDetail';
 import ReportList from './pages/reportlist';
 import Introduce from './pages/introduce';
 import AiCreateLoading from './components/report/report_AiCreateLoading';
+import CreateForExtension from './pages/questSetCreateForExtension';
 import { getAuthToken } from './helpers/axios_helper';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/workbook" element={<RequireAuth><WorkBook isLoggedIn={isLoggedIn} /></RequireAuth>} />
         <Route path="/create" element={<RequireAuth><Create isLoggedIn={isLoggedIn} /></RequireAuth>} />
+        <Route path="/createforextension" element={<CreateForExtension />} />
         <Route path="/question_info/:quizSetId" element={<RequireAuth><Question_info isLoggedIn={isLoggedIn} /></RequireAuth>} />
         <Route path="/reportlist" element={<RequireAuth><ReportList isLoggedIn={isLoggedIn} /></RequireAuth>} />
         <Route path="/reportDetail/:lectureHistoryId" element={<ReportDetail isLoggedIn={isLoggedIn} />} />
