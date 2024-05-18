@@ -3,24 +3,23 @@ import ProblemPage from "../components/quizSetCreate/create_question";
 import { useNavigate } from "react-router-dom";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import styled from "styled-components";
-import ToastModal from "../components/public/toastModal";
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
-import Side from "../styles/publicStyleComponents/Side";
 import Main from "../styles/publicStyleComponents/Main";
 
-const Create: React.FC = () => {
+interface CreateProps {
+  isLoggedIn: boolean;
+}
+
+const Create: React.FC<CreateProps> = ({ isLoggedIn }) => {
     const navigate = useNavigate();
     const currentMenuName = '문제집 만들기'
 
     return (
     <BackgroundAnimation>
       <Container>
-          <NaviSection currentMenuName = {currentMenuName}></NaviSection>
+          <NaviSection currentMenuName = {currentMenuName} isLoggedIn={isLoggedIn} />
               <InnerContentSection>
-                <Side>
-                    <ToastModal/>
-                </Side>
                 <Main>
                 <ProblemPage navigate={navigate}/> 
                 </Main>

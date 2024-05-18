@@ -1,5 +1,4 @@
 import React from "react";
-import { PublicCardContent } from "../../styles/Public";
 import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 
@@ -23,25 +22,20 @@ const ReportCard: React.FC<ReportCardProps> = ({  subLectureTitle, registrationD
   };
 
   function formatUTCDateTime(utcDateTimeString:string) {
-    // UTC 시간 문자열을 Date 객체로 변환
     const date = new Date(utcDateTimeString);
-
-    // UTC 시간대의 연, 월, 일, 시, 분, 초 추출
     const year = date.getUTCFullYear();
-    const month = date.getUTCMonth() + 1; // getUTCMonth()는 0부터 시작하므로 +1 필요
+    const month = date.getUTCMonth() + 1;
     const day = date.getUTCDate();
     const hour = date.getUTCHours();
     const minute = date.getUTCMinutes();
     const second = date.getUTCSeconds();
 
-    // 결과 형식: YYYY년 M월 DD일 HH시 MM분 SS초
     return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분 ${second}초`;
 }
   
 
   return (
     <ReportCardContainer>
-      <PublicCardContent>
         <div onClick={handleCardClick}>
 
           <ReportCardTitle>{subLectureTitle}</ReportCardTitle>
@@ -51,8 +45,6 @@ const ReportCard: React.FC<ReportCardProps> = ({  subLectureTitle, registrationD
           <ReportCardComponent>{lectureHistoryId}</ReportCardComponent>
         </div>
         {/* <CardDescription>작성자: {memberNickname}</CardDescription> */}
-
-      </PublicCardContent>
     </ReportCardContainer>
   );
 };

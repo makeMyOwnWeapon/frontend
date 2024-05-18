@@ -6,20 +6,14 @@ import "../styles/Public";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
-import { Cookies } from "react-cookie";
-import { getAuthToken } from "../helpers/axios_helper";
 
-const Main: React.FC = () => {
+interface MainProps {
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Main: React.FC<MainProps> = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
-  const cookies = new Cookies();
-  const currentMenuName = '홈';
-
-  const jwt = getAuthToken();
-
-  const handleLogout = () => {
-    cookies.remove('jwt');
-    navigate("/");
-  };
 
   const handleIntroduce = () => {
     navigate("/introduce");
@@ -28,16 +22,15 @@ const Main: React.FC = () => {
   return (
     <BackgroundAnimation>
       <Container>
-        <NaviSection currentMenuName={currentMenuName} />
+        <NaviSection currentMenuName={''} isLoggedIn={isLoggedIn} />
         <InnerContentSection>
           <div id="title">
             <span>온라인 학습 헬퍼</span>
             <span>Learn On-Air</span>
           </div>
           <div id="info">
-            <Account />
+            <Account setIsLoggedIn={setIsLoggedIn} />
             <div id="buttonBox">
-              {jwt && <Button onClick={handleLogout}>로그아웃</Button>}
               <Button onClick={handleIntroduce}>소개페이지</Button>
             </div>
           </div>

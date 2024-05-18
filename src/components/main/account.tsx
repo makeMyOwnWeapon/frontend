@@ -1,25 +1,29 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
-import { GoogleOAuthProvider,GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { getAuthToken, googleRequest } from '../../helpers/axios_helper';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'default_client_id';
-const Account: React.FC = () => {
-  const cookies = new Cookies;
-  const navigate = useNavigate();
-  let getUserInfoByGoogle = getAuthToken();
-  let userInfo: string | null = null;
 
-    if (getUserInfoByGoogle !== null) {
-      userInfo = jwtDecode(getUserInfoByGoogle);
-    }
+interface AccountProps {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Account: React.FC<AccountProps> = ({ setIsLoggedIn }) => {
+  const cookies = new Cookies();
+  const navigate = useNavigate();
+  const getUserInfoByGoogle = getAuthToken();
+  let userInfo: any = null;
+
+  if (getUserInfoByGoogle !== null) {
+    userInfo = jwtDecode<any>(getUserInfoByGoogle);
+  }
 
   console.dir(userInfo);
 
   const handleCredentialResponse = async (userInfoByGoogle: any) => {
-
     let credential = userInfoByGoogle.credential;
     try {
       const response = await googleRequest('GET', 'api/member/signin', credential);
@@ -27,11 +31,11 @@ const Account: React.FC = () => {
         cookies.set('tempGoogleToken', credential);
         navigate('/signup');
       } else {
-        const cookies = new Cookies();
         const expireTimeUTC = Date.now() + response.data.expire * 1000;
         const expireTimeKST = expireTimeUTC + (9 * 60 * 60 * 1000);
         const expireDateKST = new Date(expireTimeKST).toUTCString();
         cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });
+        setIsLoggedIn(true);
         navigate('/');
       }
     } catch (error) {
@@ -40,27 +44,25 @@ const Account: React.FC = () => {
   };
 
   return (
-
     <div id="account">
       <GoogleOAuthProvider clientId={clientId}>
-      {
-        userInfo ? (
-          <div>
-            <h2>{(userInfo as any)?.nickname}님 안녕하세요</h2>
-          </div>
-        ) : (
-        
-          <GoogleLogin
-          onSuccess={(response:any)=>{
-            handleCredentialResponse(response);
-          }}
-          onError={() => {
-            alert('Login Failed');
-          }}
-        />
-        )
-      }
-    </GoogleOAuthProvider>
+        {
+          userInfo ? (
+            <div>
+              <h2>{userInfo.nickname}님 안녕하세요</h2>
+            </div>
+          ) : (
+            <GoogleLogin
+              onSuccess={(response: any) => {
+                handleCredentialResponse(response);
+              }}
+              onError={() => {
+                alert('Login Failed');
+              }}
+            />
+          )
+        }
+      </GoogleOAuthProvider>
     </div>
   );
 };

@@ -1,7 +1,58 @@
-import { useState } from 'react';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from 'styled-components';
+import ToastModal from "../../components/public/toastModal";
+
+interface NaviSectionProps {
+  currentMenuName: string;
+  isLoggedIn: boolean;
+}
+
+const NaviSection: React.FC<NaviSectionProps> = ({ currentMenuName, isLoggedIn }) => {
+  const navigate = useNavigate();
+  const [isMyPageOpen, setIsMyPageOpen] = useState(false);
+
+  const handleNavigation = (path: any) => {
+    navigate(path);
+  };
+
+  const toggleMyPage = () => {
+    setIsMyPageOpen(!isMyPageOpen);
+  };
+
+  return (
+    <NavSectionWrapper>
+      <div id="logo_box" onClick={() => handleNavigation("/")}>
+        <div id="logo_img">
+          <img src={`${process.env.PUBLIC_URL}/blueLoa.png`} alt="logo" />
+        </div>
+        <div id="logo_title">
+          <LogoTitle>LOA</LogoTitle>
+        </div>
+      </div>
+      <NavbarWrapper>
+        <div className="navbar">
+          <div className="menus">
+            <div className="menu" onClick={() => handleNavigation("/workbook")}>문제집 조회</div>
+            <div className="menu" onClick={() => handleNavigation("/create")}>문제집 만들기</div>
+            <div className="menu" onClick={() => handleNavigation("/reportlist")}>레포트 조회</div>
+          </div>
+        </div>
+        <CurrentMenu>{currentMenuName}</CurrentMenu>
+      </NavbarWrapper>
+      {isLoggedIn && (
+        <>
+          <MyPageButton onClick={toggleMyPage}>마이페이지</MyPageButton>
+          <ToastModalWrapper isVisible={isMyPageOpen}>
+            <ToastModal />
+          </ToastModalWrapper>
+        </>
+      )}
+    </NavSectionWrapper>
+  );
+};
+
+export default NaviSection;
 
 const gradientAnimation = keyframes`
   0% {
@@ -16,58 +67,22 @@ const gradientAnimation = keyframes`
 `;
 
 const NavSectionWrapper = styled.div`
-
-  justify-content: center;
+  justify-content: flex-start;
   display: flex;
   align-items: center;
+  flex-direction: column;
   position: relative;
-  height: 15%;
   box-sizing: border-box;
-  /* border: 1px solid red; */
-  padding-top : 20px;
+  padding: 20px;
   margin-bottom: 30px;
-
-
-  .navbar {
-    /* border: 1px solid red; */
-    width: 200px;
-    border-radius: 50px;
-    height: 3rem;
-    background: linear-gradient(270deg, #ACE1F4, #00C6FF, #0073E6);
-    background-size: 400% 400%;
-    animation: ${gradientAnimation} 15s ease infinite;
-    cursor: pointer;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 10px;
-    transition: width 0.5s, border-radius 0.5s, background-color 0.5s;
-
-    font-size: 1.5rem;
-    &:hover {
-      width: 400px;
-      border-radius: 50px;
-      background: skyblue;
-      animation: none;
-    }
-
-    &:hover .menus {
-      opacity: 1;
-      transition: opacity 0.5s;
-    }
-
-    &:hover .current_menu {
-      opacity: 0;
-    }
-  }
+  height: 190px;
 
   #logo_box {
     position: absolute;
-    left: 0;
+    top: 5px;
+    left: 10px;
     display: flex;
-    width: 20%;
-    height: 20%;
+    width: 10%;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
@@ -76,102 +91,176 @@ const NavSectionWrapper = styled.div`
   #logo_img {
     flex: 0.5;
     margin-left: 5px;
-    margin-right: -15px;
   }
 
   #logo_img > img {
-    width: 90%;
+    width: 100px;
     height: auto;
     object-fit: cover;
   }
 
   #logo_title {
     flex: 1;
-    color: black;
-    font-size: 2rem;
-  }
-
-  .menus {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-  }
-
-  .menu {
-    width: 130px;
-    height: 50px;
-    color: black;
-    line-height: 50px;
-    text-align: center;
-    border-radius: 10px;
-    transition: color 0.3s, background-color 0.3s, transform 0.3s;
-
-    &:hover {
-      color: white;
-      font-weight: bold;
-    }
-  }
-
-  .current_menu {
-    position: absolute;
-    opacity: 1;
-    transition: opacity 0.5s;
   }
 
   @media (max-width: 768px) {
     #logo_box {
       width: 30%;
     }
+  }
+`;
 
-    #logo_title {
+const LogoTitle = styled.h1`
+  color: white;
+  font-size: 2.4rem;
+  letter-spacing: 3px;
+  text-shadow: 
+    -2.3px -2.3px 0 #0082CB, 2.3px -2.3px 0 #0082CB, 
+    -2.3px 2.3px 0 #0082CB, 2.3px 2.3px 0 #0082CB,
+    2.3px 0px 0 #0082CB, 0px 2.3px 0 #0082CB, 
+    -2.3px 0px 0 #0082CB, 0px -2.3px 0 #0082CB;
+`;
+
+const NavbarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .navbar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(270deg, #ACE1F4, #00C6FF, #0073E6);
+    background-size: 400% 400%;
+    animation: ${gradientAnimation} 15s ease infinite;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: width 0.5s, height 0.5s, border-radius 0.5s;
+
+    &:hover {
+      width: 600px;
+      height: 105px;
+      border-radius: 65px;
     }
 
-    .navbar {
-      width: 150px;
+    &:hover .menus {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s;
+      transition-delay: 0.2s;
+    }
 
-      &:hover {
-        width: 350px;
-      }
+    .menus {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      visibility: hidden;
+      width: 100%;
     }
 
     .menu {
-      width: 80px;
-      height: 40px;
-      line-height: 40px;
+      width: 200px;
+      height: 10px;
+      color: black;
+      line-height: 15px;
+      text-align: center;
+      border-radius: 10px;
+      transition: color 0.3s, background-color 0.3s, transform 0.2s;
+      font-size: 1.6rem;
+
+      &:hover {
+        color: white;
+        font-weight: bold;
+      }
+    }
+
+    @media (max-width: 768px) {
+      width: 100px;
+      height: 100px;
+
+      &:hover {
+        width: 300px;
+        height: 120px;
+        border-radius: 60px;
+      }
+
+      .menu {
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1.1rem;
+      }
     }
   }
 `;
 
-const NaviSection = (path:any) => {
-  const navigate = useNavigate();
-  const [currentMenu, setCurrentMenu] = useState('');
+const CurrentMenu = styled.div`
+  margin-top: 20px;
+  font-size: 3.5rem;
+  color: white;
+  letter-spacing: 8.5px;
+  text-shadow: 
+    -4px -4px 0 #0082CB, 4px -4px 0 #0082CB, 
+    -4px 4px 0 #0082CB, 4px 4px 0 #0082CB,
+    4px 0px 0 #0082CB, 0px 4px 0 #0082CB, 
+    -4px 0px 0 #0082CB, 0px -4px 0 #0082CB;
+  transition: opacity 0.5s;
+`;
 
-  const handleNavigation = (path:any) => {
-    navigate(path);
-  };
+const MyPageButton = styled.button`
+  position: absolute;
+  right: 50px;
+  top: 30px;
+  font-size: 22px;
+  padding: 10px 17px;
+  letter-spacing: 1px;
+  background-color: #008fe1;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
 
-  return (
-    <NavSectionWrapper>
-      <div id="logo_box" onClick={() => handleNavigation("/")}>
-        <div id="logo_img">
-          <img src={`${process.env.PUBLIC_URL}/blueLoa.png`}></img>
-        </div>
-        <div id="logo_title">
-          <h1>LOA</h1>
-        </div>
-      </div>
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
 
-      <div className="navbar">
-        <div className="current_menu">{path.currentMenuName}</div>
-        <div className="menus">
-          <div className="menu" onClick={() => handleNavigation("/workbook")}>문제집 조회</div>
-          <div className="menu" onClick={() => handleNavigation("/create")}>문제집 만들기</div>
-          <div className="menu" onClick={() => handleNavigation("/reportlist")}>레포트 조회</div>
-        </div>
-      </div>
-    </NavSectionWrapper>
-  );
-};
+interface ToastModalWrapperProps {
+  isVisible: boolean;
+}
 
-export default NaviSection;
+const ToastModalWrapper = styled.div<ToastModalWrapperProps>`
+  position: absolute;
+  right: 50px;
+  top: 95px;
+  box-shadow: 
+    -6px -6px 0 #1daafc, 6px -6px 0 #1daafc, 
+    -6px 6px 0 #1daafc, 6px 6px 0 #1daafc,
+    6px 0px 0 #1daafc, 0px 6px 0 #1daafc, 
+    -6px 0px 0 #1daafc, 0px -6px 0 #1daafc;
+  background-color: rgba(244, 254, 254, 0.8);
+  border: none;
+  border-radius: 15px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 3px;
+  padding-right: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  z-index: 1000;
+
+  ${({ isVisible }) =>
+    isVisible &&
+    `
+      transform: translateY(0);
+      opacity: 1;
+    `}
+`;

@@ -5,11 +5,8 @@ import "../styles/Public"
 import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
-
 import ReportCard from "../components/reportList/reportCard";
-import ToastModal from "../components/public/toastModal";
 import { request } from "../helpers/axios_helper";
-import Side from "../styles/publicStyleComponents/Side";
 import Main from "../styles/publicStyleComponents/Main";
 
 interface ReportCard {
@@ -20,7 +17,11 @@ interface ReportCard {
   lectureHistoryId:number;
 }
 
-const ReportList: React.FC = () => {
+interface ReportList {
+    isLoggedIn: boolean;
+  }  
+
+const ReportList: React.FC<ReportList> = ({ isLoggedIn }) => {
     const [cards, setCards] = useState<ReportCard[]>([]);
     const navigate = useNavigate();   
     const currentMenuName = '레포트 조회'
@@ -43,11 +44,8 @@ const ReportList: React.FC = () => {
         <>
         <BackgroundAnimation>
             <Container>
-            <NaviSection currentMenuName = {currentMenuName}></NaviSection>
+            <NaviSection currentMenuName = {currentMenuName} isLoggedIn={isLoggedIn} />
                     <InnerContentSection>
-                      <Side>
-                        <ToastModal/>
-                      </Side>
                         <Main>
                             {cards.map((card, index) => (
                                     <ReportCard
@@ -72,17 +70,12 @@ export default ReportList;
 const InnerContentSection = styled.div`
   display: flex;
   height: 85%;
-  /* border: 10px solid red; */
-
->div{
+  >div{
 
 }
 
 #searchBox{
   height: 30%;
   margin-bottom: 100px;
-  
 }
-
-
 `

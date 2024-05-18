@@ -5,11 +5,14 @@ import BackgroundAnimation from '../components/public/BackgroundAnimation';
 import Container from '../styles/publicStyleComponents/Container';
 import NaviSection from '../styles/publicStyleComponents/NaviSection';
 import styled from 'styled-components';
-import Side from '../styles/publicStyleComponents/Side';
-import ToastModal from '../components/public/toastModal';
 import Main from '../styles/publicStyleComponents/Main';
 
-const QuestionInfo = () => {
+
+interface QuestionInfoProps {
+  isLoggedIn: boolean;
+}
+
+const QuestionInfo: React.FC<QuestionInfoProps>  = ({ isLoggedIn }) => {
   const location = useLocation();
   const { quizSetId } = useParams();
   const currentMenuName = '문제집 조회';
@@ -18,11 +21,8 @@ const QuestionInfo = () => {
   return (
     <BackgroundAnimation>
       <Container>
-        <NaviSection currentMenuName={currentMenuName} />
+        <NaviSection currentMenuName={currentMenuName} isLoggedIn={isLoggedIn}/>
         <InnerContentSection>
-          <Side>
-            <ToastModal />
-          </Side>
           <Main>
             <div id="main">
               <Title>{quizSetTitle}</Title>

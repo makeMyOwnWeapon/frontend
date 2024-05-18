@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Form } from '../../styles/CreateQuestion';
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -53,15 +52,6 @@ const Summary = styled.div`
   padding: 10px;
   margin: 10px;
   flex-direction:column;
-`;
-
-const PublicTextContainer = styled.div`
-  padding: 10px;
-  margin: 5px 0;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-  color: #212529;
-  line-height: 1.5;
 `;
 
 const SummaryText = styled.div`

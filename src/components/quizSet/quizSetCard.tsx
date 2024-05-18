@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { PublicCardContent, PublicCardTitle, PublicCardDescription } from "../../styles/Public";
 import VideoThumbnail from "../public/url_to_image";
 import { FaThumbsUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -78,20 +77,19 @@ const QuizSetCard: React.FC<WorkbookCardProps> = ({
   };
 
   return (
-    <PublicCardContainer onClick={handleCardClick}>
+    <CardContainer onClick={handleCardClick}>
       <a className="cardImg" >
       <VideoThumbnail imageUrl={subLectureUrl} />
       </a>
-      <PublicCardContent>
-        <PublicCardTitle>{quizSetTitle}</PublicCardTitle>
-        <PublicCardDescription>작성자: {memberNickname}</PublicCardDescription>
-        <PublicCardDescription>강의명: {truncateTitle(subLectureTitle,9)}</PublicCardDescription>
+
+        <CardTitle>{quizSetTitle}</CardTitle>
+        <CardDescription>작성자: {memberNickname}</CardDescription>
+        <CardDescription>강의명: {truncateTitle(subLectureTitle,9)}</CardDescription>
         <ReadMoreLink onClick={recommendationClick}>
           <FaThumbsUp />
           {recommendation}
         </ReadMoreLink>
-      </PublicCardContent>
-    </PublicCardContainer>
+    </CardContainer>
   );
 };
 
@@ -115,7 +113,15 @@ const ReadMoreLink = styled.a`
   }
 `;
 
-const PublicCardContainer = styled.div`
+const CardTitle = styled.div`
+  font-size: 1.5rem;
+`;
+
+const CardDescription = styled.p`
+  font-size: 1.2rem;
+`;
+
+const CardContainer = styled.div`
   max-width: 20rem;
   max-height: 30rem;
   background-color: rgba(255, 255, 255, 0.4);

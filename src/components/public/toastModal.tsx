@@ -37,11 +37,11 @@ const ToastModal = () => {
     switch (id) {
       case 1:
         try {
-          const response = await request("GET","/api/member/oauthId");
+          const response = await request("GET", "/api/member/oauthId");
           if (response.status === 200) {
             const data = response.data;
             toast(
-              <div>
+              <div className="toast-content">
                 <span>인증코드: {data.oauthId}</span>
                 <button
                   className="copy-button"
@@ -49,7 +49,8 @@ const ToastModal = () => {
                 >
                   Copy!
                 </button>
-              </div>
+              </div>,
+              { className: "custom-toast" }
             );
           } else {
             throw new Error("인증코드 조회에 실패했습니다.");
@@ -69,7 +70,7 @@ const ToastModal = () => {
                   className="confirm-button"
                   onClick={async () => {
                     try {
-                      const response = await request("POST","/api/member/delete");
+                      const response = await request("POST", "/api/member/delete");
                       if (response.status >= 200 && response.status < 300) {
                         toast.success("회원 탈퇴가 성공적으로 이루어졌습니다.");
                         removeCookie("jwt", { path: '/' });
@@ -98,6 +99,7 @@ const ToastModal = () => {
       default:
         break;
     }
+    setSelectedOption(null);
   };
 
   const handleLogout = async () => {
@@ -105,19 +107,9 @@ const ToastModal = () => {
       console.log('Logging out...');
       removeCookie('jwt', { path: '/' });
 
-      const jwt = cookies.jwt;
-      if (jwt) {
-        console.error('JWT cookie was not removed');
-        toast.error('로그아웃에 실패했습니다. 다시 시도해주세요.');
-        return;
-      } else {
-        console.log('JWT cookie removed successfully');
-      }
-
       navigate("/");
       window.location.reload();
       console.log('Navigated to home page');
-
     } catch (error) {
       console.error('Error during logout:', error);
       toast.error('로그아웃 중 오류가 발생했습니다.');
@@ -130,13 +122,12 @@ const ToastModal = () => {
         <React.Fragment key={option.id}>
           <Option
             onClick={() => handleOptionClick(option.id)}
-            style={{ backgroundColor: selectedOption === option.id ? '#ccc' : 'transparent' }}
           >
             {option.label}
           </Option>
-          {selectedOption === option.id && <ToastContainer position="top-center" className="custom-toast-container" />}
         </React.Fragment>
       ))}
+      <ToastContainer position="top-center" className="custom-toast-container" />
       <div style={{ display: 'flex' }} />
     </>
   );
@@ -149,4 +140,17 @@ const Option = styled.div`
   margin: 5px 0;
   cursor: pointer;
   border-radius: 5px;
+  font-size: 1.6rem;
+  color: white;
+  letter-spacing: 2px;
+  text-shadow: 
+    -2px -2px 0 #006C8D, 2px -2px 0 #006C8D, 
+    -2px 2px 0 #006C8D, 2px 2px 0 #006C8D,
+    2px 0px 0 #006C8D, 0px 2px 0 #006C8D, 
+    -2px 0px 0 #006C8D, 0px -2px 0 #006C8D;
+  transition: opacity 0.5s, background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(0, 130, 203, 0.3);
+  }
 `;

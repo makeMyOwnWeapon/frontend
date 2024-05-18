@@ -4,13 +4,17 @@ import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
 
-const Main: React.FC = () => {
+interface IntroduceProps {
+  isLoggedIn: boolean;
+}
+
+const Introduce: React.FC<IntroduceProps> = ({ isLoggedIn }) => {
   const currentMenuName = '소개 페이지'
 
   return (
     <BackgroundAnimation>
       <Container>
-        <NaviSection currentMenuName = {currentMenuName}></NaviSection>
+        <NaviSection currentMenuName={currentMenuName} isLoggedIn={isLoggedIn} />
             <InnerContentSection>
             </InnerContentSection>
       </Container>
@@ -18,7 +22,7 @@ const Main: React.FC = () => {
   );
 };
 
-export default Main;
+export default Introduce;
 
 const InnerContentSection = styled.div`
   /* border: 10px solid green; */

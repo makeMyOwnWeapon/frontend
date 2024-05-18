@@ -3,23 +3,25 @@ import styled from "styled-components";
 import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
 import "../styles/Public"
-import ToastModal from "../components/public/toastModal";
-import Side from "../styles/publicStyleComponents/Side";
 import Main from "../styles/publicStyleComponents/Main";
-import { request, getAuthToken } from "../helpers/axios_helper";
+import { request } from "../helpers/axios_helper";
 import NaviSection from "../styles/publicStyleComponents/NaviSection";
 import { useParams } from "react-router-dom";
 import ReportpageComponent from "../components/report/report_reportpage_component";
 import { Data } from "../components/reportList/reportInterface";
 
-const ReportDetail  = () => {
+
+interface ReportDetailProps {
+  isLoggedIn: boolean;
+}
+
+const ReportDetail: React.FC<ReportDetailProps>  = ({ isLoggedIn }) => {
   const {lectureHistoryId} = useParams();
 
-  const [data, setData] = useState<Data | undefined>(); // Set initial value to undefined
+  const [data, setData] = useState<Data | undefined>();
   const currentMenuName = '레포트 상세조회'
 
   useEffect(() => {
-    // 레포트 정보 요청
     const fetchData = async () => {
       try{
         const response = await request('GET','/api/history?lectureHistoryId=' + lectureHistoryId);
@@ -36,11 +38,8 @@ const ReportDetail  = () => {
     <>
       <BackgroundAnimation>
         <Container>
-          <NaviSection currentMenuName = {currentMenuName}></NaviSection>
+          <NaviSection currentMenuName = {currentMenuName} isLoggedIn={isLoggedIn} />
           <InnerContentSection>
-            <Side>
-              <ToastModal/>
-            </Side>
             <Main>
               {data && <ReportpageComponent data = {data} />}
             </Main>

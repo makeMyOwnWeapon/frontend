@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { PublicSliderContainer, PublicTextContainer, PublicQuestionContainer } from "../../styles/Public";
+import { PublicQuestionContainer } from "../../styles/Public";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -51,7 +51,7 @@ const ReportQuestionReview = ({ quizzes }: quizzes) => {
                                 <div className="questionName">{question.question}</div>
                                 <br />
                                 {question && question.choices.length > 1 && question.choices.map((choice, choiceIndex) => (
-                                    <PublicTextContainer key={choiceIndex}>{choiceIndex + 1}번 : {choice.content}</PublicTextContainer>
+                                    <TextContainer key={choiceIndex}>{choiceIndex + 1}번 : {choice.content}</TextContainer>
                                 ))}
                             </div>
 
@@ -62,7 +62,7 @@ const ReportQuestionReview = ({ quizzes }: quizzes) => {
                                     <div>정답 : {getCorrectAnswerNumber(question)}</div>
                                 </div>
                                 <hr />
-                                <PublicTextContainer>{question.commentary}</PublicTextContainer>
+                                <TextContainer>{question.commentary}</TextContainer>
                                
                             </div>
                         </Question>
@@ -75,8 +75,27 @@ const ReportQuestionReview = ({ quizzes }: quizzes) => {
 
 export default ReportQuestionReview;
 
+// 사용자가 제출한 답안의 번호를 가져오는 함수
+const getSubmittedAnswerNumber = (question: Question_) => {
+    const userAnswerIndex = question.choices.findIndex(choice => choice.content === question.userChoice);
+    const userAnswerNumber = userAnswerIndex !== -1 ? userAnswerIndex + 1 : 0;
+    return userAnswerNumber !== 0 ? userAnswerNumber + '번' : '없음';
+};
+
+// 정답의 번호를 가져오는 함수
+const getCorrectAnswerNumber = (question: Question_) => {
+    const correctAnswerIndex = question.choices.findIndex(choice => choice.isAnswer);
+    return correctAnswerIndex !== -1 ? correctAnswerIndex + 1 + '번' : '없음';
+};
+
+
 const ReportQuestionTitle = styled.div`
   font-size: 2rem;
+`;
+
+const TextContainer = styled.div`
+  font-size: 1.5rem;
+
 `;
 
 const Question = styled.div`
@@ -118,15 +137,3 @@ const Question = styled.div`
     }
 `;
 
-// 사용자가 제출한 답안의 번호를 가져오는 함수
-const getSubmittedAnswerNumber = (question: Question_) => {
-    const userAnswerIndex = question.choices.findIndex(choice => choice.content === question.userChoice);
-    const userAnswerNumber = userAnswerIndex !== -1 ? userAnswerIndex + 1 : 0;
-    return userAnswerNumber !== 0 ? userAnswerNumber + '번' : '없음';
-};
-
-// 정답의 번호를 가져오는 함수
-const getCorrectAnswerNumber = (question: Question_) => {
-    const correctAnswerIndex = question.choices.findIndex(choice => choice.isAnswer);
-    return correctAnswerIndex !== -1 ? correctAnswerIndex + 1 + '번' : '없음';
-};
