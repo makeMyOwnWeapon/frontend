@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import VideoThumbnail from '../public/url_to_image';
 import QuestionComponent from './create_question_component';
 import { NavigateFunction } from 'react-router-dom';
-import { REPORT_PROCESSING_HOST, request } from '../../helpers/axios_helper';
+import { REPORT_PROCESSING_HOST, bodyRequest, headerInputRequest, request } from '../../helpers/axios_helper';
 import styled from 'styled-components';
 import { Quizzes } from '../../pages/questSetCreateForExtension';
+import QuestionComponentForExtension from './create_question_component_for_extension';
 
 interface Props {
     navigate: NavigateFunction;
@@ -13,6 +14,7 @@ interface Props {
     playTime: string;
     iframeQuizzes: Quizzes[];
     subLectureUrl: string;
+    token: string;
 }
 
 interface Answer {
@@ -58,15 +60,35 @@ class ProblemPageForExtension extends Component<Props, State> {
             prevProps.playTime !== this.props.playTime ||
             prevProps.subLectureUrl !== this.props.subLectureUrl
         ) {
+            const formattedDuration = this.formatDuration(this.props.playTime);
             this.setState({
                 title: this.props.courseTitle,
                 subLectureUrl: this.props.subLectureUrl,
                 mainLectureTitle: this.props.courseTitle,
                 subLectureTitle: this.props.subCourseTitle,
-                duration: this.props.playTime,
+                duration: formattedDuration,
             });
         }
     }
+    
+    formatDuration = (timeStr: string): string => {
+        // ss 형식일 경우 00:00:ss로 변경
+        if (/^[0-5]?\d$/.test(timeStr)) {
+            return `00:00:${timeStr.padStart(2, '0')}`;
+        }
+        
+        // mm:ss 형식일 경우 00:mm:ss로 변경
+        if (/^[0-5]?\d:[0-5]\d$/.test(timeStr)) {
+            return `00:${timeStr.padStart(5, '0')}`;
+        }
+        
+        // hh:mm:ss 형식일 경우 그대로 반환
+        if (/^(?:[0-1]?\d|2[0-3]):[0-5]?\d:[0-5]?\d$/.test(timeStr)) {
+            return timeStr.split(':').map(unit => unit.padStart(2, '0')).join(':');
+        }
+            return '00:00:00';
+    };
+    
 
     trimSubLectureUrl = (url: string): string => {
         const urlObj = new URL(url);
@@ -85,33 +107,34 @@ class ProblemPageForExtension extends Component<Props, State> {
     };
 
     addQuestionComponent = (): void => {
-    this.setState(prevState => ({
-      questionComponents: [...prevState.questionComponents, { id: prevState.questionComponents.length, expanded: true }],
-      answers: [...prevState.answers, Array(6).fill({ text: '', selected: false })],
-      questionTimes: [...prevState.questionTimes, '']
-    }));
+        this.setState(prevState => ({
+            questionComponents: [...prevState.questionComponents, { id: prevState.questionComponents.length, expanded: true }],
+            answers: [...prevState.answers, Array(6).fill({ text: '', selected: false })],
+            questionTimes: [...prevState.questionTimes, '']
+        }));
     };
 
     addAIQuestionComponent = (): void => {
-      const { iframeQuizzes } = this.props;
-
-      if (iframeQuizzes.length > this.state.questionComponents.length) {
-          const nextQuiz = iframeQuizzes[this.state.questionComponents.length];
-
-          const answers: Answer[] = [
-              { text: nextQuiz.instruction },
-              ...nextQuiz.choices.map(choice => ({ text: choice.content, selected: choice.isAnswer })),
-              { text: nextQuiz.commentary },
-          ];
-
-          this.setState(prevState => ({
-              questionComponents: [...prevState.questionComponents, { id: prevState.questionComponents.length, expanded: true }],
-              answers: [...prevState.answers, answers],
-              questionTimes: [...prevState.questionTimes, this.convertSecondsToTime(nextQuiz.popupTime)],
-          }));
-      }
-  };
-
+        const { iframeQuizzes } = this.props;
+        const { questionComponents } = this.state;
+    
+        for (let i = questionComponents.length; i < iframeQuizzes.length; i++) {
+            const nextQuiz = iframeQuizzes[i];
+    
+            const answers: Answer[] = [
+                { text: nextQuiz.instruction },
+                ...nextQuiz.choices.map(choice => ({ text: choice.content, selected: choice.isAnswer })),
+                { text: nextQuiz.commentary },
+            ];
+    
+            this.setState(prevState => ({
+                questionComponents: [...prevState.questionComponents, { id: prevState.questionComponents.length, expanded: true }],
+                answers: [...prevState.answers, answers],
+                questionTimes: [...prevState.questionTimes, this.convertSecondsToTime(nextQuiz.popupTime)],
+            }));
+        }
+    };
+    
 
     updateQuestionTime = (index: number, timeExchange: string): void => {
         const updatedTimes = [...this.state.questionTimes];
@@ -137,7 +160,8 @@ class ProblemPageForExtension extends Component<Props, State> {
     deleteQuestion = (id: number): void => {
         this.setState(prevState => ({
             questionComponents: prevState.questionComponents.filter(component => component.id !== id),
-            answers: prevState.answers.filter((_, index) => index !== id)
+            answers: prevState.answers.filter((_, index) => index !== id),
+            questionTimes: prevState.questionTimes.filter((_, index) => index !== id),
         }));
     };
 
@@ -205,7 +229,7 @@ class ProblemPageForExtension extends Component<Props, State> {
             return {
                 instruction: answerSet[0].text,
                 commentary: answerSet[answerSet.length - 1].text,
-                popupTime: this.convertTimeToSeconds(time),
+                popupTime: time,
                 choices: answerSet.slice(1, answerSet.length - 1).map((answer, idx) => ({
                     content: answer.text,
                     isAnswer: answer.selected
@@ -214,17 +238,20 @@ class ProblemPageForExtension extends Component<Props, State> {
         }).filter(quiz => quiz !== undefined);
 
         try {
-            const response = await request('POST', '/api/quizsets', {
+            const response = await headerInputRequest('POST', '/api/quizsets', {
                 title,
                 subLectureUrl: trimmedSubLectureUrl,
                 subLectureTitle,
                 mainLectureTitle,
                 duration: durationInSeconds,
                 quizzes,
-            });
+            }, this.props.token);
 
             if (response.status >= 200 && response.status < 300) {
-                this.props.navigate('/workbook');
+                window.parent.postMessage(
+                    { functionName: 'closeModal' }
+                    , '*'
+                );
             } else {
                 alert(`Error ${response.status}: ${response.statusText}`);
             }
@@ -257,17 +284,19 @@ class ProblemPageForExtension extends Component<Props, State> {
                         </div>
                         <div>
                             <VideoThumbnail imageUrl={this.state.subLectureUrl} />
-                            <ButtonContainer>
+
+                        </div>
+                    </InputContainer>
+                    <ButtonContainer>
                                 <Button type="button" onClick={this.addAIQuestionComponent}>AI 문제 추가</Button>
                                 <Button type="button" onClick={this.resetInputs}>입력창 초기화</Button>
                             </ButtonContainer>
-                        </div>
-                    </InputContainer>
                     {this.state.questionComponents.map((component, index) => (
-                        <QuestionComponent
+                        <QuestionComponentForExtension
                             key={component.id}
                             id={component.id}
                             expand={component.expanded}
+                            questionTime={this.state.questionTimes[index]}
                             onToggle={this.toggleExpand}
                             onDelete={this.deleteQuestion}
                             answers={this.state.answers[index]}
@@ -299,7 +328,7 @@ const Button = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 25px;
   text-align: center;
   &:hover {
     background-color: skyblue;
@@ -323,7 +352,7 @@ const Input = styled.input`
   border: 2px solid #dee2e6;
   border-radius: 5px;
   outline: none;
-  font-size: 16px;
+  font-size: 30px;
   transition: border 0.3s ease-in-out;
   &:focus {
     border-color: #007bff;
@@ -344,14 +373,14 @@ const Formdiv = styled.div`
 const InputContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 60%;
+  width: 100%;
   padding: 20px;
   justify-content: space-between;
   margin-bottom: 20px;
 `;
 
 const StyledText = styled.p`
-  font-size: 24px;
+  font-size: 84px;
   color: black;
   margin-top: 70px;
   margin-bottom: 30px;
