@@ -5,7 +5,7 @@ import defaultThumbnail from '../../images/default_thumbnail.png';
 import styled from 'styled-components';
 
 interface Props {
-    imageUrl: string;
+  imageUrl: string;
 }
 
 const VideoThumbnail: React.FC<Props> = ({ imageUrl }) => {
@@ -32,14 +32,15 @@ const VideoThumbnail: React.FC<Props> = ({ imageUrl }) => {
   };
 
   return (
-        <ImageWithShadow src={getVideoThumbnail(imageUrl)} alt="Video Thumbnail" style={{ width: '150px', height: '150px' }} />
+    <ImageWithShadow src={getVideoThumbnail(imageUrl)} alt="Video Thumbnail" />
   );
 };
 
 export default VideoThumbnail;
 
-
 const ImageWithShadow = styled.img`
-  /* border: 1px solid red; */
+  width: 200px;
+  height: 200px;
   object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;

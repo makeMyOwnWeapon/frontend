@@ -15,6 +15,7 @@ interface ReportCard {
   subLectureUrl: string;
   registrationDate: string;
   lectureHistoryId: number;
+  subLectureDescription: string; // 설명 필드 추가
 }
 
 interface ReportList {
@@ -81,6 +82,7 @@ const ReportList: React.FC<ReportList> = ({ isLoggedIn }) => {
                   subLectureUrl={card.subLectureUrl}
                   registrationDate={card.registrationDate}
                   lectureHistoryId={card.lectureHistoryId}
+                  subLectureDescription={card.subLectureDescription} // 설명 필드 추가
                 />
               ))}
             </Main>
@@ -90,6 +92,7 @@ const ReportList: React.FC<ReportList> = ({ isLoggedIn }) => {
     </>
   );
 };
+
 
 export default ReportList;
 

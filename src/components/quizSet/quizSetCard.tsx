@@ -62,14 +62,8 @@ const QuizSetCard: React.FC<WorkbookCardProps> = ({
 
   const handleCardClick = (event: React.MouseEvent) => {
     event.preventDefault();
-    navigate(`/question_info/${quizSetId}`,{state: {
-      subLectureTitle, 
-      quizSetTitle,   
-      memberNickname   
-    }
-  });
+    navigate(`/question_info/${quizSetId}`, { state: { subLectureTitle, quizSetTitle, memberNickname } });
   };
-  
 
   const recommendationClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.stopPropagation();
@@ -78,17 +72,16 @@ const QuizSetCard: React.FC<WorkbookCardProps> = ({
 
   return (
     <CardContainer onClick={handleCardClick}>
-      <a className="cardImg" >
-      <VideoThumbnail imageUrl={subLectureUrl} />
-      </a>
-
-        <CardTitle>{quizSetTitle}</CardTitle>
-        <CardDescription>작성자: {memberNickname}</CardDescription>
-        <CardDescription>강의명: {truncateTitle(subLectureTitle,9)}</CardDescription>
-        <ReadMoreLink onClick={recommendationClick}>
-          <FaThumbsUp />
-          {recommendation}
-        </ReadMoreLink>
+      <ThumbnailContainer>
+        <VideoThumbnail imageUrl={subLectureUrl} />
+      </ThumbnailContainer>
+      <CardTitle>{quizSetTitle}</CardTitle>
+      <CardDescription>작성자: {memberNickname}</CardDescription>
+      <CardDescription>강의명: {truncateTitle(subLectureTitle, 8)}</CardDescription>
+      <ReadMoreLink onClick={recommendationClick}>
+        <FaThumbsUp />
+        {recommendation}
+      </ReadMoreLink>
     </CardContainer>
   );
 };
@@ -99,14 +92,15 @@ const ReadMoreLink = styled.a`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 1.6rem;
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
   background-color: #3b82f6;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
   text-decoration: none;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1.1rem;
 
   &:hover {
     background-color: #2563eb;
@@ -114,34 +108,38 @@ const ReadMoreLink = styled.a`
 `;
 
 const CardTitle = styled.div`
-  font-size: 1.5rem;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 `;
 
 const CardDescription = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
 `;
 
 const CardContainer = styled.div`
-  max-width: 20rem;
-  max-height: 30rem;
+  max-width: 25rem;
+  max-height: 35rem;
   background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 1.5rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.2s ease, transform 0.3s ease-in-out;
-  margin: 10px;
+  margin: 15px;
   cursor: pointer;
-  padding: 20px;
-
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.08);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   }
+`;
 
-  .cardImg {
-    object-fit: cover;
-    width: 100%;
-    height: 150px;
-    border-radius: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
+const ThumbnailContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
 `;
