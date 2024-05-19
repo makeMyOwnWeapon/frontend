@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Account from '../components/main/account';
+import AccountWithProvider from '../components/main/account';
 import "../styles/Public";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import Container from "../styles/publicStyleComponents/Container";
@@ -22,17 +22,17 @@ const Main: React.FC<MainProps> = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
     <BackgroundAnimation>
       <Container>
-        <NaviSection currentMenuName={''} isLoggedIn={isLoggedIn} />
+        <NaviSection currentMenuName={undefined} isLoggedIn={isLoggedIn} />
         <InnerContentSection>
           <div id="title">
-            <span>온라인 학습 헬퍼</span>
-            <span>Learn On-Air</span>
+            <span className="title">온라인 학습 헬퍼</span>
+            <span className="subtitle">LEARN ON-AIR</span>
           </div>
           <div id="info">
-            <Account setIsLoggedIn={setIsLoggedIn} />
-            <div id="buttonBox">
+            <AccountWithProvider setIsLoggedIn={setIsLoggedIn} />
+            <ButtonBox>
               <Button onClick={handleIntroduce}>소개페이지</Button>
-            </div>
+            </ButtonBox>
           </div>
         </InnerContentSection>
       </Container>
@@ -49,46 +49,57 @@ const InnerContentSection = styled.div`
   text-align: center;
   height: 100%;
   justify-content: space-around;
+  padding: 20px;
 
   > div {
+    width: 100%;
   }
 
   #title {
     font-weight: bold;
-    font-size: 4rem;
-    margin-top: 100px;
-    height: 200px;
+    margin-top: 2%;
     display: flex;
     flex-direction: column;
     color: black;
+    height: 30%;
   }
 
-  #title span {
-    display: block;
+  .title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    font-size: 6.6rem;
+    color: white;
+    margin-bottom: 4%;
+    text-shadow: 
+      -3px -3px 0 #006C8D, 3px -3px 0 #006C8D, 
+      -3px 3px 0 #006C8D, 3px 3px 0 #006C8D;
   }
 
   #account {
+    height: 55%;
   }
 
   #account > #signInDiv {
-    height: 100;
+    height: 100%;
   }
 
   #info {
     display: flex;
     flex-direction: column;
-    width: 500px;
-    height: 300px;
     align-items: center;
-  }  
-
-  #info #buttonBox {
-    margin-top: 50px;
-    display: flex;
-    > div:first-of-type {
-      margin-right: 10px;
-    }
+    justify-content: center;
+    width: 500px;
+    height: 40%;
   }
+`;
+
+const ButtonBox = styled.div`
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
 `;
 
 const Button = styled.div`

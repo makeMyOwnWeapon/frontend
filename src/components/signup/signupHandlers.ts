@@ -36,6 +36,7 @@ export async function handleSubmit({
       cookies.set('jwt', response.data.token, { expires: new Date(expireDateKST) });
       cookies.remove('tempGoogleToken');
       navigate('/');
+      window.location.reload();
     }
   } catch (error) {
     console.error('Error:', error);

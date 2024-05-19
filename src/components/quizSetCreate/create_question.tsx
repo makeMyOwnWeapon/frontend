@@ -178,8 +178,6 @@ class ProblemPage extends Component<Props, State> {
       <>
         <Formdiv>
           <InputContainer>
-            <StyledText>나만의 문제 만들기</StyledText>
-
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', width:'100%'}}>
               <Input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
               <Input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={this.handleSubLectureUrlChange} />
@@ -275,13 +273,4 @@ const InputContainer = styled.div`
   padding: 20px;
   justify-content: space-between;
   margin-bottom: 20px;
-`;
-
-const StyledText = styled.div`
-  font-size: 3rem;
-  color: black;
-  /* border: 1px solid red; */
-  /* margin-top: 70px; */
-  margin-bottom: 30px;
-  /* text-align: left; */
 `;

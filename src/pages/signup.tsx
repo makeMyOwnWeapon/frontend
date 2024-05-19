@@ -1,4 +1,3 @@
-// src/pages/Signup.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NicknameGenerator from '../components/signup/nickNameGenerator';
@@ -18,15 +17,15 @@ function Signup() {
   return (
       <BackgroundAnimation>
         <Div>
-        <Title>Sign Up</Title>
-        <SmallButton selected={selectedButton === 0} onClick={() => handleButtonClick({ buttonIndex: 0, selectedButton, setSelectedButton })}>선생님</SmallButton>
-        <SmallButton selected={selectedButton === 1} onClick={() => handleButtonClick({ buttonIndex: 1, selectedButton, setSelectedButton })}>학생</SmallButton>
-        <NameContainer>
-          <NicknameGenerator onNicknameGenerated={setNickname} />
-        </NameContainer>
-        <form onSubmit={(event) => handleSubmit({ event, credential, nickname, selectedButton, navigate })}>
-          <Button type="submit">Join</Button>
-        </form>
+          <Title>Sign Up</Title>
+          <SmallButton selected={selectedButton === 0} onClick={() => handleButtonClick({ buttonIndex: 0, selectedButton, setSelectedButton })}>선생님</SmallButton>
+          <SmallButton selected={selectedButton === 1} onClick={() => handleButtonClick({ buttonIndex: 1, selectedButton, setSelectedButton })}>학생</SmallButton>
+          <NameContainer>
+            <NicknameGenerator onNicknameGenerated={setNickname} />
+          </NameContainer>
+          <form onSubmit={(event) => handleSubmit({ event, credential, nickname, selectedButton, navigate })}>
+            <Button type="submit">Join</Button>
+          </form>
         </Div>
       </BackgroundAnimation>
   );
@@ -34,14 +33,11 @@ function Signup() {
 
 export default Signup;
 
-
 const Div = styled.div`
   display: flex;
   flex-direction: column;
   width: 20%;
   margin: 0 auto;
-
-  
 `;
 
 const Button = styled.button`
@@ -73,5 +69,5 @@ const Title = styled.h1`
   ${tw`text-2xl font-bold text-gray-900`};
   margin: 0 auto;
   font-size: 1rem;
-  margin-bottom : 30px;
+  margin-bottom: 30px;
 `;

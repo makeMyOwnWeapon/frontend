@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import ToastModal from "../../components/public/toastModal";
 
 interface NaviSectionProps {
-  currentMenuName: string;
+  currentMenuName?: string;
   isLoggedIn: boolean;
 }
 
@@ -38,7 +38,7 @@ const NaviSection: React.FC<NaviSectionProps> = ({ currentMenuName, isLoggedIn }
             <div className="menu" onClick={() => handleNavigation("/reportlist")}>레포트 조회</div>
           </div>
         </div>
-        <CurrentMenu>{currentMenuName}</CurrentMenu>
+        {currentMenuName && <CurrentMenu>{currentMenuName}</CurrentMenu>}
       </NavbarWrapper>
       {isLoggedIn && (
         <>
@@ -248,7 +248,7 @@ const ToastModalWrapper = styled.div<ToastModalWrapperProps>`
   padding-bottom: 30px;
   padding-left: 3px;
   padding-right: 3px;
-  display: flex;
+  display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
   flex-direction: column;
   justify-content: center;
   align-items: center;

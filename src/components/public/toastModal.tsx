@@ -72,7 +72,6 @@ const ToastModal = () => {
                     try {
                       const response = await request("POST", "/api/member/delete");
                       if (response.status >= 200 && response.status < 300) {
-                        toast.success("회원 탈퇴가 성공적으로 이루어졌습니다.");
                         removeCookie("jwt", { path: '/' });
                         navigate("/");
                         window.location.reload();
