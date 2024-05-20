@@ -30,6 +30,7 @@ const CreateForExtension: React.FC = () => {
     const [token, setToken] = useState('');
 
     const courseDataRef = useRef({ courseTitle: '', subCourseTitle: '', playTime: '' });
+    const messageIntervalRef = useRef<number | null>(null);
 
     useEffect(() => {
         
