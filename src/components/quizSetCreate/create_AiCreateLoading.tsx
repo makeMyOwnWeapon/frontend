@@ -16,7 +16,7 @@ return (
                     <p>Learn <RedText>O</RedText>n Air</p>          
                 </TitleContainer>  
                 <TextContainer>
-                    <p>AI가 문제 생성에 필요한 정보를 모으고 있습니다!</p>
+                    <p>AI가 문제집을 생성하고있습니다!</p>
                 </TextContainer>
             </div>
 
