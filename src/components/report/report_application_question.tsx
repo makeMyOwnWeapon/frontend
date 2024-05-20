@@ -39,6 +39,7 @@ const ReportRecommand = ({gptSummary}:gptSummary)=> {
 export default ReportRecommand;
 
 const ApplicationQuestionTitle = styled.div`
+    padding-left: 10px;
     font-weight: bold; 
     font-size: 2rem;
 `;
@@ -47,17 +48,20 @@ const Summary = styled.div`
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
+  border-radius: 20px;
+  border: 2px solid #0076B8;
+  padding: 22px;
+  padding-left: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   flex-direction:column;
 `;
 
 const SummaryText = styled.div`
-
+    
 `;
 
 const SolveAnalyzeContainer = styled.div`
   font-size: 1.5rem;
+  
 `;

@@ -49,7 +49,6 @@ const ReportpageComponent = ({ data }: ReportpageProps) => {
 
   return (
     <ReportStudentBackground>
-      <ReportStudentTitle>레포트</ReportStudentTitle>
       <div className="section">
         <div id="lectureTimeInfo">
           <ReportStudentSubTitle>공부 시작 시간 : {formatUTCDateTime(data.reports.studyStartTime)}</ReportStudentSubTitle>
@@ -74,17 +73,19 @@ const ReportpageComponent = ({ data }: ReportpageProps) => {
         <div className="graph" id="barGraph">
           <div id="labelBox">
             <div className="label">
-              <div className="colorBox" id="greenColor"></div>
-              <div className="colorDesc">자리비움</div>
+              <div className="colorBox" id="pinkColor"></div>
+              <div className="colorDesc">졸은 시간</div>
             </div>
             <div className="label">
-              <div className="colorBox" id="pinkColor"></div>
-              <div className="colorDesc">졸음</div>
+              <div className="colorBox" id="greenColor"></div>
+              <div className="colorDesc">자리 비움</div>
             </div>
           </div>
-          <LineChartSize>
-            <LineChart response={data.reports} />
-          </LineChartSize>
+          <LincharContainer>
+            <LineChartSize>
+              <LineChart response={data.reports} />
+            </LineChartSize>
+          </LincharContainer>
         </div>
         <div className="graph" id="circleGraph">
           <PieChart response={data.reports} setstudyTime={setStudyTime} />
@@ -113,12 +114,14 @@ const ReportStudentBackground = styled.div`
   #lectureTimeInfo {
     display: flex;
     flex-direction: column;
+    border: 4px solid #0076B8;
     background-color: white;
     border-radius: 10px;
     padding: 20px;
   }
   
   .section {
+    
     margin-bottom: 20px;
     padding: 20px 0;
   }
@@ -126,7 +129,7 @@ const ReportStudentBackground = styled.div`
   .section.white {
     background-color: white;
     border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 4px solid #0076B8;
   }
 
   #dashBoards {
@@ -138,9 +141,9 @@ const ReportStudentBackground = styled.div`
     width: 300px;
     height: 200px;
     position: relative;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: white;
     border-radius: 20px;
+    border: 4px solid #0076B8;
     padding: 20px;
 
     > div {
@@ -169,6 +172,8 @@ const ReportStudentBackground = styled.div`
   }
 
   #labelBox {
+    font-size: 20px;
+    color: #4e4e4e;
     display: flex;
     justify-content: center;
   }
@@ -217,14 +222,12 @@ const ReportStudentSubTitle = styled.div`
   font-weight: lighter;
 `;
 
-const ReportStudentTitle = styled.div`
-  font-weight: bold;
-  font-size: 3rem;
-  display: flex;
-`;
-
 const LineChartSize = styled.div`
   width: 100%;
 `;
 
+const LincharContainer = styled.div`
+  margin-top: 10%;
+  margin-left: 15%;
+`;
 export default ReportpageComponent;

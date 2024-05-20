@@ -248,19 +248,13 @@ const ToastModalWrapper = styled.div<ToastModalWrapperProps>`
   padding-bottom: 47px;
   padding-left: 3px;
   padding-right: 3px;
-  display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: translateY(-20px);
-  opacity: 0;
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transform: ${({ isVisible }) => (isVisible ? 'translateY(0)' : 'translateY(-20px)')};
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out, visibility 0.5s ease-out;
   z-index: 1000;
-
-  ${({ isVisible }) =>
-    isVisible &&
-    `
-      transform: translateY(0);
-      opacity: 1;
-    `}
 `;

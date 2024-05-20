@@ -36,13 +36,13 @@ const ReportQuestionReview = ({ quizzes }: quizzes) => {
         infinite: data && data.length > 1,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
     };
 
     return (
         <div>
             <ReportQuestionTitle>문제 다시보기</ReportQuestionTitle>
-            <Slider className="custom-slider" {...settings}>
+            <CustomSlider className="custom-slider" {...settings}>
                 {data && data.map((question, index) => (
                     <PublicQuestionContainer key={index}>
                         <Question key={index}>
@@ -60,27 +60,25 @@ const ReportQuestionReview = ({ quizzes }: quizzes) => {
                                     <div>내가 제출한 답안 : {getSubmittedAnswerNumber(question)}</div>
                                     <div>정답 : {getCorrectAnswerNumber(question)}</div>
                                 </div>
-                                <hr />
+                                <BlueHr />
                                 <TextContainer>{question.commentary}</TextContainer>
                             </div>
                         </Question>
                     </PublicQuestionContainer>
                 ))}
-            </Slider>
+            </CustomSlider>
         </div>
     );
 };
 
 export default ReportQuestionReview;
 
-// 사용자가 제출한 답안의 번호를 가져오는 함수
 const getSubmittedAnswerNumber = (question: Question_) => {
     const userAnswerIndex = question.choices.findIndex(choice => choice.content === question.userChoice);
     const userAnswerNumber = userAnswerIndex !== -1 ? userAnswerIndex + 1 : 0;
     return userAnswerNumber !== 0 ? userAnswerNumber + '번' : '없음';
 };
 
-// 정답의 번호를 가져오는 함수
 const getCorrectAnswerNumber = (question: Question_) => {
     const correctAnswerIndex = question.choices.findIndex(choice => choice.isAnswer);
     return correctAnswerIndex !== -1 ? correctAnswerIndex + 1 + '번' : '없음';
@@ -94,6 +92,13 @@ const TextContainer = styled.div`
   font-size: 1.5rem;
 `;
 
+const CustomSlider = styled(Slider)`
+  .slick-dots {
+    position: relative;
+    top: 10px;
+  }
+`;
+
 const Question = styled.div`
     flex: 1;
     display: flex;
@@ -101,29 +106,34 @@ const Question = styled.div`
     flex-direction: column;
 
     .quizPart {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px;
+        border: 2px solid #0076B8;
+        padding: 20px;
+        padding-left: 30px;
+        margin-top: 22px;
+        margin-bottom: 22px;
+        border-radius: 20px;
         font-size: 1.5rem;
     }
 
     .quizAnswerPart {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px;
+        border: 2px solid #0076B8;
+        border-radius: 20px;
+        padding: 20px;
+        padding-left: 30px;
+        margin-top: 22px;
+        margin-bottom: 22px;
         font-size: 1.5rem;
     }
 
     .title {
         font-size: 1.5rem;
-        background-color: aliceblue;
-        padding: 10px 20px;
+        border: 3px solid #3fb9ff;
+        padding: 10px 4px;
         width: 100px;
+        margin-left: -10px;
         text-align: center;
         border-radius: 20px;
-        margin-bottom: 10px;
+        margin-bottom: 22px;
     }
 
     .desc {
@@ -133,3 +143,10 @@ const Question = styled.div`
     }
 `;
 
+const BlueHr = styled.hr`
+    border: 0;
+    height: 1px;
+    background: #0076B8;
+    margin-top: 22px;
+    margin-bottom: 22px;
+`;
