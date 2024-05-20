@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import ReportpageComponent from "../components/report/report_reportpage_component";
 import { Data } from "../components/reportList/reportInterface";
 import { bodyRequest } from "../helpers/axios_helper";
-import AiCreateLoading from "../components/report/report_AiCreateLoading";
+import AiReportCreateLoading from "../components/report/report_AiCreateLoading";
 
 const ReportStudentFroExtension  = () => {
     const {lectureHistoryId} = useParams();
@@ -20,7 +20,7 @@ const ReportStudentFroExtension  = () => {
             });
             setTimeout(() => {
               setData(response.data);
-          }, 10000); // 10초 레이턴시를 만드는 함수. setData를 n/1000초 만큼 늦게 로딩시킴
+          }, 5000); // 10초 레이턴시를 만드는 함수. setData를 n/1000초 만큼 늦게 로딩시킴
             console.log('=======');
             console.dir(response.data);
             console.log('=======');
@@ -32,7 +32,7 @@ const ReportStudentFroExtension  = () => {
     }, [lectureHistoryId])
     if (!data) {
       return (       
-        <AiCreateLoading/>
+        <AiReportCreateLoading/>
       )
     }
     

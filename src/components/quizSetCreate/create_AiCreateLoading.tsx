@@ -3,7 +3,7 @@ import styles from "../../styles/css/loading-cat.module.css"
 import styled from "styled-components";
 import BackgroundAnimation from "../public/BackgroundAnimation";
 
-const AiReportCreateLoading = () => {
+const AiQuizCreateLoading = () => {
 
 
 return (
@@ -16,7 +16,7 @@ return (
                     <p>Learn <RedText>O</RedText>n Air</p>          
                 </TitleContainer>  
                 <TextContainer>
-                    <p>AI가 학습분석 레포트를 생성하고있습니다!</p>
+                    <p>AI가 문제 생성에 필요한 정보를 모으고 있습니다!</p>
                 </TextContainer>
             </div>
 
@@ -44,7 +44,7 @@ return (
 };
 
 
-export default AiReportCreateLoading;
+export default AiQuizCreateLoading;
 
 const LoadingContainer = styled.div`
   display: flex;

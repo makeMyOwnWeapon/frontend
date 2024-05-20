@@ -11,9 +11,10 @@ import ReportStudentFroExtention from './pages/reportstudentforextention';
 import ReportDetail from './pages/reportDetail';
 import ReportList from './pages/reportlist';
 import Introduce from './pages/introduce';
-import AiCreateLoading from './components/report/report_AiCreateLoading';
+import AiReportCreateLoading from './components/report/report_AiCreateLoading';
 import CreateForExtension from './pages/questSetCreateForExtension';
 import { getAuthToken } from './helpers/axios_helper';
+import AiQuizCreateLoading from './components/quizSetCreate/create_AiCreateLoading';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,7 +36,8 @@ function App() {
         <Route path="/reportlist" element={<RequireAuth><ReportList isLoggedIn={isLoggedIn} /></RequireAuth>} />
         <Route path="/reportDetail/:lectureHistoryId" element={<ReportDetail isLoggedIn={isLoggedIn} />} />
         <Route path="/reportstudentforextension/:lectureHistoryId" element={<ReportStudentFroExtention />} />
-        <Route path="/aicreate" element={<AiCreateLoading />} />
+        <Route path="/aireportcreate" element={<AiReportCreateLoading />} />
+        <Route path="/aiquizcreate" element={<AiQuizCreateLoading />} />
         <Route path="/introduce" element={<Introduce isLoggedIn={isLoggedIn} />} />
         <Route path="/404page" element={<NotFoundPage isLoggedIn={isLoggedIn} />} />
         <Route path="*" element={<Navigate to="/404page" replace />} />
