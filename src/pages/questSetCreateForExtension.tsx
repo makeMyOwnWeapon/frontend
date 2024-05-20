@@ -27,14 +27,29 @@ const CreateForExtension: React.FC = () => {
     const [duration, setDuration] = useState('');
     const [quizzes, setQuizzes] = useState<Quizzes[]>([]);
     const [subLectureUrl, setSubLectureUrl] = useState('');
-    const [loading, setLoading] = useState(true); // 로딩 상태 추가
     const [token, setToken] = useState('');
 
     const courseDataRef = useRef({ courseTitle: '', subCourseTitle: '', playTime: '' });
 
     useEffect(() => {
+        
         function handleMessage(event: MessageEvent) {
-            if (event.origin == null) return;
+            console.log('iframe useEffect start1');
+            console.log('data = ',event.data);
+            if (
+                !event.origin || 
+                !event.data ||
+                typeof event.data.courseTitle !== 'string' ||
+                typeof event.data.subCourseTitle !== 'string' ||
+                typeof event.data.playTime !== 'string' ||
+                typeof event.data.currentURL !== 'string' ||
+                (event.data.iframeQuizzes && !Array.isArray(event.data.iframeQuizzes)) ||
+                typeof event.data.authToken !== 'string'
+            ) {
+                console.log('Invalid data format');
+                return;
+            }
+        
             const { courseTitle, subCourseTitle, playTime, currentURL, iframeQuizzes,authToken } = event.data;
             setMainLectureTitle(courseTitle);
             setSubLectureTitle(subCourseTitle);
@@ -43,7 +58,6 @@ const CreateForExtension: React.FC = () => {
             setQuizzes(iframeQuizzes || []);
             setToken(authToken);
             courseDataRef.current = { courseTitle, subCourseTitle, playTime };
-            setLoading(false);
         }
 
         window.addEventListener('message', handleMessage);
@@ -51,16 +65,6 @@ const CreateForExtension: React.FC = () => {
         return () => {
             window.removeEventListener('message', handleMessage);
         };
-    }, []);
-
-    useEffect(() => {
-        const iframe = document.getElementById('iframeContent') as HTMLIFrameElement;
-        if (iframe) {
-            iframe.onload = function () {
-                const data = courseDataRef.current;
-                iframe.contentWindow?.postMessage(data, HOST);
-            };
-        }
     }, []);
 
     const extractDuration = (playTime: string): string => {
@@ -71,10 +75,6 @@ const CreateForExtension: React.FC = () => {
             return parts[1]?.trim() || playTime;
         }
     };
-
-    if (loading) {
-        return <div>Loading...</div>; // 로딩 중일 때 표시할 페이지
-    }
 
     return (
         <BackgroundAnimation>
