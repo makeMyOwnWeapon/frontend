@@ -61,10 +61,10 @@ const SummaryText = styled.div`
 
 const KeywordTitle = styled.div`
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 `;
 
 const KeywordComment = styled.div`
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-left: 20px;
 `;
