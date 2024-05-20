@@ -29,9 +29,6 @@ const CreateForExtension: React.FC = () => {
     const [subLectureUrl, setSubLectureUrl] = useState('');
     const [token, setToken] = useState('');
 
-    const courseDataRef = useRef({ courseTitle: '', subCourseTitle: '', playTime: '' });
-    const messageIntervalRef = useRef<number | null>(null);
-
     useEffect(() => {
         
         function handleMessage(event: MessageEvent) {

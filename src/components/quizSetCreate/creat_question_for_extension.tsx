@@ -36,6 +36,7 @@ interface State {
     subLectureTitle: string;
     mainLectureTitle: string;
     duration: string;
+    showResetButton: boolean; // 추가된 상태
 }
 
 class ProblemPageForExtension extends Component<Props, State> {
@@ -50,6 +51,7 @@ class ProblemPageForExtension extends Component<Props, State> {
             subLectureTitle: '',
             mainLectureTitle: '',
             duration: '',
+            showResetButton: true, // 초기값 설정
         };
     }
 
@@ -58,18 +60,38 @@ class ProblemPageForExtension extends Component<Props, State> {
             prevProps.courseTitle !== this.props.courseTitle ||
             prevProps.subCourseTitle !== this.props.subCourseTitle ||
             prevProps.playTime !== this.props.playTime ||
+            prevProps.iframeQuizzes.length !== this.props.iframeQuizzes.length ||
             prevProps.subLectureUrl !== this.props.subLectureUrl
         ) {
             const formattedDuration = this.formatDuration(this.props.playTime);
             this.setState({
-                title: this.props.courseTitle,
                 subLectureUrl: this.props.subLectureUrl,
                 mainLectureTitle: this.props.courseTitle,
                 subLectureTitle: this.props.subCourseTitle,
                 duration: formattedDuration,
+            }, () => {
+                const { iframeQuizzes } = this.props;
+                const { questionComponents } = this.state;
+            
+                for (let i = questionComponents.length; i < iframeQuizzes.length; i++) {
+                    const nextQuiz = iframeQuizzes[i];
+            
+                    const answers: Answer[] = [
+                        { text: nextQuiz.instruction },
+                        ...nextQuiz.choices.map(choice => ({ text: choice.content, selected: choice.isAnswer })),
+                        { text: nextQuiz.commentary },
+                    ];
+            
+                    this.setState(prevState => ({
+                        questionComponents: [...prevState.questionComponents, { id: prevState.questionComponents.length, expanded: true }],
+                        answers: [...prevState.answers, answers],
+                        questionTimes: [...prevState.questionTimes, this.convertSecondsToTime(nextQuiz.popupTime)],
+                    }));
+                }
             });
         }
     }
+    
     
     formatDuration = (timeStr: string): string => {
         // ss 형식일 경우 00:00:ss로 변경
@@ -269,6 +291,17 @@ class ProblemPageForExtension extends Component<Props, State> {
         });
     };
 
+    toggleFunction = (): void => {
+        if (this.state.showResetButton) {
+            this.resetInputs();
+        } else {
+            this.addAIQuestionComponent();
+        }
+        this.setState(prevState => ({
+            showResetButton: !prevState.showResetButton, // 상태를 토글하여 버튼을 전환
+        }));
+    };
+
     render() {
         return (
             <>
@@ -276,7 +309,7 @@ class ProblemPageForExtension extends Component<Props, State> {
                     <StyledText>나만의 문제 만들기!</StyledText>
                     <InputContainer>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                            <Input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
+                            <Input type="text" placeholder="문제집명을 입력해 주세요!" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
                             <Input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={this.handleSubLectureUrlChange} />
                             <Input type="text" placeholder="대강의명" value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
                             <Input type="text" placeholder="소강의명" value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
@@ -284,13 +317,13 @@ class ProblemPageForExtension extends Component<Props, State> {
                         </div>
                         <div>
                             <VideoThumbnail imageUrl={this.state.subLectureUrl} />
-
                         </div>
                     </InputContainer>
                     <ButtonContainer>
-                                <Button type="button" onClick={this.addAIQuestionComponent}>AI 문제 추가</Button>
-                                <Button type="button" onClick={this.resetInputs}>입력창 초기화</Button>
-                            </ButtonContainer>
+                        <Button type="button" onClick={this.toggleFunction}>
+                            {this.state.showResetButton ? 'AI 문제 ON!' : 'AI 문제 OFF!'}
+                        </Button>
+                    </ButtonContainer>
                     {this.state.questionComponents.map((component, index) => (
                         <QuestionComponentForExtension
                             key={component.id}
