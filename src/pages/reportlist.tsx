@@ -110,7 +110,7 @@ const InnerContentSection = styled.div`
 
 const SearchBox = styled.div`
   position: absolute;
-  right: 50px;
+  right: 70px;
   top: 100px;
   display: flex;
   align-items: center;

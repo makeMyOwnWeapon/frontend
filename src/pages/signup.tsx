@@ -11,63 +11,87 @@ function Signup() {
   const [nickname, setNickname] = useState('');
   const [selectedButton, setSelectedButton] = useState<number | null>(null);
   const navigate = useNavigate();
-  const cookies = new Cookies;
+  const cookies = new Cookies();
   const credential = cookies.get('tempGoogleToken');
 
   return (
-      <BackgroundAnimation>
-        <Div>
+    <BackgroundAnimation>
+      <Container>
+        <Content>
           <Title>Sign Up</Title>
-          <SmallButton selected={selectedButton === 0} onClick={() => handleButtonClick({ buttonIndex: 0, selectedButton, setSelectedButton })}>선생님</SmallButton>
-          <SmallButton selected={selectedButton === 1} onClick={() => handleButtonClick({ buttonIndex: 1, selectedButton, setSelectedButton })}>학생</SmallButton>
+          <ButtonGroup>
+            <SmallButton
+              selected={selectedButton === 0}
+              onClick={() => handleButtonClick({ buttonIndex: 0, selectedButton, setSelectedButton })}
+            >
+              선생님
+            </SmallButton>
+            <SmallButton
+              selected={selectedButton === 1}
+              onClick={() => handleButtonClick({ buttonIndex: 1, selectedButton, setSelectedButton })}
+            >
+              학생
+            </SmallButton>
+          </ButtonGroup>
           <NameContainer>
             <NicknameGenerator onNicknameGenerated={setNickname} />
           </NameContainer>
-          <form onSubmit={(event) => handleSubmit({ event, credential, nickname, selectedButton, navigate })}>
-            <Button type="submit">Join</Button>
-          </form>
-        </Div>
-      </BackgroundAnimation>
+          <Form onSubmit={(event) => handleSubmit({ event, credential, nickname, selectedButton, navigate })}>
+            <SubmitButton type="submit">확인</SubmitButton>
+          </Form>
+        </Content>
+      </Container>
+    </BackgroundAnimation>
   );
 }
 
 export default Signup;
 
-const Div = styled.div`
+const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 20%;
-  margin: 0 auto;
-`;
-
-const Button = styled.button`
-  ${tw`w-full py-3 px-4 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-700`}
-  box-sizing: border-box; 
-  border: none;         
-  font-size: 1rem;
-  cursor: pointer;
-`;
-
-const SmallButton = styled.button<{selected: boolean }>`
-  padding: 8px 16px;
-  margin-right: 8px;
-  background-color: ${({ selected }) => (selected ? '#4CAF50' : '#CCCCCC')};
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
-
-const NameContainer = styled.div`
-  display: flex;
+  justify-content: center;
   align-items: center;
-  margin-top: 16px;
+  height: 100vh;
+`;
+
+const Content = styled.div`
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  ${tw`w-full max-w-md`}
 `;
 
 const Title = styled.h1`
-  padding: 20px 0;
-  ${tw`text-2xl font-bold text-gray-900`};
-  margin: 0 auto;
-  font-size: 1rem;
-  margin-bottom: 30px;
+  ${tw`text-6xl font-bold text-center mb-16`}
+  color: #0d47a1;
+`;
+
+const ButtonGroup = styled.div`
+  ${tw`flex justify-center mb-6`}
+`;
+
+const SmallButton = styled.button<{ selected: boolean }>`
+  ${tw`py-3 px-6 mx-2 rounded text-lg`}
+  background-color: ${({ selected }) => (selected ? '#1565c0' : '#e3f2fd')};
+  color: ${({ selected }) => (selected ? '#fff' : '#1565c0')};
+  border: 2px solid #1565c0;
+  cursor: pointer;
+  &:hover {
+    background-color: ${({ selected }) => (selected ? '#0d47a1' : '#bbdefb')};
+  }
+`;
+
+const NameContainer = styled.div`
+  ${tw`mb-6`}
+`;
+
+const Form = styled.form`
+  ${tw`flex flex-col items-center`}
+`;
+
+const SubmitButton = styled.button`
+  ${tw`py-3 px-6 text-white bg-blue-500 rounded-md hover:bg-blue-700 text-lg`}
+  font-size: 1.25rem;
+  cursor: pointer;
 `;

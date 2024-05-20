@@ -212,8 +212,8 @@ const CurrentMenu = styled.div`
 
 const MyPageButton = styled.button`
   position: absolute;
-  right: 50px;
-  top: 30px;
+  right: 70px;
+  top: 35px;
   font-size: 22px;
   padding: 10px 17px;
   letter-spacing: 1px;
@@ -243,9 +243,9 @@ const ToastModalWrapper = styled.div<ToastModalWrapperProps>`
     -6px 0px 0 #1daafc, 0px -6px 0 #1daafc;
   background-color: rgba(244, 254, 254, 0.8);
   border: none;
-  border-radius: 15px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  border-radius: 40px;
+  padding-top: 47px;
+  padding-bottom: 47px;
   padding-left: 3px;
   padding-right: 3px;
   display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};

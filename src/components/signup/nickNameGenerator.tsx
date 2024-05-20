@@ -19,7 +19,7 @@ const NicknameGenerator: React.FC<NicknameGeneratorProps> = ({ onNicknameGenerat
       "영감을 주는", "창조적인", "칭찬받는", "자의적인", "상쾌한", "고급스러운", "스타일리시한",
       "헌신적인", "진실한", "감동적인", "섬세한", "가슴 뭉클한", "긍정적인", "열정적인", "감사한",
       "희망찬", "신뢰할 수 있는", "가슴 따뜻한", "친절한", "존경받는", "충분한", "인기 있는"
-  ];
+    ];
     const suffixes = [
       "스위트하트", "플로럴", "버터플라이", "선샤인", "비비드", "스프링", "프레시", "허니", "러블리", "허그",
       "프렌들리", "반딧불", "코지", "캔디", "핑크", "하트", "로즈", "데이지", "코랄", "스파클", "패스텔",
@@ -28,8 +28,8 @@ const NicknameGenerator: React.FC<NicknameGeneratorProps> = ({ onNicknameGenerat
       "리버", "버니", "퀸", "마린", "토니", "블러썸", "제니", "버터", "마시멜로", "버디", "소피아",
       "비비드", "바니", "카페", "케이크", "프라임", "리플렉트", "라이트", "로아", "세이지", "데일리",
       "베일", "비젼", "스프라우트", "윈터", "테일", "캣", "슈트", "리프", "버드", "메들리", "마음"
-  ];
-    
+    ];
+
     const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
     const randomSuffix = suffixes[Math.floor(Math.random() * suffixes.length)];
     const newNickname = `${randomPrefix} ${randomSuffix}`;
@@ -38,31 +38,43 @@ const NicknameGenerator: React.FC<NicknameGeneratorProps> = ({ onNicknameGenerat
   };
 
   return (
-    <div>
-      <GenerateButton type="button" onClick={generateNickname}>Generate Nickname</GenerateButton>
-      {nickname && <p>{nickname}</p>}
-    </div>
+    <Container>
+      <GenerateButton type="button" onClick={generateNickname}>닉네임 랜덤 설정</GenerateButton>
+      {nickname && <NicknameText>{nickname}</NicknameText>}
+    </Container>
   );
 };
 
 export default NicknameGenerator;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 const GenerateButton = styled.button`
-  font-weight: 700;
+  font-size: 1.5rem;
   padding: 8px 16px;
-  margin-right: 8px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  color: #000;
-  background-color: #ebebeb; 
+  margin: 8px 0;
+  color: #2c5aff;
+  background-color: #cee5ff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #79ebed; 
-    color: #000; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    background-color: #0d47a1;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+`;
+
+const NicknameText = styled.p`
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #1565c0;
+  margin-top: 16px;
 `;
