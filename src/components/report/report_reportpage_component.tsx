@@ -10,6 +10,11 @@ interface ReportpageProps {
   data: Data;
 }
 
+interface Summary {
+  keyword: string;
+  comment: string;
+}
+
 function formatUTCDateTime(utcDateTimeString: string) {
   const date = new Date(utcDateTimeString);
   const year = date.getUTCFullYear();
@@ -31,7 +36,6 @@ const ReportpageComponent = ({ data }: ReportpageProps) => {
   const [studyTime, setStudyTime] = useState<string[]>(['0', '0', '0']);
 
   useEffect(() => {
-    // 계산 로직 추가
     const totalStudyTime = (new Date(data.reports.studyEndTime).getTime() - new Date(data.reports.studyStartTime).getTime()) / 1000;
     const distractionTime = data.reports.sleepinessAndDistraction.reduce((acc, cur) => {
       const distractionDuration = (cur.distractionEnd ? new Date(cur.distractionEnd).getTime() : 0) - (cur.distractionStart ? new Date(cur.distractionStart).getTime() : 0);
@@ -98,7 +102,7 @@ const ReportpageComponent = ({ data }: ReportpageProps) => {
       )}
       {data.gptSummary && data.gptSummary.summary.length > 0 && (
         <div className="section white" id="aiSection">
-          <ReportApplicationQuestion gptSummary={data.gptSummary.summary} />
+          <ReportApplicationQuestion gptSummary={data.gptSummary.summary as Summary[]} />
         </div>
       )}
     </ReportStudentBackground>
@@ -121,7 +125,6 @@ const ReportStudentBackground = styled.div`
   }
   
   .section {
-    
     margin-bottom: 20px;
     padding: 20px 0;
   }
@@ -230,4 +233,5 @@ const LincharContainer = styled.div`
   margin-top: 10%;
   margin-left: 15%;
 `;
+
 export default ReportpageComponent;

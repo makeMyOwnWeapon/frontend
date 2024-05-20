@@ -18,7 +18,6 @@ export async function handleSubmit({
 }: HandleSubmitArgs) {
   event.preventDefault();
   try {
-    console.log(nickname)
     if (nickname === '' || selectedButton === null || credential === null){
         return alert('회원가입 에러!');
     }

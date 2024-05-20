@@ -4,34 +4,33 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/css/slick.css';
 
-interface gptSummary {
-    gptSummary: summary[];
-  }
+interface Summary {
+    keyword: string;
+    comment: string;
+}
 
-  interface summary{
-    keyword:string;
-  }
+interface GptSummaryProps {
+    gptSummary: Summary[];
+}
 
-const ReportRecommand = ({gptSummary}:gptSummary)=> {
-
-    const [data, setData] = useState<summary[]>();
-    useEffect(()=>{
-    setData(gptSummary);
-    },[gptSummary])
-
+const ReportRecommand = ({ gptSummary }: GptSummaryProps) => {
+    const [data, setData] = useState<Summary[]>([]);
+    
+    useEffect(() => {
+        setData(gptSummary);
+    }, [gptSummary]);
 
     return (
         <div>
-            <SolveAnalyzeContainer>
-                <ApplicationQuestionTitle>AI 추천 키워드</ApplicationQuestionTitle>
-                    <Summary>
-                        {data&&data.map((summary,index)=>(
-                            <SummaryText key={index}>
-                                - {summary.keyword}
-                            </SummaryText>
-                        ))}
-                    </Summary>
-            </SolveAnalyzeContainer>
+            <ApplicationQuestionTitle>AI 추천 키워드</ApplicationQuestionTitle>
+            <Summary>
+                {data && data.map((summary, index) => (
+                    <SummaryText key={index}>
+                        <KeywordTitle>{index + 1}. {summary.keyword}</KeywordTitle>
+                        <KeywordComment>{summary.comment}</KeywordComment>
+                    </SummaryText>
+                ))}
+            </Summary>
         </div>
     );
 };
@@ -40,28 +39,32 @@ export default ReportRecommand;
 
 const ApplicationQuestionTitle = styled.div`
     padding-left: 10px;
-    font-weight: bold; 
     font-size: 2rem;
 `;
 
 const Summary = styled.div`
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  border-radius: 20px;
-  border: 2px solid #0076B8;
-  padding: 22px;
-  padding-left: 30px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  flex-direction:column;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    border: 2px solid #0076B8;
+    padding: 22px;
+    padding-left: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    flex-direction: column;
 `;
 
 const SummaryText = styled.div`
-    
+    margin-bottom: 10px;
 `;
 
-const SolveAnalyzeContainer = styled.div`
-  font-size: 1.5rem;
-  
+const KeywordTitle = styled.div`
+    font-weight: bold;
+    font-size: 1.5rem;
+`;
+
+const KeywordComment = styled.div`
+    font-size: 1.2rem;
+    margin-left: 20px;
 `;

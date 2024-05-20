@@ -34,7 +34,6 @@ const WorkBook: React.FC<QuizSetProps> = ({ isLoggedIn }) => {
       try {
         const response = await request('GET','/api/quizsets/');
         setCards(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error('Error:', error);
       }

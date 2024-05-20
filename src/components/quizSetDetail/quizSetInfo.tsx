@@ -49,7 +49,6 @@ const QuizSetInfo = ({ quizSetId }: QuestionComponentProps) => {
                 const response = await request('GET', `/api/quizsets/${quizSetId}/quizzes`);
                 if (response.data) {
                     setData(response.data);
-                    console.log(response.data);
                 }
             } catch (error) {
                 console.error("Error fetching quiz data:", error);

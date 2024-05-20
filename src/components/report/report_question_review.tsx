@@ -85,6 +85,7 @@ const getCorrectAnswerNumber = (question: Question_) => {
 };
 
 const ReportQuestionTitle = styled.div`
+  margin-left: 10px;
   font-size: 2rem;
 `;
 

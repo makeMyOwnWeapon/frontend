@@ -25,7 +25,6 @@ const ReportDetail: React.FC<ReportDetailProps> = ({ isLoggedIn }) => {
       try {
         const response = await request('GET', '/api/history?lectureHistoryId=' + lectureHistoryId);
         setData(response.data);
-        console.log('summary', response.data);
       } catch (error) {
         console.error('Error:', error);
       }

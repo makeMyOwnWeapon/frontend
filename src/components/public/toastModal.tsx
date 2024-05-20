@@ -103,12 +103,10 @@ const ToastModal = () => {
 
   const handleLogout = async () => {
     try {
-      console.log('Logging out...');
       removeCookie('jwt', { path: '/' });
 
       navigate("/");
       window.location.reload();
-      console.log('Navigated to home page');
     } catch (error) {
       console.error('Error during logout:', error);
       toast.error('로그아웃 중 오류가 발생했습니다.');

@@ -21,8 +21,6 @@ const Account: React.FC<AccountProps> = ({ setIsLoggedIn }) => {
     userInfo = jwtDecode<any>(getUserInfoByGoogle);
   }
 
-  console.dir(userInfo);
-
   const handleCredentialResponse = async (userInfoByGoogle: any) => {
     let credential = userInfoByGoogle.credential;
     try {

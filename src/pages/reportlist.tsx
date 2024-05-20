@@ -34,7 +34,6 @@ const ReportList: React.FC<ReportList> = ({ isLoggedIn }) => {
       try {
         const response = await request('GET', '/api/history/');
         setCards(response.data);
-        console.dir(response.data);
       } catch (error) {
         console.error('Error:', error);
       }
