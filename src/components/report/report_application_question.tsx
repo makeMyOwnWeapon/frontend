@@ -4,20 +4,20 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/css/slick.css';
 
-interface gptSummery {
-    gptSummery: summary[];
+interface gptSummary {
+    gptSummary: summary[];
   }
 
   interface summary{
     keyword:string;
   }
 
-const ReportRecommand = ({gptSummery}:gptSummery)=> {
+const ReportRecommand = ({gptSummary}:gptSummary)=> {
 
     const [data, setData] = useState<summary[]>();
     useEffect(()=>{
-    setData(gptSummery);
-    },[gptSummery])
+    setData(gptSummary);
+    },[gptSummary])
 
 
     return (

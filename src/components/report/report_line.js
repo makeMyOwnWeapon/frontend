@@ -7,8 +7,6 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, TimeScale);
 
 const LineChart = ({ response }) => {
-    console.log('response');
-    console.log(response);
 
     const [sleepinessData, setSleepinessData] = useState([]);
     const [distractionData, setDistractionData] = useState([]);
@@ -56,10 +54,6 @@ const LineChart = ({ response }) => {
         }
     }, [response]);
     useEffect(()=>{
-
-        console.log('sleepdata = ', sleepinessData.length);
-        console.log('labeldata = ', labels.length);
-        console.log('data duration = ',(new Date(endTime).getTime() - new Date(startTime).getTime()) / 1000)
 
     },[sleepinessData])
     const data = {

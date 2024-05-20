@@ -90,14 +90,12 @@ const QuizSetInfo = ({ quizSetId }: QuestionComponentProps) => {
                         <Question>
                             <QuizSetInfoTextContainer>
                                 <Instruction>{`${index + 1}. ${question.instruction}`}</Instruction>
-                         
                                 {question.choices && question.choices.length === 4 ? (
                                     <Choices>
                                         <QuestionType>객관식 문제</QuestionType>
                                         {question.choices.map((choice, idx) => (
                                             <Choice key={choice.choiceId}>{`${idx + 1}) ${choice.content}`}</Choice>
                                         ))}
-                                        
                                     </Choices>
                                 ) : <QuestionType>주관식 문제</QuestionType>}
                                 <PopupTime>{`Popup Time: ${formatTime(Number(question.popupTime))}`}</PopupTime>

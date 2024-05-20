@@ -29,13 +29,13 @@ interface SleepinessAndDistraction {
     keyword:string;
   }
   
-  interface gptSummery{
+  interface gptSummary{
     summary: summary[];
   }
   
   export interface Data{
     gptAppQuestion:gptAppQuestion[];
-    gptSummery:gptSummery;
+    gptSummary:gptSummary;
     reports:reports;
   }
   interface reports {
