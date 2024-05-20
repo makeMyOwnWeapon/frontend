@@ -30,41 +30,59 @@ const CreateForExtension: React.FC = () => {
     const [token, setToken] = useState('');
 
     const courseDataRef = useRef({ courseTitle: '', subCourseTitle: '', playTime: '' });
+    const messageIntervalRef = useRef<number | null>(null);
 
     useEffect(() => {
         
         function handleMessage(event: MessageEvent) {
             console.log('iframe useEffect start1');
-            console.log('data = ',event.data);
-            // if (
-            //     !event.origin || 
-            //     !event.data ||
-            //     typeof event.data.courseTitle !== 'string' ||
-            //     typeof event.data.subCourseTitle !== 'string' ||
-            //     typeof event.data.playTime !== 'string' ||
-            //     typeof event.data.currentURL !== 'string' ||
-            //     (event.data.iframeQuizzes && !Array.isArray(event.data.iframeQuizzes)) ||
-            //     typeof event.data.authToken !== 'string'
-            // ) {
-            //     console.log('Invalid data format');
-            //     return;
-            // }
-        
-            const { courseTitle, subCourseTitle, playTime, currentURL, iframeQuizzes,authToken } = event.data;
+            console.log('data = ', event.data);
+            if (
+                !event.origin || 
+                !event.data ||
+                typeof event.data.courseTitle !== 'string' ||
+                typeof event.data.subCourseTitle !== 'string' ||
+                typeof event.data.playTime !== 'string' ||
+                typeof event.data.currentURL !== 'string' ||
+                (event.data.iframeQuizzes && !Array.isArray(event.data.iframeQuizzes)) ||
+                typeof event.data.authToken !== 'string'
+            ) {
+                console.log('Invalid data format');
+                return;
+            }
+
+            const { courseTitle, subCourseTitle, playTime, currentURL, iframeQuizzes, authToken } = event.data;
             setMainLectureTitle(courseTitle);
             setSubLectureTitle(subCourseTitle);
             setDuration(extractDuration(playTime));
             setSubLectureUrl(currentURL);
             setQuizzes(iframeQuizzes || []);
             setToken(authToken);
-            // courseDataRef.current = { courseTitle, subCourseTitle, playTime };
+            courseDataRef.current = { courseTitle, subCourseTitle, playTime };
+
+            if (messageIntervalRef.current) {
+                clearInterval(messageIntervalRef.current);
+                messageIntervalRef.current = null;
+            }
         }
 
         window.addEventListener('message', handleMessage);
+        console.log('require data');
+        // 지속적인 호출이 있기 때문에 리렌더링 방지를 위해서 ref 함수를 씀
+        messageIntervalRef.current = window.setInterval(() => {
+            console.log('require data (interval)');
+            window.parent.postMessage(
+                { functionName: 'requiredata' }
+                , '*'
+            );
+        }, 1000);
 
-        // return () => {
-        //     window.removeEventListener('message', handleMessage);
-        // };
+        return () => {
+            window.removeEventListener('message', handleMessage);
+            if (messageIntervalRef.current) {
+                clearInterval(messageIntervalRef.current);
+            }
+        };
     }, []);
 
     const extractDuration = (playTime: string): string => {
