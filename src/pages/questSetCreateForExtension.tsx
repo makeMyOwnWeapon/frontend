@@ -36,19 +36,19 @@ const CreateForExtension: React.FC = () => {
         function handleMessage(event: MessageEvent) {
             console.log('iframe useEffect start1');
             console.log('data = ',event.data);
-            // if (
-            //     !event.origin || 
-            //     !event.data ||
-            //     typeof event.data.courseTitle !== 'string' ||
-            //     typeof event.data.subCourseTitle !== 'string' ||
-            //     typeof event.data.playTime !== 'string' ||
-            //     typeof event.data.currentURL !== 'string' ||
-            //     (event.data.iframeQuizzes && !Array.isArray(event.data.iframeQuizzes)) ||
-            //     typeof event.data.authToken !== 'string'
-            // ) {
-            //     console.log('Invalid data format');
-            //     return;
-            // }
+            if (
+                !event.origin || 
+                !event.data ||
+                typeof event.data.courseTitle !== 'string' ||
+                typeof event.data.subCourseTitle !== 'string' ||
+                typeof event.data.playTime !== 'string' ||
+                typeof event.data.currentURL !== 'string' ||
+                (event.data.iframeQuizzes && !Array.isArray(event.data.iframeQuizzes)) ||
+                typeof event.data.authToken !== 'string'
+            ) {
+                console.log('Invalid data format');
+                return;
+            }
         
             const { courseTitle, subCourseTitle, playTime, currentURL, iframeQuizzes,authToken } = event.data;
             setMainLectureTitle(courseTitle);
@@ -57,14 +57,9 @@ const CreateForExtension: React.FC = () => {
             setSubLectureUrl(currentURL);
             setQuizzes(iframeQuizzes || []);
             setToken(authToken);
-            // courseDataRef.current = { courseTitle, subCourseTitle, playTime };
         }
 
         window.addEventListener('message', handleMessage);
-
-        // return () => {
-        //     window.removeEventListener('message', handleMessage);
-        // };
     }, []);
 
     const extractDuration = (playTime: string): string => {

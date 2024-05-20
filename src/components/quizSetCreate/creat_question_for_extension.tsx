@@ -273,7 +273,7 @@ class ProblemPageForExtension extends Component<Props, State> {
         return (
             <>
                 <Formdiv>
-                    <StyledText>나만의 문제 만들기</StyledText>
+                    <StyledText>나만의 문제 만들기!</StyledText>
                     <InputContainer>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                             <Input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
