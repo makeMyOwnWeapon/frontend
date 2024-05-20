@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Modal from "react-modal";
-import { PublicQuestionContainer } from "../../styles/Public";
+import { PublicQuestionContainer } from "../../styles/publicStyleComponents/Public";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/css/slick.css';

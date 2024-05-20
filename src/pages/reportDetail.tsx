@@ -2,10 +2,10 @@ import React, { useEffect, useState }  from "react";
 import styled from "styled-components";
 import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
-import "../styles/Public"
+import "../styles/publicStyleComponents/Public"
 import Main from "../styles/publicStyleComponents/Main";
 import { request } from "../helpers/axios_helper";
-import NaviSection from "../styles/publicStyleComponents/NaviSection";
+import NaviSection from "../components/public/NaviSection";
 import { useParams } from "react-router-dom";
 import ReportpageComponent from "../components/report/report_reportpage_component";
 import { Data } from "../components/reportList/reportInterface";

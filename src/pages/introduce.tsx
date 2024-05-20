@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
-import NaviSection from "../styles/publicStyleComponents/NaviSection";
+import NaviSection from "../components/public/NaviSection";
 
 interface IntroduceProps {
   isLoggedIn: boolean;

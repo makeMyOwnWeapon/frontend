@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
-import NaviSection from "../styles/publicStyleComponents/NaviSection";
+import NaviSection from "../components/public/NaviSection";
 
 interface NotFoundPageProps {
   isLoggedIn: boolean;

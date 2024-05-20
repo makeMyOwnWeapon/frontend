@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import "../styles/Public";
+import "../styles/publicStyleComponents/Public";
 import WorkbookCard from "../components/quizSet/quizSetCard";
 import { request } from "../helpers/axios_helper";
-import NaviSection from "../styles/publicStyleComponents/NaviSection";
+import NaviSection from "../components/public/NaviSection";
 import Main from "../styles/publicStyleComponents/Main";
 import Container from "../styles/publicStyleComponents/Container";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";

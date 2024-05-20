@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import "../styles/Public";
+import "../styles/publicStyleComponents/Public";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import Container from "../styles/publicStyleComponents/Container";
-import NaviSection from "../styles/publicStyleComponents/NaviSection";
+import NaviSection from "../components/public/NaviSection";
 import ReportCard from "../components/reportList/reportCard";
 import { request } from "../helpers/axios_helper";
 import Main from "../styles/publicStyleComponents/Main";

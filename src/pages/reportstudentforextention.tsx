@@ -2,7 +2,7 @@ import React, { useEffect, useState }  from "react";
 import styled from "styled-components";
 import BackgroundAnimation from "../components/public/BackgroundAnimation"
 import Container from "../styles/publicStyleComponents/Container";
-import "../styles/Public"
+import "../styles/publicStyleComponents/Public"
 import { useParams } from "react-router-dom";
 import ReportpageComponent from "../components/report/report_reportpage_component";
 import { Data } from "../components/reportList/reportInterface";

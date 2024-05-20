@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import styled from "styled-components";
 import Container from "../styles/publicStyleComponents/Container";
-import NaviSection from "../styles/publicStyleComponents/NaviSection";
+import NaviSection from "../components/public/NaviSection";
 import Main from "../styles/publicStyleComponents/Main";
 
 interface CreateProps {

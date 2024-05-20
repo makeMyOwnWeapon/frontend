@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from 'styled-components';
-import ToastModal from "../../components/public/toastModal";
+import ToastModal from "./toastModal";
 
 interface NaviSectionProps {
   currentMenuName?: string;

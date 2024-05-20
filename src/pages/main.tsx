@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import AccountWithProvider from '../components/main/account';
-import "../styles/Public";
+import AccountWithProvider from '../components/account/account';
+import "../styles/publicStyleComponents/Public";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import Container from "../styles/publicStyleComponents/Container";
-import NaviSection from "../styles/publicStyleComponents/NaviSection";
+import NaviSection from "../components/public/NaviSection";
 
 interface MainProps {
   isLoggedIn: boolean;

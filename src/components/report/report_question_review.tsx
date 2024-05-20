@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { PublicQuestionContainer } from "../../styles/Public";
+import { PublicQuestionContainer } from "../../styles/publicStyleComponents/Public";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -54,7 +54,6 @@ const ReportQuestionReview = ({ quizzes }: quizzes) => {
                                     <TextContainer key={choiceIndex}>{choiceIndex + 1}번 : {choice.content}</TextContainer>
                                 ))}
                             </div>
-
                             <div className="quizAnswerPart">
                                 <div className="title">해설</div>
                                 <div className="desc">
@@ -63,7 +62,6 @@ const ReportQuestionReview = ({ quizzes }: quizzes) => {
                                 </div>
                                 <hr />
                                 <TextContainer>{question.commentary}</TextContainer>
-                               
                             </div>
                         </Question>
                     </PublicQuestionContainer>
@@ -88,14 +86,12 @@ const getCorrectAnswerNumber = (question: Question_) => {
     return correctAnswerIndex !== -1 ? correctAnswerIndex + 1 + '번' : '없음';
 };
 
-
 const ReportQuestionTitle = styled.div`
   font-size: 2rem;
 `;
 
 const TextContainer = styled.div`
   font-size: 1.5rem;
-
 `;
 
 const Question = styled.div`
