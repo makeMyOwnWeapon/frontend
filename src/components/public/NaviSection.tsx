@@ -11,6 +11,7 @@ interface NaviSectionProps {
 const NaviSection: React.FC<NaviSectionProps> = ({ currentMenuName, isLoggedIn }) => {
   const navigate = useNavigate();
   const [isMyPageOpen, setIsMyPageOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleNavigation = (path: any) => {
     navigate(path);
@@ -22,9 +23,14 @@ const NaviSection: React.FC<NaviSectionProps> = ({ currentMenuName, isLoggedIn }
 
   return (
     <NavSectionWrapper>
-      <div id="logo_box" onClick={() => handleNavigation("/")}>
+      <div
+        id="logo_box"
+        onClick={() => handleNavigation("/")}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <div id="logo_img">
-          <img src={`${process.env.PUBLIC_URL}/blueLoa.png`} alt="logo" />
+          <img src={isHovered ? `${process.env.PUBLIC_URL}/blueLoaMouseOpen.png` : `${process.env.PUBLIC_URL}/blueLoa.png`} alt="logo" />
         </div>
         <div id="logo_title">
           <LogoTitle>LOA</LogoTitle>
