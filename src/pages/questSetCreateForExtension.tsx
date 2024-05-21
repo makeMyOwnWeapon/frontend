@@ -68,9 +68,19 @@ const CreateForExtension: React.FC = () => {
             return parts[1]?.trim() || playTime;
         }
     };
+    function exitbutton (){
+        window.parent.postMessage(
+            { functionName: 'exitModal' }
+            , '*'
+        );
+
+    };
 
     return (
         <BackgroundAnimation>
+        <ExitContainer>
+            <ExitButton type="button" onClick={exitbutton}>X</ExitButton>
+        </ExitContainer>
             <Container>
                 <InnerContentSection>
                     <Main>
@@ -110,4 +120,31 @@ const Main = styled.div`
     }
     -ms-overflow-style: none;
     scrollbar-width: none;
+`;
+
+const ExitContainer = styled.div`
+    
+
+
+`;
+
+const ExitButton = styled.button`
+  float: right;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #ACE1F4;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 25px;
+  text-align: center;
+  &:hover {
+    background-color: skyblue;
+    color: white;
+  }
+
+
 `;

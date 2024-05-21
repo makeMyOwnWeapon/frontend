@@ -415,7 +415,7 @@ const InputContainer = styled.div`
 const StyledText = styled.p`
   font-size: 84px;
   color: black;
-  margin-top: 70px;
+  margin-top: 0px;
   margin-bottom: 30px;
   text-align: left;
 `;
