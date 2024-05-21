@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import VideoThumbnail from '../public/url_to_image';
-import QuestionComponent from './create_question_component';
+import React, { Component, Suspense } from 'react';
 import { NavigateFunction } from 'react-router-dom';
-import { REPORT_PROCESSING_HOST, bodyRequest, headerInputRequest, request } from '../../helpers/axios_helper';
+import { headerInputRequest } from '../../helpers/axios_helper';
 import styled from 'styled-components';
 import { Quizzes } from '../../pages/questSetCreateForExtension';
-import QuestionComponentForExtension from './create_question_component_for_extension';
+
+const VideoThumbnail = React.lazy(() => import('../public/url_to_image'));
+const QuestionComponentForExtension = React.lazy(() => import('./create_question_component_for_extension'));
 
 interface Props {
     navigate: NavigateFunction;
@@ -36,7 +36,7 @@ interface State {
     subLectureTitle: string;
     mainLectureTitle: string;
     duration: string;
-    showResetButton: boolean; // 추가된 상태
+    showResetButton: boolean;
 }
 
 class ProblemPageForExtension extends Component<Props, State> {
@@ -51,7 +51,7 @@ class ProblemPageForExtension extends Component<Props, State> {
             subLectureTitle: '',
             mainLectureTitle: '',
             duration: '',
-            showResetButton: true, // 초기값 설정
+            showResetButton: true,
         };
     }
 
@@ -94,17 +94,14 @@ class ProblemPageForExtension extends Component<Props, State> {
     
     
     formatDuration = (timeStr: string): string => {
-        // ss 형식일 경우 00:00:ss로 변경
         if (/^[0-5]?\d$/.test(timeStr)) {
             return `00:00:${timeStr.padStart(2, '0')}`;
         }
         
-        // mm:ss 형식일 경우 00:mm:ss로 변경
         if (/^[0-5]?\d:[0-5]\d$/.test(timeStr)) {
             return `00:${timeStr.padStart(5, '0')}`;
         }
         
-        // hh:mm:ss 형식일 경우 그대로 반환
         if (/^(?:[0-1]?\d|2[0-3]):[0-5]?\d:[0-5]?\d$/.test(timeStr)) {
             return timeStr.split(':').map(unit => unit.padStart(2, '0')).join(':');
         }
@@ -298,7 +295,7 @@ class ProblemPageForExtension extends Component<Props, State> {
             this.addAIQuestionComponent();
         }
         this.setState(prevState => ({
-            showResetButton: !prevState.showResetButton, // 상태를 토글하여 버튼을 전환
+            showResetButton: !prevState.showResetButton,
         }));
     };
 
@@ -315,32 +312,35 @@ class ProblemPageForExtension extends Component<Props, State> {
                             <Input type="text" placeholder="소강의명" value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
                             <Input type="text" placeholder="강의 시간 (예: 1:23:45 또는 45:30)" maxLength={8} value={this.state.duration} onChange={this.handleDurationChange} />
                         </div>
-                        <div>
+                        <Suspense fallback={<div>Loading...</div>}>
                             <VideoThumbnail imageUrl={this.state.subLectureUrl} />
-                        </div>
+                        </Suspense>
                     </InputContainer>
                     <ButtonContainer>
-                        <Button type="button" onClick={this.toggleFunction}>
-                            {this.state.showResetButton ? 'AI 문제 ON!' : 'AI 문제 OFF!'}
-                        </Button>
+                        <ToggleButtonContainer onClick={this.toggleFunction}>
+                            <ToggleButton>{this.state.showResetButton ? 'AI 문제 제공 ON' : 'AI 문제 제공 OFF'}</ToggleButton>
+                            <ToggleSwitch checked={this.state.showResetButton} />
+                        </ToggleButtonContainer>
                     </ButtonContainer>
-                    {this.state.questionComponents.map((component, index) => (
-                        <QuestionComponentForExtension
-                            key={component.id}
-                            id={component.id}
-                            expand={component.expanded}
-                            questionTime={this.state.questionTimes[index]}
-                            onToggle={this.toggleExpand}
-                            onDelete={this.deleteQuestion}
-                            answers={this.state.answers[index]}
-                            updateAnswer={(index, newAnswers) => this.updateAnswers(index, newAnswers)}
-                            updateTime={(index, timeExchange) => this.updateQuestionTime(index, timeExchange)}
-                        />
-                    ))}
+                    <Suspense fallback={<div>Loading...</div>}>
+                        {this.state.questionComponents.map((component, index) => (
+                            <QuestionComponentForExtension
+                                key={component.id}
+                                id={component.id}
+                                expand={component.expanded}
+                                questionTime={this.state.questionTimes[index]}
+                                onToggle={this.toggleExpand}
+                                onDelete={this.deleteQuestion}
+                                answers={this.state.answers[index]}
+                                updateAnswer={(index, newAnswers) => this.updateAnswers(index, newAnswers)}
+                                updateTime={(index, timeExchange) => this.updateQuestionTime(index, timeExchange)}
+                            />
+                        ))}
+                    </Suspense>
                     <ButtonContainer>
                         <Button type="button" onClick={this.addQuestionComponent}>문제 추가</Button>
                         <form onSubmit={this.postData}>
-                            <Button type="submit">제출하기 버튼</Button>
+                            <Button type="submit">제출하기</Button>
                         </form>
                     </ButtonContainer>
                 </Formdiv>
@@ -375,6 +375,39 @@ const ButtonContainer = styled.div`
   align-items: center;
   width: 100%;
   margin-top: 20px;
+`;
+
+const ToggleButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const ToggleButton = styled.div`
+  font-size: 25px;
+  margin-right: 15px;
+`;
+
+const ToggleSwitch = styled.div<{ checked: boolean }>`
+  width: 60px;
+  height: 30px;
+  background: ${({ checked }) => (checked ? '#007bff' : '#ccc')};
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:before {
+    content: '';
+    width: 28px;
+    height: 28px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: ${({ checked }) => (checked ? '1px' : '32px')};
+    transition: left 0.3s;
+  }
 `;
 
 const Input = styled.input`
@@ -419,3 +452,4 @@ const StyledText = styled.p`
   margin-bottom: 30px;
   text-align: left;
 `;
+

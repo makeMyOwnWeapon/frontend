@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import styled from "styled-components";
 import "../styles/publicStyleComponents/Public";
-import WorkbookCard from "../components/quizSet/quizSetCard";
 import { request } from "../helpers/axios_helper";
 import NaviSection from "../components/public/NaviSection";
 import Main from "../styles/publicStyleComponents/Main";
 import Container from "../styles/publicStyleComponents/Container";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
+
+const WorkbookCard = React.lazy(() => import("../components/quizSet/quizSetCard"));
 
 interface Card {
   createdAt: string;
@@ -32,7 +33,7 @@ const WorkBook: React.FC<QuizSetProps> = ({ isLoggedIn }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await request('GET','/api/quizsets/');
+        const response = await request('GET', '/api/quizsets/');
         setCards(response.data);
       } catch (error) {
         console.error('Error:', error);
@@ -59,8 +60,7 @@ const WorkBook: React.FC<QuizSetProps> = ({ isLoggedIn }) => {
     <>
       <BackgroundAnimation>
         <Container>
-        {/* showSearchBox={true} */}
-          <NaviSection currentMenuName={currentMenuName} isLoggedIn={isLoggedIn}  />
+          <NaviSection currentMenuName={currentMenuName} isLoggedIn={isLoggedIn} />
           <SearchBox>
             <select onChange={(e) => setSearchOption(e.target.value)}>
               <option value="all">선택</option>
@@ -78,18 +78,20 @@ const WorkBook: React.FC<QuizSetProps> = ({ isLoggedIn }) => {
           </SearchBox>
           <InnerContentSection>
             <Main>
-              {cards.filter(filterCards).map((card, index) => (
-                <WorkbookCard
-                  key={index}
-                  createdAt={card.createdAt}
-                  memberNickname={truncateTitle(card.memberNickname, 12)}
-                  quizSetTitle={truncateTitle(card.quizSetTitle, 10)}
-                  quizSetId={card.quizSetId}
-                  recommendationCount={card.recommendationCount}
-                  subLectureTitle={card.subLectureTitle}
-                  subLectureUrl={card.subLectureUrl}
-                />
-              ))}
+              <Suspense fallback={<div>Loading...</div>}>
+                {cards.filter(filterCards).map((card, index) => (
+                  <WorkbookCard
+                    key={index}
+                    createdAt={card.createdAt}
+                    memberNickname={truncateTitle(card.memberNickname, 12)}
+                    quizSetTitle={truncateTitle(card.quizSetTitle, 10)}
+                    quizSetId={card.quizSetId}
+                    recommendationCount={card.recommendationCount}
+                    subLectureTitle={card.subLectureTitle}
+                    subLectureUrl={card.subLectureUrl}
+                  />
+                ))}
+              </Suspense>
             </Main>
           </InnerContentSection>
         </Container>
@@ -116,7 +118,6 @@ const InnerContentSection = styled.div`
     margin-bottom: 100px;
   }
 `;
-
 
 const SearchBox = styled.div`
   position: absolute;

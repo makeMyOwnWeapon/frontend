@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import { NavigateFunction } from 'react-router-dom';
 import VideoThumbnail from '../public/url_to_image';
 import QuestionComponent from './create_question_component';
-import { NavigateFunction } from 'react-router-dom';
 import { request } from '../../helpers/axios_helper';
-import styled from 'styled-components';
 
 interface Props {
   navigate: NavigateFunction;
 }
+
 interface Answer {
   text: string;
   selected?: boolean;
@@ -26,7 +27,7 @@ interface State {
   questionTimes: string[];
   subLectureTitle: string;
   mainLectureTitle: string;
-  duration: string; 
+  duration: string;
 }
 
 class ProblemPage extends Component<Props, State> {
@@ -92,7 +93,8 @@ class ProblemPage extends Component<Props, State> {
   deleteQuestion = (id: number): void => {
     this.setState(prevState => ({
       questionComponents: prevState.questionComponents.filter(component => component.id !== id),
-      answers: prevState.answers.filter((_, index) => index !== id)
+      answers: prevState.answers.filter((_, index) => index !== id),
+      questionTimes: prevState.questionTimes.filter((_, index) => index !== id),
     }));
   };
 
@@ -178,14 +180,16 @@ class ProblemPage extends Component<Props, State> {
       <>
         <Formdiv>
           <InputContainer>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', width:'100%'}}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', width:'60%' }}>
               <Input type="text" placeholder="문제집명" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
               <Input type="text" placeholder="동영상 URL" value={this.state.subLectureUrl} onChange={this.handleSubLectureUrlChange} />
               <Input type="text" placeholder="대강의명" value={this.state.mainLectureTitle} onChange={(e) => this.setState({ mainLectureTitle: e.target.value })} />
               <Input type="text" placeholder="소강의명" value={this.state.subLectureTitle} onChange={(e) => this.setState({ subLectureTitle: e.target.value })} />
               <Input type="text" placeholder="강의 시간 (예: 1:23:45 또는 45:30)" maxLength={8} value={this.state.duration} onChange={this.handleDurationChange} />
             </div>
-            <VideoThumbnail imageUrl={this.state.subLectureUrl} />
+            <ThumbnailContainer>
+              <VideoThumbnail imageUrl={this.state.subLectureUrl} />
+            </ThumbnailContainer>
           </InputContainer>
           {this.state.questionComponents.map((component, index) => (
             <QuestionComponent
@@ -202,7 +206,7 @@ class ProblemPage extends Component<Props, State> {
           <ButtonContainer>
             <Button type="button" onClick={this.addQuestionComponent}>문제 추가</Button>
             <form onSubmit={this.postData}>
-              <Button type="submit">제출하기 버튼</Button>
+              <Button type="submit">제출하기</Button>
             </form>
           </ButtonContainer>
         </Formdiv>
@@ -267,10 +271,19 @@ const Formdiv = styled.div`
 
 const InputContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  width: 60%;
+  width: 80%;
   padding: 20px;
   justify-content: space-between;
   margin-bottom: 20px;
+`;
+
+const ThumbnailContainer = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
 `;

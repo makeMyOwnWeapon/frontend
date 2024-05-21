@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "../styles/publicStyleComponents/Public";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import Container from "../styles/publicStyleComponents/Container";
 import NaviSection from "../components/public/NaviSection";
-import ReportCard from "../components/reportList/reportCard";
 import { request } from "../helpers/axios_helper";
 import Main from "../styles/publicStyleComponents/Main";
+
+const ReportCard = React.lazy(() => import("../components/reportList/reportCard"));
 
 interface ReportCard {
   subLectureId: number;
@@ -15,7 +16,7 @@ interface ReportCard {
   subLectureUrl: string;
   registrationDate: string;
   lectureHistoryId: number;
-  subLectureDescription: string; // 설명 필드 추가
+  subLectureDescription: string;
 }
 
 interface ReportList {
@@ -73,17 +74,19 @@ const ReportList: React.FC<ReportList> = ({ isLoggedIn }) => {
           </SearchBox>
           <InnerContentSection>
             <Main>
-              {cards.filter(filterCards).map((card, index) => (
-                <ReportCard
-                  key={index}
-                  subLectureId={card.subLectureId}
-                  subLectureTitle={card.subLectureTitle}
-                  subLectureUrl={card.subLectureUrl}
-                  registrationDate={card.registrationDate}
-                  lectureHistoryId={card.lectureHistoryId}
-                  subLectureDescription={card.subLectureDescription} // 설명 필드 추가
-                />
-              ))}
+              <Suspense fallback={<div>Loading...</div>}>
+                {cards.filter(filterCards).map((card, index) => (
+                  <ReportCard
+                    key={index}
+                    subLectureId={card.subLectureId}
+                    subLectureTitle={card.subLectureTitle}
+                    subLectureUrl={card.subLectureUrl}
+                    registrationDate={card.registrationDate}
+                    lectureHistoryId={card.lectureHistoryId}
+                    subLectureDescription={card.subLectureDescription}
+                  />
+                ))}
+              </Suspense>
             </Main>
           </InnerContentSection>
         </Container>
@@ -91,7 +94,6 @@ const ReportList: React.FC<ReportList> = ({ isLoggedIn }) => {
     </>
   );
 };
-
 
 export default ReportList;
 

@@ -36,4 +36,3 @@ const InnerContentSection = styled.div`
     height: 85%;
     /* border: 10px solid red; */
 `
-

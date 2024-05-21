@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import styled from "styled-components";
-import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import Container from "../styles/publicStyleComponents/Container";
 import "../styles/publicStyleComponents/Public";
 import Main from "../styles/publicStyleComponents/Main";
 import { request } from "../helpers/axios_helper";
-import NaviSection from "../components/public/NaviSection";
 import { useParams } from "react-router-dom";
-import ReportpageComponent from "../components/report/report_reportpage_component";
 import { Data } from "../components/reportList/reportInterface";
+
+const BackgroundAnimation = React.lazy(() => import("../components/public/BackgroundAnimation"));
+const NaviSection = React.lazy(() => import("../components/public/NaviSection"));
+const ReportpageComponent = React.lazy(() => import("../components/report/report_reportpage_component"));
 
 interface ReportDetailProps {
   isLoggedIn: boolean;
@@ -34,16 +35,18 @@ const ReportDetail: React.FC<ReportDetailProps> = ({ isLoggedIn }) => {
 
   return (
     <>
-      <BackgroundAnimation>
-        <Container>
-          <NaviSection currentMenuName={currentMenuName} isLoggedIn={isLoggedIn} />
-          <InnerContentSection>
-            <Main>
-              {data && <ReportpageComponent data={data} />}
-            </Main>
-          </InnerContentSection>
-        </Container>
-      </BackgroundAnimation>
+      <Suspense fallback={<div>Loading...</div>}>
+        <BackgroundAnimation>
+          <Container>
+            <NaviSection currentMenuName={currentMenuName} isLoggedIn={isLoggedIn} />
+            <InnerContentSection>
+              <Main>
+                {data && <ReportpageComponent data={data} />}
+              </Main>
+            </InnerContentSection>
+          </Container>
+        </BackgroundAnimation>
+      </Suspense>
     </>
   );
 };

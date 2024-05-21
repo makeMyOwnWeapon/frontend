@@ -96,7 +96,6 @@ class QuestionComponentForExtension extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    console.log(this.state)
     if (prevProps.expand !== this.props.expand) {
       this.setState({ open: this.props.expand });
     }

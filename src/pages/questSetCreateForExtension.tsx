@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import ProblemPage from "../components/quizSetCreate/create_question";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackgroundAnimation from "../components/public/BackgroundAnimation";
 import styled from "styled-components";
 import Container from "../styles/publicStyleComponents/Container";
-import { HOST, REPORT_PROCESSING_HOST } from "../helpers/axios_helper";
-import ProblemPageForExtension from "../components/quizSetCreate/creat_question_for_extension";
+const ProblemPageForExtension = lazy(() => import("../components/quizSetCreate/creat_question_for_extension"));
 
 export interface Quizzes {
     choices: choices[];
@@ -32,8 +30,6 @@ const CreateForExtension: React.FC = () => {
     useEffect(() => {
         
         function handleMessage(event: MessageEvent) {
-            console.log('iframe useEffect start1');
-            console.log('data = ',event.data);
             if (
                 !event.origin || 
                 !event.data ||
@@ -44,11 +40,10 @@ const CreateForExtension: React.FC = () => {
                 (event.data.iframeQuizzes && !Array.isArray(event.data.iframeQuizzes)) ||
                 typeof event.data.authToken !== 'string'
             ) {
-                console.log('Invalid data format');
                 return;
             }
         
-            const { courseTitle, subCourseTitle, playTime, currentURL, iframeQuizzes,authToken } = event.data;
+            const { courseTitle, subCourseTitle, playTime, currentURL, iframeQuizzes, authToken } = event.data;
             setMainLectureTitle(courseTitle);
             setSubLectureTitle(subCourseTitle);
             setDuration(extractDuration(playTime));
@@ -68,31 +63,31 @@ const CreateForExtension: React.FC = () => {
             return parts[1]?.trim() || playTime;
         }
     };
-    function exitbutton (){
+
+    function exitbutton() {
         window.parent.postMessage(
             { functionName: 'exitModal' }
             , '*'
         );
-
     };
 
     return (
         <BackgroundAnimation>
-        <ExitContainer>
             <ExitButton type="button" onClick={exitbutton}>X</ExitButton>
-        </ExitContainer>
             <Container>
                 <InnerContentSection>
                     <Main>
-                        <ProblemPageForExtension
-                            navigate={navigate}
-                            courseTitle={mainLectureTitle}
-                            subCourseTitle={subLectureTitle}
-                            playTime={duration}
-                            subLectureUrl={subLectureUrl}
-                            iframeQuizzes={quizzes}
-                            token={token}
-                        />
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <ProblemPageForExtension
+                                navigate={navigate}
+                                courseTitle={mainLectureTitle}
+                                subCourseTitle={subLectureTitle}
+                                playTime={duration}
+                                subLectureUrl={subLectureUrl}
+                                iframeQuizzes={quizzes}
+                                token={token}
+                            />
+                        </Suspense>
                     </Main>
                 </InnerContentSection>
             </Container>
@@ -122,12 +117,6 @@ const Main = styled.div`
     scrollbar-width: none;
 `;
 
-const ExitContainer = styled.div`
-    
-
-
-`;
-
 const ExitButton = styled.button`
   float: right;
   margin: 10px;
@@ -145,6 +134,4 @@ const ExitButton = styled.button`
     background-color: skyblue;
     color: white;
   }
-
-
 `;
