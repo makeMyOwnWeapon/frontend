@@ -83,8 +83,8 @@ const WorkBook: React.FC<QuizSetProps> = ({ isLoggedIn }) => {
                   <WorkbookCard
                     key={index}
                     createdAt={card.createdAt}
-                    memberNickname={truncateTitle(card.memberNickname, 12)}
-                    quizSetTitle={truncateTitle(card.quizSetTitle, 10)}
+                    memberNickname={truncateTitle(card.memberNickname, 8)}
+                    quizSetTitle={truncateTitle(card.quizSetTitle, 9)}
                     quizSetId={card.quizSetId}
                     recommendationCount={card.recommendationCount}
                     subLectureTitle={card.subLectureTitle}
