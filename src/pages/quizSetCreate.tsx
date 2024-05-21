@@ -34,5 +34,4 @@ export default Create;
 const InnerContentSection = styled.div`
     display: flex;
     height: 85%;
-    /* border: 10px solid red; */
 `

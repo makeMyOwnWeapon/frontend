@@ -93,13 +93,6 @@ const LineChart = ({ response }) => {
         plugins: {
             legend: {
                 display:false,
-                // position: 'top',
-                // labels: {
-                //     padding: 10,
-                //     usePointStyle: true,
-                //     boxWidth: 0.01,
-                //     boxHeight: 0.0001
-                // }
             },
             tooltip: {
                 mode: 'point',

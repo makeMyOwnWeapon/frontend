@@ -7,7 +7,6 @@ const Main = styled.div`
   flex-wrap: wrap;
   display: flex;
   height: 85vh;
-  /* border: 5px solid blue; */
   justify-content: space-between;
   padding: 20px;
   padding-bottom: 10%;

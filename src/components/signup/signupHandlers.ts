@@ -19,7 +19,7 @@ export async function handleSubmit({
   event.preventDefault();
   try {
     if (nickname === '' || selectedButton === null || credential === null){
-        return alert('회원가입 에러!');
+        return alert('회원가입 정보를 기입해 주세요!');
     }
 
     const response = await tempRequest('POST', 'api/member/signup', {

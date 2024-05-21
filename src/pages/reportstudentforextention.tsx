@@ -20,7 +20,7 @@ const ReportStudentFroExtension = () => {
                 const response = await bodyRequest('GET', `/api/history/extension/?lectureHistoryId=${lectureHistoryId}`, {});
                 setTimeout(() => {
                     setData(response.data);
-                }, 5000); // 5초 레이턴시를 만드는 함수
+                }, 5000); 
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -58,7 +58,6 @@ const InnerContentSection = styled.div`
   height: 100vh;
 
   > div {
-    /* border: 1px solid black; */
   }
 
   #main {
