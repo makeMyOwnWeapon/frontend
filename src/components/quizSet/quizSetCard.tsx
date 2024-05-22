@@ -76,7 +76,7 @@ const QuizSetCard: React.FC<WorkbookCardProps> = ({
         <VideoThumbnail imageUrl={subLectureUrl} />
       </ThumbnailContainer>
       <CardTitle>{quizSetTitle}</CardTitle>
-      <CardDescription>작성자: {memberNickname}</CardDescription>
+      <CardDescription>작성자: {truncateTitle(memberNickname, 7)}</CardDescription>
       <CardDescription>강의명: {truncateTitle(subLectureTitle, 7)}</CardDescription>
       <ReadMoreLink onClick={recommendationClick}>
         <FaThumbsUp />

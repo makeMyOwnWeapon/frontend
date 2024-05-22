@@ -12,7 +12,7 @@ const Introduce: React.FC<IntroduceProps> = ({ isLoggedIn }) => {
   const currentMenuName = '소개 페이지';
 
   const images = [
-    "introduce1.png",
+    "introduce0.png",
     "introduce2.png",
     "introduce3.png",
     "introduce4.png",
