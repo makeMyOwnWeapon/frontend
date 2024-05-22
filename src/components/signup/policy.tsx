@@ -83,7 +83,7 @@ const Policy: React.FC = () => {
 export default Policy;
 
 const PrivacyPolicy = styled.div`
-  ${tw`mt-8 p-4 bg-gray-100 rounded-lg w-full max-w-md`}
+  ${tw`mt-1 p-4 bg-gray-100 rounded-lg w-full max-w-md`}
   background-color: rgba(255, 255, 255, 0.7);
   height: 500px;
   margin-right: 60px;

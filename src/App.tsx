@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Main from './pages/main';
-import Signup from './pages/signup';
+import SignUp from './pages/signup';
 import WorkBook from './pages/quizSet';
 import Create from './pages/quizSetCreate';
 import Question_info from './pages/quizSetDetail';
@@ -28,7 +28,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<SignUp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/workbook" element={<RequireAuth><WorkBook isLoggedIn={isLoggedIn} /></RequireAuth>} />
         <Route path="/create" element={<RequireAuth><Create isLoggedIn={isLoggedIn} /></RequireAuth>} />
         <Route path="/createforextension" element={<CreateForExtension />} />
