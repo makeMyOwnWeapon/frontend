@@ -6,6 +6,7 @@ import { Cookies } from 'react-cookie';
 import BackgroundAnimation from '../components/public/BackgroundAnimation';
 import styled from 'styled-components';
 import tw from 'twin.macro';
+import Policy from '../components/signup/policy';
 
 function Signup() {
   const [nickname, setNickname] = useState('');
@@ -16,36 +17,43 @@ function Signup() {
 
   return (
     <BackgroundAnimation>
-      <Container>
-        <Content>
-          <Title>Sign Up</Title>
-          <ButtonGroup>
-            <SmallButton
-              selected={selectedButton === 0}
-              onClick={() => handleButtonClick({ buttonIndex: 0, selectedButton, setSelectedButton })}
-            >
-              선생님
-            </SmallButton>
-            <SmallButton
-              selected={selectedButton === 1}
-              onClick={() => handleButtonClick({ buttonIndex: 1, selectedButton, setSelectedButton })}
-            >
-              학생
-            </SmallButton>
-          </ButtonGroup>
-          <NameContainer>
-            <NicknameGenerator onNicknameGenerated={setNickname} />
-          </NameContainer>
-          <Form onSubmit={(event) => handleSubmit({ event, credential, nickname, selectedButton, navigate })}>
-            <SubmitButton type="submit">확인</SubmitButton>
-          </Form>
-        </Content>
-      </Container>
+      <Wrapper>
+        <Container>
+          <Policy />
+          <Content>
+            <Title>Sign Up</Title>
+            <ButtonGroup>
+              <SmallButton
+                selected={selectedButton === 0}
+                onClick={() => handleButtonClick({ buttonIndex: 0, selectedButton, setSelectedButton })}
+              >
+                선생님
+              </SmallButton>
+              <SmallButton
+                selected={selectedButton === 1}
+                onClick={() => handleButtonClick({ buttonIndex: 1, selectedButton, setSelectedButton })}
+              >
+                학생
+              </SmallButton>
+            </ButtonGroup>
+            <NameContainer>
+              <NicknameGenerator onNicknameGenerated={setNickname} />
+            </NameContainer>
+            <Form onSubmit={(event) => handleSubmit({ event, credential, nickname, selectedButton, navigate })}>
+              <SubmitButton type="submit">확인</SubmitButton>
+            </Form>
+          </Content>
+        </Container>
+      </Wrapper>
     </BackgroundAnimation>
   );
 }
 
 export default Signup;
+
+const Wrapper = styled.div`
+  ${tw`flex flex-col justify-center items-center`}
+`;
 
 const Container = styled.div`
   display: flex;
@@ -59,7 +67,8 @@ const Content = styled.div`
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  ${tw`w-full max-w-md`}
+  height: 500px;
+  width: 400px;
 `;
 
 const Title = styled.h1`
